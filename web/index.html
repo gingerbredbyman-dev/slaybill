@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SLAYBILL</title>
+<meta name="description" content="Your show's favorite show guide. What's coming, what's in previews, and what's live on Broadway right now.">
+<style>
+  /* Three bucket themes are applied via a data-theme attribute on each
+     <section.bucket>. Each theme sets --poster-filter + --accent + --bg-ink
+     so the same card component reskins per bucket. */
+  :root {
+    --playbill-yellow: #f4d71e;
+    --playbill-ink: #0a0a0a;
+    --playbill-red: #c3102f;
+    --playbill-muted: #5a5a5a;
+    --bg: #05050f;
+    --ink: #ecebff;
+    --muted: #8a8ab0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #1a1a1a;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 32px 20px 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 48px;
+  }
+
+  /* Scroll jostle — same damped translate as the cover copy. */
+  .jostle {
+    display: inline-block;
+    will-change: transform;
+    transition: transform .45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  body.scroll-down .jostle { transform: translateY(-3px); }
+  body.scroll-up   .jostle { transform: translateY(3px); }
+  body.scroll-down .cover .jostle:nth-of-type(2n) { transform: translateY(-4px); }
+  body.scroll-up   .cover .jostle:nth-of-type(2n) { transform: translateY(4px); }
+
+  /* SLAYBILL yellow cover. */
+  .cover {
+    width: 100%; max-width: 460px;
+    background: var(--playbill-yellow);
+    color: var(--playbill-ink);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.1);
+    padding: 28px 32px 24px;
+    display: grid;
+    gap: 16px;
+    position: relative;
+    font-family: "Times New Roman", Georgia, serif;
+  }
+  .masthead {
+    border-top: 4px solid var(--playbill-ink);
+    border-bottom: 4px solid var(--playbill-ink);
+    padding: 10px 0;
+    text-align: center;
+  }
+  .masthead .word {
+    font-size: clamp(44px, 9vw + 6px, 68px);
+    letter-spacing: -0.02em; font-weight: 900; line-height: 0.9;
+  }
+  .masthead .sub {
+    font-size: 10px; letter-spacing: 0.32em; margin-top: 6px; text-transform: uppercase;
+  }
+  .tagline {
+    text-align: center;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .superstition {
+    border-top: 1px dashed rgba(0,0,0,0.3);
+    border-bottom: 1px dashed rgba(0,0,0,0.3);
+    padding: 10px 8px;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .superstition .warn {
+    color: var(--playbill-red); font-weight: 900; letter-spacing: 0.3em;
+  }
+  footer.cover-foot {
+    border-top: 2px solid var(--playbill-ink);
+    padding-top: 12px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between;
+  }
+  .dog-ear {
+    position: absolute; top: 0; right: 0;
+    width: 38px; height: 38px;
+    background: linear-gradient(225deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.08) 50%, transparent 50%);
+  }
+
+  /* Buckets. */
+  .bucket {
+    width: 100%; max-width: 1200px;
+    padding: 28px 24px 32px;
+    border-radius: 18px;
+    background: var(--bucket-bg, #101020);
+    color: var(--bucket-ink, var(--ink));
+    transition: background .3s ease;
+  }
+  .bucket header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .bucket h2 {
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(28px, 3.5vw + 10px, 44px);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+  }
+  .bucket .bucket-note {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    text-align: right;
+  }
+
+  /* Bucket themes. */
+  .bucket[data-theme="coming"] {
+    --bucket-bg: #ffffff;
+    --bucket-ink: #0a0a0a;
+    --bucket-accent: #0a0a0a;
+    --poster-filter: grayscale(1) contrast(1.1);
+  }
+  .bucket[data-theme="previews"] {
+    --bucket-bg: #0a0a0a;
+    --bucket-ink: #f4c842;
+    --bucket-accent: #f4c842;
+    --poster-filter: sepia(0.7) saturate(3) hue-rotate(-10deg) brightness(0.95);
+  }
+  .bucket[data-theme="live"] {
+    --bucket-bg: #0a0a18;
+    --bucket-ink: #ecebff;
+    --bucket-accent: #f72585;
+    --poster-filter: none;
+  }
+
+  /* Card grid. */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
+
+  /* Each card is its own container so the title font can shrink to fit via
+     container queries (the HADESTOWN fix — no mid-word wrapping). */
+  a.show-card {
+    container-type: inline-size;
+    container-name: card;
+    display: flex; flex-direction: column; gap: 10px;
+    text-decoration: none; color: inherit;
+    background: color-mix(in oklab, var(--bucket-bg) 85%, var(--bucket-ink) 10%);
+    border: 1px solid color-mix(in oklab, var(--bucket-ink) 15%, transparent);
+    border-radius: 14px;
+    padding: 14px;
+    min-width: 0;
+    overflow: hidden;
+    transition:
+      transform .35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color .35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow .35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  a.show-card:hover, a.show-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--bucket-ink) 40%, transparent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    outline: none;
+  }
+
+  /* Poster: palette-gradient fallback + optional real image; filter per theme. */
+  .poster {
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    filter: var(--poster-filter);
+  }
+  .poster .palette-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--p1,#444), var(--p2,#666) 55%, var(--p3,#888));
+  }
+  .poster .palette-accent {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 25% 15%, var(--p4,#999) 0%, transparent 55%);
+    opacity: 0.5;
+  }
+  .poster img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .poster .stamp {
+    position: absolute; inset: auto 0 12px 0;
+    text-align: center;
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 900;
+    color: var(--p5, #fff);
+    letter-spacing: -0.01em;
+    padding: 0 14px;
+    text-transform: uppercase;
+    font-size: clamp(14px, 6cqw, 28px);
+    line-height: 0.95;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    mix-blend-mode: overlay;
+  }
+
+  /* Title slot — container-query-sized to fit HADESTOWN without wrap. */
+  .show-card .title {
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(14px, 8.5cqw, 22px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    word-break: keep-all;
+    hyphens: none;
+    min-height: calc(2 * 1em);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .show-card .venue {
+    font-family: "Courier New", monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .metrics {
+    display: flex; flex-wrap: wrap; gap: 6px 10px;
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+  }
+  .metrics .m { white-space: nowrap; }
+  .metrics .m.pending { opacity: 0.45; font-style: italic; }
+  .scores {
+    display: flex; gap: 10px;
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+  .scores .s.pending { opacity: 0.4; }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--bucket-accent) 18%, transparent);
+    border: 1px solid color-mix(in oklab, var(--bucket-accent) 40%, transparent);
+    color: var(--bucket-accent);
+    font-family: "Courier New", monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  /* Off-Broadway horizontal-scroll row: smaller cards at 50% saturation. */
+  .ob-row {
+    width: 100%; max-width: 1200px;
+  }
+  .ob-row header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 0 4px 10px;
+  }
+  .ob-row h2 {
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(22px, 2.2vw + 10px, 30px);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--ink);
+    opacity: 0.85;
+  }
+  .ob-row .note {
+    font-family: "Courier New", monospace;
+    font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .ob-track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 4px 4px 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .ob-track::-webkit-scrollbar { height: 8px; }
+  .ob-track::-webkit-scrollbar-thumb { background: rgba(232,232,255,0.2); border-radius: 4px; }
+  .ob-card {
+    flex: 0 0 150px;
+    scroll-snap-align: start;
+    filter: saturate(0.5);
+    container-type: inline-size;
+    container-name: obcard;
+    --bucket-bg: #0a0a18;
+    --bucket-ink: #ecebff;
+    --bucket-accent: #8a8ab0;
+  }
+  .ob-card .title { font-size: clamp(12px, 9cqw, 17px); }
+
+  /* Secondary nav: Fantasy + Archive only. */
+  .more {
+    width: 100%; max-width: 1200px;
+    display: flex; justify-content: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  .more a {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    background: rgba(20,20,40,0.75);
+    border: 1px solid rgba(232,232,255,0.12);
+    border-radius: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    transition: transform .3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color .3s;
+  }
+  .more a .badge {
+    font-family: "Courier New", monospace;
+    font-size: 9px; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .more a:hover { transform: translateY(-2px); border-color: rgba(255,215,0,0.5); }
+
+  footer.page-foot {
+    max-width: 1200px;
+    color: var(--muted);
+    text-align: center;
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .empty-bucket {
+    padding: 30px 10px;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="masthead">
+    <div class="word jostle">SLAYBILL</div>
+    <div class="sub jostle">Your Shows Favorite Show Guide &middot; AKA Edition</div>
+  </div>
+  <p class="tagline jostle">What's showing and how's it going?<br>Build your roster below.</p>
+  <div class="superstition jostle">
+    Break a leg &middot; No whistling &middot; Don't speak of the Scottish Play<br>
+    <span class="warn">Beyond this point!</span>
+  </div>
+  <footer class="cover-foot">
+    <span class="jostle">Vol. 1 &middot; Issue 2</span>
+    <span class="jostle">2026</span>
+  </footer>
+  <div class="dog-ear"></div>
+</section>
+
+<section class="bucket" data-theme="coming" data-bucket="coming_soon">
+  <header>
+    <h2>Coming Soon</h2>
+    <div class="bucket-note">Previews start within 6 weeks</div>
+  </header>
+  <div class="grid" data-slot="grid"></div>
+</section>
+
+<section class="bucket" data-theme="previews" data-bucket="in_previews">
+  <header>
+    <h2>In Previews</h2>
+    <div class="bucket-note">Performing tonight &middot; Not yet opened</div>
+  </header>
+  <div class="grid" data-slot="grid"></div>
+</section>
+
+<section class="bucket" data-theme="live" data-bucket="live">
+  <header>
+    <h2>Live on Broadway</h2>
+    <div class="bucket-note">Officially open</div>
+  </header>
+  <div class="grid" data-slot="grid"></div>
+</section>
+
+<section class="ob-row" aria-label="Off-Broadway">
+  <header>
+    <h2>Off-Broadway</h2>
+    <div class="note">Scroll &rarr;</div>
+  </header>
+  <div class="ob-track" data-slot="ob-track"></div>
+</section>
+
+<nav class="more" aria-label="More">
+  <a href="fantasy.html"><span>Fantasy Broadway</span><span class="badge">Draft &middot; Score &middot; Tonys</span></a>
+  <a href="archive.html"><span>Archive</span><span class="badge">Closed &middot; Cancelled</span></a>
+</nav>
+
+<footer class="page-foot">SLAYBILL &middot; Your shows, what they're doing, what they're worth</footer>
+
+<template id="card-template">
+  <a class="show-card" href="#">
+    <span class="pill"></span>
+    <div class="poster">
+      <div class="palette-bg"></div>
+      <div class="palette-accent"></div>
+      <div class="stamp"></div>
+    </div>
+    <div class="title"></div>
+    <div class="venue"></div>
+    <div class="metrics"></div>
+    <div class="scores"></div>
+  </a>
+</template>
+
+<script>
+/* SLAYBILL hydration — fetches data/shows_live.json once, renders each bucket
+ * + the off-Broadway row. No framework; every card is cloned from the
+ * <template> and mutated in place. Poster is a CSS palette gradient (per
+ * show --p1..p5) unless a real image exists at web/shows/posters/<slug>.jpg
+ * which will swap in at load. */
+
+function fmtMoney(n) {
+  if (n == null) return null;
+  if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(1) + 'M/wk';
+  if (n >= 1_000)     return '$' + Math.round(n / 1_000) + 'K/wk';
+  return '$' + n + '/wk';
+}
+function fmtPct(p) { return p == null ? null : Math.round(p) + '% cap'; }
+function fmtAvg(a) { return a == null ? null : '$' + a + ' avg'; }
+
+function heroCredit(show) {
+  const c = (show.creatives || []);
+  const byRole = (needle) => c.find(x => (x.role || '').toLowerCase().includes(needle));
+  const pick = byRole('music') || byRole('play') || byRole('book') || byRole('director') || c[0];
+  return pick ? pick.name : null;
+}
+
+function makeCard(show) {
+  const tpl = document.getElementById('card-template');
+  const frag = tpl.content.cloneNode(true);
+  const a = frag.querySelector('a.show-card');
+  a.href = `shows/${show.slug}.html`;
+
+  const pal = show.palette || [];
+  for (let i = 0; i < 5; i++) {
+    a.style.setProperty(`--p${i+1}`, pal[i] || '#444');
+  }
+
+  const pill = frag.querySelector('.pill');
+  pill.textContent = ({
+    coming_soon: 'Coming Soon',
+    in_previews: 'In Previews',
+    live:        'Live',
+    closed:      'Closed',
+  })[show.status] || show.status;
+
+  const stamp = frag.querySelector('.poster .stamp');
+  stamp.textContent = show.title;
+  const poster = frag.querySelector('.poster');
+  const img = new Image();
+  img.alt = '';
+  img.onload = () => { poster.appendChild(img); stamp.style.display = 'none'; };
+  img.src = `shows/posters/${show.slug}.jpg`;
+
+  frag.querySelector('.title').textContent = show.title;
+  const hero = heroCredit(show);
+  frag.querySelector('.venue').textContent =
+    hero ? `${show.theatre || ''} · ${hero}` : (show.theatre || '');
+
+  const metrics = frag.querySelector('.metrics');
+  const parts = [
+    { v: fmtMoney(show.weekly_gross_usd), ok: show.weekly_gross_usd != null },
+    { v: fmtAvg(show.avg_ticket_usd),     ok: show.avg_ticket_usd    != null },
+    { v: fmtPct(show.capacity_pct),       ok: show.capacity_pct      != null },
+  ];
+  for (const p of parts) {
+    if (p.v == null) continue;
+    const span = document.createElement('span');
+    span.className = 'm' + (p.ok ? '' : ' pending');
+    span.textContent = p.v;
+    metrics.appendChild(span);
+  }
+  if (!metrics.children.length) {
+    const span = document.createElement('span');
+    span.className = 'm pending';
+    span.textContent = 'data pending';
+    metrics.appendChild(span);
+  }
+
+  const scores = frag.querySelector('.scores');
+  const cSpan = document.createElement('span');
+  cSpan.className = 's ' + (show.critic_score != null ? '' : 'pending');
+  cSpan.textContent = show.critic_score != null ? `Critic ${show.critic_score}` : 'Critic —';
+  cSpan.title = show.critic_score != null ? '' : 'Critic aggregation coming soon';
+  const aSpan = document.createElement('span');
+  aSpan.className = 's ' + (show.sentiment_score != null ? '' : 'pending');
+  aSpan.textContent = show.sentiment_score != null ? `Audience ${show.sentiment_score}` : 'Audience —';
+  aSpan.title = show.sentiment_score != null ? '' : 'Audience sentiment coming soon';
+  scores.appendChild(cSpan);
+  scores.appendChild(aSpan);
+
+  return frag;
+}
+
+async function hydrate() {
+  let data;
+  try {
+    const r = await fetch('../data/shows_live.json', { cache: 'no-store' });
+    data = await r.json();
+  } catch (e) {
+    console.error('Failed to load shows_live.json', e);
+    return;
+  }
+
+  for (const section of document.querySelectorAll('.bucket')) {
+    const bucket = section.dataset.bucket;
+    const shows = (data.buckets && data.buckets[bucket]) || [];
+    const grid = section.querySelector('[data-slot="grid"]');
+    grid.innerHTML = '';
+    if (!shows.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-bucket';
+      empty.textContent = 'No shows in this bucket right now.';
+      grid.appendChild(empty);
+      continue;
+    }
+    for (const show of shows) grid.appendChild(makeCard(show));
+  }
+
+  const track = document.querySelector('[data-slot="ob-track"]');
+  track.innerHTML = '';
+  const ob = data.off_broadway || [];
+  if (!ob.length) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-bucket';
+    empty.textContent = 'No Off-Broadway shows tracked yet.';
+    track.appendChild(empty);
+  } else {
+    for (const show of ob) {
+      const card = makeCard(show);
+      const a = card.querySelector('a.show-card');
+      a.classList.add('ob-card');
+      track.appendChild(card);
+    }
+  }
+}
+
+(function(){
+  let lastY = window.scrollY, clearTimer, raf = 0;
+  function onScroll(){
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const y = window.scrollY, delta = y - lastY;
+      if (Math.abs(delta) < 2) return;
+      const dir = delta > 0 ? 'down' : 'up';
+      lastY = y;
+      document.body.classList.remove('scroll-up', 'scroll-down');
+      document.body.classList.add('scroll-' + dir);
+      clearTimeout(clearTimer);
+      clearTimer = setTimeout(() => {
+        document.body.classList.remove('scroll-up', 'scroll-down');
+      }, 240);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+hydrate();
+</script>
+</body>
+</html>

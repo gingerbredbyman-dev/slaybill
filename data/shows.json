@@ -1,0 +1,478 @@
+{
+  "_doc": "SLAYBILL curated show list. Source of truth for v1 — populated from Playbill grosses + editorial curation. build_live_shows.py transforms this into shows_live.json with computed state. Drop web/shows/posters/<slug>.{jpg,png,webp} to auto-extract palette; otherwise `palette` here is used. Update `status` manually or let classify_status.py derive from `first_preview_date` + `opening_date` + `closing_date`.",
+  "shows": [
+    {
+      "slug": "wicked",
+      "title": "Wicked",
+      "subtitle": "The Untold Story of the Witches of Oz",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Gershwin Theatre",
+      "theatre_capacity": 1933,
+      "first_preview_date": "2003-10-08",
+      "opening_date": "2003-10-30",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Elphaba and Galinda cross paths at Shiz University and discover they are destined to become rivals — then something deeper.",
+      "cast": [
+        {"name": "Mary Kate Morrissey", "role": "Elphaba"},
+        {"name": "Alexandra Socha", "role": "Galinda"}
+      ],
+      "creatives": [
+        {"name": "Stephen Schwartz", "role": "Music & Lyrics"},
+        {"name": "Winnie Holzman", "role": "Book"},
+        {"name": "Joe Mantello", "role": "Director"}
+      ],
+      "producers": ["Marc Platt", "Universal Stage Productions"],
+      "avg_ticket_usd": 159,
+      "capacity_pct": 95.7,
+      "weekly_gross_usd": 1850000,
+      "palette": ["#4a8a3a", "#e6165e", "#1a1a1a", "#f5d945", "#f7f3e8"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Wicked",
+        "todaytix": "https://www.todaytix.com/nyc/shows/12-wicked",
+        "tkts": "https://www.tdf.org/nyc/7/TKTS-ticket-booths"
+      }
+    },
+    {
+      "slug": "hamilton",
+      "title": "Hamilton",
+      "subtitle": "An American Musical",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Richard Rodgers Theatre",
+      "theatre_capacity": 1319,
+      "first_preview_date": "2015-07-13",
+      "opening_date": "2015-08-06",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "The story of America then, told by America now — a Founding Father rewritten in hip-hop and sung-through revolution.",
+      "cast": [
+        {"name": "Miguel Cervantes", "role": "Alexander Hamilton"},
+        {"name": "James Monroe Iglehart", "role": "Lafayette / Thomas Jefferson"}
+      ],
+      "creatives": [
+        {"name": "Lin-Manuel Miranda", "role": "Music, Lyrics & Book"},
+        {"name": "Thomas Kail", "role": "Director"},
+        {"name": "Andy Blankenbuehler", "role": "Choreography"}
+      ],
+      "producers": ["Jeffrey Seller", "Sander Jacobs", "Jill Furman"],
+      "avg_ticket_usd": 218,
+      "capacity_pct": 100.4,
+      "weekly_gross_usd": 2100000,
+      "palette": ["#c9a760", "#1c2541", "#f4ecd8", "#8b4513", "#0a0a0a"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Hamilton",
+        "todaytix": "https://www.todaytix.com/nyc/shows/4-hamilton",
+        "broadway_direct": "https://hamiltonmusical.com/new-york/"
+      }
+    },
+    {
+      "slug": "mj",
+      "title": "MJ",
+      "subtitle": "The Musical",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Neil Simon Theatre",
+      "theatre_capacity": 1467,
+      "first_preview_date": "2021-12-06",
+      "opening_date": "2022-02-01",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Rehearsals for the 1992 Dangerous World Tour, looking backward through the life that shaped a global icon.",
+      "cast": [
+        {"name": "Jordan Markus", "role": "MJ"}
+      ],
+      "creatives": [
+        {"name": "Lynn Nottage", "role": "Book"},
+        {"name": "Christopher Wheeldon", "role": "Director & Choreographer"}
+      ],
+      "producers": ["Lia Vollack Productions"],
+      "avg_ticket_usd": 142,
+      "capacity_pct": 84.3,
+      "weekly_gross_usd": 1280000,
+      "palette": ["#c12026", "#e3b34a", "#0a0a0a", "#6c0a0e", "#f7f3e8"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/MJ",
+        "todaytix": "https://www.todaytix.com/nyc/shows/15427-mj-the-musical"
+      }
+    },
+    {
+      "slug": "six",
+      "title": "SIX",
+      "subtitle": "The Musical",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Lena Horne Theatre",
+      "theatre_capacity": 597,
+      "first_preview_date": "2020-02-13",
+      "opening_date": "2021-10-03",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Henry VIII's six wives take the mic and reclaim the narrative — a pop-concert history remix.",
+      "cast": [
+        {"name": "Gerianne Pérez", "role": "Catherine of Aragon"},
+        {"name": "Khaila Wilcoxon", "role": "Anne Boleyn"}
+      ],
+      "creatives": [
+        {"name": "Toby Marlow", "role": "Music, Lyrics & Book"},
+        {"name": "Lucy Moss", "role": "Music, Lyrics & Book; Director"}
+      ],
+      "producers": ["Kenny Wax", "Wendy & Andy Barnes"],
+      "avg_ticket_usd": 128,
+      "capacity_pct": 98.2,
+      "weekly_gross_usd": 890000,
+      "palette": ["#e91e63", "#b8b8ff", "#0a0a0a", "#ffd700", "#f7f3e8"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/SIX",
+        "todaytix": "https://www.todaytix.com/nyc/shows/18273-six"
+      }
+    },
+    {
+      "slug": "hadestown",
+      "title": "Hadestown",
+      "subtitle": "A Folk Opera",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Walter Kerr Theatre",
+      "theatre_capacity": 975,
+      "first_preview_date": "2019-03-22",
+      "opening_date": "2019-04-17",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Orpheus and Eurydice descend into a mythic underworld industrial town ruled by Hades — a story of love against the wall.",
+      "cast": [
+        {"name": "Reeve Carney", "role": "Orpheus"},
+        {"name": "Eva Noblezada", "role": "Eurydice"}
+      ],
+      "creatives": [
+        {"name": "Anaïs Mitchell", "role": "Music, Lyrics & Book"},
+        {"name": "Rachel Chavkin", "role": "Director"}
+      ],
+      "producers": ["Mara Isaacs", "Dale Franzen"],
+      "avg_ticket_usd": 171,
+      "capacity_pct": 94.5,
+      "weekly_gross_usd": 1420000,
+      "palette": ["#d4893a", "#6e1f27", "#2a3a2a", "#f0d19b", "#0a0a0a"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Hadestown",
+        "todaytix": "https://www.todaytix.com/nyc/shows/14521-hadestown"
+      }
+    },
+    {
+      "slug": "cursed-child",
+      "title": "Harry Potter and the Cursed Child",
+      "subtitle": "",
+      "tier": "broadway",
+      "category": "play",
+      "theatre": "Lyric Theatre",
+      "theatre_capacity": 1622,
+      "first_preview_date": "2018-03-16",
+      "opening_date": "2018-04-22",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Nineteen years after the Battle of Hogwarts, Harry's youngest son Albus and his unlikely friend Scorpius confront a past the wizarding world hoped to forget.",
+      "cast": [],
+      "creatives": [
+        {"name": "Jack Thorne", "role": "Play"},
+        {"name": "J.K. Rowling", "role": "Original Story"},
+        {"name": "John Tiffany", "role": "Director"}
+      ],
+      "producers": ["Sonia Friedman Productions", "Colin Callender"],
+      "avg_ticket_usd": 152,
+      "capacity_pct": 99.7,
+      "weekly_gross_usd": 1780000,
+      "palette": ["#1a1a2e", "#c9a847", "#6d0a0f", "#0a0a0a", "#f1e6c9"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Harry-Potter-and-the-Cursed-Child",
+        "todaytix": "https://www.todaytix.com/nyc/shows/15428-harry-potter-and-the-cursed-child"
+      }
+    },
+    {
+      "slug": "death-of-a-salesman",
+      "title": "Death of a Salesman",
+      "subtitle": "",
+      "tier": "broadway",
+      "category": "play",
+      "theatre": "Winter Garden Theatre",
+      "theatre_capacity": 1526,
+      "first_preview_date": "2026-02-28",
+      "opening_date": "2026-03-20",
+      "closing_date": null,
+      "status": "in_previews",
+      "synopsis": "Arthur Miller's American tragedy in a new production directed by Miranda Cromwell. Willy Loman at the edge of his profession and his mind.",
+      "cast": [],
+      "creatives": [
+        {"name": "Arthur Miller", "role": "Play"},
+        {"name": "Miranda Cromwell", "role": "Director"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 138,
+      "capacity_pct": 91.4,
+      "weekly_gross_usd": 1310000,
+      "palette": ["#f4c842", "#0a0a0a", "#5a5a5a", "#dddddd", "#f7f3e8"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Death-of-a-Salesman"
+      }
+    },
+    {
+      "slug": "every-brilliant-thing",
+      "title": "Every Brilliant Thing",
+      "subtitle": "",
+      "tier": "broadway",
+      "category": "play",
+      "theatre": "Hudson Theatre",
+      "theatre_capacity": 970,
+      "first_preview_date": "2026-05-15",
+      "opening_date": "2026-06-02",
+      "closing_date": null,
+      "status": "in_previews",
+      "synopsis": "A one-person play about the joys of being alive — told through a list of every brilliant thing in the world, added to by the audience as we go.",
+      "cast": [
+        {"name": "Jonny Donahoe", "role": "The Narrator"}
+      ],
+      "creatives": [
+        {"name": "Duncan Macmillan", "role": "Play"},
+        {"name": "Jonny Donahoe", "role": "Additional Material"},
+        {"name": "George Perrin", "role": "Director"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 95,
+      "capacity_pct": 99.9,
+      "weekly_gross_usd": 780000,
+      "palette": ["#f4c842", "#0a0a0a", "#ff6b9d", "#ffffff", "#2a2a2a"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Every-Brilliant-Thing"
+      }
+    },
+    {
+      "slug": "ragtime-2026",
+      "title": "Ragtime",
+      "subtitle": "A New Production",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Vivian Beaumont Theater",
+      "theatre_capacity": 1080,
+      "first_preview_date": "2026-05-30",
+      "opening_date": "2026-06-18",
+      "closing_date": null,
+      "status": "coming_soon",
+      "synopsis": "Three families — Black, white, and immigrant — collide in turn-of-the-century New York. Lincoln Center Theater's revival of the Flaherty/Ahrens/McNally masterwork.",
+      "cast": [],
+      "creatives": [
+        {"name": "Stephen Flaherty", "role": "Music"},
+        {"name": "Lynn Ahrens", "role": "Lyrics"},
+        {"name": "Terrence McNally", "role": "Book"},
+        {"name": "Lear deBessonet", "role": "Director"}
+      ],
+      "producers": ["Lincoln Center Theater"],
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
+      "palette": ["#1a1a1a", "#d4d4d4", "#b31b1b", "#6b6b6b", "#ffffff"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Ragtime"
+      }
+    },
+    {
+      "slug": "chess-2026",
+      "title": "Chess",
+      "subtitle": "The Musical",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Imperial Theatre",
+      "theatre_capacity": 1417,
+      "first_preview_date": "2026-05-22",
+      "opening_date": "2026-06-10",
+      "closing_date": null,
+      "status": "coming_soon",
+      "synopsis": "A Cold War love triangle between a Russian grandmaster, an American challenger, and a Hungarian second — set to the ABBA composers' sprawling pop score.",
+      "cast": [],
+      "creatives": [
+        {"name": "Benny Andersson & Björn Ulvaeus", "role": "Music"},
+        {"name": "Tim Rice", "role": "Lyrics & Book"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
+      "palette": ["#0a0a0a", "#d4d4d4", "#5a5a5a", "#f0f0f0", "#1a1a1a"],
+      "ticket_links": {
+        "telecharge": "https://www.telecharge.com/Broadway/Chess"
+      }
+    },
+    {
+      "slug": "little-shop",
+      "title": "Little Shop of Horrors",
+      "subtitle": "",
+      "tier": "off_broadway",
+      "category": "musical",
+      "theatre": "Westside Theatre",
+      "theatre_capacity": 270,
+      "first_preview_date": "2019-09-17",
+      "opening_date": "2019-10-17",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Nerdy florist Seymour discovers a plant with a taste for human blood. Ashman & Menken's cult hit in Michael Mayer's acclaimed revival.",
+      "cast": [
+        {"name": "Rob McClure", "role": "Seymour"},
+        {"name": "Laura Osnes", "role": "Audrey"}
+      ],
+      "creatives": [
+        {"name": "Howard Ashman", "role": "Book & Lyrics"},
+        {"name": "Alan Menken", "role": "Music"},
+        {"name": "Michael Mayer", "role": "Director"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 115,
+      "capacity_pct": 92.0,
+      "weekly_gross_usd": 320000,
+      "palette": ["#4a8a3a", "#c1272d", "#f4d71e", "#1a1a1a", "#f7f3e8"],
+      "ticket_links": {
+        "todaytix": "https://www.todaytix.com/nyc/shows/14873-little-shop-of-horrors",
+        "official": "https://littleshopnyc.com/"
+      }
+    },
+    {
+      "slug": "titanique",
+      "title": "Titanique",
+      "subtitle": "",
+      "tier": "off_broadway",
+      "category": "musical",
+      "theatre": "Daryl Roth Theatre",
+      "theatre_capacity": 499,
+      "first_preview_date": "2022-10-30",
+      "opening_date": "2022-11-22",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Celine Dion crashes into the Titanic gift shop with her own version of what really happened — told in her backlog of greatest hits.",
+      "cast": [],
+      "creatives": [
+        {"name": "Marla Mindelle & Tye Blue & Constantine Rousouli", "role": "Book"},
+        {"name": "Tye Blue", "role": "Director"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 95,
+      "capacity_pct": 97.5,
+      "weekly_gross_usd": 410000,
+      "palette": ["#6ab4dc", "#f9c5d1", "#1a1a1a", "#ffffff", "#001c33"],
+      "ticket_links": {
+        "todaytix": "https://www.todaytix.com/nyc/shows/17236-titanique",
+        "official": "https://titaniquemusical.com/"
+      }
+    },
+    {
+      "slug": "perfect-crime",
+      "title": "Perfect Crime",
+      "subtitle": "",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "The Theater Center",
+      "theatre_capacity": 199,
+      "first_preview_date": "1987-04-05",
+      "opening_date": "1987-04-18",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Dr. Margaret Thorne Brent is accused of murdering her husband. Her alibi: the next-door neighbor, a handsome lieutenant. The longest-running play in New York theatre history.",
+      "cast": [
+        {"name": "Catherine Russell", "role": "Margaret Thorne Brent"}
+      ],
+      "creatives": [
+        {"name": "Warren Manzi", "role": "Play"},
+        {"name": "Jeffrey Hyatt", "role": "Director"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 89,
+      "capacity_pct": 75.0,
+      "weekly_gross_usd": 95000,
+      "palette": ["#6d0a0f", "#f4e1c1", "#1a1a1a", "#5a5a5a", "#ffffff"],
+      "ticket_links": {
+        "official": "https://theatercenter.com/perfect-crime/",
+        "todaytix": "https://www.todaytix.com/nyc/shows/perfect-crime"
+      }
+    },
+    {
+      "slug": "stomp",
+      "title": "STOMP",
+      "subtitle": "",
+      "tier": "off_broadway",
+      "category": "musical",
+      "theatre": "Orpheum Theatre",
+      "theatre_capacity": 347,
+      "first_preview_date": "1994-02-18",
+      "opening_date": "1994-02-27",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "Eight performers use everything but conventional percussion instruments — matchboxes, wooden poles, brooms, garbage cans — to build a thunderous rhythmic spectacle.",
+      "cast": [],
+      "creatives": [
+        {"name": "Luke Cresswell & Steve McNicholas", "role": "Created"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 89,
+      "capacity_pct": 81.0,
+      "weekly_gross_usd": 215000,
+      "palette": ["#e3b34a", "#1a1a1a", "#5a5a5a", "#c12026", "#f7f3e8"],
+      "ticket_links": {
+        "todaytix": "https://www.todaytix.com/nyc/shows/14872-stomp",
+        "official": "https://stomponline.com/"
+      }
+    },
+    {
+      "slug": "gazillion-bubble",
+      "title": "The Gazillion Bubble Show",
+      "subtitle": "",
+      "tier": "off_broadway",
+      "category": "musical",
+      "theatre": "New World Stages",
+      "theatre_capacity": 499,
+      "first_preview_date": "2007-01-17",
+      "opening_date": "2007-02-15",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "The Yang family's bubble artistry — geometric shapes, smoke-filled bubbles, a bubble big enough to contain the audience — set to music and colored light.",
+      "cast": [
+        {"name": "Ana Yang", "role": "Bubble Artist"}
+      ],
+      "creatives": [
+        {"name": "Fan Yang", "role": "Created"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 65,
+      "capacity_pct": 78.0,
+      "weekly_gross_usd": 180000,
+      "palette": ["#6ab4dc", "#f9c5d1", "#ffd700", "#ffffff", "#4cc9f0"],
+      "ticket_links": {
+        "official": "https://gazillionbubbleshow.com/",
+        "todaytix": "https://www.todaytix.com/nyc/shows/gazillion-bubble-show"
+      }
+    },
+    {
+      "slug": "drunk-shakespeare",
+      "title": "Drunk Shakespeare",
+      "subtitle": "",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "The Lounge",
+      "theatre_capacity": 85,
+      "first_preview_date": "2014-10-15",
+      "opening_date": "2014-10-15",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "A professional actor takes five shots of whiskey, then attempts to perform a Shakespeare play. The remaining cast attempts to keep it on the rails.",
+      "cast": [],
+      "creatives": [
+        {"name": "Scott Griffin", "role": "Director"}
+      ],
+      "producers": [],
+      "avg_ticket_usd": 79,
+      "capacity_pct": 88.0,
+      "weekly_gross_usd": 140000,
+      "palette": ["#6d0a0f", "#e3b34a", "#1a1a1a", "#f4e1c1", "#5a5a5a"],
+      "ticket_links": {
+        "official": "https://drunkshakespeare.com/new-york/",
+        "todaytix": "https://www.todaytix.com/nyc/shows/14901-drunk-shakespeare"
+      }
+    }
+  ]
+}

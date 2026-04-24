@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fantasy Broadway — SLAYBILL</title>
+<meta name="description" content="Fantasy Broadway: draft a roster of one Broadway musical, one Broadway play, and the same for off-Broadway. Score on audience sentiment, critic reviews, and weekly revenue. Season ends at the Tonys.">
+<style>
+  :root {
+    --playbill-yellow: #f4d71e;
+    --playbill-ink: #0a0a0a;
+    --playbill-red: #c3102f;
+    --playbill-muted: #5a5a5a;
+    --bg: #05050f;
+    --ink: #ecebff;
+    --muted: #8a8ab0;
+    --holo1: #7209b7;
+    --holo2: #f72585;
+    --holo3: #4cc9f0;
+    --holo4: #80ffdb;
+    --gold: #ffd700;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,215,0,0.08), transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(247,37,133,0.12), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 32px 20px 64px;
+  }
+
+  /* Same jostle pattern as the main Playbill page for continuity. */
+  .jostle {
+    display: inline-block;
+    will-change: transform;
+    transition: transform .45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  body.scroll-down .jostle { transform: translateY(-3px); }
+  body.scroll-up   .jostle { transform: translateY(3px); }
+  body.scroll-down .cover .jostle:nth-of-type(2n) { transform: translateY(-4px); }
+  body.scroll-up   .cover .jostle:nth-of-type(2n) { transform: translateY(4px); }
+
+  /* Personal SLAYBILL cover — yellow card, the user's name on top. */
+  .cover {
+    width: 100%; max-width: 520px;
+    margin: 0 auto 40px;
+    background: var(--playbill-yellow);
+    color: var(--playbill-ink);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.1);
+    padding: 24px 32px 22px;
+    position: relative;
+    font-family: "Times New Roman", Georgia, serif;
+    display: grid;
+    gap: 14px;
+  }
+  .cover .masthead {
+    border-top: 4px solid var(--playbill-ink);
+    border-bottom: 4px solid var(--playbill-ink);
+    padding: 10px 0;
+    text-align: center;
+  }
+  .cover .word {
+    font-size: clamp(40px, 8vw + 4px, 64px);
+    letter-spacing: -0.02em; font-weight: 900;
+    line-height: 0.9;
+  }
+  .cover .sub {
+    font-size: 10px; letter-spacing: 0.3em; margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .cover .owner {
+    text-align: center;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+  .cover .owner input {
+    font: inherit; color: inherit; letter-spacing: inherit;
+    background: transparent; border: none;
+    border-bottom: 1px dashed rgba(0,0,0,0.4);
+    text-align: center;
+    padding: 2px 4px;
+    min-width: 200px;
+    outline: none;
+  }
+  .cover .owner input:focus { border-bottom-color: var(--playbill-red); }
+  .cover .tagline {
+    text-align: center;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .cover .dog-ear {
+    position: absolute; top: 0; right: 0;
+    width: 38px; height: 38px;
+    background: linear-gradient(225deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.08) 50%, transparent 50%);
+  }
+
+  /* Top nav back to Playbill. */
+  .topbar {
+    max-width: 1100px; margin: 0 auto 18px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .topbar a {
+    color: var(--muted); text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid rgba(232,232,255,0.15);
+    border-radius: 999px;
+    transition: border-color .3s, color .3s;
+  }
+  .topbar a:hover { color: var(--ink); border-color: rgba(232,232,255,0.35); }
+
+  /* Roster — 4 slots. Each shows the drafted show or a "DRAFT" placeholder. */
+  .roster {
+    max-width: 1100px; margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  @media (max-width: 820px) { .roster { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 440px) { .roster { grid-template-columns: 1fr; } }
+  .slot {
+    position: relative;
+    padding: 18px 18px 16px;
+    border-radius: 14px;
+    background: rgba(20,20,40,0.75);
+    border: 1px solid rgba(232,232,255,0.12);
+    display: flex; flex-direction: column; gap: 8px;
+    min-height: 180px;
+  }
+  @supports ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+    .slot {
+      background: rgba(20,20,40,0.5);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(12px) saturate(140%);
+    }
+  }
+  .slot .label {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .slot .name {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: clamp(18px, 1.8vw + 10px, 22px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word;
+  }
+  .slot .name.empty {
+    color: var(--muted);
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    font-weight: 400;
+  }
+  .slot .venue {
+    font-size: 11px;
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .slot .score {
+    margin-top: auto;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    font-family: "Courier New", monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .slot .score .n {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .slot .clear {
+    position: absolute; top: 8px; right: 10px;
+    background: transparent; border: none; color: var(--muted);
+    font-size: 14px; cursor: pointer;
+    padding: 4px; line-height: 1;
+  }
+  .slot .clear:hover { color: var(--playbill-red); }
+
+  .summary {
+    max-width: 1100px; margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 22px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,215,0,0.35);
+    background: color-mix(in oklab, var(--gold) 8%, rgba(10,10,15,0.5));
+  }
+  .summary .lbl {
+    font-family: "Courier New", monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .summary .total {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 38px; font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .summary .note {
+    font-size: 11px; color: var(--muted);
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+
+  /* Draft pool — 4 columns (one per roster slot category). */
+  h2.section {
+    max-width: 1100px; margin: 0 auto 12px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .pool {
+    max-width: 1100px; margin: 0 auto 36px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  @media (max-width: 820px) { .pool { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 440px) { .pool { grid-template-columns: 1fr; } }
+  .col {
+    background: rgba(15,15,30,0.65);
+    border: 1px solid rgba(232,232,255,0.08);
+    border-radius: 12px;
+    padding: 12px 12px 10px;
+    display: flex; flex-direction: column; gap: 6px;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  .col h3 {
+    margin: 0 0 6px;
+    font-family: "Courier New", monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--holo3);
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(232,232,255,0.1);
+  }
+  .card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    background: rgba(20,20,40,0.6);
+    border: 1px solid rgba(232,232,255,0.08);
+    cursor: pointer;
+    transition: transform .25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color .25s, background .25s;
+  }
+  .card:hover { transform: translateX(2px); border-color: rgba(255,215,0,0.35); background: rgba(40,40,20,0.7); }
+  .card.selected { border-color: var(--gold); background: color-mix(in oklab, var(--gold) 10%, rgba(20,20,40,0.6)); }
+  .card .title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .card .sub {
+    font-family: "Courier New", monospace;
+    font-size: 9px; letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .card .score {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 16px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .col .empty {
+    color: var(--muted);
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 14px 8px;
+    font-style: italic;
+  }
+
+  /* Tonys countdown strip. */
+  .tonys {
+    max-width: 1100px; margin: 0 auto 24px;
+    padding: 18px 22px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(195,16,47,0.08));
+    border: 1px solid rgba(255,215,0,0.3);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 18px; flex-wrap: wrap;
+  }
+  .tonys .t { font-family: "Times New Roman", Georgia, serif; font-size: 22px; color: var(--gold); }
+  .tonys .s { color: var(--muted); font-family: "Courier New", monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+
+  footer {
+    max-width: 1100px; margin: 40px auto 0; text-align: center;
+    font-family: "Courier New", monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html">← SLAYBILL · All Shows</a>
+</div>
+
+<section class="cover">
+  <div class="masthead">
+    <div class="word jostle">FANTASY BROADWAY</div>
+    <div class="sub jostle">Draft · Score · Tonys</div>
+  </div>
+  <p class="owner jostle">Manager · <input id="ownerName" type="text" maxlength="28" placeholder="Your name here" autocomplete="off" spellcheck="false"></p>
+  <p class="tagline jostle">Like Fantasy Football — without the risk of CTEs.<br><span style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--playbill-red)">Draft 4 shows · score weekly · crown the Tonys</span></p>
+  <div class="dog-ear"></div>
+</section>
+
+<section class="tonys">
+  <div>
+    <div class="s">78th Tony Awards</div>
+    <div class="t" id="tonysCountdown">calculating…</div>
+  </div>
+  <div>
+    <div class="s">Season ends · final roster locks day of ceremony</div>
+  </div>
+</section>
+
+<h2 class="section">Your roster · click a show below to draft it into a slot</h2>
+
+<section class="roster" id="roster">
+  <!-- Populated by JS -->
+</section>
+
+<section class="summary">
+  <div>
+    <div class="lbl">Total fantasy points</div>
+    <div class="total"><span id="totalPts">0</span></div>
+  </div>
+  <div class="note">
+    points = capacity% × 10 + gross_rank_bonus<br>
+    sentiment + critic wiring next
+  </div>
+</section>
+
+<h2 class="section">Draft pool · <span id="poolStatus">live from Playbill</span></h2>
+
+<section class="pool" id="pool">
+  <div class="col" data-slot="broadway-musical">
+    <h3>Broadway · Musical</h3>
+  </div>
+  <div class="col" data-slot="broadway-play">
+    <h3>Broadway · Play</h3>
+  </div>
+  <div class="col" data-slot="offbroadway-musical">
+    <h3>Off-Broadway · Musical</h3>
+  </div>
+  <div class="col" data-slot="offbroadway-play">
+    <h3>Off-Broadway · Play</h3>
+  </div>
+</section>
+
+<footer>SLAYBILL &middot; Fantasy Broadway &middot; Data from Playbill weekly grosses</footer>
+
+<script>
+/* Fantasy Broadway page logic.
+ *
+ * Loads shows_live.json (generated by build_live_shows.py from the Playbill
+ * grosses scrape). Lets the user assign one show to each of four slots:
+ * Broadway Musical / Broadway Play / Off-Broadway Musical / Off-Broadway Play.
+ * Persists the team + manager name in localStorage so refreshing doesn't
+ * blow away the draft.
+ *
+ * Score rules (v1 — placeholder formula):
+ *   per show = round(capacity_pct * 10 + rank_bonus)
+ *   rank_bonus = 40 for gross rank 1, 38 for 2, ... down to 0 beyond rank 20
+ *   Off-Broadway shows score 50 flat (no gross data yet).
+ * Real sentiment + critic signals wire in once the Reddit/Playbill-news
+ * scrapers feed per-show event aggregates. The formula is kept simple
+ * enough that the ordering intuition holds: filling a stronger venue +
+ * higher capacity scores better. */
+
+const SLOTS = [
+  { id: 'broadway-musical',    label: 'Broadway · Musical',     scope: 'broadway',    category: 'musical' },
+  { id: 'broadway-play',       label: 'Broadway · Play',        scope: 'broadway',    category: 'play'    },
+  { id: 'offbroadway-musical', label: 'Off-Broadway · Musical', scope: 'off-broadway', category: 'musical' },
+  { id: 'offbroadway-play',    label: 'Off-Broadway · Play',    scope: 'off-broadway', category: 'play'    },
+];
+
+const STORAGE_KEY = 'slaybill.fantasy.team.v1';
+const NAME_KEY    = 'slaybill.fantasy.name';
+
+let data = null;
+let team = {};
+
+function rankBonus(rank) {
+  if (rank == null || rank > 20) return 0;
+  return Math.max(0, 42 - rank * 2);
+}
+
+function scoreOf(show, bwayRank) {
+  if (!show) return 0;
+  if (show.tier === 'off_broadway') return 50;
+  const cap = show.capacity_pct || 90;
+  return Math.round(cap * 10 + rankBonus(bwayRank));
+}
+
+function allBroadway() {
+  if (!data || !data.buckets) return [];
+  return [
+    ...(data.buckets.live || []),
+    ...(data.buckets.in_previews || []),
+    ...(data.buckets.coming_soon || []),
+  ];
+}
+
+function findShow(slug) {
+  if (!data) return null;
+  return [...allBroadway(), ...(data.off_broadway || [])].find(s => s.slug === slug) || null;
+}
+
+function rankOf(show) {
+  if (!show || show.tier !== 'broadway' || !data) return null;
+  const sorted = [...allBroadway()].sort((a, b) => (b.weekly_gross_usd || 0) - (a.weekly_gross_usd || 0));
+  const idx = sorted.findIndex(s => s.slug === show.slug);
+  return idx >= 0 ? idx + 1 : null;
+}
+
+function renderRoster() {
+  const root = document.getElementById('roster');
+  root.innerHTML = '';
+  let total = 0;
+  for (const slot of SLOTS) {
+    const show = team[slot.id] ? findShow(team[slot.id]) : null;
+    const rank = show ? rankOf(show) : null;
+    const pts = show ? scoreOf(show, rank) : 0;
+    total += pts;
+    const el = document.createElement('div');
+    el.className = 'slot';
+    el.innerHTML = show ? `
+      <button class="clear" data-slot="${slot.id}" aria-label="Drop ${show.title}">✕</button>
+      <div class="label">${slot.label}</div>
+      <div class="name">${escapeHTML(show.title)}</div>
+      <div class="venue">${escapeHTML(show.theatre)}${rank ? ' · rank #' + rank : ''}</div>
+      <div class="score"><span>points</span><span class="n">${pts}</span></div>
+    ` : `
+      <div class="label">${slot.label}</div>
+      <div class="name empty">— DRAFT —</div>
+      <div class="venue">click a ${slot.category} in the pool below</div>
+      <div class="score"><span>points</span><span class="n">0</span></div>
+    `;
+    root.appendChild(el);
+  }
+  document.getElementById('totalPts').textContent = total;
+  root.querySelectorAll('.clear').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    const slot = b.dataset.slot;
+    delete team[slot];
+    saveTeam();
+    renderRoster();
+    renderPool();
+  }));
+}
+
+function renderPool() {
+  if (!data) return;
+  const pool = document.getElementById('pool');
+  for (const slot of SLOTS) {
+    const col = pool.querySelector(`[data-slot="${slot.id}"]`);
+    // keep the h3, wipe the rest
+    col.querySelectorAll('.card, .empty').forEach(e => e.remove());
+    const sourceList = slot.scope === 'broadway' ? allBroadway() : (data.off_broadway || []);
+    let filtered = sourceList.filter(s => s.category === slot.category);
+    if (slot.scope === 'broadway') {
+      filtered.sort((a, b) => (b.weekly_gross_usd || 0) - (a.weekly_gross_usd || 0));
+    } else {
+      filtered.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    if (!filtered.length) {
+      const e = document.createElement('div');
+      e.className = 'empty';
+      e.textContent = 'no shows tagged yet';
+      col.appendChild(e);
+      continue;
+    }
+    for (const show of filtered) {
+      const rank = rankOf(show);
+      const pts = scoreOf(show, rank);
+      const picked = team[slot.id] === show.slug;
+      const c = document.createElement('div');
+      c.className = 'card' + (picked ? ' selected' : '');
+      c.innerHTML = `
+        <div>
+          <div class="title">${escapeHTML(show.title)}</div>
+          <div class="sub">${escapeHTML(show.theatre)}${show.capacity_pct ? ' · ' + show.capacity_pct.toFixed(0) + '%' : ''}</div>
+        </div>
+        <div class="score">${pts}</div>
+      `;
+      c.addEventListener('click', () => {
+        team[slot.id] = show.slug;
+        saveTeam();
+        renderRoster();
+        renderPool();
+      });
+      col.appendChild(c);
+    }
+  }
+  const bway = allBroadway();
+  const untagged = bway.filter(s => s.category === 'unknown').length;
+  const obCount = (data.off_broadway || []).length;
+  document.getElementById('poolStatus').textContent =
+    `${bway.length} Broadway + ${obCount} Off-Broadway${untagged ? ` · ${untagged} untagged` : ''}`;
+}
+
+function loadTeam() {
+  try { team = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch { team = {}; }
+}
+function saveTeam() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(team));
+}
+
+function wireOwnerName() {
+  const input = document.getElementById('ownerName');
+  const saved = localStorage.getItem(NAME_KEY);
+  // URL param takes precedence — so sharing ?name=Austin works as a preset
+  const params = new URLSearchParams(location.search);
+  const fromUrl = params.get('name');
+  input.value = fromUrl || saved || '';
+  input.addEventListener('input', () => localStorage.setItem(NAME_KEY, input.value));
+}
+
+function wireTonysCountdown() {
+  // 78th Tony Awards — airing June 7 2026 per current calendar.
+  // Placeholder; update to CBS/League-confirmed air date when announced.
+  const target = new Date('2026-06-07T20:00:00-04:00');
+  const el = document.getElementById('tonysCountdown');
+  function tick() {
+    const now = new Date();
+    const ms = target - now;
+    if (ms <= 0) { el.textContent = 'TONIGHT'; return; }
+    const d = Math.floor(ms / 86_400_000);
+    const h = Math.floor((ms % 86_400_000) / 3_600_000);
+    el.textContent = `${d} days · ${h}h · to ceremony`;
+  }
+  tick();
+  setInterval(tick, 60_000);
+}
+
+function escapeHTML(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+// Scroll-jostle — same pattern as the main SLAYBILL page.
+(function(){
+  let lastY = window.scrollY, clearTimer, raf = 0;
+  function onScroll(){
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const y = window.scrollY, delta = y - lastY;
+      if (Math.abs(delta) < 2) return;
+      const dir = delta > 0 ? 'down' : 'up';
+      lastY = y;
+      document.body.classList.remove('scroll-up', 'scroll-down');
+      document.body.classList.add('scroll-' + dir);
+      clearTimeout(clearTimer);
+      clearTimer = setTimeout(() => {
+        document.body.classList.remove('scroll-up', 'scroll-down');
+      }, 240);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+(async function init() {
+  loadTeam();
+  wireOwnerName();
+  wireTonysCountdown();
+  try {
+    const r = await fetch('../data/shows_live.json', { cache: 'no-store' });
+    data = await r.json();
+  } catch (e) {
+    data = { buckets: {}, off_broadway: [] };
+    document.getElementById('poolStatus').textContent = 'shows_live.json not loaded — run builders/build_live_shows.py';
+  }
+  renderRoster();
+  renderPool();
+})();
+</script>
+</body>
+</html>

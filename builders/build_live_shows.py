@@ -1,0 +1,158 @@
+"""
+SLAYBILL — emit shows_live.json from the curated shows.json source of truth.
+
+v1 strategy: shows.json is authoritative. This builder normalizes it into the
+format the front-end expects (split by tier + status bucket, computed rank
+fields, safe defaults for missing metrics).
+
+v1.5 will layer DB grosses + news-event overlays on top (date refresh + live
+capacity_pct from the latest grosses row).
+
+Run:
+    python builders/build_live_shows.py
+
+Output shape:
+    {
+      "_doc": "...",
+      "generated_at": "...",
+      "buckets": {
+        "coming_soon":   [show, ...],   # previews start within 42 days
+        "in_previews":   [show, ...],   # currently previewing
+        "live":          [show, ...],   # officially opened
+        "closed":        [show, ...]    # archived, shown only on archive page
+      },
+      "off_broadway":    [show, ...]    # ALL off-Broadway regardless of bucket
+    }
+
+Rationale for splitting off-Broadway from the buckets: the UI renders it as a
+separate horizontal-scroll row, not inside the bucket stacks. Easier to emit
+once here than to filter client-side.
+"""
+
+import json
+from datetime import date, datetime, timezone, timedelta
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PROJECT_ROOT = HERE.parent
+SHOWS_JSON = PROJECT_ROOT / "data" / "shows.json"
+OUT_PATH = PROJECT_ROOT / "data" / "shows_live.json"
+
+COMING_SOON_WINDOW_DAYS = 42  # 6 weeks
+
+
+def _parse_date(value):
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(str(value)[:10])
+    except ValueError:
+        return None
+
+
+def derive_status(show: dict, today: date) -> str:
+    """If shows.json already has a status, trust it. Otherwise derive from dates."""
+    if show.get("status"):
+        return show["status"]
+    closing = _parse_date(show.get("closing_date"))
+    opening = _parse_date(show.get("opening_date"))
+    first_preview = _parse_date(show.get("first_preview_date"))
+
+    if closing and closing < today:
+        return "closed"
+    if opening and opening <= today:
+        if not closing or closing >= today:
+            return "live"
+    if first_preview and first_preview <= today:
+        if not opening or today < opening:
+            return "in_previews"
+    if first_preview and today < first_preview <= today + timedelta(days=COMING_SOON_WINDOW_DAYS):
+        return "coming_soon"
+    return "announced"
+
+
+def normalize(show: dict, today: date) -> dict:
+    """Flatten into the exact contract the front-end expects. Keeping the
+    in-memory JS simple means all fields have the SAME name across every
+    show, and always present (null when unknown)."""
+    return {
+        "slug": show["slug"],
+        "title": show["title"],
+        "subtitle": show.get("subtitle", ""),
+        "tier": show.get("tier", "broadway"),
+        "category": show.get("category", "unknown"),
+        "status": derive_status(show, today),
+        "theatre": show.get("theatre", ""),
+        "theatre_capacity": show.get("theatre_capacity"),
+        "first_preview_date": show.get("first_preview_date"),
+        "opening_date": show.get("opening_date"),
+        "closing_date": show.get("closing_date"),
+        "synopsis": show.get("synopsis", ""),
+        "cast": show.get("cast", []),
+        "creatives": show.get("creatives", []),
+        "producers": show.get("producers", []),
+        "avg_ticket_usd": show.get("avg_ticket_usd"),
+        "capacity_pct": show.get("capacity_pct"),
+        "weekly_gross_usd": show.get("weekly_gross_usd"),
+        "critic_score": show.get("critic_score"),
+        "sentiment_score": show.get("sentiment_score"),
+        "palette": show.get("palette", ["#333333", "#666666", "#999999", "#cccccc", "#ffffff"]),
+        "ticket_links": show.get("ticket_links", {}),
+    }
+
+
+def build() -> dict:
+    data = json.loads(SHOWS_JSON.read_text())
+    today = date.today()
+
+    buckets: dict[str, list[dict]] = {
+        "coming_soon": [],
+        "in_previews": [],
+        "live": [],
+        "closed": [],
+    }
+    off_broadway: list[dict] = []
+
+    for show in data["shows"]:
+        normalized = normalize(show, today)
+        if normalized["tier"] == "off_broadway":
+            off_broadway.append(normalized)
+            continue
+        bucket = normalized["status"]
+        if bucket == "closed_early" or bucket == "cancelled":
+            bucket = "closed"
+        if bucket in buckets:
+            buckets[bucket].append(normalized)
+        # announced shows are omitted from main page; they'd live on an
+        # upcoming-season view later.
+
+    # Sort each Broadway bucket by weekly gross desc (nulls last).
+    def sort_key(s):
+        return (-(s["weekly_gross_usd"] or 0), s["title"].lower())
+
+    for key in buckets:
+        buckets[key].sort(key=sort_key)
+    off_broadway.sort(key=lambda s: (-(s["weekly_gross_usd"] or 0), s["title"].lower()))
+
+    out = {
+        "_doc": (
+            "Auto-generated by build_live_shows.py from shows.json. "
+            "buckets[*] lists Broadway shows grouped by status; off_broadway "
+            "is flat regardless of bucket. Do NOT edit by hand — edit "
+            "shows.json and re-run the builder."
+        ),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "buckets": buckets,
+        "off_broadway": off_broadway,
+    }
+    OUT_PATH.write_text(json.dumps(out, indent=2))
+    return out
+
+
+if __name__ == "__main__":
+    data = build()
+    counts = {k: len(v) for k, v in data["buckets"].items()}
+    counts["off_broadway"] = len(data["off_broadway"])
+    print(f"Wrote {OUT_PATH.name}")
+    for k, v in counts.items():
+        print(f"  {k:14} {v}")
