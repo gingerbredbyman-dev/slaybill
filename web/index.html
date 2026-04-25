@@ -3,37 +3,80 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SLAYBILL</title>
-<meta name="description" content="Your show's favorite show guide. What's coming, what's in previews, and what's live on Broadway right now.">
+<title>SLAYBILL — Broadway, Off-Broadway, what they're worth</title>
+<meta name="description" content="SLAYBILL — the Broadway guide that tracks what's opening, what's running, and what it's all grossing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Inter:wght@300..800&family=Instrument+Serif&display=swap">
 <style>
-  /* Three bucket themes are applied via a data-theme attribute on each
-     <section.bucket>. Each theme sets --poster-filter + --accent + --bg-ink
-     so the same card component reskins per bucket. */
+  /* SLAYBILL design system — post-glass-liquid 2026.
+   * Fraunces (display, variable opsz/wght/WONK) + Inter (UI) replace
+   * Times New Roman + Courier. OKLCH tokens, edge-lit borders, no
+   * backdrop-filter on cards. Three buckets get distinct themes via
+   * data-theme on each <section.bucket>. */
   :root {
-    --playbill-yellow: #f4d71e;
-    --playbill-ink: #0a0a0a;
-    --playbill-red: #c3102f;
-    --playbill-muted: #5a5a5a;
-    --bg: #05050f;
-    --ink: #ecebff;
-    --muted: #8a8ab0;
+    color-scheme: dark light;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-ui:      'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-stamp:   'Instrument Serif', 'Times New Roman', serif;
+    --font-mono:    'Courier New', monospace;
+
+    /* Core OKLCH palette */
+    --yellow:   oklch(86% 0.22 95);
+    --ink:      oklch(12% 0.01 270);
+    --cream:    oklch(96% 0.01 95);
+    --red:      oklch(48% 0.22 27);
+    --gold:     oklch(80% 0.19 85);
+    --violet:   oklch(72% 0.18 290);
+    --cyan:     oklch(78% 0.13 220);
+
+    /* Surfaces */
+    --surface-0: oklch(8% 0.02 270);
+    --surface-1: oklch(11% 0.025 270);
+    --surface-2: oklch(15% 0.03 270);
+    --surface-border: oklch(22% 0.04 270);
+
+    /* Easing */
+    --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out-cub: cubic-bezier(0.65, 0, 0.35, 1);
+
+    --dur-fast:    200ms;
+    --dur-medium:  350ms;
+    --dur-slow:    600ms;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
   body {
-    background: #1a1a1a;
-    color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--surface-0);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-feature-settings: "ss01" 1, "cv05" 1;
     min-height: 100vh;
     padding: 32px 20px 80px;
-    display: flex; flex-direction: column; align-items: center; gap: 48px;
+    display: flex; flex-direction: column; align-items: center; gap: 56px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+  ::selection { background: color-mix(in oklch, var(--gold) 35%, transparent); color: var(--cream); }
 
-  /* Scroll jostle — same damped translate as the cover copy. */
+  /* Theatrical focus rings — visible on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* Scroll-jostle: black text shifts opposite scroll direction, eases back. */
   .jostle {
     display: inline-block;
     will-change: transform;
-    transition: transform .45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform .45s var(--ease-out-expo);
   }
   body.scroll-down .jostle { transform: translateY(-3px); }
   body.scroll-up   .jostle { transform: translateY(3px); }
@@ -42,197 +85,238 @@
 
   /* SLAYBILL yellow cover. */
   .cover {
-    width: 100%; max-width: 460px;
-    background: var(--playbill-yellow);
-    color: var(--playbill-ink);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.1);
+    width: 100%; max-width: 480px;
+    background: var(--yellow);
+    color: var(--ink);
+    box-shadow:
+      0 30px 80px oklch(0% 0 0 / 0.6),
+      0 0 0 1px oklch(0% 0 0 / 0.1);
     padding: 28px 32px 24px;
     display: grid;
     gap: 16px;
     position: relative;
-    font-family: "Times New Roman", Georgia, serif;
+    font-family: var(--font-display);
   }
   .masthead {
-    border-top: 4px solid var(--playbill-ink);
-    border-bottom: 4px solid var(--playbill-ink);
-    padding: 10px 0;
+    border-top: 4px solid var(--ink);
+    border-bottom: 4px solid var(--ink);
+    padding: 12px 0 10px;
     text-align: center;
   }
   .masthead .word {
-    font-size: clamp(44px, 9vw + 6px, 68px);
-    letter-spacing: -0.02em; font-weight: 900; line-height: 0.9;
+    font-family: var(--font-display);
+    font-size: clamp(46px, 9.4vw + 4px, 74px);
+    font-variation-settings: 'wght' 900, 'opsz' 72, 'WONK' 1;
+    letter-spacing: -0.04em;
+    line-height: 0.86;
+    text-rendering: optimizeLegibility;
   }
   .masthead .sub {
-    font-size: 10px; letter-spacing: 0.32em; margin-top: 6px; text-transform: uppercase;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.36em;
+    margin-top: 8px;
+    text-transform: uppercase;
+    opacity: 0.78;
   }
   .tagline {
     text-align: center;
+    font-family: var(--font-display);
     font-style: italic;
-    font-size: 15px;
-    line-height: 1.35;
+    font-variation-settings: 'wght' 320, 'opsz' 14, 'WONK' 0;
+    font-size: clamp(14px, 1.5vw + 8px, 17px);
+    line-height: 1.45;
+    letter-spacing: 0.005em;
+    margin: 0;
   }
   .superstition {
-    border-top: 1px dashed rgba(0,0,0,0.3);
-    border-bottom: 1px dashed rgba(0,0,0,0.3);
+    border-top: 1px dashed oklch(0% 0 0 / 0.3);
+    border-bottom: 1px dashed oklch(0% 0 0 / 0.3);
     padding: 10px 8px;
     text-align: center;
-    font-family: "Courier New", monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    line-height: 1.5;
+    line-height: 1.55;
   }
   .superstition .warn {
-    color: var(--playbill-red); font-weight: 900; letter-spacing: 0.3em;
+    /* Darkened from #c3102f to clear WCAG AA on yellow ground. */
+    color: oklch(38% 0.22 27);
+    font-weight: 900;
+    letter-spacing: 0.32em;
   }
   footer.cover-foot {
-    border-top: 2px solid var(--playbill-ink);
+    border-top: 2px solid var(--ink);
     padding-top: 12px;
     font-size: 10px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     display: flex; justify-content: space-between;
+    font-family: var(--font-mono);
   }
   .dog-ear {
     position: absolute; top: 0; right: 0;
     width: 38px; height: 38px;
-    background: linear-gradient(225deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.08) 50%, transparent 50%);
+    background: linear-gradient(225deg, oklch(0% 0 0 / 0.08) 0%, oklch(0% 0 0 / 0.08) 50%, transparent 50%);
   }
 
-  /* Buckets. */
+  /* Buckets — three lifecycle modules with distinct themes. */
   .bucket {
     width: 100%; max-width: 1200px;
-    padding: 28px 24px 32px;
+    padding: 30px 26px 34px;
     border-radius: 18px;
-    background: var(--bucket-bg, #101020);
-    color: var(--bucket-ink, var(--ink));
-    transition: background .3s ease;
+    background: var(--bucket-bg, var(--surface-1));
+    color: var(--bucket-ink, var(--cream));
+    transition: background var(--dur-medium) var(--ease-in-out-cub);
   }
   .bucket header {
     display: flex; justify-content: space-between; align-items: baseline;
     gap: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
   }
   .bucket h2 {
-    font-family: "Times New Roman", Georgia, serif;
-    font-weight: 900;
-    font-size: clamp(28px, 3.5vw + 10px, 44px);
-    letter-spacing: -0.01em;
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    font-size: clamp(30px, 3.5vw + 12px, 48px);
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     margin: 0;
-    line-height: 1;
+    line-height: 0.95;
+    text-wrap: balance;
   }
   .bucket .bucket-note {
-    font-family: "Courier New", monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     opacity: 0.7;
     text-align: right;
   }
 
-  /* Bucket themes. */
+  /* Theme: Coming Soon — paper, monochrome.
+   * In OS dark mode, drop to a pale grey instead of pure white. */
   .bucket[data-theme="coming"] {
-    --bucket-bg: #ffffff;
-    --bucket-ink: #0a0a0a;
-    --bucket-accent: #0a0a0a;
-    --poster-filter: grayscale(1) contrast(1.1);
+    --bucket-bg: oklch(96% 0.005 95);
+    --bucket-ink: oklch(15% 0.01 270);
+    --bucket-accent: oklch(15% 0.01 270);
+    --poster-filter: grayscale(1) contrast(1.05);
   }
+
+  /* Theme: In Previews — yellow on black, duotone posters. */
   .bucket[data-theme="previews"] {
-    --bucket-bg: #0a0a0a;
-    --bucket-ink: #f4c842;
-    --bucket-accent: #f4c842;
+    --bucket-bg: oklch(10% 0.01 270);
+    --bucket-ink: oklch(86% 0.22 95);
+    --bucket-accent: oklch(86% 0.22 95);
     --poster-filter: sepia(0.7) saturate(3) hue-rotate(-10deg) brightness(0.95);
   }
+
+  /* Theme: Live — full color, current scheme. */
   .bucket[data-theme="live"] {
-    --bucket-bg: #0a0a18;
-    --bucket-ink: #ecebff;
-    --bucket-accent: #f72585;
+    --bucket-bg: oklch(11% 0.025 270);
+    --bucket-ink: var(--cream);
+    --bucket-accent: oklch(70% 0.22 350);
     --poster-filter: none;
   }
 
   /* Card grid. */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
   }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
 
-  /* Each card is its own container so the title font can shrink to fit via
-     container queries (the HADESTOWN fix — no mid-word wrapping). */
+  /* Card — container query host so titles fit without mid-word wraps. */
   a.show-card {
     container-type: inline-size;
     container-name: card;
     display: flex; flex-direction: column; gap: 10px;
-    text-decoration: none; color: inherit;
-    background: color-mix(in oklab, var(--bucket-bg) 85%, var(--bucket-ink) 10%);
-    border: 1px solid color-mix(in oklab, var(--bucket-ink) 15%, transparent);
+    text-decoration: none;
+    color: inherit;
     border-radius: 14px;
     padding: 14px;
     min-width: 0;
     overflow: hidden;
+    /* Edge-lit border via two-layer background — no rgba border. */
+    border: 1px solid transparent;
+    background-image:
+      linear-gradient(color-mix(in oklch, var(--bucket-bg) 88%, var(--bucket-ink) 5%),
+                      color-mix(in oklch, var(--bucket-bg) 88%, var(--bucket-ink) 5%)),
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--bucket-accent) 50%, transparent) 0%,
+        transparent 50%,
+        color-mix(in oklch, var(--bucket-accent) 18%, transparent) 100%
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     transition:
-      transform .35s cubic-bezier(0.2, 0.8, 0.2, 1),
-      border-color .35s cubic-bezier(0.2, 0.8, 0.2, 1),
-      box-shadow .35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow var(--dur-fast) var(--ease-spring),
+      translate var(--dur-fast) var(--ease-spring);
   }
   a.show-card:hover, a.show-card:focus-visible {
-    transform: translateY(-3px);
-    border-color: color-mix(in oklab, var(--bucket-ink) 40%, transparent);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    outline: none;
+    translate: 0 -4px;
+    box-shadow:
+      0 20px 48px oklch(0% 0 0 / 0.35),
+      0 0 0 1px color-mix(in oklch, var(--bucket-accent) 35%, transparent);
   }
 
-  /* Poster: palette-gradient fallback + optional real image; filter per theme. */
+  /* Poster: palette-gradient fallback + optional real image. */
   .poster {
     aspect-ratio: 3 / 4;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
     filter: var(--poster-filter);
+    background: oklch(15% 0.01 270);
   }
   .poster .palette-bg {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--p1,#444), var(--p2,#666) 55%, var(--p3,#888));
+    background: linear-gradient(135deg, var(--p1, oklch(45% 0.05 270)), var(--p2, oklch(30% 0.04 270)) 55%, var(--p3, oklch(20% 0.03 270)));
   }
   .poster .palette-accent {
     position: absolute; inset: 0;
-    background: radial-gradient(circle at 25% 15%, var(--p4,#999) 0%, transparent 55%);
-    opacity: 0.5;
+    background: radial-gradient(circle at 28% 18%, var(--p4, oklch(60% 0.10 270)) 0%, transparent 55%);
+    opacity: 0.55;
   }
   .poster img {
     position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%; height: 100%;
+    object-fit: cover;
     display: block;
   }
   .poster .stamp {
-    position: absolute; inset: auto 0 12px 0;
+    position: absolute; inset: auto 0 14px 0;
     text-align: center;
-    font-family: "Times New Roman", Georgia, serif;
-    font-weight: 900;
-    color: var(--p5, #fff);
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    color: var(--p5, white);
     letter-spacing: -0.01em;
     padding: 0 14px;
     text-transform: uppercase;
-    font-size: clamp(14px, 6cqw, 28px);
+    font-size: clamp(14px, 6cqw, 32px);
     line-height: 0.95;
     word-break: keep-all;
     overflow-wrap: break-word;
+    text-wrap: balance;
     mix-blend-mode: overlay;
   }
 
-  /* Title slot — container-query-sized to fit HADESTOWN without wrap. */
+  /* Title — container-query-sized so HADESTOWN fits without mid-word wrap. */
   .show-card .title {
-    font-family: "Times New Roman", Georgia, serif;
-    font-weight: 900;
-    font-size: clamp(14px, 8.5cqw, 22px);
+    font-family: var(--font-display);
+    font-variation-settings: 'wght' 800, 'opsz' 24, 'WONK' 1;
+    font-size: clamp(15px, 8.5cqw, 22px);
     line-height: 1;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.018em;
     text-transform: uppercase;
     word-break: keep-all;
     hyphens: none;
+    text-wrap: balance;
     min-height: calc(2 * 1em);
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -240,70 +324,81 @@
     overflow: hidden;
   }
   .show-card .venue {
-    font-family: "Courier New", monospace;
-    font-size: 9px;
-    letter-spacing: 0.18em;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    opacity: 0.7;
+    opacity: 0.72;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .metrics {
-    display: flex; flex-wrap: wrap; gap: 6px 10px;
-    font-family: "Courier New", monospace;
-    font-size: 10px;
-    letter-spacing: 0.08em;
+    display: flex; flex-wrap: wrap; gap: 4px 10px;
+    font-family: var(--font-ui);
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    font-weight: 500;
     opacity: 0.85;
   }
   .metrics .m { white-space: nowrap; }
-  .metrics .m.pending { opacity: 0.45; font-style: italic; }
+  .metrics .m.pending { opacity: 0.45; font-style: italic; font-weight: 400; }
+
   .scores {
-    display: flex; gap: 10px;
-    font-family: "Courier New", monospace;
+    display: flex; gap: 12px;
+    font-family: var(--font-ui);
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric: tabular-nums;
     font-size: 10px;
-    letter-spacing: 0.1em;
-    opacity: 0.7;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.66;
   }
-  .scores .s.pending { opacity: 0.4; }
+  .scores .s.pending { opacity: 0.45; }
 
   .pill {
-    display: inline-block;
-    padding: 3px 8px;
-    border-radius: 999px;
-    background: color-mix(in oklab, var(--bucket-accent) 18%, transparent);
-    border: 1px solid color-mix(in oklab, var(--bucket-accent) 40%, transparent);
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: color-mix(in oklch, var(--bucket-accent) 12%, transparent);
+    border: 1px solid color-mix(in oklch, var(--bucket-accent) 32%, transparent);
     color: var(--bucket-accent);
-    font-family: "Courier New", monospace;
+    font-family: var(--font-ui);
     font-size: 9px;
-    letter-spacing: 0.22em;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     width: fit-content;
   }
 
-  /* Off-Broadway horizontal-scroll row: smaller cards at 50% saturation. */
+  /* Off-Broadway horizontal scroll row. */
   .ob-row {
     width: 100%; max-width: 1200px;
   }
   .ob-row header {
     display: flex; justify-content: space-between; align-items: baseline;
-    margin: 0 4px 10px;
+    margin: 0 4px 12px;
   }
   .ob-row h2 {
-    font-family: "Times New Roman", Georgia, serif;
-    font-weight: 900;
-    font-size: clamp(22px, 2.2vw + 10px, 30px);
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    font-size: clamp(24px, 2.4vw + 10px, 32px);
     letter-spacing: -0.01em;
     text-transform: uppercase;
     margin: 0;
-    color: var(--ink);
-    opacity: 0.85;
+    color: var(--cream);
+    opacity: 0.9;
   }
   .ob-row .note {
-    font-family: "Courier New", monospace;
-    font-size: 10px; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--muted);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.55;
   }
   .ob-track {
     display: flex;
@@ -312,69 +407,131 @@
     padding: 4px 4px 16px;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
+    scrollbar-color: oklch(35% 0.04 270) transparent;
   }
   .ob-track::-webkit-scrollbar { height: 8px; }
-  .ob-track::-webkit-scrollbar-thumb { background: rgba(232,232,255,0.2); border-radius: 4px; }
+  .ob-track::-webkit-scrollbar-thumb { background: oklch(35% 0.04 270); border-radius: 4px; }
   .ob-card {
-    flex: 0 0 150px;
+    flex: 0 0 168px;
     scroll-snap-align: start;
     filter: saturate(0.5);
     container-type: inline-size;
     container-name: obcard;
-    --bucket-bg: #0a0a18;
-    --bucket-ink: #ecebff;
-    --bucket-accent: #8a8ab0;
+    --bucket-bg: var(--surface-1);
+    --bucket-ink: var(--cream);
+    --bucket-accent: oklch(60% 0.06 270);
   }
-  .ob-card .title { font-size: clamp(12px, 9cqw, 17px); }
+  .ob-card .title { font-size: clamp(13px, 9cqw, 18px); }
 
-  /* Secondary nav: Fantasy + Archive only. */
+  /* Skeleton loaders. */
+  @property --shimmer-x {
+    syntax: '<percentage>'; inherits: false; initial-value: -100%;
+  }
+  .skeleton-card {
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-border);
+    overflow: hidden;
+    position: relative;
+  }
+  .skeleton-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      color-mix(in oklch, var(--bucket-ink, var(--cream)) 8%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(var(--shimmer-x));
+    animation: shimmer 1.6s linear infinite;
+  }
+  @keyframes shimmer {
+    from { --shimmer-x: -100%; }
+    to   { --shimmer-x:  200%; }
+  }
+
+  /* Visible fetch error (CRIT a11y fix). */
+  .fetch-error {
+    width: 100%;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: color-mix(in oklch, var(--red) 12%, transparent);
+    border: 1px solid color-mix(in oklch, var(--red) 40%, transparent);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* Secondary nav: Fantasy + Archive. */
   .more {
     width: 100%; max-width: 1200px;
     display: flex; justify-content: center; gap: 14px;
     flex-wrap: wrap;
   }
   .more a {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 20px;
-    background: rgba(20,20,40,0.75);
-    border: 1px solid rgba(232,232,255,0.12);
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 14px 22px;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-border);
     border-radius: 12px;
-    color: var(--ink);
+    color: var(--cream);
     text-decoration: none;
-    font-family: "Times New Roman", Georgia, serif;
+    font-family: var(--font-display);
+    font-variation-settings: 'wght' 800, 'opsz' 24, 'WONK' 0;
     font-size: 18px;
-    font-weight: 900;
     letter-spacing: -0.01em;
-    transition: transform .3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color .3s;
+    transition: translate var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) var(--ease-spring);
   }
   .more a .badge {
-    font-family: "Courier New", monospace;
-    font-size: 9px; letter-spacing: 0.3em;
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 400;
+    opacity: 0.55;
   }
-  .more a:hover { transform: translateY(-2px); border-color: rgba(255,215,0,0.5); }
+  .more a:hover, .more a:focus-visible {
+    translate: 0 -2px;
+    border-color: color-mix(in oklch, var(--gold) 60%, transparent);
+    outline: none;
+  }
 
   footer.page-foot {
     max-width: 1200px;
-    color: var(--muted);
+    color: oklch(75% 0.02 270);
     text-align: center;
-    font-family: "Courier New", monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: 'wght' 320, 'opsz' 14;
+    font-size: 14px;
   }
 
   .empty-bucket {
     padding: 30px 10px;
     text-align: center;
-    font-family: "Courier New", monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    opacity: 0.5;
+    opacity: 0.45;
     font-style: italic;
+  }
+
+  @media (prefers-contrast: more) {
+    a.show-card {
+      background-image: none !important;
+      background: var(--surface-1) !important;
+      border-color: var(--bucket-ink) !important;
+    }
+    .pill {
+      background: transparent;
+      border-color: currentColor;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -389,87 +546,85 @@
 </head>
 <body>
 
-<section class="cover">
+<section class="cover" aria-label="SLAYBILL masthead">
   <div class="masthead">
     <div class="word jostle">SLAYBILL</div>
-    <div class="sub jostle">Your Shows Favorite Show Guide &middot; AKA Edition</div>
+    <div class="sub jostle">Your show&rsquo;s favorite show guide &middot; Broadway Edition</div>
   </div>
-  <p class="tagline jostle">What's showing and how's it going?<br>Build your roster below.</p>
+  <p class="tagline jostle">What&rsquo;s on tonight, what&rsquo;s opening soon,<br>and what it&rsquo;s grossing this week.</p>
   <div class="superstition jostle">
-    Break a leg &middot; No whistling &middot; Don't speak of the Scottish Play<br>
-    <span class="warn">Beyond this point!</span>
+    Break a leg &middot; No whistling &middot; Never name the Scottish Play<br>
+    <span class="warn">You have been warned.</span>
   </div>
   <footer class="cover-foot">
-    <span class="jostle">Vol. 1 &middot; Issue 2</span>
-    <span class="jostle">2026</span>
+    <span class="jostle">Vol. 1 &middot; Issue 3</span>
+    <span class="jostle">26 Apr 2026</span>
   </footer>
-  <div class="dog-ear"></div>
+  <div class="dog-ear" aria-hidden="true"></div>
 </section>
 
-<section class="bucket" data-theme="coming" data-bucket="coming_soon">
+<section class="bucket" data-theme="coming" data-bucket="coming_soon" aria-labelledby="bk-coming">
   <header>
-    <h2>Coming Soon</h2>
-    <div class="bucket-note">Previews start within 6 weeks</div>
+    <h2 id="bk-coming">Coming Soon</h2>
+    <div class="bucket-note">First previews within 6 weeks</div>
   </header>
   <div class="grid" data-slot="grid"></div>
 </section>
 
-<section class="bucket" data-theme="previews" data-bucket="in_previews">
+<section class="bucket" data-theme="previews" data-bucket="in_previews" aria-labelledby="bk-previews">
   <header>
-    <h2>In Previews</h2>
-    <div class="bucket-note">Performing tonight &middot; Not yet opened</div>
+    <h2 id="bk-previews">In Previews</h2>
+    <div class="bucket-note">Performing tonight &middot; Opening night TBA</div>
   </header>
   <div class="grid" data-slot="grid"></div>
 </section>
 
-<section class="bucket" data-theme="live" data-bucket="live">
+<section class="bucket" data-theme="live" data-bucket="live" aria-labelledby="bk-live">
   <header>
-    <h2>Live on Broadway</h2>
-    <div class="bucket-note">Officially open</div>
+    <h2 id="bk-live">Live on Broadway</h2>
+    <div class="bucket-note">Curtain&rsquo;s up.</div>
   </header>
   <div class="grid" data-slot="grid"></div>
 </section>
 
-<section class="ob-row" aria-label="Off-Broadway">
+<section class="ob-row" aria-labelledby="bk-ob">
   <header>
-    <h2>Off-Broadway</h2>
+    <h2 id="bk-ob">Off-Broadway</h2>
     <div class="note">Scroll &rarr;</div>
   </header>
   <div class="ob-track" data-slot="ob-track"></div>
 </section>
 
 <nav class="more" aria-label="More">
-  <a href="fantasy.html"><span>Fantasy Broadway</span><span class="badge">Draft &middot; Score &middot; Tonys</span></a>
+  <a href="fantasy.html"><span>Fantasy Broadway</span><span class="badge">Four slots &middot; Tonys</span></a>
   <a href="archive.html"><span>Archive</span><span class="badge">Closed &middot; Cancelled</span></a>
 </nav>
 
-<footer class="page-foot">SLAYBILL &middot; Your shows, what they're doing, what they're worth</footer>
+<footer class="page-foot">SLAYBILL &middot; The boards never lied.</footer>
 
 <template id="card-template">
   <a class="show-card" href="#">
     <span class="pill"></span>
-    <div class="poster">
-      <div class="palette-bg"></div>
-      <div class="palette-accent"></div>
-      <div class="stamp"></div>
+    <div class="poster" role="img">
+      <div class="palette-bg" aria-hidden="true"></div>
+      <div class="palette-accent" aria-hidden="true"></div>
+      <span class="stamp" aria-hidden="true"></span>
     </div>
     <div class="title"></div>
     <div class="venue"></div>
-    <div class="metrics"></div>
-    <div class="scores"></div>
+    <div class="metrics" aria-label="Box office summary"></div>
+    <div class="scores" aria-label="Critic and audience scores"></div>
   </a>
 </template>
 
 <script>
-/* SLAYBILL hydration — fetches data/shows_live.json once, renders each bucket
- * + the off-Broadway row. No framework; every card is cloned from the
- * <template> and mutated in place. Poster is a CSS palette gradient (per
- * show --p1..p5) unless a real image exists at web/shows/posters/<slug>.jpg
- * which will swap in at load. */
+/* SLAYBILL hydration — fetches data/shows_live.json once, renders each
+ * bucket + the off-Broadway row. Pure DOM, no framework. Skeleton loaders
+ * while fetching; visible <div role="alert"> on failure. */
 
 function fmtMoney(n) {
   if (n == null) return null;
-  if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(1) + 'M/wk';
+  if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(2) + 'M/wk';
   if (n >= 1_000)     return '$' + Math.round(n / 1_000) + 'K/wk';
   return '$' + n + '/wk';
 }
@@ -479,7 +634,7 @@ function fmtAvg(a) { return a == null ? null : '$' + a + ' avg'; }
 function heroCredit(show) {
   const c = (show.creatives || []);
   const byRole = (needle) => c.find(x => (x.role || '').toLowerCase().includes(needle));
-  const pick = byRole('music') || byRole('play') || byRole('book') || byRole('director') || c[0];
+  const pick = byRole('music') || byRole('book') || byRole('play') || byRole('director') || c[0];
   return pick ? pick.name : null;
 }
 
@@ -488,10 +643,11 @@ function makeCard(show) {
   const frag = tpl.content.cloneNode(true);
   const a = frag.querySelector('a.show-card');
   a.href = `shows/${show.slug}.html`;
+  a.setAttribute('aria-label', `${show.title} — ${show.theatre || 'Broadway'} — ${show.status.replace('_', ' ')}`);
 
   const pal = show.palette || [];
   for (let i = 0; i < 5; i++) {
-    a.style.setProperty(`--p${i+1}`, pal[i] || '#444');
+    a.style.setProperty(`--p${i+1}`, pal[i] || 'oklch(40% 0.05 270)');
   }
 
   const pill = frag.querySelector('.pill');
@@ -501,10 +657,12 @@ function makeCard(show) {
     live:        'Live',
     closed:      'Closed',
   })[show.status] || show.status;
+  pill.setAttribute('aria-hidden', 'true');
 
+  const poster = frag.querySelector('.poster');
+  poster.setAttribute('aria-label', `${show.title} poster`);
   const stamp = frag.querySelector('.poster .stamp');
   stamp.textContent = show.title;
-  const poster = frag.querySelector('.poster');
   const img = new Image();
   img.alt = '';
   img.onload = () => { poster.appendChild(img); stamp.style.display = 'none'; };
@@ -517,15 +675,16 @@ function makeCard(show) {
 
   const metrics = frag.querySelector('.metrics');
   const parts = [
-    { v: fmtMoney(show.weekly_gross_usd), ok: show.weekly_gross_usd != null },
-    { v: fmtAvg(show.avg_ticket_usd),     ok: show.avg_ticket_usd    != null },
-    { v: fmtPct(show.capacity_pct),       ok: show.capacity_pct      != null },
+    { v: fmtMoney(show.weekly_gross_usd), label: 'Weekly gross', ok: show.weekly_gross_usd != null },
+    { v: fmtAvg(show.avg_ticket_usd),     label: 'Average ticket', ok: show.avg_ticket_usd    != null },
+    { v: fmtPct(show.capacity_pct),       label: 'Capacity', ok: show.capacity_pct      != null },
   ];
   for (const p of parts) {
     if (p.v == null) continue;
     const span = document.createElement('span');
     span.className = 'm' + (p.ok ? '' : ' pending');
     span.textContent = p.v;
+    span.setAttribute('aria-label', `${p.label}: ${p.v}`);
     metrics.appendChild(span);
   }
   if (!metrics.children.length) {
@@ -539,24 +698,62 @@ function makeCard(show) {
   const cSpan = document.createElement('span');
   cSpan.className = 's ' + (show.critic_score != null ? '' : 'pending');
   cSpan.textContent = show.critic_score != null ? `Critic ${show.critic_score}` : 'Critic —';
-  cSpan.title = show.critic_score != null ? '' : 'Critic aggregation coming soon';
+  cSpan.title = show.critic_score != null ? '' : 'Critic — wiring soon';
+  cSpan.setAttribute('aria-label', show.critic_score != null ? `Critic score: ${show.critic_score} of 100` : 'Critic score: pending');
   const aSpan = document.createElement('span');
   aSpan.className = 's ' + (show.sentiment_score != null ? '' : 'pending');
   aSpan.textContent = show.sentiment_score != null ? `Audience ${show.sentiment_score}` : 'Audience —';
-  aSpan.title = show.sentiment_score != null ? '' : 'Audience sentiment coming soon';
+  aSpan.title = show.sentiment_score != null ? '' : 'Audience — listening soon';
+  aSpan.setAttribute('aria-label', show.sentiment_score != null ? `Audience score: ${show.sentiment_score} of 100` : 'Audience score: pending');
   scores.appendChild(cSpan);
   scores.appendChild(aSpan);
 
   return frag;
 }
 
+function renderSkeletons(grid, count) {
+  grid.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'skeleton-card';
+    s.setAttribute('aria-hidden', 'true');
+    grid.appendChild(s);
+  }
+}
+
+function showFetchError(grid, msg) {
+  grid.innerHTML = '';
+  const div = document.createElement('div');
+  div.className = 'fetch-error';
+  div.setAttribute('role', 'alert');
+  div.textContent = msg;
+  grid.appendChild(div);
+}
+
 async function hydrate() {
+  // Render skeletons in every grid before fetch.
+  for (const section of document.querySelectorAll('.bucket')) {
+    renderSkeletons(section.querySelector('[data-slot="grid"]'), 4);
+  }
+  renderSkeletons(document.querySelector('[data-slot="ob-track"]'), 4);
+
   let data;
   try {
     const r = await fetch('data/shows_live.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error(`status ${r.status}`);
     data = await r.json();
   } catch (e) {
     console.error('Failed to load shows_live.json', e);
+    for (const section of document.querySelectorAll('.bucket')) {
+      showFetchError(
+        section.querySelector('[data-slot="grid"]'),
+        'Show data did not load. The server may be down — refresh in a moment.'
+      );
+    }
+    showFetchError(
+      document.querySelector('[data-slot="ob-track"]'),
+      'Off-Broadway data did not load.'
+    );
     return;
   }
 
@@ -568,7 +765,7 @@ async function hydrate() {
     if (!shows.length) {
       const empty = document.createElement('div');
       empty.className = 'empty-bucket';
-      empty.textContent = 'No shows in this bucket right now.';
+      empty.textContent = 'Nothing in this bucket right now.';
       grid.appendChild(empty);
       continue;
     }
@@ -593,9 +790,10 @@ async function hydrate() {
   }
 }
 
-(function(){
+// Scroll-jostle — only enable when reduced-motion is not requested.
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let lastY = window.scrollY, clearTimer, raf = 0;
-  function onScroll(){
+  window.addEventListener('scroll', () => {
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = 0;
@@ -610,9 +808,8 @@ async function hydrate() {
         document.body.classList.remove('scroll-up', 'scroll-down');
       }, 240);
     });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
+  }, { passive: true });
+}
 
 hydrate();
 </script>
