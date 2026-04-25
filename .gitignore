@@ -17,6 +17,9 @@ data/*.db-journal
 data/STOP
 *.log
 
+# Generated JSON consumed by the front-end (rebuild via Makefile)
+web/data/shows_live.json
+
 # Editor
 .vscode/
 .idea/

@@ -610,7 +610,7 @@ function escapeHTML(s) {
   wireOwnerName();
   wireTonysCountdown();
   try {
-    const r = await fetch('../data/shows_live.json', { cache: 'no-store' });
+    const r = await fetch('data/shows_live.json', { cache: 'no-store' });
     data = await r.json();
   } catch (e) {
     data = { buckets: {}, off_broadway: [] };

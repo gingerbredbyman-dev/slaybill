@@ -553,7 +553,7 @@ function makeCard(show) {
 async function hydrate() {
   let data;
   try {
-    const r = await fetch('../data/shows_live.json', { cache: 'no-store' });
+    const r = await fetch('data/shows_live.json', { cache: 'no-store' });
     data = await r.json();
   } catch (e) {
     console.error('Failed to load shows_live.json', e);

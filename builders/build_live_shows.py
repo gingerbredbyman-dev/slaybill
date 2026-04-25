@@ -36,7 +36,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
 SHOWS_JSON = PROJECT_ROOT / "data" / "shows.json"
-OUT_PATH = PROJECT_ROOT / "data" / "shows_live.json"
+# Write the generated JSON into web/data/ so the static server can reach it
+# via a sibling path (fetch('data/shows_live.json') from web/index.html).
+OUT_PATH = PROJECT_ROOT / "web" / "data" / "shows_live.json"
 
 COMING_SOON_WINDOW_DAYS = 42  # 6 weeks
 
@@ -145,6 +147,7 @@ def build() -> dict:
         "buckets": buckets,
         "off_broadway": off_broadway,
     }
+    OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2))
     return out
 
