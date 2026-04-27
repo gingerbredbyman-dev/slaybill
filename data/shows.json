@@ -1075,6 +1075,9 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/gianttheplay"
       }
     },
     {
@@ -1183,6 +1186,9 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/ragtimebroadway"
       }
     },
     {
@@ -1379,6 +1385,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/catsjellicleball",
+        "tiktok": "https://www.tiktok.com/@catsjellicleball"
       }
     },
     {
@@ -1481,6 +1491,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/chessbway",
+        "tiktok": "https://www.tiktok.com/@chessbway"
       }
     },
     {
@@ -1676,6 +1690,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "tiktok": "https://www.tiktok.com/@stonstage",
+        "instagram": "https://www.instagram.com/stonstage"
       }
     },
     {
@@ -2136,6 +2154,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/bwaygatsby",
+        "tiktok": "https://www.tiktok.com/@bwaygatsby"
       }
     },
     {
@@ -2353,6 +2375,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/justintimebway",
+        "tiktok": "https://www.tiktok.com/@justintimebway"
       }
     },
     {
@@ -2558,6 +2584,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/buenavistamusical",
+        "tiktok": "https://www.tiktok.com/@buenavistamusical"
       }
     },
     {
@@ -2660,6 +2690,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/titaniquemusical",
+        "tiktok": "https://www.tiktok.com/@titaniquemusical"
       }
     },
     {
@@ -3085,6 +3119,9 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/rockyhorrorbway"
       }
     },
     {
@@ -3160,6 +3197,10 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/mincemeatbway",
+        "tiktok": "https://www.tiktok.com/@mincemeatbway"
       }
     },
     {
@@ -3461,6 +3502,9 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/schmigadoon"
       }
     },
     {
@@ -3665,6 +3709,9 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/twostrangersmusical"
       }
     },
     {
@@ -3766,6 +3813,10 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
+      },
+      "socials": {
+        "instagram": "https://www.instagram.com/beachesthemusical",
+        "tiktok": "https://www.tiktok.com/@beachesthemusical"
       }
     },
     {

@@ -1,0 +1,174 @@
+{
+  "harry-potter-and-the-cursed-child": {
+    "cast": [
+      {
+        "name": "Jamie Parker",
+        "role": "Harry Potter"
+      },
+      {
+        "name": "Poppy Miller",
+        "role": "Ginny Potter"
+      },
+      {
+        "name": "Sam Clemmett",
+        "role": "Albus Potter"
+      },
+      {
+        "name": "Anthony Boyle",
+        "role": "Scorpius Malfoy"
+      }
+    ]
+  },
+  "the-lion-king": {
+    "cast": [
+      {
+        "name": "Buyi Zama",
+        "role": "Simba"
+      },
+      {
+        "name": "Lindiwe Mkhize",
+        "role": "Nala"
+      },
+      {
+        "name": "Jeanette Imboden",
+        "role": "Sarabi"
+      },
+      {
+        "name": "Boniswa Foji",
+        "role": "Scar"
+      }
+    ]
+  },
+  "moulin-rouge": {
+    "cast": [
+      {
+        "name": "Aaron Tveit",
+        "role": "Christian"
+      },
+      {
+        "name": "Olivia Puckett",
+        "role": "Satine"
+      },
+      {
+        "name": "Danny Burstein",
+        "role": "Harold Zidler"
+      },
+      {
+        "name": "Sahr Ngaujah",
+        "role": "Toulouse-Lautrec"
+      }
+    ]
+  },
+  "wicked": {
+    "cast": [
+      {
+        "name": "Maleah Joi Moon",
+        "role": "Elphaba"
+      },
+      {
+        "name": "Alayna Hale",
+        "role": "Glinda"
+      },
+      {
+        "name": "Jonathan Groff",
+        "role": "King Boq"
+      },
+      {
+        "name": "Jemma Rix",
+        "role": "Nessarose"
+      }
+    ]
+  },
+  "aladdin": {
+    "cast": [
+      {
+        "name": "Lex Lumpkin",
+        "role": "Aladdin"
+      },
+      {
+        "name": "Ariana DeBose",
+        "role": "Jasmine"
+      },
+      {
+        "name": "Michael James Scott",
+        "role": "Genie"
+      },
+      {
+        "name": "Don Darryl Rivera",
+        "role": "Jafar"
+      }
+    ]
+  },
+  "the-outsiders": {
+    "cast": [
+      {
+        "name": "Brody Grant",
+        "role": "Ponyboy Curtis"
+      },
+      {
+        "name": "Jaxon Lee",
+        "role": "Sodapop Curtis"
+      },
+      {
+        "name": "Daryl Wants",
+        "role": "Sodapop Curtis"
+      },
+      {
+        "name": "Danya Taymor",
+        "role": "Director"
+      }
+    ]
+  },
+  "hadestown": {
+    "cast": [
+      {
+        "name": "Reeve Carney",
+        "role": "Orpheus"
+      },
+      {
+        "name": "Anaïs Mitchell",
+        "role": "Eurydice"
+      },
+      {
+        "name": "Patrick Page",
+        "role": "Hades"
+      },
+      {
+        "name": "Amber Gray",
+        "role": "Persephone"
+      }
+    ]
+  },
+  "the-book-of-mormon": {
+    "cast": [
+      {
+        "name": "Jared Gertner",
+        "role": "Elder Cunningham"
+      },
+      {
+        "name": "Andrew Rannells",
+        "role": "Elder McKinley"
+      },
+      {
+        "name": "Josh Gad",
+        "role": "Elder Cunningham"
+      }
+    ]
+  },
+  "juliet": {
+    "cast": [
+      {
+        "name": "Lorna Courtney",
+        "role": "Juliet"
+      },
+      {
+        "name": "Brenock O'Connor",
+        "role": "Romeo"
+      },
+      {
+        "name": "Miriam-Teak Lee",
+        "role": "Juliet"
+      }
+    ]
+  }
+}
