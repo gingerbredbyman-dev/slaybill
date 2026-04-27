@@ -335,6 +335,105 @@
     background: linear-gradient(225deg, oklch(0% 0 0 / 0.08) 0%, oklch(0% 0 0 / 0.08) 50%, transparent 50%);
   }
 
+  /* AKA NYC stamp — sits in the lower-right of the cover like a printed ink
+   * stamp on a Playbill cover. Animates in after the lighting settles, with
+   * a stamp-press effect (overshoot scale + slight rotation easing back to 0).
+   * Multiply blend so the dark ink absorbs into the yellow paper. */
+  .aka-stamp {
+    position: absolute;
+    bottom: 16px; right: 18px;
+    z-index: 7;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 10px 16px 8px;
+    border: 1.5px solid oklch(20% 0.02 30 / 0.5);
+    border-radius: 4px;
+    background: oklch(0% 0 0 / 0.04);
+    text-decoration: none;
+    color: oklch(15% 0.01 30 / 0.85);
+    font-family: var(--font-ui);
+    transform: rotate(-4deg) scale(0.9);
+    transform-origin: 50% 50%;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition:
+      transform 220ms var(--ease-spring),
+      box-shadow 220ms var(--ease-spring);
+    mix-blend-mode: multiply;
+    cursor: pointer;
+  }
+  .aka-stamp-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: oklch(20% 0.02 30 / 0.7);
+  }
+  .aka-stamp-mark {
+    height: 26px; width: auto;
+    display: block;
+    /* Slight desaturation + subtle blur to look stamp-ink rather than crisp logo */
+    filter: contrast(1.1) saturate(0.85);
+  }
+  .aka-stamp-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: oklch(20% 0.02 30 / 0.65);
+  }
+  /* Hover: press deeper into the page + tilt slightly straighter */
+  .aka-stamp:hover {
+    transform: rotate(-2deg) scale(0.95) translateY(1px);
+    box-shadow: 0 0 0 4px oklch(20% 0.02 30 / 0.04);
+  }
+  .aka-stamp:focus-visible {
+    outline: 2px solid oklch(40% 0.20 280);
+    outline-offset: 4px;
+  }
+
+  /* INTRO — stamp animates in AFTER the cover lighting has settled (~3.5s).
+   * Animation: starts off-canvas + over-rotated + over-scaled, eases down to
+   * a tilted-but-pressed final state. Reads as 'someone just pressed an ink
+   * stamp onto the cover.' */
+  @keyframes aka-stamp-press {
+    0%   { opacity: 0; transform: rotate(-22deg) scale(2.2) translate(28px, -38px); }
+    35%  { opacity: 0.75; }
+    62%  { transform: rotate(-1deg) scale(1.05) translate(0, 0); opacity: 1; }
+    78%  { transform: rotate(-5deg) scale(0.96) translate(0, 0); }
+    100% { opacity: 1; transform: rotate(-4deg) scale(0.9) translate(0, 0); }
+  }
+  .aka-stamp.is-stamping {
+    animation: aka-stamp-press 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0s 1 forwards;
+  }
+  /* Subtle ink-bleed on first impact — pseudo-element flares once during the press */
+  .aka-stamp::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 6px;
+    background: radial-gradient(circle at center, oklch(15% 0.02 30 / 0.18) 0%, transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  @keyframes aka-stamp-ink {
+    0%, 100% { opacity: 0; }
+    62%, 70% { opacity: 1; }
+  }
+  .aka-stamp.is-stamping::before {
+    animation: aka-stamp-ink 1.4s ease-out 0s 1 forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aka-stamp { opacity: 1 !important; transform: rotate(-4deg) scale(0.9) !important; animation: none !important; }
+    .aka-stamp::before { animation: none !important; }
+  }
+  /* Mobile: shrink + repostion so it doesn't overlap the issue date */
+  @media (max-width: 480px) {
+    .aka-stamp { bottom: 10px; right: 10px; padding: 7px 12px 6px; }
+    .aka-stamp-mark { height: 18px; }
+    .aka-stamp-label, .aka-stamp-sub { font-size: 7px; }
+  }
+
   /* Buckets — three lifecycle modules with distinct themes. */
   .bucket {
     width: 100%; max-width: 1200px;
@@ -1646,6 +1745,11 @@
     <span class="jostle">26 Apr 2026</span>
   </footer>
   <div class="dog-ear" aria-hidden="true"></div>
+  <a class="aka-stamp" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC — visit aka.nyc">
+    <span class="aka-stamp-label">Marketing by</span>
+    <img src="assets/img/aka-logo-dark.png" alt="AKA" class="aka-stamp-mark">
+    <span class="aka-stamp-sub">aka.nyc</span>
+  </a>
 </section>
 
 <section class="marquee-board" aria-labelledby="bk-marquee">
@@ -2398,7 +2502,12 @@ async function hydrateFeed(url, selector, kind, limit, teaser = false) {
   // the resting state, no JS branching needed.
   void cover.offsetWidth; // flush layout
   cover.classList.add('intro-running');
-  // Last spot starts at +1.2s, runs 3.6s → 4.8s total; pad to 5.0s.
+  // Lights settle at ~3.5s. Fire the AKA stamp press a hair later.
+  setTimeout(() => {
+    const stamp = cover.querySelector('.aka-stamp');
+    if (stamp) stamp.classList.add('is-stamping');
+  }, 3400);
+  // Lighting intro completes at 5s.
   setTimeout(() => {
     cover.classList.remove('intro-running');
     cover.classList.add('intro-finished');
