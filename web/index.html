@@ -166,107 +166,96 @@
     pointer-events: none;
   }
 
-  /* SPOTLIGHT INTRO — cover starts in darkness; four searching follow-spots
-   * sweep around looking for the act, then converge on the SLAYBILL masthead.
-   * Replaces the prior red-curtain animation entirely. JS injects the spot
-   * elements at runtime so no-JS users see the lit cover by default. */
-  .cover {
-    overflow: hidden;
-  }
-  /* Black scrim that hides the cover; lifts to ~12% opacity once spots converge. */
+  /* COVER LIGHTING — refined 2-light architectural setup. Cover starts dark,
+   * a key light sweeps in from upper-left, a fill from the right, both rake
+   * across the masthead, then settle on the SLAYBILL letterforms ABOVE the
+   * body text (so the copy underneath stays readable). Replaces the earlier
+   * 4-spot convergence that pooled light over the body text. */
+  .cover { overflow: hidden; }
+  /* Subtle vignette that frames the cover; never fully hides the masthead. */
   .stage-scrim {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     z-index: 5;
-    background: oklch(4% 0.005 270);
     pointer-events: none;
-    opacity: 1;
-    transition: opacity 700ms ease-out;
+    background:
+      radial-gradient(140% 100% at 50% 50%, transparent 40%, oklch(8% 0.01 30 / 0.55) 100%);
+    opacity: 0;
+    transition: opacity 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
   }
-  .cover.intro-finished .stage-scrim { opacity: 0.12; }
-  .cover.intro-finished .stage-scrim { mix-blend-mode: multiply; }
+  .cover.intro-running .stage-scrim,
+  .cover.intro-finished .stage-scrim { opacity: 1; }
 
-  /* Each spot is a soft warm-light radial gradient applied via mask
-   * onto a stage-glow layer. Four of them, stacked. */
+  /* Two architectural lights stacked above the cover. mix-blend overlay so
+   * they tint the yellow Playbill warmly without washing it out. */
   .stage-spots {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     z-index: 6;
     pointer-events: none;
   }
   .stage-spot {
     position: absolute;
-    top: var(--sy, 50%);
+    top: var(--sy, 30%);
     left: var(--sx, 50%);
-    width: 32vmin; height: 32vmin;
-    margin-top: -16vmin;
-    margin-left: -16vmin;
-    background: radial-gradient(circle at center,
-      oklch(98% 0.05 90 / 0.95) 0%,
-      oklch(94% 0.14 85 / 0.65) 12%,
-      oklch(80% 0.20 75 / 0.35) 32%,
-      oklch(60% 0.18 60 / 0.10) 55%,
-      transparent 75%);
-    filter: blur(2px);
-    mix-blend-mode: plus-lighter;
+    width: 60vmin; height: 60vmin;
+    margin-top: -30vmin;
+    margin-left: -30vmin;
+    border-radius: 50%;
+    filter: blur(14px);
+    mix-blend-mode: overlay;
     opacity: 0;
-    will-change: top, left, opacity, transform;
-    transition: top 200ms linear, left 200ms linear;
+    will-change: top, left, opacity;
+    transition: top 380ms cubic-bezier(0.25, 0.1, 0.25, 1), left 380ms cubic-bezier(0.25, 0.1, 0.25, 1), opacity 600ms ease-out;
   }
-  /* Each spot animates in sequence, sweeps a unique search path, then
-   * converges to the masthead center (50%, 56%) where SLAYBILL sits. */
-  @keyframes spot-1-search {
-    0%   { opacity: 0; --sx: 12%; --sy: 18%; }
-    8%   { opacity: 1; }
-    35%  { --sx: 75%; --sy: 22%; opacity: 1; }
-    62%  { --sx: 25%; --sy: 70%; opacity: 1; }
-    85%  { --sx: 50%; --sy: 56%; opacity: 1; }
-    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
+  /* KEY light — larger, warmer, positioned upper-left. Rakes across to land
+   * on the SLAYBILL letterforms (Y ~28% of cover). */
+  .stage-spot.spot-1 {
+    background: radial-gradient(circle at center,
+      oklch(96% 0.05 80 / 0.55) 0%,
+      oklch(82% 0.14 70 / 0.30) 25%,
+      oklch(60% 0.10 50 / 0.10) 55%,
+      transparent 78%);
   }
-  @keyframes spot-2-search {
-    0%   { opacity: 0; --sx: 88%; --sy: 22%; }
-    14%  { opacity: 1; }
-    38%  { --sx: 18%; --sy: 30%; opacity: 1; }
-    66%  { --sx: 78%; --sy: 75%; opacity: 1; }
-    88%  { --sx: 50%; --sy: 56%; opacity: 1; }
-    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
+  /* FILL light — smaller, cooler, positioned upper-right. Softens the shadow
+   * side without competing with the key. */
+  .stage-spot.spot-2 {
+    width: 42vmin; height: 42vmin; margin-top: -21vmin; margin-left: -21vmin;
+    background: radial-gradient(circle at center,
+      oklch(94% 0.04 240 / 0.40) 0%,
+      oklch(75% 0.08 220 / 0.20) 30%,
+      transparent 70%);
   }
-  @keyframes spot-3-search {
-    0%   { opacity: 0; --sx: 18%; --sy: 82%; }
-    20%  { opacity: 1; }
-    44%  { --sx: 60%; --sy: 88%; opacity: 1; }
-    72%  { --sx: 32%; --sy: 18%; opacity: 1; }
-    91%  { --sx: 50%; --sy: 56%; opacity: 1; }
-    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
+  /* Hide the legacy spot-3 + spot-4 (still in DOM from JS injection but no
+   * styling = invisible). Cleaner two-light setup is the upgrade. */
+  .stage-spot.spot-3, .stage-spot.spot-4 { display: none; }
+
+  /* INTRO: lights sweep in. Key starts off-canvas upper-left, fill from
+   * upper-right, both ease toward the title. */
+  @keyframes spot-key-rake {
+    0%   { opacity: 0; --sx: -10%; --sy: 10%; }
+    20%  { opacity: 0.9; }
+    55%  { --sx: 35%; --sy: 22%; opacity: 1; }
+    100% { --sx: 42%; --sy: 28%; opacity: 1; }
   }
-  @keyframes spot-4-search {
-    0%   { opacity: 0; --sx: 82%; --sy: 86%; }
-    26%  { opacity: 1; }
-    50%  { --sx: 30%; --sy: 50%; opacity: 1; }
-    78%  { --sx: 70%; --sy: 36%; opacity: 1; }
-    94%  { --sx: 50%; --sy: 56%; opacity: 1; }
-    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
+  @keyframes spot-fill-rake {
+    0%   { opacity: 0; --sx: 110%; --sy: 18%; }
+    30%  { opacity: 0.7; }
+    65%  { --sx: 70%; --sy: 26%; opacity: 0.85; }
+    100% { --sx: 62%; --sy: 30%; opacity: 0.85; }
   }
-  .cover.intro-running .stage-spot.spot-1 { animation: spot-1-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 0.0s 1 forwards; }
-  .cover.intro-running .stage-spot.spot-2 { animation: spot-2-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 0.4s 1 forwards; }
-  .cover.intro-running .stage-spot.spot-3 { animation: spot-3-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 0.8s 1 forwards; }
-  .cover.intro-running .stage-spot.spot-4 { animation: spot-4-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 1.2s 1 forwards; }
-  /* Resting state after intro: spots gently breathe at the center. */
-  .cover.intro-finished .stage-spot {
-    opacity: 0.7;
-    --sx: 50%; --sy: 56%;
-    animation: spot-breathe 6s ease-in-out infinite;
-  }
-  .cover.intro-finished .stage-spot.spot-2 { animation-delay: 1.5s; }
-  .cover.intro-finished .stage-spot.spot-3 { animation-delay: 3s;   }
-  .cover.intro-finished .stage-spot.spot-4 { animation-delay: 4.5s; }
-  @keyframes spot-breathe {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50%      { opacity: 0.95; transform: scale(1.08); }
+  .cover.intro-running .stage-spot.spot-1 { animation: spot-key-rake  3.0s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s 1 forwards; }
+  .cover.intro-running .stage-spot.spot-2 { animation: spot-fill-rake 3.0s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s 1 forwards; }
+
+  /* RESTING: lights hold at the title position, breathe slightly. */
+  .cover.intro-finished .stage-spot.spot-1 { opacity: 1; --sx: 42%; --sy: 28%; animation: light-breathe 9s ease-in-out infinite; }
+  .cover.intro-finished .stage-spot.spot-2 { opacity: 0.85; --sx: 62%; --sy: 30%; animation: light-breathe 11s ease-in-out infinite reverse; animation-delay: 2s; }
+  @keyframes light-breathe {
+    0%, 100% { transform: scale(1);    filter: blur(14px); }
+    50%      { transform: scale(1.05); filter: blur(11px); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .stage-scrim { opacity: 0.12 !important; transition: none !important; }
-    .stage-spot { opacity: 0.7 !important; --sx: 50% !important; --sy: 56% !important; animation: none !important; }
+    .stage-scrim { opacity: 1 !important; transition: none !important; }
+    .stage-spot.spot-1 { opacity: 1 !important; --sx: 42% !important; --sy: 28% !important; animation: none !important; }
+    .stage-spot.spot-2 { opacity: 0.85 !important; --sx: 62% !important; --sy: 30% !important; animation: none !important; }
   }
   .masthead {
     border-top: 4px solid var(--ink);
@@ -449,21 +438,79 @@
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
 
-  /* ── Live Broadway: vertical single-column hero layout ─────────────
-   * Slider was cut. Live is the focus of the site — give it room. Each
-   * card stretches the full bucket width on all viewports, stacks vertically.
-   * Constrains max-width on wide screens so cards don't feel comical. */
+  /* ── Live Broadway: horizontal scroll row, OB pattern, 25% smaller cards.
+   * Live is the FOCUS surface. Same scroll-snap pattern as Off-Broadway, but
+   * cards are larger than OB (260px vs 168px), full saturation (no desat
+   * filter), iridescent gradient borders, glass treatment. 2026-trendy:
+   * scroll-snap-stop: always so each card pauses cleanly, edge mask, hover
+   * lift, container queries on poster sizing. */
   .bucket[data-theme="live"] .grid {
     display: flex;
-    flex-direction: column;
-    gap: 18px;
-    max-width: 880px;
-    margin: 0 auto;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 6px 4px 22px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, oklch(80% 0.18 75) 45%, transparent) transparent;
+    mask-image: linear-gradient(90deg, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+  }
+  .bucket[data-theme="live"] .grid::-webkit-scrollbar { height: 8px; }
+  .bucket[data-theme="live"] .grid::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, oklch(80% 0.18 75) 45%, transparent);
+    border-radius: 4px;
   }
   .bucket[data-theme="live"] .show-card {
-    width: 100%;
+    flex: 0 0 260px;        /* ~25% smaller than the prior wide single-column */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    container-type: inline-size;
+    container-name: livecard;
+    /* 2026-trendy: gradient border via background trick + glass layer */
+    background-image:
+      linear-gradient(color-mix(in oklch, var(--bucket-bg) 92%, var(--bucket-ink) 5%),
+                      color-mix(in oklch, var(--bucket-bg) 92%, var(--bucket-ink) 5%)),
+      linear-gradient(135deg,
+        oklch(80% 0.20 75) 0%,
+        oklch(70% 0.20 350) 35%,
+        oklch(70% 0.18 220) 65%,
+        oklch(78% 0.16 75) 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border: 1px solid transparent;
+    box-shadow:
+      0 1px 0 color-mix(in oklch, var(--bucket-ink) 8%, transparent) inset,
+      0 14px 30px -18px oklch(0% 0 0 / 0.55),
+      0 2px 6px -2px oklch(0% 0 0 / 0.18);
   }
-
+  .bucket[data-theme="live"] .show-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 1px 0 color-mix(in oklch, var(--bucket-ink) 14%, transparent) inset,
+      0 22px 40px -16px oklch(0% 0 0 / 0.65),
+      0 4px 10px -4px oklch(0% 0 0 / 0.22),
+      0 0 0 1px color-mix(in oklch, oklch(80% 0.18 75) 30%, transparent);
+  }
+  .bucket[data-theme="live"] .show-card .poster {
+    aspect-ratio: 3 / 4;
+    transform: translateZ(18px);
+  }
+  .bucket[data-theme="live"] .show-card .title {
+    font-size: clamp(13px, 7.2cqw, 18px);
+  }
+  /* Tablet+ widens cards slightly for breathing room */
+  @media (min-width: 880px) {
+    .bucket[data-theme="live"] .show-card { flex-basis: 280px; }
+  }
+  /* Mobile: trim card width so the snap reveals the next card edge as a tease */
+  @media (max-width: 720px) {
+    .bucket[data-theme="live"] .show-card { flex-basis: 220px; }
+    .bucket[data-theme="live"] .grid { padding-bottom: 28px; }
+    /* Override the earlier mobile rule that disabled slider — we now WANT the scroll */
+    .bucket[data-theme="live"] .stage-viewport { display: none; }
+  }
   /* Legacy slider class names kept for any residual references. */
 
   .live-stage { position: relative; }
@@ -487,27 +534,9 @@
     padding-bottom: 16px;
     flex-shrink: 0;
   }
-  /* Mobile: disable slider, show every live show in a normal vertical scroll.
-   * The 4-card slider on a phone made each page 4 huge cards tall and broke
-   * resize. Stack all pages, hide nav, single column. */
-  @media (max-width: 720px) {
-    .bucket[data-theme="live"] .stage-viewport { overflow: visible; }
-    .bucket[data-theme="live"] .stage-track {
-      transform: none !important;
-      transition: none !important;
-      gap: 14px;
-    }
-    .bucket[data-theme="live"] .stage-page {
-      grid-template-columns: 1fr;
-      padding-bottom: 0;
-    }
-    .bucket[data-theme="live"] .stage-nav { display: none !important; }
-    .bucket[data-theme="live"] .stage-spotlight { display: none; }
-  }
-  /* Tablet sweet-spot: keep 2 cols, but tighten the slider page heights. */
-  @media (min-width: 720px) and (max-width: 880px) {
-    .stage-page { gap: 12px; }
-  }
+  /* Live now uses horizontal scroll-row (OB pattern) — legacy slider rules
+   * removed. The .stage-page / .stage-track / .stage-nav classes are no
+   * longer rendered into the DOM; their CSS above is dead-code-tolerant. */
 
   /* Nav */
   .stage-nav {
