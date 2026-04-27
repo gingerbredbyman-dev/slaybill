@@ -128,6 +128,12 @@ PAGE = """<!doctype html>
 
 
 def build() -> None:
+    """Generate web/archive.html from closed/cancelled shows in shows.json.
+
+    Filters shows.json for closed/closed_early/cancelled status, sorts by
+    closing_date descending, and renders a simple table view with links to
+    each show's Tier 2 detail page.
+    """
     data = json.loads(SHOWS_JSON.read_text())
     closed = [
         s for s in data["shows"]

@@ -145,6 +145,12 @@ def upsert_show(conn: sqlite3.Connection, title: str) -> int:
 
 
 def run() -> None:
+    """Main entry point: fetch Playbill grosses, parse, and upsert to corpus.db.
+
+    Creates a scrape_run record, fetches the Playbill grosses page, parses each
+    show's weekly gross + capacity%, upserts shows and grosses rows, and marks
+    the scrape_run as success or error.
+    """
     conn = connect()
     cur = conn.execute(
         "INSERT INTO scrape_runs (source, status) VALUES ('playbill_grosses', 'running')"

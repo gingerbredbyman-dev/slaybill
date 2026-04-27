@@ -104,6 +104,15 @@ def _parse_hex(h):
 
 
 def extract_palette(poster: Path, k: int = 5):
+    """Extract dominant color palette from a poster image using k-means quantization.
+
+    Args:
+        poster: Path to the poster image file.
+        k: Number of dominant colors to extract (default 5).
+
+    Returns:
+        List of hex color strings (e.g., ['#ff0000', ...]), or None if Pillow unavailable.
+    """
     if Image is None:
         return None
     im = Image.open(poster).convert("RGB")
@@ -387,6 +396,12 @@ def build_one(show, template):
 
 
 def main():
+    """Render web/shows/<slug>.html for each show in shows.json.
+
+    Reads shows.json and _template.html, extracts poster palette (via Pillow),
+    derives ink/surface tones, and emits one detail page per show with all
+    metrics, cast/crew, ticket links, and marketing firms.
+    """
     POSTERS_DIR.mkdir(parents=True, exist_ok=True)
     data = json.loads(SHOWS_JSON.read_text())
     template = TEMPLATE.read_text()

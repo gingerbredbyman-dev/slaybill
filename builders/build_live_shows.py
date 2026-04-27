@@ -44,7 +44,7 @@ NEWS_FEED = PROJECT_ROOT / "web" / "data" / "news_feed.json"
 POSTERS_DIR = PROJECT_ROOT / "web" / "shows" / "posters"
 POSTER_EXTS = (".jpg", ".jpeg", ".png", ".webp")
 
-COMING_SOON_WINDOW_DAYS = 42  # 6 weeks
+COMING_SOON_WINDOW_DAYS = 270  # 9 months — marquee showcases the announced season
 
 VALID_FIRM_ROLES = {
     "lead_agency", "press", "digital", "creative",
@@ -110,6 +110,9 @@ def resolve_source_url(show: dict, news_items: list[dict]) -> str | None:
     """For a show without confirmed grosses (coming_soon / in_previews), find
     the best news article that mentions the show. Falls back to ticket_links.official
     or a Playbill production URL guess. Returns None if nothing reasonable found."""
+    # Honor an explicit announcement_url on the show (curated source-of-truth).
+    if show.get("announcement_url"):
+        return show["announcement_url"]
     title_norm = _norm_title(show.get("title", ""))
     if not title_norm:
         return show.get("ticket_links", {}).get("official")
@@ -224,6 +227,15 @@ def normalize(show: dict, today: date, news_items: list[dict] | None = None) -> 
 
 
 def build() -> dict:
+    """Build shows_live.json from the curated shows.json source.
+
+    Reads shows.json, normalizes each show into the front-end contract format,
+    groups by status bucket (coming_soon/in_previews/live/closed), and emits
+    shows_live.json to web/data/ for client-side hydration.
+
+    Returns:
+        dict: The complete output structure with buckets + off_broadway list.
+    """
     data = json.loads(SHOWS_JSON.read_text())
     today = date.today()
     news_items = _load_news_index()

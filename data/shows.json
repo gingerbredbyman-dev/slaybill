@@ -3940,7 +3940,7 @@
       "first_preview_date": "2026-03-27",
       "opening_date": "2026-04-26",
       "closing_date": null,
-      "status": "in_previews",
+      "status": "live",
       "synopsis": "Based on the 1987 Joel Schumacher supernatural horror-comedy film, this world premiere musical follows two brothers who move with their mother to Santa Carla, California only to discover their new friends are vampires. Michael Arden directs the production featuring music by indie band The Rescues.",
       "cast": [
         {
@@ -4813,6 +4813,98 @@
         "official": "https://www.broadway.com/shows/new-born/"
       },
       "marketing_firms": []
+    },
+    {
+      "slug": "school-girls-african-mean-girls-play",
+      "title": "School Girls; or, the African Mean Girls Play",
+      "subtitle": "Jocelyn Bioh's hit comedy gets a Broadway transfer",
+      "tier": "broadway",
+      "category": "play",
+      "theatre": "Samuel J. Friedman Theatre",
+      "theatre_capacity": 650,
+      "first_preview_date": "2026-09-08",
+      "opening_date": null,
+      "closing_date": null,
+      "status": "coming_soon",
+      "synopsis": "Jocelyn Bioh's acclaimed comedy follows the catty rivalries at a 1986 Ghanaian boarding school where six girls compete for the Miss Ghana 1986 crown. The play originally ran Off-Broadway at MCC Theater in 2017 and won wide acclaim for its sharp humor and heart.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Jocelyn Bioh",
+          "role": "Playwright"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
+      "palette": [
+        "#d97706",
+        "#7c2d12",
+        "#fef3c7",
+        "#451a03",
+        "#0a0a0a"
+      ],
+      "ticket_links": {},
+      "announcement_url": "https://playbill.com/article/schedule-of-upcoming-and-announced-broadway-shows"
+    },
+    {
+      "slug": "wanted-musical",
+      "title": "Wanted",
+      "subtitle": "The Mary and Martha Clarke story (formerly Gun & Powder)",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "James Earl Jones Theatre",
+      "theatre_capacity": 1078,
+      "first_preview_date": "2026-10-15",
+      "opening_date": "2026-11-08",
+      "closing_date": null,
+      "status": "coming_soon",
+      "synopsis": "A new musical inspired by the true story of Mary and Martha Clarke, African-American twin sisters in 1893 Texas who pose as white outlaws to settle their mother's sharecropper debt and save her home. Premiered at Paper Mill Playhouse in 2024 under the title Gun & Powder.",
+      "cast": [],
+      "creatives": [],
+      "producers": [],
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
+      "palette": [
+        "#a16207",
+        "#451a03",
+        "#fef3c7",
+        "#1c1917",
+        "#000000"
+      ],
+      "ticket_links": {},
+      "announcement_url": "https://playbill.com/article/schedule-of-upcoming-and-announced-broadway-shows"
+    },
+    {
+      "slug": "galileo-musical",
+      "title": "Galileo",
+      "subtitle": "A new musical about the man who saw the stars",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Shubert Theatre",
+      "theatre_capacity": 1502,
+      "first_preview_date": "2026-11-10",
+      "opening_date": "2026-12-06",
+      "closing_date": null,
+      "status": "coming_soon",
+      "synopsis": "A musical centered on the historical scientist Galileo Galilei, who defied the Inquisition with what his telescope revealed about the heavens. Premiered at Berkeley Rep in 2024.",
+      "cast": [],
+      "creatives": [],
+      "producers": [],
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
+      "palette": [
+        "#1e3a8a",
+        "#0c4a6e",
+        "#fef3c7",
+        "#0f172a",
+        "#020617"
+      ],
+      "ticket_links": {},
+      "announcement_url": "https://playbill.com/article/schedule-of-upcoming-and-announced-broadway-shows"
     }
   ]
 }

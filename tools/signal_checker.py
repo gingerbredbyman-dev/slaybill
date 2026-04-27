@@ -38,6 +38,15 @@ def _count_recent(conn: sqlite3.Connection, min_severity: int = 0) -> int:
 
 
 def run() -> dict:
+    """Generate editorial signal verdict from recent events in corpus.db.
+
+    Counts events from the last 24 hours, classifies as musical/play/preview
+    based on severity thresholds, and writes the verdict to data/status.json
+    and updates web/index.html.
+
+    Returns:
+        dict: Verdict summary with label, subline, and event counts.
+    """
     if not DB.exists():
         return _write_verdict("preview", "Corpus not yet created.", 0, 0)
     with sqlite3.connect(DB) as conn:

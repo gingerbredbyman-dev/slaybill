@@ -54,25 +54,42 @@ slaybill/
 │   ├── index.html          main SLAYBILL page (three buckets + OB row)
 │   ├── fantasy.html        Fantasy Broadway (draft + score + Tonys countdown)
 │   ├── archive.html        closed & cancelled shows (generated)
+│   ├── news.html           news aggregation page
+│   ├── gossip.html         gossip/buzz feed page
+│   ├── assets/             static assets (CSS, JS, images)
+│   ├── config/             client-side config
+│   ├── data/               generated JSON (shows_live.json, news_feed.json, etc.)
 │   └── shows/
 │       ├── _template.html  Tier 2 detail page template
+│       ├── posters/        show poster images
 │       └── <slug>.html     generated detail pages
 ├── data/
-│   ├── shows.json          curated source of truth (edit here)
-│   ├── shows_live.json     generated for the front-end
-│   ├── schema.sql          SQLite schema
-│   └── corpus.db           scraper output (gitignored)
+│   ├── shows.json                     curated source of truth (edit here)
+│   ├── marketing_firms_research.json  marketing agency data
+│   ├── status.json                    editorial signal verdict
+│   ├── schema.sql                     SQLite schema
+│   └── corpus.db                      scraper output (gitignored)
 ├── scrapers/
-│   ├── playbill_grosses.py weekly Broadway grosses
-│   ├── playbill_news.py    event detection (closings, casting, previews)
-│   └── broadway_world.py   supplementary news feed
+│   ├── playbill_grosses.py     weekly Broadway grosses
+│   ├── playbill_news.py        event detection (closings, casting, previews)
+│   ├── broadway_world.py       supplementary news feed
+│   ├── news_aggregator.py      unified news feed builder
+│   ├── gossip_aggregator.py    social buzz / gossip feed
+│   ├── llm_aggregator.py       LLM-powered content aggregation
+│   ├── intel_scraper.py        competitive intelligence gathering
+│   └── scoring.py              scoring algorithms for shows
 ├── builders/
-│   ├── build_live_shows.py emit shows_live.json
-│   ├── build_show_pages.py emit web/shows/<slug>.html
-│   ├── build_archive.py    emit web/archive.html
-│   └── classify_status.py  back-propagate events → shows.status
+│   ├── build_live_shows.py     emit shows_live.json
+│   ├── build_show_pages.py     emit web/shows/<slug>.html
+│   ├── build_archive.py        emit web/archive.html
+│   ├── classify_status.py      back-propagate events → shows.status
+│   ├── apply_scores.py         apply critic + sentiment scores to shows
+│   └── build_firms.py          marketing firms data builder
 ├── tools/
-│   └── signal_checker.py   (misc utilities)
+│   ├── signal_checker.py       editorial signal detector
+│   ├── poster_fetcher.py       automated poster image downloader
+│   ├── merge_firm_research.py  merge marketing firm research data
+│   └── build_codex_brief.py    generate codebase documentation
 └── README.md
 ```
 

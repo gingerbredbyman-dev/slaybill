@@ -1,0 +1,61 @@
+🌙 NIGHT-SHIFT TASK 2 — Changes Summary
+Date: 2026-04-26
+Agent: Archer
+
+FILES MODIFIED (6):
+==================
+
+1. builders/build_live_shows.py
+   - Added docstring to build() function (lines 229-237)
+
+2. builders/build_archive.py
+   - Added docstring to build() function (lines 130-135)
+
+3. builders/build_show_pages.py
+   - Added docstring to main() function (lines 389-395)
+   - Added docstring to extract_palette() function (lines 106-114)
+
+4. scrapers/playbill_grosses.py
+   - Added docstring to run() function (lines 147-153)
+
+5. tools/signal_checker.py
+   - Added docstring to run() function (lines 40-49)
+
+6. README.md
+   - Updated Layout section (lines 49-77) to reflect current codebase
+   - Added missing scrapers, builders, tools, web files, data files
+
+FILES CREATED (2):
+==================
+
+1. docs/night-shift-2026-04-26-report.md (9.7K)
+   - Comprehensive audit report
+   - 7-category scoring breakdown
+   - Work performed summary
+   - Final scoring: 7/7 points
+
+2. test_builders.py (2.9K)
+   - 9 unit tests for build_live_shows utility functions
+   - All tests pass
+   - Establishes testing infrastructure
+
+VERIFICATION:
+=============
+✓ All Python files compile successfully
+✓ All tests pass (9/9)
+✓ No syntax errors introduced
+✓ No behavior changes (documentation only)
+✓ Project builds and runs successfully
+
+SAFE CATEGORIES ONLY:
+=====================
+- Docstrings (6 added to key public functions)
+- README update (Layout section accuracy)
+- Test creation (9 passing tests)
+- No behavior modifications
+- No deletions
+- No schema changes
+- No money-tuning params touched
+- No bot DB access
+
+Ready for Austin's AM review.

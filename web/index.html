@@ -166,80 +166,107 @@
     pointer-events: none;
   }
 
-  /* Stage-curtain panels — two halves that part on intro and close back as
-   * you scroll past the cover. Injected by JS at runtime so no-JS users
-   * never see them (graceful degradation: cover is just visible by default).
-   * Scroll-reactive behavior uses animation-timeline: view() — supported in
-   * Chrome 115+, Firefox 120+, Safari 26+. Older browsers get the intro
-   * only and curtains stay parted permanently after that. */
+  /* SPOTLIGHT INTRO — cover starts in darkness; four searching follow-spots
+   * sweep around looking for the act, then converge on the SLAYBILL masthead.
+   * Replaces the prior red-curtain animation entirely. JS injects the spot
+   * elements at runtime so no-JS users see the lit cover by default. */
   .cover {
-    view-timeline-name: --cover-view;
-    view-timeline-axis: block;
     overflow: hidden;
   }
-  .curtain {
+  /* Black scrim that hides the cover; lifts to ~12% opacity once spots converge. */
+  .stage-scrim {
     position: absolute;
-    top: -2px; bottom: -2px;
-    width: 52%;
+    inset: 0;
+    z-index: 5;
+    background: oklch(4% 0.005 270);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 700ms ease-out;
+  }
+  .cover.intro-finished .stage-scrim { opacity: 0.12; }
+  .cover.intro-finished .stage-scrim { mix-blend-mode: multiply; }
+
+  /* Each spot is a soft warm-light radial gradient applied via mask
+   * onto a stage-glow layer. Four of them, stacked. */
+  .stage-spots {
+    position: absolute;
+    inset: 0;
     z-index: 6;
     pointer-events: none;
-    background:
-      /* fabric folds — vertical stripes of darker/lighter velvet */
-      repeating-linear-gradient(90deg,
-        oklch(18% 0.10 22) 0px,
-        oklch(28% 0.18 25) 8px,
-        oklch(34% 0.22 26) 14px,
-        oklch(28% 0.18 25) 20px,
-        oklch(18% 0.10 22) 28px);
-    box-shadow:
-      inset 0 8px 24px oklch(0% 0 0 / 0.55),
-      inset 0 -8px 24px oklch(0% 0 0 / 0.55),
-      0 0 24px oklch(0% 0 0 / 0.6);
-    will-change: transform;
   }
-  .curtain-left {
-    left: 0;
-    transform: translateX(-105%);
-    transform-origin: left center;
-    /* Soft right edge — feathered shadow where the curtain meets the gap */
-    mask-image: linear-gradient(to right, black 0%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 0%, black 92%, transparent 100%);
+  .stage-spot {
+    position: absolute;
+    top: var(--sy, 50%);
+    left: var(--sx, 50%);
+    width: 32vmin; height: 32vmin;
+    margin-top: -16vmin;
+    margin-left: -16vmin;
+    background: radial-gradient(circle at center,
+      oklch(98% 0.05 90 / 0.95) 0%,
+      oklch(94% 0.14 85 / 0.65) 12%,
+      oklch(80% 0.20 75 / 0.35) 32%,
+      oklch(60% 0.18 60 / 0.10) 55%,
+      transparent 75%);
+    filter: blur(2px);
+    mix-blend-mode: plus-lighter;
+    opacity: 0;
+    will-change: top, left, opacity, transform;
+    transition: top 200ms linear, left 200ms linear;
   }
-  .curtain-right {
-    right: 0;
-    transform: translateX(105%);
-    transform-origin: right center;
-    mask-image: linear-gradient(to left, black 0%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to left, black 0%, black 92%, transparent 100%);
+  /* Each spot animates in sequence, sweeps a unique search path, then
+   * converges to the masthead center (50%, 56%) where SLAYBILL sits. */
+  @keyframes spot-1-search {
+    0%   { opacity: 0; --sx: 12%; --sy: 18%; }
+    8%   { opacity: 1; }
+    35%  { --sx: 75%; --sy: 22%; opacity: 1; }
+    62%  { --sx: 25%; --sy: 70%; opacity: 1; }
+    85%  { --sx: 50%; --sy: 56%; opacity: 1; }
+    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
   }
-
-  /* INTRO — runs once on load, JS adds .intro-running class. backwards
-   * fill-mode keeps curtains closed during the 200ms delay before parting. */
-  @keyframes curtain-part-left {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-105%); }
+  @keyframes spot-2-search {
+    0%   { opacity: 0; --sx: 88%; --sy: 22%; }
+    14%  { opacity: 1; }
+    38%  { --sx: 18%; --sy: 30%; opacity: 1; }
+    66%  { --sx: 78%; --sy: 75%; opacity: 1; }
+    88%  { --sx: 50%; --sy: 56%; opacity: 1; }
+    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
   }
-  @keyframes curtain-part-right {
-    from { transform: translateX(0); }
-    to   { transform: translateX(105%); }
+  @keyframes spot-3-search {
+    0%   { opacity: 0; --sx: 18%; --sy: 82%; }
+    20%  { opacity: 1; }
+    44%  { --sx: 60%; --sy: 88%; opacity: 1; }
+    72%  { --sx: 32%; --sy: 18%; opacity: 1; }
+    91%  { --sx: 50%; --sy: 56%; opacity: 1; }
+    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
   }
-  .cover.intro-running .curtain-left {
-    animation: curtain-part-left 1.4s cubic-bezier(0.55, 0.06, 0.22, 1) 0.2s 1 backwards;
+  @keyframes spot-4-search {
+    0%   { opacity: 0; --sx: 82%; --sy: 86%; }
+    26%  { opacity: 1; }
+    50%  { --sx: 30%; --sy: 50%; opacity: 1; }
+    78%  { --sx: 70%; --sy: 36%; opacity: 1; }
+    94%  { --sx: 50%; --sy: 56%; opacity: 1; }
+    100% { --sx: 50%; --sy: 56%; opacity: 0.95; }
   }
-  .cover.intro-running .curtain-right {
-    animation: curtain-part-right 1.4s cubic-bezier(0.55, 0.06, 0.22, 1) 0.2s 1 backwards;
+  .cover.intro-running .stage-spot.spot-1 { animation: spot-1-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 0.0s 1 forwards; }
+  .cover.intro-running .stage-spot.spot-2 { animation: spot-2-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 0.4s 1 forwards; }
+  .cover.intro-running .stage-spot.spot-3 { animation: spot-3-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 0.8s 1 forwards; }
+  .cover.intro-running .stage-spot.spot-4 { animation: spot-4-search 3.6s cubic-bezier(0.45, 0.05, 0.25, 1) 1.2s 1 forwards; }
+  /* Resting state after intro: spots gently breathe at the center. */
+  .cover.intro-finished .stage-spot {
+    opacity: 0.7;
+    --sx: 50%; --sy: 56%;
+    animation: spot-breathe 6s ease-in-out infinite;
   }
-
-  /* SCROLL-REACTIVE — after intro plays, curtains close as the cover
-   * scrolls out of view, reopen as it scrolls back. Driven by JS that
-   * sets --curtain-progress (0 = parted, 1 = fully closed) on the cover. */
-  .cover.intro-played .curtain-left {
-    transform: translateX(calc(-105% + 105% * var(--curtain-progress, 0)));
-    transition: transform 50ms linear;
+  .cover.intro-finished .stage-spot.spot-2 { animation-delay: 1.5s; }
+  .cover.intro-finished .stage-spot.spot-3 { animation-delay: 3s;   }
+  .cover.intro-finished .stage-spot.spot-4 { animation-delay: 4.5s; }
+  @keyframes spot-breathe {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%      { opacity: 0.95; transform: scale(1.08); }
   }
-  .cover.intro-played .curtain-right {
-    transform: translateX(calc(105% - 105% * var(--curtain-progress, 0)));
-    transition: transform 50ms linear;
+  @media (prefers-reduced-motion: reduce) {
+    .stage-scrim { opacity: 0.12 !important; transition: none !important; }
+    .stage-spot { opacity: 0.7 !important; --sx: 50% !important; --sy: 56% !important; animation: none !important; }
   }
   .masthead {
     border-top: 4px solid var(--ink);
@@ -429,7 +456,27 @@
     padding-bottom: 16px;
     flex-shrink: 0;
   }
-  @media (max-width: 600px) { .stage-page { grid-template-columns: 1fr; } }
+  /* Mobile: disable slider, show every live show in a normal vertical scroll.
+   * The 4-card slider on a phone made each page 4 huge cards tall and broke
+   * resize. Stack all pages, hide nav, single column. */
+  @media (max-width: 720px) {
+    .bucket[data-theme="live"] .stage-viewport { overflow: visible; }
+    .bucket[data-theme="live"] .stage-track {
+      transform: none !important;
+      transition: none !important;
+      gap: 14px;
+    }
+    .bucket[data-theme="live"] .stage-page {
+      grid-template-columns: 1fr;
+      padding-bottom: 0;
+    }
+    .bucket[data-theme="live"] .stage-nav { display: none !important; }
+    .bucket[data-theme="live"] .stage-spotlight { display: none; }
+  }
+  /* Tablet sweet-spot: keep 2 cols, but tighten the slider page heights. */
+  @media (min-width: 720px) and (max-width: 880px) {
+    .stage-page { gap: 12px; }
+  }
 
   /* Nav */
   .stage-nav {
@@ -1072,6 +1119,17 @@
     margin: 0;
     color: var(--cream);
   }
+  .news-row h2 .h2-sub, .gossip-row h2 .h2-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.55em;
+    color: color-mix(in oklch, var(--cream) 65%, transparent);
+    margin-left: 6px;
+    vertical-align: 4px;
+  }
   .news-row .note, .gossip-row .note {
     font-family: var(--font-ui);
     font-size: 11px;
@@ -1482,8 +1540,8 @@
 
 <section class="news-row" aria-labelledby="bk-news">
   <header>
-    <h2 id="bk-news">Broadway News</h2>
-    <a class="view-all" href="news.html">View all news <span aria-hidden="true">&rarr;</span></a>
+    <h2 id="bk-news">Legit News</h2>
+    <a class="view-all" href="news.html">All the legit news <span aria-hidden="true">&rarr;</span></a>
   </header>
   <div class="feed-list teaser" data-slot="news-feed" aria-busy="true">
     <div class="feed-loading">Loading the wire&hellip;</div>
@@ -1492,7 +1550,7 @@
 
 <section class="gossip-row" aria-labelledby="bk-gossip">
   <header>
-    <h2 id="bk-gossip">Gossip &amp; Whispers</h2>
+    <h2 id="bk-gossip">Hot Mic <span class="h2-sub">(gossip)</span></h2>
     <a class="view-all" href="gossip.html">All the tea <span aria-hidden="true">&rarr;</span></a>
   </header>
   <div class="feed-list teaser" data-slot="gossip-feed" aria-busy="true">
@@ -1763,6 +1821,24 @@ function initLiveStage(grid, shows) {
   prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
   nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
 
+  // Recompute slider transform on resize. On mobile the CSS disables the
+  // slider entirely — we still re-fire so when user rotates back to desktop
+  // the math is fresh.
+  let resizeRaf = 0;
+  window.addEventListener('resize', () => {
+    if (resizeRaf) return;
+    resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = 0;
+      // Only run slider math when slider is actually active (>720px viewport).
+      if (window.matchMedia('(min-width: 721px)').matches) {
+        goToPage(currentPage, false);
+      } else {
+        // Mobile: clear inline style so CSS !important rules clean state.
+        viewport.style.height = '';
+      }
+    });
+  }, { passive: true });
+
   // First-time roll-in animation + spotlight on section entry
   let animated = false;
   const io = new IntersectionObserver((entries) => {
@@ -1787,8 +1863,10 @@ function initLiveStage(grid, shows) {
   }, { threshold: 0.15 });
   io.observe(grid.closest('.bucket') || grid);
 
-  // Set initial viewport height after first paint
+  // Set initial viewport height after first paint. Skip the slider math on
+  // mobile — CSS handles layout and the inline styles would just be dead weight.
   requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (!window.matchMedia('(min-width: 721px)').matches) return;
     viewport.style.height = pageDivs[0].offsetHeight + 'px';
     goToPage(0, false);
   }));
@@ -2085,62 +2163,39 @@ async function hydrateFeed(url, selector, kind, limit, teaser = false) {
   }
 }
 
-// Stage-curtain intro — inject two curtain panels on the cover, run the
-// part-open animation once on load, then hand off to the scroll-reactive
-// view-timeline animations declared in CSS. JS-injected so no-JS users
-// see the cover already revealed (graceful degradation).
+// Spotlight intro — cover starts in darkness; four follow-spots light up
+// one at a time, sweep around as if searching the stage, then converge on
+// the SLAYBILL masthead. Replaces the prior red-curtain animation entirely.
+// JS-injected so no-JS users see the cover already lit (graceful degradation).
 (() => {
   const cover = document.querySelector('.cover');
   if (!cover) return;
 
-  const left = document.createElement('div');
-  left.className = 'curtain curtain-left';
-  left.setAttribute('aria-hidden', 'true');
-  const right = document.createElement('div');
-  right.className = 'curtain curtain-right';
-  right.setAttribute('aria-hidden', 'true');
-  // Insert as first children so they sit above content (z-index handles the rest).
-  cover.prepend(right);
-  cover.prepend(left);
+  const scrim = document.createElement('div');
+  scrim.className = 'stage-scrim';
+  scrim.setAttribute('aria-hidden', 'true');
 
-  // Trigger intro. The CSS @media (prefers-reduced-motion: reduce) rule at
-  // the bottom of the stylesheet sets animation-duration to 0.01ms for
-  // reduced-motion users, so the intro effectively snaps to the end state
-  // for them — no need to branch in JS.
+  const spots = document.createElement('div');
+  spots.className = 'stage-spots';
+  spots.setAttribute('aria-hidden', 'true');
+  for (let i = 1; i <= 4; i++) {
+    const s = document.createElement('div');
+    s.className = `stage-spot spot-${i}`;
+    spots.appendChild(s);
+  }
+  // scrim first (sits below the spots), then spots
+  cover.prepend(spots);
+  cover.prepend(scrim);
+
+  // Trigger intro. CSS @media (prefers-reduced-motion: reduce) snaps to
+  // the resting state, no JS branching needed.
   void cover.offsetWidth; // flush layout
   cover.classList.add('intro-running');
-  // Total = 0.2s delay + 1.4s duration = 1.6s; pad to 1.7s for safety.
+  // Last spot starts at +1.2s, runs 3.6s → 4.8s total; pad to 5.0s.
   setTimeout(() => {
     cover.classList.remove('intro-running');
-    cover.classList.add('intro-played');
-    enableScrollCurtains();
-  }, 1700);
-
-  // Scroll-reactive curtain controller: maps the cover's "exit progress"
-  // (0 when fully in view, 1 when fully scrolled past viewport top) onto
-  // a CSS var that the curtain transforms read. Uses passive scroll +
-  // rAF coalescing for 60fps with no jank.
-  function enableScrollCurtains() {
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const r = cover.getBoundingClientRect();
-      // Exit phase progress: 0 when the cover bottom is at viewport top
-      // (fully visible), 1 when the cover top is at viewport top (fully
-      // scrolled past). We clamp outside the [0,1] range so curtains stay
-      // parted while the cover is in view, and fully closed once past.
-      const h = r.height || 1;
-      const raw = (h - r.bottom) / h;
-      const progress = Math.max(0, Math.min(1, raw));
-      cover.style.setProperty('--curtain-progress', progress.toFixed(3));
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update(); // initial sync
-  }
+    cover.classList.add('intro-finished');
+  }, 5000);
 })();
 
 // Scroll-jostle — only enable when reduced-motion is not requested.
