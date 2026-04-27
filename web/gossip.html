@@ -35,14 +35,31 @@
     margin: 0 auto;
     padding: 48px 24px 80px;
   }
+  .crumb-bar {
+    position: sticky; top: 0; z-index: 100;
+    margin: -48px -24px 24px;
+    padding: 14px 24px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: color-mix(in oklch, var(--bg) 75%, transparent);
+    border-bottom: 1px solid color-mix(in oklch, var(--cream) 8%, transparent);
+    display: flex; align-items: center; gap: 12px;
+  }
   .crumb {
     display: inline-flex; align-items: center; gap: 6px;
     color: var(--ink-muted);
     font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
     text-decoration: none;
-    margin-bottom: 18px;
+    transition: color 180ms ease;
   }
   .crumb:hover { color: var(--cream); }
+  .crumb-aka { margin-left: auto; line-height: 0; }
+  .crumb-aka img {
+    height: 14px; width: auto; display: block;
+    filter: brightness(0) invert(1) opacity(0.7);
+    transition: opacity 180ms ease;
+  }
+  .crumb-aka:hover img { opacity: 1; }
   h1 {
     font-family: var(--font-display);
     font-weight: 200;
@@ -172,7 +189,12 @@
 </head>
 <body>
 <main class="page">
-  <a class="crumb" href="index.html">&larr; Slaybill home</a>
+  <div class="crumb-bar">
+    <a class="crumb" href="index.html">&larr; Slaybill home</a>
+    <a class="crumb-aka" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC">
+      <img src="assets/img/aka-logo-dark.png" alt="AKA NYC">
+    </a>
+  </div>
   <h1>Gossip &amp; Whispers</h1>
   <p class="deck">Verified Exclusive items from Philip Boroff's Broadway Journal. Confirmed-Adjacent items appear in two or more sources within 48 hours. Unverified Rumor items are single-source — read them as gossip, not fact.</p>
 

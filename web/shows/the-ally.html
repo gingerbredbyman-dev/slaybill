@@ -64,14 +64,30 @@
 
   /* Top bar: back link + status pill. */
   .topbar {
-    max-width: 1100px; margin: 0 auto 24px;
-    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100;
+    margin: 0 -20px 24px;
+    padding: 14px 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: color-mix(in oklab, var(--stage) 70%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
     font-family: "Courier New", monospace;
     font-size: 11px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--ink-muted);
   }
+  .topbar-aka {
+    line-height: 0;
+    text-decoration: none;
+  }
+  .topbar-aka img {
+    height: 14px; width: auto; display: block;
+    filter: brightness(0) saturate(100%) opacity(0.7);
+    transition: opacity 180ms ease;
+  }
+  .topbar-aka:hover img { opacity: 1; }
   .topbar a {
     color: var(--ink-muted); text-decoration: none;
     padding: 8px 12px;
@@ -155,19 +171,29 @@
     color: var(--ink-muted);
     margin: 6px 0 0;
   }
+  /* Marquee bulb strips — matches the Tier 1 home-page aesthetic. Top + bottom
+   * rows of glowing orbs framing the show title. */
   .bulbs {
-    position: absolute; left: 0; right: 0; top: -6px;
-    height: 10px;
-    background: repeating-linear-gradient(90deg, var(--c1) 0 6px, transparent 6px 24px);
-    border-radius: 4px;
-    opacity: 0.75;
-    filter: drop-shadow(0 0 6px var(--c1));
+    position: absolute; left: 0; right: 0;
+    height: 14px;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 4px 7px,
+      oklch(94% 0.18 90) 0 3px,
+      oklch(80% 0.20 75 / 0.6) 3px 4.5px,
+      transparent 5px);
+    background-repeat: repeat-x;
+    background-size: 22px 14px;
+    background-position: center;
+    filter: drop-shadow(0 0 6px color-mix(in oklab, oklch(80% 0.20 75) 80%, transparent));
     animation: bulb-pulse 2.6s ease-in-out infinite;
   }
+  .bulbs.top    { top: -10px; }
+  .bulbs.bottom { bottom: -10px; animation-delay: 1.3s; }
   @keyframes bulb-pulse {
-    0%, 100% { opacity: 0.75; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
   }
+  @media (prefers-reduced-motion: reduce) { .bulbs { animation: none; } }
 
   .poster {
     position: relative;
@@ -586,6 +612,64 @@
     letter-spacing: 0.12em;
     line-height: 1.7;
   }
+  /* details/summary native disclosure for per-outlet score table */
+  .source-details { grid-column: 1 / -1; }
+  .source-details summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--surface) 55%, transparent);
+    color: color-mix(in oklab, var(--ink) 82%, transparent);
+    font-family: "Courier New", monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1.7;
+    transition: background 180ms ease;
+    position: relative;
+  }
+  .source-details summary::-webkit-details-marker { display: none; }
+  .source-details summary::after {
+    content: "▾ Click for per-outlet scores";
+    display: block;
+    margin-top: 8px;
+    font-size: 9px; opacity: 0.6;
+    letter-spacing: 0.18em;
+    transition: transform 180ms ease;
+  }
+  .source-details[open] summary::after { content: "▴ Hide per-outlet scores"; }
+  .source-details summary:hover { background: color-mix(in oklab, var(--surface) 75%, transparent); }
+  .per-outlet {
+    margin-top: 8px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--surface) 70%, transparent);
+    border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+  }
+  @media (max-width: 640px) { .per-outlet { grid-template-columns: 1fr; } }
+  .per-outlet h4 {
+    margin: 0 0 8px;
+    font-family: "Courier New", monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .per-outlet .outlet-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  .per-outlet .outlet-row:last-child { border-bottom: none; }
+  .per-outlet .outlet-name { color: var(--ink); }
+  .per-outlet .outlet-score {
+    font-family: "Courier New", monospace; font-weight: 700;
+    color: var(--ink); font-size: 14px;
+  }
+  .per-outlet .outlet-empty { color: var(--ink-muted); font-style: italic; padding: 6px 0; }
   .source-list .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline; }
   .source-list .row span:first-child {
     color: var(--ink);
@@ -664,11 +748,15 @@
 <div class="topbar">
   <a href="../index.html">&larr; SLAYBILL</a>
   <span class="chip">Live &middot; The Public Theater · Newman</span>
+  <a class="topbar-aka" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC">
+    <img src="../assets/img/aka-logo-dark.png" alt="AKA NYC">
+  </a>
 </div>
 
 <main>
   <section class="marquee">
-    <div class="bulbs"></div>
+    <div class="bulbs top" aria-hidden="true"></div>
+    <div class="bulbs bottom" aria-hidden="true"></div>
     <div class="eyebrow">SLAYBILL</div>
     <h1>The Ally</h1>
     <p class="subtitle">Itamar Moses&#x27; campus politics powderkeg</p>
@@ -783,18 +871,28 @@
       <div class="label" style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">Critic Score</div>
       <div class="big pending">—</div>
       <div class="note">Aggregation not yet available</div>
-      <div class="methodology">Critic reviews not yet aggregated for this show.</div>
+      <div class="methodology">Scoring soon — reviews still landing or production too new to aggregate.</div>
     </div>
     <div class="score-card">
       <div class="label" style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">Audience Sentiment</div>
       <div class="big pending">—</div>
       <div class="note">Aggregation not yet available</div>
-      <div class="methodology">Audience sentiment not yet aggregated for this show.</div>
+      <div class="methodology">Scoring soon — audience platforms still gathering ratings for this run.</div>
     </div>
-    <div class="source-list">
-      <div class="row"><span>Critics:</span><span>—</span></div>
-      <div class="row"><span>Audience:</span><span>—</span></div>
-    </div>
+    <details class="source-details">
+      <summary>
+        <div class="row"><span>Critics:</span><span>—</span></div>
+        <div class="row"><span>Audience:</span><span>—</span></div>
+      </summary>
+      <div class="per-outlet">
+        <div><h4>Critics</h4>
+<div class="outlet-empty">No critic data yet.</div>
+</div>
+<div><h4>Audience</h4>
+<div class="outlet-empty">No audience data yet.</div>
+</div>
+      </div>
+    </details>
   </section>
 
   <section class="sources">

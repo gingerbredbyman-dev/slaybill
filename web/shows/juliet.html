@@ -64,14 +64,30 @@
 
   /* Top bar: back link + status pill. */
   .topbar {
-    max-width: 1100px; margin: 0 auto 24px;
-    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100;
+    margin: 0 -20px 24px;
+    padding: 14px 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: color-mix(in oklab, var(--stage) 70%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
     font-family: "Courier New", monospace;
     font-size: 11px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--ink-muted);
   }
+  .topbar-aka {
+    line-height: 0;
+    text-decoration: none;
+  }
+  .topbar-aka img {
+    height: 14px; width: auto; display: block;
+    filter: brightness(0) saturate(100%) opacity(0.7);
+    transition: opacity 180ms ease;
+  }
+  .topbar-aka:hover img { opacity: 1; }
   .topbar a {
     color: var(--ink-muted); text-decoration: none;
     padding: 8px 12px;
@@ -155,19 +171,29 @@
     color: var(--ink-muted);
     margin: 6px 0 0;
   }
+  /* Marquee bulb strips — matches the Tier 1 home-page aesthetic. Top + bottom
+   * rows of glowing orbs framing the show title. */
   .bulbs {
-    position: absolute; left: 0; right: 0; top: -6px;
-    height: 10px;
-    background: repeating-linear-gradient(90deg, var(--c1) 0 6px, transparent 6px 24px);
-    border-radius: 4px;
-    opacity: 0.75;
-    filter: drop-shadow(0 0 6px var(--c1));
+    position: absolute; left: 0; right: 0;
+    height: 14px;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 4px 7px,
+      oklch(94% 0.18 90) 0 3px,
+      oklch(80% 0.20 75 / 0.6) 3px 4.5px,
+      transparent 5px);
+    background-repeat: repeat-x;
+    background-size: 22px 14px;
+    background-position: center;
+    filter: drop-shadow(0 0 6px color-mix(in oklab, oklch(80% 0.20 75) 80%, transparent));
     animation: bulb-pulse 2.6s ease-in-out infinite;
   }
+  .bulbs.top    { top: -10px; }
+  .bulbs.bottom { bottom: -10px; animation-delay: 1.3s; }
   @keyframes bulb-pulse {
-    0%, 100% { opacity: 0.75; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
   }
+  @media (prefers-reduced-motion: reduce) { .bulbs { animation: none; } }
 
   .poster {
     position: relative;
@@ -586,6 +612,64 @@
     letter-spacing: 0.12em;
     line-height: 1.7;
   }
+  /* details/summary native disclosure for per-outlet score table */
+  .source-details { grid-column: 1 / -1; }
+  .source-details summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--surface) 55%, transparent);
+    color: color-mix(in oklab, var(--ink) 82%, transparent);
+    font-family: "Courier New", monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1.7;
+    transition: background 180ms ease;
+    position: relative;
+  }
+  .source-details summary::-webkit-details-marker { display: none; }
+  .source-details summary::after {
+    content: "▾ Click for per-outlet scores";
+    display: block;
+    margin-top: 8px;
+    font-size: 9px; opacity: 0.6;
+    letter-spacing: 0.18em;
+    transition: transform 180ms ease;
+  }
+  .source-details[open] summary::after { content: "▴ Hide per-outlet scores"; }
+  .source-details summary:hover { background: color-mix(in oklab, var(--surface) 75%, transparent); }
+  .per-outlet {
+    margin-top: 8px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--surface) 70%, transparent);
+    border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+  }
+  @media (max-width: 640px) { .per-outlet { grid-template-columns: 1fr; } }
+  .per-outlet h4 {
+    margin: 0 0 8px;
+    font-family: "Courier New", monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .per-outlet .outlet-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  .per-outlet .outlet-row:last-child { border-bottom: none; }
+  .per-outlet .outlet-name { color: var(--ink); }
+  .per-outlet .outlet-score {
+    font-family: "Courier New", monospace; font-weight: 700;
+    color: var(--ink); font-size: 14px;
+  }
+  .per-outlet .outlet-empty { color: var(--ink-muted); font-style: italic; padding: 6px 0; }
   .source-list .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline; }
   .source-list .row span:first-child {
     color: var(--ink);
@@ -664,11 +748,15 @@
 <div class="topbar">
   <a href="../index.html">&larr; SLAYBILL</a>
   <span class="chip">Live &middot; Stephen Sondheim Theatre</span>
+  <a class="topbar-aka" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC">
+    <img src="../assets/img/aka-logo-dark.png" alt="AKA NYC">
+  </a>
 </div>
 
 <main>
   <section class="marquee">
-    <div class="bulbs"></div>
+    <div class="bulbs top" aria-hidden="true"></div>
+    <div class="bulbs bottom" aria-hidden="true"></div>
     <div class="eyebrow">SLAYBILL</div>
     <h1>&amp; Juliet</h1>
     <p class="subtitle"></p>
@@ -783,10 +871,31 @@
       <div class="note">3 audience platforms</div>
       <div class="methodology">Weighted aggregate across 3 audience platforms (Show-Score, Broadway Scorecard, Broadway.com). Refreshes weekly.</div>
     </div>
-    <div class="source-list">
-      <div class="row"><span>Critics:</span><span>NY Times, Variety, Hollywood Reporter, NY Post, The Guardian, Time Out NY, TheaterMania, Vulture, Associated Press, BroadwayWorld</span></div>
-      <div class="row"><span>Audience:</span><span>Show-Score, Broadway Scorecard, Broadway.com</span></div>
-    </div>
+    <details class="source-details">
+      <summary>
+        <div class="row"><span>Critics:</span><span>NY Times, Variety, Hollywood Reporter, NY Post, The Guardian, Time Out NY, TheaterMania, Vulture, Associated Press, BroadwayWorld</span></div>
+        <div class="row"><span>Audience:</span><span>Show-Score, Broadway Scorecard, Broadway.com</span></div>
+      </summary>
+      <div class="per-outlet">
+        <div><h4>Critics</h4>
+<div class="outlet-row" title="Positive reception for its irreverent humor and strong performances, though some found it overstuffed."><span class="outlet-name">NY Post</span><span class="outlet-score">78</span></div>
+<div class="outlet-row" title="Positive take on the show&#x27;s feminist reimagining and strong ensemble work, with minor reservations about pacing."><span class="outlet-name">Vulture</span><span class="outlet-score">77</span></div>
+<div class="outlet-row" title="Favorable review praising the cast&#x27;s commitment and the clever use of pop hits to tell Juliet&#x27;s story."><span class="outlet-name">Time Out NY</span><span class="outlet-score">76</span></div>
+<div class="outlet-row" title="Generally positive reception noting the show&#x27;s appeal to pop music fans and younger demographics."><span class="outlet-name">BroadwayWorld</span><span class="outlet-score">76</span></div>
+<div class="outlet-row" title="Reviewer appreciated the jukebox concept and Max Martin catalog but felt the narrative was thin."><span class="outlet-name">Variety</span><span class="outlet-score">75</span></div>
+<div class="outlet-row" title="Upbeat review highlighting the show&#x27;s fun energy and strong vocal performances from the cast."><span class="outlet-name">Associated Press</span><span class="outlet-score">75</span></div>
+<div class="outlet-row" title="Reviewer found it entertaining and well-executed, though acknowledged it won&#x27;t appeal to all tastes."><span class="outlet-name">TheaterMania</span><span class="outlet-score">74</span></div>
+<div class="outlet-row" title="Mixed review acknowledging the show&#x27;s fun spirit and appeal to younger audiences despite thin plot."><span class="outlet-name">Hollywood Reporter</span><span class="outlet-score">73</span></div>
+<div class="outlet-row" title="Brantley found it charming but somewhat uneven, praising its energy while noting structural issues."><span class="outlet-name">NY Times</span><span class="outlet-score">72</span></div>
+<div class="outlet-row" title="Critic noted the show&#x27;s infectious energy but questioned whether the concept fully justified the runtime."><span class="outlet-name">The Guardian</span><span class="outlet-score">70</span></div>
+</div>
+<div><h4>Audience</h4>
+<div class="outlet-row" title="Audience consensus has been strongly positive with A-/A range ratings, particularly among younger theatergoers."><span class="outlet-name">Show-Score</span><span class="outlet-score">88</span></div>
+<div class="outlet-row" title="Audience reviews reflect strong enthusiasm for the show&#x27;s energy, humor, and contemporary pop soundtrack."><span class="outlet-name">Broadway.com</span><span class="outlet-score">86</span></div>
+<div class="outlet-row" title="Community ratings show solid approval with audiences enjoying the pop music integration and Juliet&#x27;s agency."><span class="outlet-name">Broadway Scorecard</span><span class="outlet-score">85</span></div>
+</div>
+      </div>
+    </details>
   </section>
 
   <section class="sources">

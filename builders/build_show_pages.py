@@ -34,6 +34,7 @@ SHOWS_JSON = PROJECT_ROOT / "data" / "shows.json"
 TEMPLATE = PROJECT_ROOT / "web" / "shows" / "_template.html"
 SHOWS_DIR = PROJECT_ROOT / "web" / "shows"
 POSTERS_DIR = SHOWS_DIR / "posters"
+SCORE_CACHE_DIR = PROJECT_ROOT / "scrapers" / "cache"
 
 POSTER_EXTS = (".jpg", ".jpeg", ".png", ".webp")
 
@@ -288,6 +289,53 @@ def _firms_markup(raw_firms):
     return "\n      ".join(blocks)
 
 
+def _build_per_outlet_table(slug: str) -> str:
+    """Render the per-outlet score table from the LLM aggregator cache.
+    Returns HTML for a 2-col grid: critics left, audience right.
+    Empty if the cache file is missing or has no scores."""
+    cache_path = SCORE_CACHE_DIR / f"scores_{slug}.json"
+    if not cache_path.exists():
+        return '<div class="outlet-empty">Per-outlet scores will appear once aggregation lands.</div>'
+    try:
+        data = json.loads(cache_path.read_text())
+    except json.JSONDecodeError:
+        return '<div class="outlet-empty">Score data unreadable.</div>'
+    crit = data.get("critic_scores") or {}
+    aud = data.get("audience_scores") or {}
+    crit_just = data.get("critic_justifications") or {}
+    aud_just = data.get("audience_justifications") or {}
+    parts = []
+    # Critics column
+    parts.append('<div><h4>Critics</h4>')
+    if crit:
+        for outlet, score in sorted(crit.items(), key=lambda kv: -kv[1]):
+            j = html.escape(crit_just.get(outlet, ""))
+            tooltip = f' title="{j}"' if j else ''
+            parts.append(
+                f'<div class="outlet-row"{tooltip}>'
+                f'<span class="outlet-name">{html.escape(outlet)}</span>'
+                f'<span class="outlet-score">{int(round(score))}</span></div>'
+            )
+    else:
+        parts.append('<div class="outlet-empty">No critic data yet.</div>')
+    parts.append('</div>')
+    # Audience column
+    parts.append('<div><h4>Audience</h4>')
+    if aud:
+        for outlet, score in sorted(aud.items(), key=lambda kv: -kv[1]):
+            j = html.escape(aud_just.get(outlet, ""))
+            tooltip = f' title="{j}"' if j else ''
+            parts.append(
+                f'<div class="outlet-row"{tooltip}>'
+                f'<span class="outlet-name">{html.escape(outlet)}</span>'
+                f'<span class="outlet-score">{int(round(score))}</span></div>'
+            )
+    else:
+        parts.append('<div class="outlet-empty">No audience data yet.</div>')
+    parts.append('</div>')
+    return "\n".join(parts)
+
+
 def build_one(show, template):
     slug = show["slug"]
     poster_path = _find_poster(slug)
@@ -327,16 +375,19 @@ def build_one(show, template):
     critic_methodology = (
         f"Weighted average across {crit_count} critic outlets (NYT, Variety, HR, Guardian, Vulture, AP, Time Out NY, TheaterMania, NY Post, BroadwayWorld). LLM-aggregated for v1."
         if crit_count else
-        "Critic reviews not yet aggregated for this show."
+        "Scoring soon — reviews still landing or production too new to aggregate."
     )
     audience_methodology = (
         f"Weighted aggregate across {aud_count} audience platforms (Show-Score, Broadway Scorecard, Broadway.com). Refreshes weekly."
         if aud_count else
-        "Audience sentiment not yet aggregated for this show."
+        "Scoring soon — audience platforms still gathering ratings for this run."
     )
     critic_sources_list = ", ".join(critic_sources) if critic_sources else "—"
     audience_sources_list = ", ".join(audience_sources) if audience_sources else "—"
     grade_pill_class = "" if grade and grade != "N/A" else "grade-na"
+
+    # Per-outlet score table — read from the cache file for this show
+    per_outlet_html = _build_per_outlet_table(slug)
 
     replacements = {
         "{{TITLE}}": html.escape(show["title"]),
@@ -369,6 +420,7 @@ def build_one(show, template):
         "{{SENTIMENT_NOTE}}": f"{aud_count} audience platforms" if sentiment is not None else "Aggregation not yet available",
         "{{AUDIENCE_METHODOLOGY}}": audience_methodology,
         "{{AUDIENCE_SOURCES_LIST}}": html.escape(audience_sources_list),
+        "{{PER_OUTLET_TABLE}}": per_outlet_html,
         "{{COMPOSITE_SCORE}}": str(composite) if composite is not None else "—",
         "{{COMPOSITE_CLASS}}": "" if composite is not None else "pending",
         "{{COMPOSITE_GRADE}}": grade,
