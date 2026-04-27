@@ -1,0 +1,39 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 88,
+    "Hollywood Reporter": 86,
+    "NY Post": 84,
+    "The Guardian": 82,
+    "Time Out NY": 87,
+    "TheaterMania": 85,
+    "Associated Press": 83
+  },
+  "critic_justifications": {
+    "NY Times": "Critics praised the 1996 revival's energetic choreography and stellar performances, though some noted the satirical edge could be sharper.",
+    "Variety": "Hailed as a triumphant return of the Fosse classic with exceptional dancing and a perfectly cast ensemble.",
+    "Hollywood Reporter": "Lauded the production's stylish direction and Kander & Ebb's enduring score as reasons for its Broadway longevity.",
+    "NY Post": "Positive reception of the revival's slick staging and strong lead performances in the title roles.",
+    "The Guardian": "Acknowledged the show's theatrical craftsmanship and cultural significance while noting some dated elements.",
+    "Time Out NY": "Praised the revival as a masterclass in musical theater choreography and entertainment value.",
+    "TheaterMania": "Recognized the show's technical excellence and its status as a defining Broadway work.",
+    "Associated Press": "Noted the production's appeal and strong audience reception upon its 1996 opening."
+  },
+  "audience_scores": {
+    "Show-Score": 89,
+    "Broadway Scorecard": 87,
+    "Broadway.com": 88
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience ratings have consistently remained in the A-/A range, reflecting strong appreciation for the production.",
+    "Broadway Scorecard": "Community voting has shown sustained enthusiasm for the show's entertainment value and performances.",
+    "Broadway.com": "Audience reviews have been predominantly positive, with particular praise for the choreography and cast."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "chicago",
+    "fetched_at": "2026-04-27T06:54:30.565604+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

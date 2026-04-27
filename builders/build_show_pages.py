@@ -65,6 +65,22 @@ VENDOR_BLURB = {
     "official":        "Show's official site",
 }
 
+VALID_FIRM_ROLES = {
+    "lead_agency", "press", "digital", "creative",
+    "oo_h", "social", "pr", "media_buy",
+}
+
+FIRM_ROLE_DISPLAY = {
+    "lead_agency": "Lead Agency",
+    "press":       "Press",
+    "digital":     "Digital",
+    "creative":    "Creative",
+    "oo_h":        "OOH",
+    "social":      "Social",
+    "pr":          "PR",
+    "media_buy":   "Media Buy",
+}
+
 
 def _find_poster(slug: str) -> Path | None:
     for ext in POSTER_EXTS:
@@ -103,10 +119,12 @@ def derive_tones(palette):
     avg = sum(lums) / len(lums)
     paired = sorted(zip(lums, rgbs, palette))
     darkest, median, lightest = paired[0], paired[len(paired) // 2], paired[-1]
+    # Higher contrast for muted ink — old values (#5a5a5a / #9c9c9c) were too
+    # faded to read for small caption / methodology / source-list copy.
     if avg > 0.55:
-        return {"ink": "#121212", "ink_muted": "#5a5a5a",
+        return {"ink": "#0a0a0a", "ink_muted": "#3a3a3a",
                 "stage": lightest[2], "surface": median[2]}
-    return {"ink": "#f5f1e6", "ink_muted": "#9c9c9c",
+    return {"ink": "#fbfaf3", "ink_muted": "#d4d4d4",
             "stage": darkest[2], "surface": median[2]}
 
 
@@ -196,6 +214,71 @@ def _fmt_pct(p):
     return ("—", "pending") if p is None else (f"{p:.0f}%", "")
 
 
+import re
+
+_AKA_RE = re.compile(r"\bAKA\b", re.IGNORECASE)
+
+
+def _firms_markup(raw_firms):
+    """Render the marketing-firms panel body.
+
+    Only the AKA-as-AOR case gets the gold/sparkle 'primary-row' treatment.
+    Every other firm — even AORs from other agencies — renders as a flat
+    'others' chip. Empty array -> 'No firms tracked'.
+    """
+    if not raw_firms:
+        return '<div class="empty">No marketing firms tracked yet for this show.</div>'
+
+    aka_aor = None  # the single AKA-AOR row, if it exists
+    others: list[dict] = []
+    aor_seen = False
+    for entry in raw_firms:
+        firm = (entry.get("firm") or "").strip()
+        role = entry.get("role")
+        if not firm or role not in VALID_FIRM_ROLES:
+            continue
+        is_primary = bool(entry.get("is_primary")) and not aor_seen
+        if is_primary:
+            aor_seen = True
+        item = {
+            "firm": firm,
+            "role": role,
+            "role_display": FIRM_ROLE_DISPLAY[role],
+            "is_primary": is_primary,
+        }
+        if is_primary and _AKA_RE.search(firm):
+            aka_aor = item
+        else:
+            others.append(item)
+
+    # Sort others: AOR first (if non-AKA), then alphabetical.
+    others.sort(key=lambda o: (not o["is_primary"], o["firm"].lower()))
+
+    blocks: list[str] = []
+    if aka_aor:
+        blocks.append(
+            f'<div class="primary-row">'
+            f'<div class="lhs">'
+            f'<span class="firm-name">{html.escape(aka_aor["firm"])}</span>'
+            f'<span class="firm-role">{html.escape(aka_aor["role_display"])}</span>'
+            f'</div>'
+            f'<span class="aor-mark">★ Agency of Record</span>'
+            f'</div>'
+        )
+    if others:
+        rows = "\n        ".join(
+            f'<div class="firm-row{" is-aor" if o["is_primary"] else ""}">'
+            f'<span class="firm-name">{html.escape(o["firm"])}</span>'
+            f'<span class="firm-role">{html.escape(o["role_display"])}{" · AOR" if o["is_primary"] else ""}</span>'
+            f'</div>'
+            for o in others
+        )
+        blocks.append(f'<div class="others">\n        {rows}\n      </div>')
+    if not blocks:
+        return '<div class="empty">No marketing firms tracked yet for this show.</div>'
+    return "\n      ".join(blocks)
+
+
 def build_one(show, template):
     slug = show["slug"]
     poster_path = _find_poster(slug)
@@ -225,6 +308,26 @@ def build_one(show, template):
 
     critic = show.get("critic_score")
     sentiment = show.get("sentiment_score")
+    composite = show.get("composite_score")
+    grade = show.get("grade") or "N/A"
+    score_label = show.get("score_label") or "Coming soon"
+    critic_sources = show.get("critic_sources_used") or []
+    audience_sources = show.get("audience_sources_used") or []
+    crit_count = len(critic_sources)
+    aud_count = len(audience_sources)
+    critic_methodology = (
+        f"Weighted average across {crit_count} critic outlets (NYT, Variety, HR, Guardian, Vulture, AP, Time Out NY, TheaterMania, NY Post, BroadwayWorld). LLM-aggregated for v1."
+        if crit_count else
+        "Critic reviews not yet aggregated for this show."
+    )
+    audience_methodology = (
+        f"Weighted aggregate across {aud_count} audience platforms (Show-Score, Broadway Scorecard, Broadway.com). Refreshes weekly."
+        if aud_count else
+        "Audience sentiment not yet aggregated for this show."
+    )
+    critic_sources_list = ", ".join(critic_sources) if critic_sources else "—"
+    audience_sources_list = ", ".join(audience_sources) if audience_sources else "—"
+    grade_pill_class = "" if grade and grade != "N/A" else "grade-na"
 
     replacements = {
         "{{TITLE}}": html.escape(show["title"]),
@@ -246,12 +349,22 @@ def build_one(show, template):
         "{{CAPACITY_PCT}}": cap_text,
         "{{CAPACITY_CLASS}}": cap_class,
         "{{TICKET_ROWS}}": _ticket_rows(show.get("ticket_links", {})),
+        "{{FIRMS_MARKUP}}": _firms_markup(show.get("marketing_firms", [])),
         "{{CRITIC_SCORE}}": str(critic) if critic is not None else "—",
         "{{CRITIC_CLASS}}": "" if critic is not None else "pending",
-        "{{CRITIC_NOTE}}": "Aggregated from critic reviews" if critic is not None else "Coming soon — aggregation not yet live",
+        "{{CRITIC_NOTE}}": f"{crit_count} critic outlets" if critic is not None else "Aggregation not yet available",
+        "{{CRITIC_METHODOLOGY}}": critic_methodology,
+        "{{CRITIC_SOURCES_LIST}}": html.escape(critic_sources_list),
         "{{SENTIMENT_SCORE}}": str(sentiment) if sentiment is not None else "—",
         "{{SENTIMENT_CLASS}}": "" if sentiment is not None else "pending",
-        "{{SENTIMENT_NOTE}}": "Social listening aggregate" if sentiment is not None else "Coming soon — social-listening pipeline pending",
+        "{{SENTIMENT_NOTE}}": f"{aud_count} audience platforms" if sentiment is not None else "Aggregation not yet available",
+        "{{AUDIENCE_METHODOLOGY}}": audience_methodology,
+        "{{AUDIENCE_SOURCES_LIST}}": html.escape(audience_sources_list),
+        "{{COMPOSITE_SCORE}}": str(composite) if composite is not None else "—",
+        "{{COMPOSITE_CLASS}}": "" if composite is not None else "pending",
+        "{{COMPOSITE_GRADE}}": grade,
+        "{{COMPOSITE_LABEL}}": score_label,
+        "{{GRADE_PILL_CLASS}}": grade_pill_class,
         "{{C1}}": palette[0],
         "{{C2}}": palette[1],
         "{{C3}}": palette[2],
@@ -262,6 +375,7 @@ def build_one(show, template):
         "{{STAGE}}": tones["stage"],
         "{{SURFACE}}": tones["surface"],
         "{{LAST_UPDATED}}": datetime.now(timezone.utc).date().isoformat(),
+        "{{SLUG}}": slug,
     }
     page = template
     for k, v in replacements.items():

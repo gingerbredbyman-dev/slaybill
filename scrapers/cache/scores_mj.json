@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 72,
+    "Variety": 75,
+    "Hollywood Reporter": 78,
+    "NY Post": 80,
+    "The Guardian": 68,
+    "Time Out NY": 76,
+    "TheaterMania": 74,
+    "Vulture": 70,
+    "Associated Press": 77,
+    "BroadwayWorld": 73
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley gave a mixed review, praising the choreography and spectacle but finding the narrative framework uneven and the treatment of Jackson's controversies superficial.",
+    "Variety": "Positive review highlighting Christopher Wheeldon's innovative choreography and the impressive production design, though noting some dramatic shortcomings.",
+    "Hollywood Reporter": "Favorable assessment of the musical's technical achievements and Jackson's catalog, with appreciation for the dance sequences.",
+    "NY Post": "Upbeat review praising the visual spectacle and energy, calling it a crowd-pleasing celebration of Jackson's artistry.",
+    "The Guardian": "Critical review questioning the show's approach to Jackson's legacy and controversies, finding it more spectacle than substance.",
+    "Time Out NY": "Positive reception of the production values and choreography, with mixed feelings about the narrative structure.",
+    "TheaterMania": "Mixed review acknowledging the impressive staging and dance while noting dramatic and thematic limitations.",
+    "Vulture": "Skeptical review of the show's treatment of its subject matter, praising technical elements but questioning artistic depth.",
+    "Associated Press": "Favorable review emphasizing the spectacular choreography and Jackson's music catalog as the show's strongest elements.",
+    "BroadwayWorld": "Generally positive reception highlighting the production's ambition and entertainment value with some reservations about storytelling."
+  },
+  "audience_scores": {
+    "Show-Score": 87,
+    "Broadway Scorecard": 85,
+    "Broadway.com": 84
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive, with high marks for spectacle and entertainment value, though some viewers noted narrative concerns.",
+    "Broadway Scorecard": "Audiences have given the show solid approval ratings, appreciating the production design and Jackson's music catalog.",
+    "Broadway.com": "Community ratings reflect strong audience enthusiasm for the visual and musical elements, with generally favorable reception."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "mj",
+    "fetched_at": "2026-04-27T06:54:36.842244+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

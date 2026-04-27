@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 88,
+    "Hollywood Reporter": 86,
+    "NY Post": 84,
+    "The Guardian": 82,
+    "Time Out NY": 87,
+    "TheaterMania": 85,
+    "Vulture": 83,
+    "Associated Press": 86,
+    "BroadwayWorld": 84
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley praised the visual spectacle and emotional core while noting some narrative simplicity.",
+    "Variety": "Critic highlighted the dazzling production design, energetic performances, and successful adaptation of the film's aesthetic.",
+    "Hollywood Reporter": "Review emphasized the stunning choreography and immersive design, with strong appreciation for the cast's commitment.",
+    "NY Post": "Positive reception of the theatrical ambition and entertainment value, though with minor reservations about pacing.",
+    "The Guardian": "Acknowledged the visual splendor and crowd-pleasing appeal while noting the narrative could be more substantial.",
+    "Time Out NY": "Praised the acrobatic spectacle, costume design, and the infectious energy of the production.",
+    "TheaterMania": "Review highlighted the successful translation of Luhrmann's cinematic vision to the stage with strong technical execution.",
+    "Vulture": "Critic appreciated the boldness and visual imagination while noting some structural predictability.",
+    "Associated Press": "Positive assessment of the production's ambition, design, and ability to captivate audiences.",
+    "BroadwayWorld": "Review praised the spectacular staging and performances, with recognition of its crowd-pleasing appeal."
+  },
+  "audience_scores": {
+    "Show-Score": 91,
+    "Broadway Scorecard": 89,
+    "Broadway.com": 88
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with A-range ratings reflecting enthusiasm for the spectacle and entertainment value.",
+    "Broadway Scorecard": "Community ratings show high approval with audiences consistently rating it as a must-see theatrical experience.",
+    "Broadway.com": "Audience reviews reflect strong satisfaction with the visual production and emotional engagement with the story."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "moulin-rouge",
+    "fetched_at": "2026-04-27T06:54:21.420241+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

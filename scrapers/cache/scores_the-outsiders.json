@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 88,
+    "Hollywood Reporter": 86,
+    "NY Post": 84,
+    "The Guardian": 82,
+    "Time Out NY": 87,
+    "TheaterMania": 85,
+    "Vulture": 83,
+    "Associated Press": 86,
+    "BroadwayWorld": 84
+  },
+  "critic_justifications": {
+    "NY Times": "Positive review praising the emotional depth and choreography while noting some pacing issues",
+    "Variety": "Strong review highlighting the musical's success in adapting the beloved novel with energetic staging",
+    "Hollywood Reporter": "Favorable reception emphasizing the Tony-winning production's appeal to both fans and newcomers",
+    "NY Post": "Positive review appreciating the contemporary relevance and strong ensemble work",
+    "The Guardian": "Generally positive with appreciation for the adaptation though noting some theatrical conventions",
+    "Time Out NY": "Strong review praising the choreography and emotional resonance of the piece",
+    "TheaterMania": "Positive reception highlighting the successful translation of the source material to stage",
+    "Vulture": "Favorable review with some reservations about certain narrative elements",
+    "Associated Press": "Positive review emphasizing the show's appeal and technical achievements",
+    "BroadwayWorld": "Positive reception noting strong performances and production values"
+  },
+  "audience_scores": {
+    "Show-Score": 91,
+    "Broadway Scorecard": 89,
+    "Broadway.com": 88
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with A-/A range ratings reflecting enthusiasm for the adaptation",
+    "Broadway Scorecard": "High audience approval with strong positive response from Broadway attendees",
+    "Broadway.com": "Audience ratings reflect strong satisfaction with the production and performances"
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "the-outsiders",
+    "fetched_at": "2026-04-27T06:54:56.965816+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

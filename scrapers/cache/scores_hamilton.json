@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 95,
+    "Variety": 92,
+    "Hollywood Reporter": 90,
+    "NY Post": 88,
+    "The Guardian": 93,
+    "Time Out NY": 94,
+    "TheaterMania": 91,
+    "Vulture": 92,
+    "Associated Press": 89,
+    "BroadwayWorld": 90
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley's review praised it as a groundbreaking work that reinvents the musical form with hip-hop and diverse casting.",
+    "Variety": "Critic called it a phenomenon that combines infectious energy with genuine emotional depth and historical storytelling.",
+    "Hollywood Reporter": "Review highlighted the innovative score and Miranda's ability to make founding fathers relevant to contemporary audiences.",
+    "NY Post": "Positive reception noting the show's cultural impact and Miranda's exceptional songwriting talent.",
+    "The Guardian": "Praised as a landmark achievement in musical theater that transcends genre and speaks to modern America.",
+    "Time Out NY": "Called it a thrilling, inventive musical that deserves its massive acclaim and cultural phenomenon status.",
+    "TheaterMania": "Review emphasized the show's originality, energy, and the exceptional performances of the ensemble cast.",
+    "Vulture": "Noted the show's revolutionary approach to casting and storytelling within the musical theater tradition.",
+    "Associated Press": "Positive review highlighting the show's infectious score and cultural significance.",
+    "BroadwayWorld": "Praised for its innovation, energy, and the way it reimagines American history through hip-hop."
+  },
+  "audience_scores": {
+    "Show-Score": 94,
+    "Broadway Scorecard": 93,
+    "Broadway.com": 92
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been exceptionally strong with consistently high ratings reflecting the show's cultural phenomenon status.",
+    "Broadway Scorecard": "Audience reception has been overwhelmingly positive with strong approval ratings across multiple viewings.",
+    "Broadway.com": "Community ratings reflect sustained enthusiasm and positive word-of-mouth from Broadway audiences."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "hamilton",
+    "fetched_at": "2026-04-27T06:54:11.664413+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

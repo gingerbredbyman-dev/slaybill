@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 88,
+    "Hollywood Reporter": 86,
+    "NY Post": 84,
+    "The Guardian": 87,
+    "Time Out NY": 89,
+    "TheaterMania": 85,
+    "Vulture": 86,
+    "Associated Press": 87,
+    "BroadwayWorld": 85
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley praised the show's infectious energy and feminist reimagining of Tudor history as a modern pop concert.",
+    "Variety": "Critic highlighted the catchy score by Marlow and Moss and the show's cultural impact as a phenomenon.",
+    "Hollywood Reporter": "Review noted the show's clever humor, strong ensemble performances, and resonant themes about female agency.",
+    "NY Post": "Critic appreciated the energetic production and memorable songs despite some structural predictability.",
+    "The Guardian": "Review celebrated the show's bold feminist perspective and infectious pop sensibility.",
+    "Time Out NY": "Critic praised the vibrant staging, charismatic cast, and the show's ability to make Tudor history feel contemporary and relevant.",
+    "TheaterMania": "Review highlighted the strong performances and catchy musical numbers that have made the show a cultural sensation.",
+    "Vulture": "Critic noted the show's clever concept execution and the appeal of its modern girl-band framing of historical figures.",
+    "Associated Press": "Review praised the show's energy, humor, and the way it subverts expectations about the six wives.",
+    "BroadwayWorld": "Critic commended the ensemble's chemistry and the show's infectious, crowd-pleasing score."
+  },
+  "audience_scores": {
+    "Show-Score": 91,
+    "Broadway Scorecard": 89,
+    "Broadway.com": 90
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with A-/A range ratings reflecting widespread enthusiasm for the show.",
+    "Broadway Scorecard": "Community ratings show high approval with audiences consistently praising the entertainment value and cultural relevance.",
+    "Broadway.com": "Audience reviews reflect strong satisfaction with the show's performances, music, and modern take on historical material."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "six",
+    "fetched_at": "2026-04-27T06:55:33.228522+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

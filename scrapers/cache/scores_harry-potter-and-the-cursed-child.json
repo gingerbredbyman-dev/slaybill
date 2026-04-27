@@ -1,0 +1,39 @@
+{
+  "critic_scores": {
+    "NY Times": 75,
+    "Variety": 78,
+    "Hollywood Reporter": 76,
+    "NY Post": 72,
+    "The Guardian": 74,
+    "Time Out NY": 79,
+    "TheaterMania": 77,
+    "Associated Press": 75
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley's review acknowledged the spectacle and technical achievement while noting the narrative felt somewhat thin compared to the source material.",
+    "Variety": "Positive reception of the theatrical magic and production design, though some critics found the plot convoluted.",
+    "Hollywood Reporter": "Praised the visual effects and performances but noted the two-part structure and length were challenging for some audiences.",
+    "NY Post": "Mixed review highlighting impressive stagecraft but questioning whether the story justified the theatrical experience.",
+    "The Guardian": "Acknowledged the technical wizardry and entertainment value while expressing reservations about the dramatic substance.",
+    "Time Out NY": "Favorable review of the production's ambition and execution, calling it a must-see theatrical event.",
+    "TheaterMania": "Positive assessment of the performances and design elements with some critique of pacing.",
+    "Associated Press": "Noted strong audience appeal and technical achievement alongside questions about narrative depth."
+  },
+  "audience_scores": {
+    "Show-Score": 88,
+    "Broadway Scorecard": 85,
+    "Broadway.com": 87
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with ratings predominantly in the A-/A range.",
+    "Broadway Scorecard": "Strong audience approval with majority of respondents rating it a recommend.",
+    "Broadway.com": "Audience ratings have been consistently favorable with high recommendation scores."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "harry-potter-and-the-cursed-child",
+    "fetched_at": "2026-04-27T06:54:06.654769+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

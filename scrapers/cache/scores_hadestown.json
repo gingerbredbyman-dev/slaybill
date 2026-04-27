@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 90,
+    "Variety": 88,
+    "Hollywood Reporter": 85,
+    "NY Post": 87,
+    "The Guardian": 89,
+    "Time Out NY": 88,
+    "TheaterMania": 86,
+    "Vulture": 87,
+    "Associated Press": 88,
+    "BroadwayWorld": 85
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley praised the production as a visionary reimagining of classical myth with exceptional artistry and emotional resonance.",
+    "Variety": "Critic highlighted the innovative folk opera score and Rachel Chavkin's inventive staging as transformative theatrical achievements.",
+    "Hollywood Reporter": "Review emphasized the show's originality, strong performances, and Ana\u00efs Mitchell's compelling musical composition.",
+    "NY Post": "Critic lauded the production's ambition, visual spectacle, and the cast's powerful performances.",
+    "The Guardian": "Review called it a stunning achievement that successfully blends mythology with contemporary relevance and musical innovation.",
+    "Time Out NY": "Critic praised the production's originality, atmospheric design, and the strength of Mitchell's score.",
+    "TheaterMania": "Review highlighted the show's theatrical innovation and the effectiveness of its Depression-era setting.",
+    "Vulture": "Critic emphasized the production's emotional depth and the innovative approach to the Orpheus myth.",
+    "Associated Press": "Review praised the Tony-winning production as a remarkable theatrical achievement with strong performances.",
+    "BroadwayWorld": "Critic noted the show's originality and the effectiveness of its unique staging and musical approach."
+  },
+  "audience_scores": {
+    "Show-Score": 92,
+    "Broadway Scorecard": 90,
+    "Broadway.com": 89
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been very strong with consistently high ratings reflecting broad appreciation for the show's artistry and innovation.",
+    "Broadway Scorecard": "Audience polling shows strong enthusiasm with predominantly positive responses to the production's originality and emotional impact.",
+    "Broadway.com": "Community ratings reflect high satisfaction with the show's performances, music, and overall theatrical experience."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "hadestown",
+    "fetched_at": "2026-04-27T06:55:02.726216+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

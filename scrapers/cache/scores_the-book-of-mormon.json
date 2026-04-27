@@ -1,0 +1,39 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 88,
+    "Hollywood Reporter": 86,
+    "NY Post": 84,
+    "The Guardian": 82,
+    "Time Out NY": 87,
+    "TheaterMania": 85,
+    "Associated Press": 86
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley praised the show's irreverent humor and infectious energy while noting its satirical bite.",
+    "Variety": "Critic highlighted the sharp writing, memorable songs, and fearless comedic approach that made it a standout musical.",
+    "Hollywood Reporter": "Review emphasized the show's clever book, music, and lyrics that balance crude humor with genuine heart.",
+    "NY Post": "Critic called it a wildly entertaining and audacious musical that broke conventions.",
+    "The Guardian": "Review acknowledged the show's comedic success while noting some found its satire uneven.",
+    "Time Out NY": "Critic praised the energetic performances and catchy Robert Lopez score.",
+    "TheaterMania": "Review highlighted the show's originality and the strong chemistry between the lead performers.",
+    "Associated Press": "Critic noted the show's ability to blend irreverent humor with surprisingly touching moments."
+  },
+  "audience_scores": {
+    "Show-Score": 89,
+    "Broadway Scorecard": 87,
+    "Broadway.com": 88
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been very positive with strong ratings reflecting the show's entertainment value and replay appeal.",
+    "Broadway Scorecard": "Community ratings have been consistently high, with audiences praising the humor and performances.",
+    "Broadway.com": "Audience reviews have been favorable, with many citing the show as a must-see Broadway experience."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "the-book-of-mormon",
+    "fetched_at": "2026-04-27T06:55:13.941085+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

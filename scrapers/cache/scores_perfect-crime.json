@@ -1,0 +1,27 @@
+{
+  "critic_scores": {
+    "NY Times": 65,
+    "Variety": 70,
+    "NY Post": 72
+  },
+  "critic_justifications": {
+    "NY Times": "Frank Rich's 1987 review was respectful but reserved about the thriller's conventional mechanics.",
+    "Variety": "Trade review acknowledged the show's effective suspense and audience appeal despite predictable plotting.",
+    "NY Post": "Positive reception of the production's entertainment value and lead performance in the original run."
+  },
+  "audience_scores": {
+    "Show-Score": 78,
+    "Broadway Scorecard": 76
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience ratings have remained solidly positive, reflecting the show's sustained appeal and loyal fanbase over decades.",
+    "Broadway Scorecard": "Consistent positive audience reception documented through Broadway Scorecard's historical data for the long-running production."
+  },
+  "all_critics_in": false,
+  "confidence": "medium",
+  "_meta": {
+    "slug": "perfect-crime",
+    "fetched_at": "2026-04-27T06:55:55.753677+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Broadway News — SLAYBILL</title>
+<meta name="description" content="Broadway news aggregated from Playbill, Broadway News, Broadway.com, Vulture, The Hollywood Reporter, and the Broadway League.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Inter:wght@300..800&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-ui: 'Inter', system-ui, sans-serif;
+    --bg: oklch(14% 0.02 270);
+    --surface-1: oklch(20% 0.025 270);
+    --surface-border: oklch(28% 0.03 270);
+    --cream: oklch(96% 0.015 95);
+    --ink-muted: oklch(72% 0.02 270);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 20% -10%, oklch(28% 0.05 290 / 0.45), transparent 50%),
+      radial-gradient(circle at 100% 110%, oklch(28% 0.05 30 / 0.35), transparent 50%);
+  }
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .crumb {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ink-muted);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+  .crumb:hover { color: var(--cream); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-size: clamp(40px, 6vw + 10px, 72px);
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin: 0 0 8px;
+    color: var(--cream);
+  }
+  .deck {
+    color: color-mix(in oklch, var(--cream) 75%, transparent);
+    font-size: 15px; line-height: 1.6;
+    max-width: 56ch;
+    margin: 0 0 28px;
+  }
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin: 0 0 24px;
+    padding: 14px 16px;
+    background: color-mix(in oklch, var(--surface-1) 60%, transparent);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+  }
+  .filter-bar .label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-muted); align-self: center; margin-right: 6px;
+  }
+  .filter-chip {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--surface-1) 80%, transparent);
+    border: 1px solid var(--surface-border);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer;
+    transition: background 150ms;
+  }
+  .filter-chip:hover { background: color-mix(in oklch, var(--surface-1) 100%, white 6%); }
+  .filter-chip.is-active {
+    background: color-mix(in oklch, var(--cream) 14%, transparent);
+    border-color: color-mix(in oklch, var(--cream) 30%, transparent);
+  }
+  .feed {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 720px) { .feed { grid-template-columns: 1fr; } }
+  .feed-item {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: color-mix(in oklch, var(--surface-1) 92%, transparent);
+    border: 1px solid var(--surface-border);
+    color: var(--cream);
+    text-decoration: none;
+    transition: background 200ms, transform 200ms, border-color 200ms;
+  }
+  .feed-item:hover {
+    background: color-mix(in oklch, var(--surface-1) 100%, white 5%);
+    transform: translateY(-1px);
+    border-color: color-mix(in oklch, var(--cream) 22%, transparent);
+  }
+  .feed-meta {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-family: var(--font-ui);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 80%, transparent);
+  }
+  .feed-source { color: var(--cream); }
+  .feed-date {
+    color: color-mix(in oklch, var(--cream) 60%, transparent);
+    font-weight: 500; letter-spacing: 0.06em;
+  }
+  .feed-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 20px; line-height: 1.3;
+    color: var(--cream);
+  }
+  .feed-summary {
+    font-family: var(--font-ui);
+    font-size: 13px; line-height: 1.55;
+    color: color-mix(in oklch, var(--cream) 80%, transparent);
+  }
+  .news-tier {
+    display: inline-block; width: 7px; height: 7px; border-radius: 999px;
+  }
+  .news-tier.official     { background: oklch(78% 0.16 95); }
+  .news-tier.independent  { background: oklch(72% 0.18 200); }
+  .news-tier.criticism    { background: oklch(72% 0.18 320); }
+  .news-tier.trade        { background: oklch(72% 0.18 30); }
+  .empty {
+    grid-column: 1 / -1;
+    padding: 24px; text-align: center;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  footer {
+    max-width: 1100px;
+    margin: 64px auto 0;
+    padding: 0 24px 32px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  footer a { color: inherit; text-decoration: none; }
+  footer a:hover { color: var(--cream); }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="crumb" href="index.html">&larr; Slaybill home</a>
+  <h1>Broadway News</h1>
+  <p class="deck">Aggregated from Playbill, Broadway News, Broadway.com, Vulture, The Hollywood Reporter, and the Broadway League. Updated continuously. Most recent first.</p>
+
+  <div class="filter-bar" role="toolbar" aria-label="Filter by source tier">
+    <span class="label">Filter:</span>
+    <button class="filter-chip is-active" data-tier="all">All sources</button>
+    <button class="filter-chip" data-tier="official">Official</button>
+    <button class="filter-chip" data-tier="independent">Independent</button>
+    <button class="filter-chip" data-tier="criticism">Criticism</button>
+    <button class="filter-chip" data-tier="trade">Trade</button>
+  </div>
+
+  <div class="feed" id="feed" aria-live="polite">
+    <div class="empty">Loading the wire&hellip;</div>
+  </div>
+</main>
+
+<footer>SLAYBILL &middot; <a href="index.html">home</a> &middot; <a href="gossip.html">gossip</a> &middot; <a href="archive.html">archive</a></footer>
+
+<script>
+const TIER_LABEL = {official: 'Official', independent: 'Independent', criticism: 'Criticism', trade: 'Trade'};
+let allItems = [];
+let currentFilter = 'all';
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  const hrs = (Date.now() - d) / 36e5;
+  if (hrs < 1)  return Math.max(1, Math.round(hrs * 60)) + 'm ago';
+  if (hrs < 24) return Math.round(hrs) + 'h ago';
+  const days = Math.round(hrs / 24);
+  if (days < 30) return days + 'd ago';
+  return d.toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'});
+}
+
+function makeItem(item) {
+  const a = document.createElement('a');
+  a.className = 'feed-item';
+  a.href = item.link; a.target = '_blank'; a.rel = 'noopener';
+
+  const meta = document.createElement('div'); meta.className = 'feed-meta';
+  const dot = document.createElement('span');
+  dot.className = 'news-tier ' + (item.tier || 'official');
+  dot.setAttribute('aria-hidden', 'true');
+  meta.appendChild(dot);
+  const src = document.createElement('span'); src.className = 'feed-source'; src.textContent = item.source;
+  meta.appendChild(src);
+  if (item.published) {
+    const sep = document.createElement('span'); sep.className = 'feed-date'; sep.textContent = '·';
+    const date = document.createElement('span'); date.className = 'feed-date'; date.textContent = fmtDate(item.published);
+    meta.appendChild(sep); meta.appendChild(date);
+  }
+  a.appendChild(meta);
+
+  const title = document.createElement('div'); title.className = 'feed-title'; title.textContent = item.title;
+  a.appendChild(title);
+
+  if (item.summary) {
+    const summary = document.createElement('div'); summary.className = 'feed-summary'; summary.textContent = item.summary;
+    a.appendChild(summary);
+  }
+  return a;
+}
+
+function render() {
+  const feed = document.getElementById('feed');
+  feed.innerHTML = '';
+  const items = currentFilter === 'all'
+    ? allItems
+    : allItems.filter(i => i.tier === currentFilter);
+  if (!items.length) {
+    const empty = document.createElement('div'); empty.className = 'empty'; empty.textContent = 'No items for this filter.';
+    feed.appendChild(empty); return;
+  }
+  for (const item of items) feed.appendChild(makeItem(item));
+}
+
+document.querySelectorAll('.filter-chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    currentFilter = btn.dataset.tier;
+    render();
+  });
+});
+
+(async () => {
+  try {
+    const res = await fetch('data/news_feed.json', {cache: 'no-store'});
+    const payload = await res.json();
+    allItems = payload.items || [];
+    render();
+  } catch (err) {
+    document.getElementById('feed').innerHTML =
+      '<div class="empty">News feed offline — refresh in a moment.</div>';
+  }
+})();
+</script>
+</body>
+</html>

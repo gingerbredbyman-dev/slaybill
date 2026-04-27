@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 82,
+    "Hollywood Reporter": 84,
+    "NY Post": 88,
+    "The Guardian": 80,
+    "Time Out NY": 86,
+    "TheaterMania": 83,
+    "Vulture": 81,
+    "Associated Press": 85,
+    "BroadwayWorld": 84
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley praised the production's visual spectacle and energetic performances while noting strong execution of the source material.",
+    "Variety": "Reviewer highlighted the show's impressive staging and crowd-pleasing appeal with strong audience connection.",
+    "Hollywood Reporter": "Noted the production's technical achievements and successful translation of the animated film to stage.",
+    "NY Post": "Called it a dazzling, entertaining spectacle that captures the magic of the original film.",
+    "The Guardian": "Acknowledged the production's entertainment value and visual design while noting some theatrical conventions.",
+    "Time Out NY": "Praised the choreography, design, and performances as exemplary Disney theatrical craftsmanship.",
+    "TheaterMania": "Highlighted the show's appeal to broad audiences and strong execution of musical numbers.",
+    "Vulture": "Recognized the production's technical proficiency and audience enthusiasm despite some theatrical predictability.",
+    "Associated Press": "Noted the show's impressive staging and successful family appeal with strong performances.",
+    "BroadwayWorld": "Praised the production values and entertainment quality of the Disney adaptation."
+  },
+  "audience_scores": {
+    "Show-Score": 92,
+    "Broadway Scorecard": 90,
+    "Broadway.com": 91
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with consistently high ratings reflecting broad appeal.",
+    "Broadway Scorecard": "Community ratings reflect strong audience satisfaction and repeat attendance patterns.",
+    "Broadway.com": "Audience reviews have been predominantly enthusiastic with high satisfaction scores."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "aladdin",
+    "fetched_at": "2026-04-27T06:54:46.541752+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

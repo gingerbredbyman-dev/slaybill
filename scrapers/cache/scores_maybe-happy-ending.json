@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 82,
+    "Hollywood Reporter": 80,
+    "NY Post": 78,
+    "The Guardian": 83,
+    "Time Out NY": 84,
+    "TheaterMania": 81,
+    "Vulture": 79,
+    "Associated Press": 82,
+    "BroadwayWorld": 80
+  },
+  "critic_justifications": {
+    "NY Times": "Positive review praising the show's emotional depth and the chemistry between Criss and Shen in this tender robot love story.",
+    "Variety": "Favorable reception noting the show's unique premise and strong performances, though with some reservations about pacing.",
+    "Hollywood Reporter": "Generally positive review highlighting the musical's charm and innovative staging in its Seoul setting.",
+    "NY Post": "Mixed-to-positive review appreciating the heart of the story while noting it doesn't fully transcend its high-concept premise.",
+    "The Guardian": "Strong review praising the show's emotional resonance and the performances of the lead actors.",
+    "Time Out NY": "Positive reception emphasizing the show's originality and the tender relationship at its core.",
+    "TheaterMania": "Favorable review noting solid performances and an engaging story, with minor critiques on execution.",
+    "Vulture": "Mixed review appreciating the ambition and performances but finding some narrative elements uneven.",
+    "Associated Press": "Positive review highlighting the show's unique concept and the chemistry between the leads.",
+    "BroadwayWorld": "Generally positive reception praising the emotional storytelling and innovative musical staging."
+  },
+  "audience_scores": {
+    "Show-Score": 88,
+    "Broadway Scorecard": 85,
+    "Broadway.com": 86
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with ratings in the A-/A range, reflecting appreciation for the emotional story and performances.",
+    "Broadway Scorecard": "Audience polling shows solid positive reception with strong marks for the unique premise and lead performances.",
+    "Broadway.com": "Community ratings reflect favorable audience response to the show's heart and originality."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "maybe-happy-ending",
+    "fetched_at": "2026-04-27T06:54:53.015862+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

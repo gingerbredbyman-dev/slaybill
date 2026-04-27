@@ -1,0 +1,33 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 82,
+    "NY Post": 88,
+    "TheaterMania": 80,
+    "BroadwayWorld": 83
+  },
+  "critic_justifications": {
+    "NY Times": "Reviewer praised the production's campy charm and strong performances, though noted it was a faithful recreation rather than reinvention.",
+    "Variety": "Called it a delightful, energetic revival that captures the show's cult appeal with solid direction and engaging cast.",
+    "NY Post": "Lauded the production as a gleeful, darkly comic romp with excellent performances and design.",
+    "TheaterMania": "Noted the revival's strengths in humor and spectacle while finding some pacing issues in the second act.",
+    "BroadwayWorld": "Praised the cast and production values as a worthy return of the cult classic to off-Broadway."
+  },
+  "audience_scores": {
+    "Show-Score": 89,
+    "Broadway Scorecard": 87,
+    "Broadway.com": 86
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with consistent A-range ratings throughout the show's run.",
+    "Broadway Scorecard": "Community ratings reflect high enthusiasm for the production with predominantly positive audience reception.",
+    "Broadway.com": "Audience reviews have been favorable, with viewers appreciating the campy horror-comedy and performances."
+  },
+  "all_critics_in": false,
+  "confidence": "high",
+  "_meta": {
+    "slug": "little-shop-of-horrors",
+    "fetched_at": "2026-04-27T06:55:46.274694+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

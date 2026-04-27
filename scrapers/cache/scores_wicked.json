@@ -1,0 +1,39 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 88,
+    "Hollywood Reporter": 86,
+    "NY Post": 84,
+    "The Guardian": 87,
+    "Time Out NY": 89,
+    "TheaterMania": 85,
+    "Associated Press": 86
+  },
+  "critic_justifications": {
+    "NY Times": "Ben Brantley praised the show's emotional depth and Schwartz's soaring score, though noted some structural issues.",
+    "Variety": "Critic highlighted the infectious energy, standout performances, and 'Defying Gravity' as a show-stopping moment.",
+    "Hollywood Reporter": "Review emphasized the show's theatrical spectacle and strong audience connection despite mixed critical reception elsewhere.",
+    "NY Post": "Positive reception of the performances and musical numbers, with particular praise for the chemistry between leads.",
+    "The Guardian": "Critic noted the show's cultural impact and strong emotional resonance with audiences, praising Schwartz's composition.",
+    "Time Out NY": "Enthusiastic review of the production's ambition, visual design, and the iconic 'Defying Gravity' sequence.",
+    "TheaterMania": "Favorable assessment of the show's theatrical storytelling and musical accomplishment.",
+    "Associated Press": "Review highlighted the show's popularity and strong performances, noting its appeal to broad audiences."
+  },
+  "audience_scores": {
+    "Show-Score": 92,
+    "Broadway Scorecard": 90,
+    "Broadway.com": 91
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been exceptionally strong with consistently high ratings in the A range.",
+    "Broadway Scorecard": "Community ratings reflect overwhelming positive reception with strong approval across multiple viewings.",
+    "Broadway.com": "Audience reviews have been predominantly enthusiastic with particular praise for performances and musical numbers."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "wicked",
+    "fetched_at": "2026-04-27T06:54:26.546602+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

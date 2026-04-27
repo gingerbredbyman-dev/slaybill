@@ -174,3 +174,33 @@ CREATE TABLE IF NOT EXISTS scrape_runs (
     new_events INTEGER DEFAULT 0,
     error_message TEXT
 );
+
+-- marketing_credits: which marketing firms hold which shows in which roles.
+-- One row per (show, firm, role). is_primary = 1 marks the agency-of-record
+-- (gold-sparkles treatment). Curated entries override scraped: confidence 1.0
+-- when source = 'curated', lower for press-release / Playbill credit scrape.
+-- v1: hand-curated via shows.json.marketing_firms[]; v2 Pro: automated press
+-- release ingestion writes here with source != 'curated'.
+CREATE TABLE IF NOT EXISTS marketing_credits (
+    credit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    show_id INTEGER REFERENCES shows(show_id),
+    firm_name TEXT NOT NULL,
+    role TEXT CHECK(role IN (
+        'lead_agency', 'press', 'digital', 'creative',
+        'oo_h', 'social', 'pr', 'media_buy'
+    )) NOT NULL,
+    is_primary BOOLEAN DEFAULT 0,
+    source TEXT CHECK(source IN (
+        'curated', 'press_release', 'playbill_credit', 'editorial_verification'
+    )) DEFAULT 'curated',
+    source_url TEXT,
+    start_date DATE,
+    end_date DATE,
+    confidence REAL DEFAULT 1.0 CHECK(confidence BETWEEN 0 AND 1),
+    ingested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    notes TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_marketing_credits_show ON marketing_credits(show_id, end_date);
+CREATE INDEX IF NOT EXISTS idx_marketing_credits_firm ON marketing_credits(firm_name);
+CREATE INDEX IF NOT EXISTS idx_marketing_credits_primary ON marketing_credits(show_id, is_primary);

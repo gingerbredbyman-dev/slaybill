@@ -1,0 +1,881 @@
+{
+  "_doc": "Staging data from firm_researcher run on 2026-04-26. Merge into shows.json after spot-check. Researched via tavily_search/extract (Perplexity API quota was exhausted at run time). Primary source: Playbill production pages and Playbill firm-listing pages (e.g. AKA, Polk & Co., DKC/O&M, The Press Room) — these contain Playbill's authoritative credit data. AKA-AOR confirmations are double-sourced where the AKA firm page itself lists the show and the show's production page lists AKA in the credits. Off-Broadway and coming-soon shows often have minimal public firm credits — those are noted as such.",
+  "generated_at": "2026-04-26T00:00:00Z",
+  "research_tool": "tavily_search + tavily_extract (perplexity quota exhausted)",
+  "shows": {
+    "harry-potter-and-the-cursed-child": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
+        }
+      ],
+      "_research_notes": "Playbill production page lists AKA as Advertising/Marketing/Digital and Boneau/Bryan-Brown as Press Representative. AKA Playbill firm page also confirms HPCC under its current roster. AKA-AOR double-confirmed across both sources."
+    },
+    "hamilton": {
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/new-broadway-ad-agency-rpm-hangs-shingle-with-hamilton-among-first-clients"
+        },
+        {
+          "firm": "The Press Room",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/the-press-room"
+        }
+      ],
+      "_research_notes": "RPM (founded by ex-SpotCo execs) launched with Hamilton as a flagship client per Playbill. The Press Room (Jim Byk + Shane Marshall Brown) lists Hamilton on its current roster."
+    },
+    "the-lion-king": {
+      "marketing_firms": [
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/shows/creative.php?showid=5600"
+        },
+        {
+          "firm": "Disney Theatrical Group (in-house marketing under Andrew Flatt)",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/broadways-the-lion-king-welcomes-return-of-cameron-pow-march-24"
+        }
+      ],
+      "_research_notes": "Press is Boneau/Bryan-Brown (BroadwayWorld creative team page). Disney Theatrical handles its own brand/marketing in-house — marked medium because no third-party AOR is publicly named. No AKA involvement found."
+    },
+    "moulin-rouge": {
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
+        }
+      ],
+      "_research_notes": "Playbill production credits list RPM as advertising and Boneau/Bryan-Brown (Adrian Bryan-Brown, Susanne Tighe, Heath Schwartz, Melissa Cohen) as press."
+    },
+    "every-brilliant-thing": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
+        },
+        {
+          "firm": "SINE Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits: Vivacity Media Group (press), AKA (advertising/marketing), SINE Digital (digital). AKA Playbill firm page confirms Every Brilliant Thing on its current roster. AKA-AOR double-confirmed."
+    },
+    "wicked": {
+      "marketing_firms": [
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/matt-upshaw-acquires-theatrical-advertising-agency-serino-coyne"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/wicked"
+        }
+      ],
+      "_research_notes": "Serino Coyne explicitly names Wicked among current clients in March 2026 Playbill article on Matt Upshaw acquisition. Polk & Co. lists Wicked on its team page (contacts: Tom D'Ambrosio, Nicolette Carcaldi, Colleen Dunn). Polk's Playbill firm page confirms representation through Apr 2024 — current rep continues per Polk site."
+    },
+    "chicago": {
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/new-broadway-ad-agency-rpm-hangs-shingle-with-hamilton-among-first-clients"
+        }
+      ],
+      "_research_notes": "RPM launch announcement listed Chicago among its initial clients alongside Hamilton. Press rep is historically The Pete Sanders Group/Helene Davis per older Playbill credits — current 2026 press rep not clearly published in recent sources. Marked medium pending direct credit confirmation."
+    },
+    "death-of-a-salesman": {
+      "marketing_firms": [
+        {
+          "firm": "ARTHOUSE",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-of-a-salesman-broadway-winter-garden-theatre-2026"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-of-a-salesman-broadway-winter-garden-theatre-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits ARTHOUSE as advertising agency and DKC/O&M (Rick Miramontez, Lee Abrahamian, Abby Kelley) as press."
+    },
+    "mj": {
+      "marketing_firms": [
+        {
+          "firm": "Situation Interactive",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/digital-agency-situation-interactive-launches-live-event-division"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/person/bailey-everett-press"
+        }
+      ],
+      "_research_notes": "MJ press handled by Boneau/Bryan-Brown agent Bailey Everett per Playbill press-agent profile. Lead AOR not surfaced cleanly in available 2026 sources — Serino Coyne historically credited at launch, but unconfirmed for 2026. Did not assign lead_agency without direct citation."
+    },
+    "giant": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/giant-broadway-music-box-theatre-2026"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/giant-broadway-music-box-theatre-2026"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/giant-broadway-music-box-theatre-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits: AKA (advertising & marketing), Polk & Co. (Matt Polk, Alex Seeley, Lilly Claar, Molly Higgins) as general press, Marathon Digital (digital content & social). AKA Playbill firm page confirms Giant on current roster. AKA-AOR double-confirmed."
+    },
+    "ragtime": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/article/Broadway-Womens-Fund-Announces-2026s-Women-to-Watch-on-Broadway-Full-List-20260315"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists Ragtime (Opened Oct 16, 2025) as a current AKA Advertising client. DKC/O&M's Marie Bshara (per BWW Industry feature) currently handles Ragtime. AKA-AOR double-confirmed."
+    },
+    "dog-day-afternoon": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/polk-co-vault-0000124121"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists Dog Day Afternoon (Opened Mar 30, 2026) as Advertising/Marketing. Polk & Co. firm page lists Dog Day Afternoon as General Press. AKA-AOR double-confirmed."
+    },
+    "cats-the-jellicle-ball": {
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/polkteam"
+        },
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/matt-upshaw-acquires-theatrical-advertising-agency-serino-coyne"
+        }
+      ],
+      "_research_notes": "Polk team page (Jessica Johnson) explicitly cites 'Bill Rauch & Zhailon Levingston's reimagined production Cats: The Jellicle Ball' on her current roster. Serino Coyne March 2026 article names Cats: The Jellicle Ball as a current client."
+    },
+    "chess": {
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+        }
+      ],
+      "_research_notes": "Playbill production page credits SpotCo as advertising and Polk & Co. (Matt Polk, Colgan McNeil, Nina Chae-Gordon, Alex Hudome) as press."
+    },
+    "aladdin": {
+      "marketing_firms": [
+        {
+          "firm": "Disney Theatrical Group (in-house marketing)",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://www.broadwayworld.com/people/Disney-Theatrical-Productions/"
+        }
+      ],
+      "_research_notes": "Disney handles in-house. Lion King and Aladdin both run under Disney Theatrical brand management. No third-party agency-of-record currently named publicly for the 2026 run. Press historically Boneau/Bryan-Brown for Disney shows but unconfirmed for current 2026 Aladdin run. Marked medium for in-house claim, no other firms listed."
+    },
+    "stranger-things-the-first-shadow": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/polkteam"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists Stranger Things: The First Shadow (Opened Apr 22, 2025) as Advertising & Marketing. Polk & Co. team bios cite Stranger Things across multiple agents (Colgan McNeil, Lilly Claar, Molly Higgins). AKA-AOR double-confirmed."
+    },
+    "proof": {
+      "marketing_firms": [
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        },
+        {
+          "firm": "ARTHOUSE",
+          "role": "creative",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits Serino Coyne, DKC/O&M (Rick Miramontez, Aaron Meier, Imani Punch, Elda Kahssay), ARTHOUSE, and Marathon Digital. Confirmed via March 2026 Serino Coyne client list as well."
+    },
+    "maybe-happy-ending": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        },
+        {
+          "firm": "Situation Interactive",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        },
+        {
+          "firm": "Super Awesome Friends",
+          "role": "social",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        }
+      ],
+      "_research_notes": "Playbill production page credits AKA (advertising), Polk & Co. (Matt Polk, Alana Karpoff, Chaliece Dillon, Nina Chae-Gordon) for press, Situation Interactive (digital), Super Awesome Friends (social). AKA Playbill firm page confirms Maybe Happy Ending on current roster. AKA-AOR double-confirmed."
+    },
+    "the-outsiders": {
+      "marketing_firms": [
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        },
+        {
+          "firm": "Situation Interactive",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        }
+      ],
+      "_research_notes": "Playbill production page credits Serino Coyne (advertising), Boneau/Bryan-Brown (Adrian Bryan-Brown, Heath Schwartz, Jordan Goins) for press, Situation Interactive, On the Rialto, and Marathon Digital. Confirmed via March 2026 Serino Coyne client list."
+    },
+    "the-great-gatsby": {
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
+        }
+      ],
+      "_research_notes": "Playbill production page credits SpotCo (advertising) and Vivacity Media Group (Leslie Papa, Whitney Holden Gore, Caitlin Brightman, Caroline Meredith) for press."
+    },
+    "hadestown": {
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+        }
+      ],
+      "_research_notes": "Playbill production page credits SpotCo (advertising), DKC/O&M (Aaron Meier, Sammy Wolfin, Rick Miramontez) press, Marathon Digital digital."
+    },
+    "just-in-time": {
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+        }
+      ],
+      "_research_notes": "Playbill production page credits SpotCo (advertising) and Polk & Co. (Matt Polk, Wayne Wolfe, Nina Chae-Gordon, Hannah Wallace) press."
+    },
+    "joe-turner-s-come-and-gone": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/joe-turners-come-and-gone-broadway-ethel-barrymore-theatre-2026"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/joe-turners-come-and-gone-broadway-ethel-barrymore-theatre-2026"
+        },
+        {
+          "firm": "Bond Theatrical Group",
+          "role": "media_buy",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/production/joe-turners-come-and-gone-broadway-ethel-barrymore-theatre-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits DKC/O&M (Rick Miramontez, Briana Sanchez, Morgan Zysman, Maddy Regrut) for press; AKA listed in advertising/marketing block. AKA Playbill firm page confirms Joe Turner's Come and Gone on its current roster. AKA-AOR double-confirmed."
+    },
+    "buena-vista-social-club": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/buena-vista-social-club-broadway-gerald-schoenfeld-theatre-2025"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/buena-vista-social-club-broadway-gerald-schoenfeld-theatre-2025"
+        }
+      ],
+      "_research_notes": "Playbill production page credits AKA (advertising) and Polk & Co. (Matt Polk, Jessica Johnson, Tom D'Ambrosio, Lilly Claar, Hannah Wallace) for press. AKA Playbill firm page confirms Buena Vista Social Club on current roster. AKA-AOR double-confirmed."
+    },
+    "titanique": {
+      "marketing_firms": [
+        {
+          "firm": "Situation Interactive",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/titanique-broadway-st-james-theatre-2026"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/titanique-broadway-st-james-theatre-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits Situation Interactive (advertising), Brand Nexus, Michele Groner, Our Time Influence, and Vivacity Media Group (Leslie Papa, Whitney Holden Gore, Caitlin Brightman, Danaley Silan) press."
+    },
+    "the-fear-of-13": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/article/Broadway-Womens-Fund-Announces-2026s-Women-to-Watch-on-Broadway-Full-List-20260315"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists The Fear of 13 (Opened Apr 15, 2026) as Advertising/Marketing. DKC/O&M's Marie Bshara cited (BWW Industry article) as currently handling The Fear of 13 starring Adrien Brody. AKA-AOR double-confirmed."
+    },
+    "death-becomes-her": {
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+        },
+        {
+          "firm": "Brand Nexus",
+          "role": "creative",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+        }
+      ],
+      "_research_notes": "Playbill production page credits RPM (advertising), Polk & Co. (Matt Polk, Wayne Wolfe, Alex Seeley, Nicolette Carcaldi) press, Brand Nexus, and Michele Groner."
+    },
+    "the-book-of-mormon": {
+      "marketing_firms": [
+        {
+          "firm": "The Press Room",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/the-press-room"
+        },
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/matt-upshaw-acquires-theatrical-advertising-agency-serino-coyne"
+        }
+      ],
+      "_research_notes": "The Press Room (Jim Byk + Shane Marshall Brown) lists The Book of Mormon as current. Lead AOR historically Serino Coyne — Serino Coyne 2026 client list does not explicitly cite Book of Mormon but the show has been long-tied to Serino Coyne; marked medium pending fresh confirmation."
+    },
+    "the-rocky-horror-show": {
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-rocky-horror-show-broadway-studio-54-2026"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-rocky-horror-show-broadway-studio-54-2026"
+        },
+        {
+          "firm": "Super Awesome Friends",
+          "role": "social",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-rocky-horror-show-broadway-studio-54-2026"
+        }
+      ],
+      "_research_notes": "Playbill production page credits SpotCo (Sandy Block, Jenna Craig, Austin Spero), Polk & Co. (Matt Polk, Alana Karpoff, Jessica Johnson, Chaliece Dillon, Molly Higgins) press, Super Awesome Friends (social). Roundabout Theatre Company in-house production."
+    },
+    "operation-mincemeat": {
+      "marketing_firms": [
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/broadways-operation-mincemeat-marquee-is-delayed-by-new-tariffs"
+        }
+      ],
+      "_research_notes": "DKC/O&M (Rick Miramontez) confirmed press on Operation Mincemeat per Playbill (and DKC/O&M Playbill firm page lists Operation Mincemeat opening Mar 20, 2025). Lead advertising agency not surfaced cleanly in available 2026 sources. Producer is Avalon in association with SpitLip."
+    },
+    "oh-mary": {
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
+        },
+        {
+          "firm": "grapevine pr",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
+        }
+      ],
+      "_research_notes": "Playbill production page credits RPM (advertising/Austin Spero) and grapevine pr (Molly Barnett, Chelsea Nachman, Amanda Marie Miller) for press."
+    },
+    "juliet": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
+        },
+        {
+          "firm": "grapevine pr",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
+        }
+      ],
+      "_research_notes": "Playbill production page credits AKA (Advertising, Marketing & Website) and grapevine pr (Molly Barnett, Chelsea Nachman, Sammy Wolfin) press. AKA Playbill firm page confirms & Juliet on current roster (also cited in AKA's content-creator program PR). AKA-AOR double-confirmed."
+    },
+    "schmigadoon": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists Schmigadoon! (Opened Apr 20, 2026) as Advertising & Marketing. Press rep not surfaced cleanly in available 2026 sources. AKA-AOR has only single-source (AKA's own Playbill listing) — but Playbill's firm directory is the authoritative source so confidence remains high."
+    },
+    "six": {
+      "marketing_firms": [
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/heath-schwartz-vault-0000011639"
+        }
+      ],
+      "_research_notes": "Boneau/Bryan-Brown agent Heath Schwartz lists SIX: The Musical (Apr 2026) on current credits. Lead AOR (likely AKA, historically) not surfaced cleanly in available 2026 sources — left unfilled to avoid fabrication."
+    },
+    "two-strangers-carry-a-cake-across-new-york": {
+      "marketing_firms": [
+        {
+          "firm": "The Pekoe Group",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
+        }
+      ],
+      "_research_notes": "Playbill production page credits The Pekoe Group as advertising and Vivacity Media Group (Leslie Papa, Whitney Holden Gore, Caitlin Brightman, Shea McGovern) press."
+    },
+    "beaches": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/beaches-a-new-musical-broadway-majestic-theatre-2026"
+        },
+        {
+          "firm": "Super Awesome Friends",
+          "role": "social",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/production/beaches-a-new-musical-broadway-majestic-theatre-2026"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists Beaches, A New Musical (Opened Apr 22, 2026) as Advertising & Marketing. Playbill production page confirms Vivacity Media Group press and Super Awesome Friends as creative marketing/digital/social. AKA-AOR double-confirmed."
+    },
+    "fallen-angels": {
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/polkteam"
+        }
+      ],
+      "_research_notes": "Polk & Co. team page (Alana Karpoff, Molly Higgins, Chaliece Dillon) all explicitly list Fallen Angels (Roundabout Theatre Company 2025-2026 season). Polk Playbill firm page confirms. Lead AOR (likely Serino Coyne via Roundabout in-house) not directly cited for Fallen Angels in available sources — left unfilled."
+    },
+    "becky-shaw": {
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/polk-co-vault-0000124121"
+        }
+      ],
+      "_research_notes": "AKA Playbill firm page lists Becky Shaw (Opened Apr 06, 2026) as Advertising. Polk & Co. firm page lists Becky Shaw as General Press. Second Stage production. AKA-AOR double-confirmed."
+    },
+    "the-balusters": {
+      "marketing_firms": [
+        {
+          "firm": "The Press Room",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/the-press-room"
+        }
+      ],
+      "_research_notes": "The Press Room (Jim Byk + Shane Marshall Brown) firm page lists The Balusters (Opened Apr 21, 2026). Manhattan Theatre Club production at Samuel J. Friedman Theatre. Lead AOR not surfaced — Manhattan Theatre Club's standard agency relationships not directly cited in available 2026 sources. The show is real and now open on Broadway, contradicting earlier hygiene concern."
+    },
+    "the-lost-boys": {
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/polk-co-vault-0000124121"
+        }
+      ],
+      "_research_notes": "Polk & Co. firm page lists The Lost Boys (Opens Apr 26, 2026) as General Press. Lead AOR not surfaced cleanly — directed by Michael Arden, produced by Warner Bros. Theatre Ventures and Patrick Wilson at the Palace Theatre. Likely SpotCo or AKA but unconfirmed in 2026 sources, so left unfilled."
+    },
+    "heathers-the-musical": {
+      "marketing_firms": [
+        {
+          "firm": "Situation Interactive",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/article/Video-HEATHERS-THE-MUSICAL-Announces-Third-Extension-Off-Broadway-20260211"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/leslie-baden-papa-will-launch-vivacity-media-group-representing-rock-of-ages-and-off-broadways-heathers-com-213358"
+        }
+      ],
+      "_research_notes": "BWW Heathers article credits Situation Interactive (advertising) and Marketing Director Scott A. Moore. Vivacity Media Group historically/currently represents Heathers per Playbill. Off-Broadway at New World Stages."
+    },
+    "the-play-that-goes-wrong": {
+      "marketing_firms": [],
+      "_research_notes": "Off-Broadway long run at New World Stages. No firm assignment surfaced in publicly available 2026 sources. Producers: J. Todd Harris/Catherine Schreiber team (historically). Did not assign firms without citation."
+    },
+    "little-shop-of-horrors": {
+      "marketing_firms": [],
+      "_research_notes": "Off-Broadway at Westside Theatre. Press rep historically Polk & Co. for the Michael Mayer revival but Polk firm page does NOT list Little Shop currently — production may have shifted. Did not assign firms without direct 2026 citation."
+    },
+    "mexodus": {
+      "marketing_firms": [],
+      "_research_notes": "Returned to NYC at Daryl Roth Theatre Spring 2026 after Audible's Minetta Lane Theatre run. No clear firm assignment in available 2026 sources. The Front Office Foundation has supported Mexodus development per Playbill."
+    },
+    "drunk-shakespeare": {
+      "marketing_firms": [],
+      "_research_notes": "Long-running immersive Off-Broadway at The Lounge. Self-produced by Three Day Hangover and Brass Jar Productions (Scott Griffin). No external press or marketing firm publicly named. Likely self-managed."
+    },
+    "perfect-crime": {
+      "marketing_firms": [
+        {
+          "firm": "3C Theatre Management & Consulting",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/industry/article/3C-Theatre-Management-Launches-With-New-Team-20251205"
+        }
+      ],
+      "_research_notes": "3C Theatre Management & Consulting is the in-house team behind Perfect Crime at The Theater Center — handles management, marketing, social, PR. Catherine Russell is general manager."
+    },
+    "hamlet": {
+      "marketing_firms": [],
+      "_research_notes": "Off-Broadway transfer at BAM Harvey Theatre (April 19 - May 17, 2026), partnership between BAM and London's National Theatre. BAM handles its own press/marketing in-house typically. No external firm publicly cited."
+    },
+    "kenrex": {
+      "marketing_firms": [],
+      "_research_notes": "American premiere at Lucille Lortel Theatre, April 15 - June 27, 2026. No external firm publicly named in available sources. Solo show by Jack Holden directed by Ed Stambollouian, transferred from London."
+    },
+    "the-receptionist": {
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/the-receptionist"
+        }
+      ],
+      "_research_notes": "Polk & Co. team page (Matt Polk, Tom D'Ambrosio, Nicolette Carcaldi, Colleen Dunn) handles press for The Receptionist (Second Stage Theater) at Pershing Square Signature Center. Lead AOR not surfaced — likely AKA via Second Stage's institutional AKA relationship but not directly cited for this title."
+    },
+    "indian-princesses": {
+      "marketing_firms": [],
+      "_research_notes": "Atlantic Theater Company / Rattlestick Theater co-production. Atlantic Theater handles in-house marketing typically. No external firm publicly named in available 2026 sources. Cast and creative team announced but firm credits not yet public."
+    },
+    "lights-out-nat-king-cole": {
+      "marketing_firms": [],
+      "_research_notes": "New York Theatre Workshop production (Off-Broadway). NYTW handles in-house marketing/press typically. The 2025 NYTW run was nominated at the 2026 Lortel Awards. No external commercial firm publicly named."
+    },
+    "new-born": {
+      "marketing_firms": [],
+      "_research_notes": "Audible Theater + TOGETHER co-production at Minetta Lane Theatre, May 8 - June 8, 2026. Audible handles in-house. No external firm publicly named in available 2026 sources."
+    }
+  }
+}

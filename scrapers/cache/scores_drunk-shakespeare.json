@@ -1,0 +1,27 @@
+{
+  "critic_scores": {
+    "NY Times": 72,
+    "Variety": 75,
+    "TheaterMania": 78
+  },
+  "critic_justifications": {
+    "NY Times": "Review acknowledged the novelty and entertainment value but found the Shakespeare element secondary to the gimmick.",
+    "Variety": "Praised the concept's originality and audience engagement while noting uneven execution depending on the intoxicated performer.",
+    "TheaterMania": "Positive reception of the show as a unique theatrical experience that successfully balances chaos with entertainment."
+  },
+  "audience_scores": {
+    "Show-Score": 82,
+    "Broadway.com": 79
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience ratings reflect strong enthusiasm for the novelty concept and interactive speakeasy experience.",
+    "Broadway.com": "Community ratings show solid approval for the show as a fun, unconventional night out despite mixed views on artistic merit."
+  },
+  "all_critics_in": false,
+  "confidence": "medium",
+  "_meta": {
+    "slug": "drunk-shakespeare",
+    "fetched_at": "2026-04-27T06:55:52.749721+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

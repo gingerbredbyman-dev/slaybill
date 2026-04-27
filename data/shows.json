@@ -18,7 +18,7 @@
       "cast": [
         {
           "name": "_note",
-          "role": "Current cast unverified \u2014 rotating leads as of April 2026"
+          "role": "Current cast unverified — rotating leads as of April 2026"
         }
       ],
       "creatives": [
@@ -54,6 +54,53 @@
         "telecharge": "https://www.telecharge.com/Broadway/Harry-Potter-and-the-Cursed-Child/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/harry-potter-and-the-cursed-child",
         "official": "https://www.harrypottertheplay.com/us/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
+        }
+      ],
+      "critic_score": 76,
+      "sentiment_score": 87,
+      "composite_score": 80.7,
+      "grade": "A-",
+      "score_label": "Great",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Associated Press"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.566500+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.566645+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -128,6 +175,55 @@
         "telecharge": "https://www.telecharge.com/Broadway/Hamilton/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/hamilton",
         "official": "https://hamiltonmusical.com/new-york/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/new-broadway-ad-agency-rpm-hangs-shingle-with-hamilton-among-first-clients"
+        },
+        {
+          "firm": "The Press Room",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/the-press-room"
+        }
+      ],
+      "critic_score": 92,
+      "sentiment_score": 93,
+      "composite_score": 92.5,
+      "grade": "A+",
+      "score_label": "Must See",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.566885+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.566888+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -188,6 +284,53 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Lion-King/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-lion-king",
         "official": "https://www.lionking.com/tickets"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/shows/creative.php?showid=5600"
+        },
+        {
+          "firm": "Disney Theatrical Group (in-house marketing under Andrew Flatt)",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/broadways-the-lion-king-welcomes-return-of-cameron-pow-march-24"
+        }
+      ],
+      "critic_score": 89,
+      "sentiment_score": 91,
+      "composite_score": 90.2,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Associated Press"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.567084+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.567086+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -246,6 +389,55 @@
         "telecharge": "https://www.telecharge.com/Broadway/Moulin-Rouge-The-Musical/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/moulin-rouge-the-musical",
         "official": "https://moulinrougemusical.com/new-york/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
+        }
+      ],
+      "critic_score": 85,
+      "sentiment_score": 90,
+      "composite_score": 87.2,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.567266+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.567268+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -286,7 +478,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 198.62,
       "capacity_pct": 100.0,
@@ -302,6 +494,47 @@
         "telecharge": "https://www.telecharge.com/Broadway/Every-Brilliant-Thing/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/every-brilliant-thing",
         "official": "https://everybrilliantthingbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
+        },
+        {
+          "firm": "SINE Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.567429+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -316,7 +549,7 @@
       "opening_date": "2003-10-30",
       "closing_date": null,
       "status": "live",
-      "synopsis": "Based on Gregory Maguire's novel, Wicked tells the untold story of the witches of Oz \u2014 popular Glinda and misunderstood Elphaba \u2014 before Dorothy arrives, exploring their unlikely friendship and the political forces that shape their destinies. Stephen Schwartz's score includes \"Defying Gravity\" and \"Popular.\"",
+      "synopsis": "Based on Gregory Maguire's novel, Wicked tells the untold story of the witches of Oz — popular Glinda and misunderstood Elphaba — before Dorothy arrives, exploring their unlikely friendship and the political forces that shape their destinies. Stephen Schwartz's score includes \"Defying Gravity\" and \"Popular.\"",
       "cast": [
         {
           "name": "_note",
@@ -360,6 +593,53 @@
         "telecharge": "https://www.telecharge.com/Broadway/Wicked/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/wicked",
         "official": "https://wickedthemusical.com/tickets/new-york/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/matt-upshaw-acquires-theatrical-advertising-agency-serino-coyne"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/wicked"
+        }
+      ],
+      "critic_score": 86,
+      "sentiment_score": 91,
+      "composite_score": 88.4,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Associated Press"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.567611+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.567613+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -425,6 +705,46 @@
         "telecharge": "https://www.telecharge.com/Broadway/Chicago-the-Musical/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/chicago",
         "official": "https://chicagothemusical.com/new-york/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/new-broadway-ad-agency-rpm-hangs-shingle-with-hamilton-among-first-clients"
+        }
+      ],
+      "critic_score": 85,
+      "sentiment_score": 88,
+      "composite_score": 86.5,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Associated Press"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.567784+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.567785+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -483,6 +803,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Death-of-a-Salesman-2026/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/death-of-a-salesman",
         "official": "https://deathofsalesmanbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "ARTHOUSE",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-of-a-salesman-broadway-winter-garden-theatre-2026"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-of-a-salesman-broadway-winter-garden-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.567937+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -537,6 +891,55 @@
         "telecharge": "https://www.telecharge.com/Broadway/MJ-The-Musical/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/mj-the-musical",
         "official": "https://mjthemusical.com/tickets/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Situation Interactive",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/digital-agency-situation-interactive-launches-live-event-division"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/person/bailey-everett-press"
+        }
+      ],
+      "critic_score": 74,
+      "sentiment_score": 86,
+      "composite_score": 79.3,
+      "grade": "B+",
+      "score_label": "Very Good",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.568101+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.568103+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -573,7 +976,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 175.73,
       "capacity_pct": 98.93,
@@ -589,6 +992,47 @@
         "telecharge": "https://www.telecharge.com/Broadway/Giant/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/giant",
         "official": "https://giantbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/giant-broadway-music-box-theatre-2026"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/giant-broadway-music-box-theatre-2026"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/giant-broadway-music-box-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.568252+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -603,7 +1047,7 @@
       "opening_date": "2025-10-16",
       "closing_date": "2026-06-14",
       "status": "live",
-      "synopsis": "Lincoln Center Theater's acclaimed revival of the Tony-winning 1998 musical based on E.L. Doctorow's novel weaves together three American families \u2014 Black, immigrant, and privileged white \u2014 at the turn of the 20th century as their lives collide against a backdrop of industrialism, inequality, and shifting social order. Lear deBessonet directs a luminous cast led by Joshua Henry.",
+      "synopsis": "Lincoln Center Theater's acclaimed revival of the Tony-winning 1998 musical based on E.L. Doctorow's novel weaves together three American families — Black, immigrant, and privileged white — at the turn of the 20th century as their lives collide against a backdrop of industrialism, inequality, and shifting social order. Lear deBessonet directs a luminous cast led by Joshua Henry.",
       "cast": [
         {
           "name": "Joshua Henry",
@@ -663,6 +1107,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Ragtime-2025/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/ragtime",
         "official": "https://www.ragtimeonbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/article/Broadway-Womens-Fund-Announces-2026s-Women-to-Watch-on-Broadway-Full-List-20260315"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.568449+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -699,7 +1177,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 109.74,
       "capacity_pct": 100.79,
@@ -715,6 +1193,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Dog-Day-Afternoon/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/dog-day-afternoon",
         "official": "https://dogdayafternoonbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/polk-co-vault-0000124121"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.568633+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -729,10 +1241,10 @@
       "opening_date": "2026-04-07",
       "closing_date": null,
       "status": "live",
-      "synopsis": "A radical reinvention of Andrew Lloyd Webber's Cats set within New York City's LGBTQ ballroom culture, this production transforms the Jellicle Ball into a voguing competition featuring house music remixes of the iconic score and runway-ready choreography by Omari Wiles. Andr\u00e9 De Shields leads the cast as Old Deuteronomy.",
+      "synopsis": "A radical reinvention of Andrew Lloyd Webber's Cats set within New York City's LGBTQ ballroom culture, this production transforms the Jellicle Ball into a voguing competition featuring house music remixes of the iconic score and runway-ready choreography by Omari Wiles. André De Shields leads the cast as Old Deuteronomy.",
       "cast": [
         {
-          "name": "Andr\u00e9 De Shields",
+          "name": "André De Shields",
           "role": "Old Deuteronomy"
         },
         {
@@ -775,7 +1287,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 113.73,
       "capacity_pct": 95.7,
@@ -791,6 +1303,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/CATS-The-Jellicle-Ball/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/cats-the-jellicle-ball",
         "official": "https://catsbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/polkteam"
+        },
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/matt-upshaw-acquires-theatrical-advertising-agency-serino-coyne"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.568761+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -805,7 +1351,7 @@
       "opening_date": "2025-11-16",
       "closing_date": null,
       "status": "live",
-      "synopsis": "The first Broadway production of Benny Andersson and Bj\u00f6rn Ulvaeus' Cold War chess musical, with a book by Richard Nelson, pits an American grandmaster against a Soviet champion in a championship match that becomes a proxy for superpower rivalry and love triangles. Aaron Tveit and Lea Michele lead the revival.",
+      "synopsis": "The first Broadway production of Benny Andersson and Björn Ulvaeus' Cold War chess musical, with a book by Richard Nelson, pits an American grandmaster against a Soviet champion in a championship match that becomes a proxy for superpower rivalry and love triangles. Aaron Tveit and Lea Michele lead the revival.",
       "cast": [
         {
           "name": "Aaron Tveit",
@@ -826,7 +1372,7 @@
           "role": "Music"
         },
         {
-          "name": "Bj\u00f6rn Ulvaeus",
+          "name": "Björn Ulvaeus",
           "role": "Music & Lyrics"
         },
         {
@@ -843,7 +1389,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 122.79,
       "capacity_pct": 70.79,
@@ -859,6 +1405,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Chess/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/chess",
         "official": "https://chessbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.568903+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -915,6 +1495,48 @@
         "telecharge": "https://www.telecharge.com/Broadway/Aladdin/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/aladdin",
         "official": "https://aladdinthemusical.com/tickets/new-york/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Disney Theatrical Group (in-house marketing)",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://www.broadwayworld.com/people/Disney-Theatrical-Productions/"
+        }
+      ],
+      "critic_score": 84,
+      "sentiment_score": 91,
+      "composite_score": 87.1,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.569095+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.569100+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -929,7 +1551,7 @@
       "opening_date": "2025-04-22",
       "closing_date": null,
       "status": "live",
-      "synopsis": "A prequel to the Netflix series set in Hawkins, Indiana in 1959, the Olivier Award-winning play reveals the origins of Henry Creel \u2014 who would become Vecna \u2014 and the secretive government experiments at Hawkins Lab that would set events in motion for the next 30 years. Stephen Daldry directs the Broadway transfer from London's West End.",
+      "synopsis": "A prequel to the Netflix series set in Hawkins, Indiana in 1959, the Olivier Award-winning play reveals the origins of Henry Creel — who would become Vecna — and the secretive government experiments at Hawkins Lab that would set events in motion for the next 30 years. Stephen Daldry directs the Broadway transfer from London's West End.",
       "cast": [
         {
           "name": "_note",
@@ -972,6 +1594,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Stranger-Things-The-First-Shadow/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/stranger-things-the-first-shadow",
         "official": "https://strangerthingsonstage.com/us"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/polkteam"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.569288+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1016,7 +1672,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 152,
       "capacity_pct": 99.9,
@@ -1032,6 +1688,54 @@
         "telecharge": "https://www.telecharge.com/Broadway/Proof-2026/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/proof",
         "official": "https://proofbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        },
+        {
+          "firm": "ARTHOUSE",
+          "role": "creative",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/proof-broadway-booth-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.569470+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1072,7 +1776,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 134.53,
       "capacity_pct": 89.14,
@@ -1088,6 +1792,69 @@
         "telecharge": "https://www.telecharge.com/Broadway/Maybe-Happy-Ending/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/maybe-happy-ending",
         "official": "https://maybehappyendingmusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        },
+        {
+          "firm": "Situation Interactive",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        },
+        {
+          "firm": "Super Awesome Friends",
+          "role": "social",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+        }
+      ],
+      "critic_score": 82,
+      "sentiment_score": 87,
+      "composite_score": 84.0,
+      "grade": "A-",
+      "score_label": "Great",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.569721+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.569723+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1146,6 +1913,69 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Outsiders/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-outsiders",
         "official": "https://theoutsidersmusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        },
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        },
+        {
+          "firm": "Situation Interactive",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+        }
+      ],
+      "critic_score": 85,
+      "sentiment_score": 90,
+      "composite_score": 87.2,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.569893+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.569895+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1214,6 +2044,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Great-Gatsby/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-great-gatsby",
         "official": "https://broadwaygatsby.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.570068+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1228,7 +2092,7 @@
       "opening_date": "2019-04-17",
       "closing_date": null,
       "status": "live",
-      "synopsis": "Ana\u00efs Mitchell's folk opera, winner of eight Tony Awards including Best Musical, weaves together the myths of Orpheus and Eurydice and Hades and Persephone in a Depression-era industrial underworld. Rachel Chavkin's production features a New Orleans jazz-inflected score and a rotating ensemble playing the Fates.",
+      "synopsis": "Anaïs Mitchell's folk opera, winner of eight Tony Awards including Best Musical, weaves together the myths of Orpheus and Eurydice and Hades and Persephone in a Depression-era industrial underworld. Rachel Chavkin's production features a New Orleans jazz-inflected score and a rotating ensemble playing the Fates.",
       "cast": [
         {
           "name": "_note",
@@ -1237,7 +2101,7 @@
       ],
       "creatives": [
         {
-          "name": "Ana\u00efs Mitchell",
+          "name": "Anaïs Mitchell",
           "role": "Book, Music & Lyrics"
         },
         {
@@ -1264,6 +2128,62 @@
         "telecharge": "https://www.telecharge.com/Broadway/Hadestown/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/hadestown",
         "official": "https://hadestown.com/tickets"
+      },
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+        },
+        {
+          "firm": "Marathon Digital",
+          "role": "digital",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+        }
+      ],
+      "critic_score": 88,
+      "sentiment_score": 91,
+      "composite_score": 89.0,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.570264+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.570266+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1278,7 +2198,7 @@
       "opening_date": "2025-04-26",
       "closing_date": "2026-09-06",
       "status": "live",
-      "synopsis": "An immersive jukebox musical bio of Bobby Darin, transforming Circle in the Square into an intimate nightclub where the singer's short, remarkable life \u2014 from teen idol to Oscar-nominated actor \u2014 plays out through his greatest hits including 'Mack the Knife' and 'Beyond the Sea.' Jeremy Jordan took over the lead role from Jonathan Groff on April 21, 2026.",
+      "synopsis": "An immersive jukebox musical bio of Bobby Darin, transforming Circle in the Square into an intimate nightclub where the singer's short, remarkable life — from teen idol to Oscar-nominated actor — plays out through his greatest hits including 'Mack the Knife' and 'Beyond the Sea.' Jeremy Jordan took over the lead role from Jonathan Groff on April 21, 2026.",
       "cast": [
         {
           "name": "Jeremy Jordan",
@@ -1335,6 +2255,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Just-in-Time/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/just-in-time",
         "official": "https://justintimebroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.570386+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1379,7 +2333,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 122.49,
       "capacity_pct": 80.66,
@@ -1395,6 +2349,47 @@
         "telecharge": "https://www.telecharge.com/Broadway/Joe-Turners-Come-and-Gone-2026/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/joe-turners-come-and-gone",
         "official": "https://joeturnerbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/joe-turners-come-and-gone-broadway-ethel-barrymore-theatre-2026"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/joe-turners-come-and-gone-broadway-ethel-barrymore-theatre-2026"
+        },
+        {
+          "firm": "Bond Theatrical Group",
+          "role": "media_buy",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/production/joe-turners-come-and-gone-broadway-ethel-barrymore-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.570514+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1416,7 +2411,7 @@
           "role": "Omara Portuondo"
         },
         {
-          "name": "Mel Sem\u00e9",
+          "name": "Mel Semé",
           "role": "Ibrahim Ferrer"
         },
         {
@@ -1425,7 +2420,7 @@
         },
         {
           "name": "Jainardo Batista Sterling",
-          "role": "Rub\u00e9n Gonz\u00e1lez"
+          "role": "Rubén González"
         }
       ],
       "creatives": [
@@ -1465,6 +2460,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Buena-Vista-Social-Club/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/buena-vista-social-club",
         "official": "https://buenavistamusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/buena-vista-social-club-broadway-gerald-schoenfeld-theatre-2025"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/buena-vista-social-club-broadway-gerald-schoenfeld-theatre-2025"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.570647+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1479,11 +2508,11 @@
       "opening_date": "2026-04-12",
       "closing_date": "2026-07-12",
       "status": "live",
-      "synopsis": "The smash Off-Broadway jukebox parody reimagines the sinking of the Titanic as told by C\u00e9line Dion herself, recharting the fate of Jack and Rose through the lens of Dion's greatest hits. Marla Mindelle reprises her Off-Broadway role alongside Jim Parsons and Deborah Cox in the Broadway transfer.",
+      "synopsis": "The smash Off-Broadway jukebox parody reimagines the sinking of the Titanic as told by Céline Dion herself, recharting the fate of Jack and Rose through the lens of Dion's greatest hits. Marla Mindelle reprises her Off-Broadway role alongside Jim Parsons and Deborah Cox in the Broadway transfer.",
       "cast": [
         {
           "name": "Marla Mindelle",
-          "role": "C\u00e9line Dion"
+          "role": "Céline Dion"
         },
         {
           "name": "Jim Parsons",
@@ -1512,12 +2541,12 @@
           "role": "Co-writer"
         },
         {
-          "name": "C\u00e9line Dion",
+          "name": "Céline Dion",
           "role": "Music (existing catalog)"
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 80.46,
       "capacity_pct": 86.81,
@@ -1533,6 +2562,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Titanique/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/titanique",
         "official": "https://titaniquemusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Situation Interactive",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/titanique-broadway-st-james-theatre-2026"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/titanique-broadway-st-james-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.570813+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1569,7 +2632,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 99.89,
       "capacity_pct": 88.01,
@@ -1585,6 +2648,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Fear-of-13/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-fear-of-13",
         "official": "https://thefearof13.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/article/Broadway-Womens-Fund-Announces-2026s-Women-to-Watch-on-Broadway-Full-List-20260315"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.571084+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1633,7 +2730,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 91.12,
       "capacity_pct": 69.08,
@@ -1649,6 +2746,57 @@
         "telecharge": "https://www.telecharge.com/Broadway/Death-Becomes-Her/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/death-becomes-her",
         "official": "https://deathbecomeshermusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+        },
+        {
+          "firm": "Brand Nexus",
+          "role": "creative",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+        }
+      ],
+      "critic_score": 77,
+      "sentiment_score": 84,
+      "composite_score": 80.4,
+      "grade": "A-",
+      "score_label": "Great",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "TheaterMania",
+        "Vulture"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.571199+00:00",
+      "scores_meta": {
+        "confidence": "medium",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1663,7 +2811,7 @@
       "opening_date": "2011-03-24",
       "closing_date": null,
       "status": "live",
-      "synopsis": "Trey Parker, Matt Stone, and Robert Lopez's satirical smash follows two naive Mormon missionaries \u2014 one overconfident, one anxious \u2014 sent to Uganda where their earnest attempts to spread the Gospel collide with the harsh realities of poverty and civil war. The 2011 Best Musical Tony winner remains one of Broadway's top-grossing shows.",
+      "synopsis": "Trey Parker, Matt Stone, and Robert Lopez's satirical smash follows two naive Mormon missionaries — one overconfident, one anxious — sent to Uganda where their earnest attempts to spread the Gospel collide with the harsh realities of poverty and civil war. The 2011 Best Musical Tony winner remains one of Broadway's top-grossing shows.",
       "cast": [
         {
           "name": "_note",
@@ -1702,6 +2850,53 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Book-of-Mormon/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-book-of-mormon",
         "official": "https://bookofmormonbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "The Press Room",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/the-press-room"
+        },
+        {
+          "firm": "Serino Coyne",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/article/matt-upshaw-acquires-theatrical-advertising-agency-serino-coyne"
+        }
+      ],
+      "critic_score": 85,
+      "sentiment_score": 88,
+      "composite_score": 86.6,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Associated Press"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.571335+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.571336+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1716,7 +2911,7 @@
       "opening_date": "2026-04-23",
       "closing_date": "2026-07-19",
       "status": "live",
-      "synopsis": "Richard O'Brien's 1973 rock 'n' roll horror musical follows Brad and Janet, stranded at the castle of Dr. Frank-N-Furter, a mad scientist transvestite who unveils his latest creation \u2014 the muscle-bound Rocky Horror. The third Broadway production features a star-studded cast led by Luke Evans as Frank-N-Furter and Rachel Dratch as the Narrator.",
+      "synopsis": "Richard O'Brien's 1973 rock 'n' roll horror musical follows Brad and Janet, stranded at the castle of Dr. Frank-N-Furter, a mad scientist transvestite who unveils his latest creation — the muscle-bound Rocky Horror. The third Broadway production features a star-studded cast led by Luke Evans as Frank-N-Furter and Rachel Dratch as the Narrator.",
       "cast": [
         {
           "name": "Luke Evans",
@@ -1743,7 +2938,7 @@
           "role": "Magenta"
         },
         {
-          "name": "Michaela Ja\u00e9 Rodriguez",
+          "name": "Michaela Jaé Rodriguez",
           "role": "Columbia"
         }
       ],
@@ -1774,6 +2969,47 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Rocky-Horror-Show-2026/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-rocky-horror-show",
         "official": "https://rockyhorrorbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "SpotCo",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-rocky-horror-show-broadway-studio-54-2026"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-rocky-horror-show-broadway-studio-54-2026"
+        },
+        {
+          "firm": "Super Awesome Friends",
+          "role": "social",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/the-rocky-horror-show-broadway-studio-54-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.571457+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1788,7 +3024,7 @@
       "opening_date": "2025-03-20",
       "closing_date": "2026-07-05",
       "status": "live",
-      "synopsis": "SpitLip's Olivier-nominated farcical retelling of the true WWII British intelligence operation, in which British officers planted false documents on a dead body to deceive the Nazis about the Allied invasion of Sicily. The five-person ensemble plays multiple roles \u2014 including a rotating cast of historical figures \u2014 in this celebrated transfer from London's West End.",
+      "synopsis": "SpitLip's Olivier-nominated farcical retelling of the true WWII British intelligence operation, in which British officers planted false documents on a dead body to deceive the Nazis about the Allied invasion of Sicily. The five-person ensemble plays multiple roles — including a rotating cast of historical figures — in this celebrated transfer from London's West End.",
       "cast": [
         {
           "name": "_note",
@@ -1806,7 +3042,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 125,
       "capacity_pct": 91.9,
@@ -1822,6 +3058,33 @@
         "telecharge": "https://www.telecharge.com/Broadway/Operation-Mincemeat/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/operation-mincemeat",
         "official": "https://operationbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "DKC/O&M",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/broadways-operation-mincemeat-marquee-is-delayed-by-new-tariffs"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.571672+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1858,7 +3121,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 115.0,
       "capacity_pct": 87.82,
@@ -1874,6 +3137,51 @@
         "telecharge": "https://www.telecharge.com/Broadway/Oh-Mary/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/oh-mary",
         "official": "https://ohmarybroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "RPM",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
+        },
+        {
+          "firm": "grapevine pr",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
+        }
+      ],
+      "critic_score": 83,
+      "sentiment_score": 85,
+      "composite_score": 84.2,
+      "grade": "A-",
+      "score_label": "Great",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Vulture"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.571818+00:00",
+      "scores_meta": {
+        "confidence": "medium",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1888,7 +3196,7 @@
       "opening_date": "2022-11-17",
       "closing_date": null,
       "status": "live",
-      "synopsis": "The irreverent jukebox musical imagines what Juliet's life would be like if she chose not to die for Romeo, following her adventures with new friends as she discovers herself and love on her own terms \u2014 set entirely to Max Martin's pop catalog including hits by Britney Spears, Katy Perry, and the Backstreet Boys.",
+      "synopsis": "The irreverent jukebox musical imagines what Juliet's life would be like if she chose not to die for Romeo, following her adventures with new friends as she discovers herself and love on her own terms — set entirely to Max Martin's pop catalog including hits by Britney Spears, Katy Perry, and the Backstreet Boys.",
       "cast": [
         {
           "name": "_note",
@@ -1932,6 +3240,55 @@
         "telecharge": "https://www.telecharge.com/Broadway/And-Juliet/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/and-juliet",
         "official": "https://andjulietmusical.com/tickets"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
+        },
+        {
+          "firm": "grapevine pr",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
+        }
+      ],
+      "critic_score": 74,
+      "sentiment_score": 87,
+      "composite_score": 79.8,
+      "grade": "B+",
+      "score_label": "Very Good",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.571961+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.571963+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -1946,7 +3303,7 @@
       "opening_date": "2026-04-20",
       "closing_date": "2026-09-06",
       "status": "live",
-      "synopsis": "Based on the first season of the Apple TV+ series, this original stage musical follows bickering couple Josh and Melissa who stumble into Schmigadoon, a magical town where everyone lives inside a Golden Age Broadway musical \u2014 and the only way out is to find true love. The show is a loving pastiche of the classic American musical form.",
+      "synopsis": "Based on the first season of the Apple TV+ series, this original stage musical follows bickering couple Josh and Melissa who stumble into Schmigadoon, a magical town where everyone lives inside a Golden Age Broadway musical — and the only way out is to find true love. The show is a loving pastiche of the classic American musical form.",
       "cast": [
         {
           "name": "Alex Brightman",
@@ -1976,7 +3333,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 76,
       "capacity_pct": 90.0,
@@ -1992,6 +3349,33 @@
         "telecharge": "https://www.telecharge.com/Broadway/Schmigadoon/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/schmigadoon",
         "official": "https://schmigadoonmusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572079+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -2062,6 +3446,48 @@
         "telecharge": "https://www.telecharge.com/Broadway/Six/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/six",
         "official": "https://sixonbroadway.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Boneau/Bryan-Brown",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/heath-schwartz-vault-0000011639"
+        }
+      ],
+      "critic_score": 86,
+      "sentiment_score": 90,
+      "composite_score": 87.9,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Time Out NY",
+        "TheaterMania",
+        "Vulture",
+        "Associated Press",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": "2026-04-27T06:57:02.572209+00:00",
+      "sentiment_updated_at": "2026-04-27T06:57:02.572210+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -2089,7 +3515,7 @@
           "role": "Book & Lyrics"
         },
         {
-          "name": "Dom Dor\u00e9",
+          "name": "Dom Doré",
           "role": "Music"
         },
         {
@@ -2098,7 +3524,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 91.84,
       "capacity_pct": 68.76,
@@ -2114,6 +3540,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Two-Strangers-Carry-a-Cake-Across-New-York/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/two-strangers-carry-a-cake-across-new-york",
         "official": "https://twostrangersmusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "The Pekoe Group",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572340+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -2158,7 +3618,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 60.05,
       "capacity_pct": 60.89,
@@ -2174,6 +3634,47 @@
         "telecharge": "https://www.telecharge.com/Broadway/Beaches-A-New-Musical/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/beaches",
         "official": "https://beachesmusical.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/production/beaches-a-new-musical-broadway-majestic-theatre-2026"
+        },
+        {
+          "firm": "Super Awesome Friends",
+          "role": "social",
+          "is_primary": false,
+          "_confidence": "medium",
+          "_source": "https://playbill.com/production/beaches-a-new-musical-broadway-majestic-theatre-2026"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572475+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2188,7 +3689,7 @@
       "opening_date": "2026-04-19",
       "closing_date": "2026-06-07",
       "status": "live",
-      "synopsis": "No\u00ebl Coward's 1925 comedy of manners follows two upper-class English wives \u2014 Julia and Jane \u2014 who discover they share a French ex-lover who may be on his way to visit. Confined together in a flat with too much champagne, they descend into witty, catty hysteria. Rose Byrne and Kelli O'Hara lead the Roundabout revival.",
+      "synopsis": "Noël Coward's 1925 comedy of manners follows two upper-class English wives — Julia and Jane — who discover they share a French ex-lover who may be on his way to visit. Confined together in a flat with too much champagne, they descend into witty, catty hysteria. Rose Byrne and Kelli O'Hara lead the Roundabout revival.",
       "cast": [
         {
           "name": "Rose Byrne",
@@ -2201,7 +3702,7 @@
       ],
       "creatives": [
         {
-          "name": "No\u00ebl Coward",
+          "name": "Noël Coward",
           "role": "Playwright"
         },
         {
@@ -2226,6 +3727,33 @@
         "telecharge": "https://www.telecharge.com/Broadway/Fallen-Angels-2026/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/fallen-angels",
         "official": "https://roundabouttheatre.org/shows/fallen-angels"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/polkteam"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572612+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2290,6 +3818,40 @@
         "telecharge": "https://www.telecharge.com/Broadway/Becky-Shaw/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/becky-shaw",
         "official": "https://2st.com/shows/becky-shaw"
+      },
+      "marketing_firms": [
+        {
+          "firm": "AKA NYC",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/aka-vault-0000115425"
+        },
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/polk-co-vault-0000124121"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572743+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2304,7 +3866,7 @@
       "opening_date": "2026-04-21",
       "closing_date": "2026-05-24",
       "status": "live",
-      "synopsis": "David Lindsay-Abaire's new play, produced by Manhattan Theatre Club, follows a neighborhood association thrown into raucous conflict over a proposal to install a stop sign on their peaceful block \u2014 a comedy that escalates from the mundane into a sharp examination of community, property, and the surprising viciousness of small-stakes disputes.",
+      "synopsis": "David Lindsay-Abaire's new play, produced by Manhattan Theatre Club, follows a neighborhood association thrown into raucous conflict over a proposal to install a stop sign on their peaceful block — a comedy that escalates from the mundane into a sharp examination of community, property, and the surprising viciousness of small-stakes disputes.",
       "cast": [
         {
           "name": "_note",
@@ -2338,6 +3900,33 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Balusters/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-balusters",
         "official": "https://manhattantheatreclub.com/shows/the-balusters"
+      },
+      "marketing_firms": [
+        {
+          "firm": "The Press Room",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/the-press-room"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572860+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2386,7 +3975,7 @@
         }
       ],
       "producers": [
-        "_note \u2014 producers not confirmed in reviewed sources"
+        "_note — producers not confirmed in reviewed sources"
       ],
       "avg_ticket_usd": 82.63,
       "capacity_pct": 87.99,
@@ -2402,7 +3991,16 @@
         "telecharge": "https://www.telecharge.com/Broadway/The-Lost-Boys/Overview",
         "todaytix": "https://www.todaytix.com/nyc/shows/the-lost-boys",
         "official": "https://lostboysmusical.com"
-      }
+      },
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/person/polk-co-vault-0000124121"
+        }
+      ]
     },
     {
       "slug": "heathers-the-musical",
@@ -2416,7 +4014,7 @@
       "opening_date": "2025-07-10",
       "closing_date": "2026-09-06",
       "status": "live",
-      "synopsis": "Outcast Veronica Sawyer is taken under the wing of the three Heathers, the most powerful clique at Westerberg High \u2014 until she falls for the dangerous outsider J.D. and their dark pact begins. Based on the 1988 cult film, this revival transferred from London's West End where it won the WhatsOnStage Award for Best Musical Revival.",
+      "synopsis": "Outcast Veronica Sawyer is taken under the wing of the three Heathers, the most powerful clique at Westerberg High — until she falls for the dangerous outsider J.D. and their dark pact begins. Based on the 1988 cult film, this revival transferred from London's West End where it won the WhatsOnStage Award for Best Musical Revival.",
       "cast": [
         {
           "name": "Kuhoo Verma",
@@ -2458,6 +4056,40 @@
       "ticket_links": {
         "todaytix": "https://www.todaytix.com/nyc/shows/heathers-the-musical",
         "official": "https://heathersthemusical.com/new-york/"
+      },
+      "marketing_firms": [
+        {
+          "firm": "Situation Interactive",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/article/Video-HEATHERS-THE-MUSICAL-Announces-Third-Extension-Off-Broadway-20260211"
+        },
+        {
+          "firm": "Vivacity Media Group",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://playbill.com/article/leslie-baden-papa-will-launch-vivacity-media-group-representing-rock-of-ages-and-off-broadways-heathers-com-213358"
+        }
+      ],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.572998+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": false,
+        "sentiment_warning": false
       }
     },
     {
@@ -2472,7 +4104,7 @@
       "opening_date": "2019-02-20",
       "closing_date": null,
       "status": "live",
-      "synopsis": "The accident-prone Cornley Polytechnic Drama Society attempts to stage a 1920s murder mystery, but everything that can go wrong does \u2014 sets collapse, props misbehave, actors miss cues, and the audience is pulled into the chaos. The Olivier Award-winning British farce has been running off-Broadway continuously since 2019.",
+      "synopsis": "The accident-prone Cornley Polytechnic Drama Society attempts to stage a 1920s murder mystery, but everything that can go wrong does — sets collapse, props misbehave, actors miss cues, and the audience is pulled into the chaos. The Olivier Award-winning British farce has been running off-Broadway continuously since 2019.",
       "cast": [
         {
           "name": "Brent Bateman",
@@ -2515,6 +4147,35 @@
       "ticket_links": {
         "todaytix": "https://www.todaytix.com/nyc/shows/14790-the-play-that-goes-wrong",
         "official": "https://broadwaygoeswrong.com"
+      },
+      "marketing_firms": [],
+      "critic_score": 78,
+      "sentiment_score": 87,
+      "composite_score": 82.1,
+      "grade": "A-",
+      "score_label": "Great",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "NY Post",
+        "TheaterMania",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.573043+00:00",
+      "scores_meta": {
+        "confidence": "medium",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2529,7 +4190,7 @@
       "opening_date": "2019-10-17",
       "closing_date": null,
       "status": "live",
-      "synopsis": "Set on Skid Row, meek floral assistant Seymour discovers a mysterious carnivorous plant he names Audrey II after his coworker crush. As the plant grows \u2014 fed on human blood \u2014 Seymour's life spirals into darkly comic horror. Alan Menken and Howard Ashman's cult 1982 musical returns to its off-Broadway roots in a long-running revival now in its seventh year.",
+      "synopsis": "Set on Skid Row, meek floral assistant Seymour discovers a mysterious carnivorous plant he names Audrey II after his coworker crush. As the plant grows — fed on human blood — Seymour's life spirals into darkly comic horror. Alan Menken and Howard Ashman's cult 1982 musical returns to its off-Broadway roots in a long-running revival now in its seventh year.",
       "cast": [
         {
           "name": "Jordan Fisher",
@@ -2580,6 +4241,35 @@
       "ticket_links": {
         "todaytix": "https://www.todaytix.com/nyc/shows/24608-little-shop-of-horrors",
         "official": "https://littleshopnyc.com"
+      },
+      "marketing_firms": [],
+      "critic_score": 84,
+      "sentiment_score": 88,
+      "composite_score": 85.6,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "NY Post",
+        "TheaterMania",
+        "BroadwayWorld"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.573083+00:00",
+      "scores_meta": {
+        "confidence": "high",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2594,7 +4284,7 @@
       "opening_date": "2026-03-06",
       "closing_date": "2026-06-14",
       "status": "live",
-      "synopsis": "Two performers \u2014 an escaped enslaved person and a Mexican war veteran \u2014 forge an unlikely bond as they travel the lesser-known Underground Railroad branch that ran south across the Rio Grande into Mexico. Written and performed live by Brian Quijada and Nygel D. Robinson using real-time loop technology to build the show's hip-hop and Afro-Latino soundscape.",
+      "synopsis": "Two performers — an escaped enslaved person and a Mexican war veteran — forge an unlikely bond as they travel the lesser-known Underground Railroad branch that ran south across the Rio Grande into Mexico. Written and performed live by Brian Quijada and Nygel D. Robinson using real-time loop technology to build the show's hip-hop and Afro-Latino soundscape.",
       "cast": [
         {
           "name": "Brian Quijada",
@@ -2607,7 +4297,7 @@
       ],
       "creatives": [
         {
-          "name": "David Mendiz\u00e1bal",
+          "name": "David Mendizábal",
           "role": "Director"
         },
         {
@@ -2630,6 +4320,25 @@
       ],
       "ticket_links": {
         "official": "https://www.darylroththeatre.com/production/mexodus/"
+      },
+      "marketing_firms": [],
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.573122+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2677,6 +4386,32 @@
       "ticket_links": {
         "todaytix": "https://www.todaytix.com/nyc/shows/152-drunk-shakespeare-nyc",
         "official": "https://www.drunkshakespeare.com/nyc"
+      },
+      "marketing_firms": [],
+      "critic_score": 74,
+      "sentiment_score": 81,
+      "composite_score": 77.2,
+      "grade": "B+",
+      "score_label": "Very Good",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "TheaterMania"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway.com"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.573161+00:00",
+      "scores_meta": {
+        "confidence": "medium",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2691,7 +4426,7 @@
       "opening_date": "1987-04-18",
       "closing_date": null,
       "status": "live",
-      "synopsis": "Psychiatrist Margaret Thorne Brent may \u2014 or may not \u2014 have murdered her wealthy husband. A detective's investigation into her sleek Connecticut home unravels into layers of psychological gamesmanship and possible conspiracy. The longest-running play in New York history, continuously performed since 1987 with the same lead actress.",
+      "synopsis": "Psychiatrist Margaret Thorne Brent may — or may not — have murdered her wealthy husband. A detective's investigation into her sleek Connecticut home unravels into layers of psychological gamesmanship and possible conspiracy. The longest-running play in New York history, continuously performed since 1987 with the same lead actress.",
       "cast": [
         {
           "name": "Catherine Russell",
@@ -2725,6 +4460,40 @@
       ],
       "ticket_links": {
         "official": "https://www.perfect-crime.com"
+      },
+      "marketing_firms": [
+        {
+          "firm": "3C Theatre Management & Consulting",
+          "role": "lead_agency",
+          "is_primary": true,
+          "_confidence": "high",
+          "_source": "https://www.broadwayworld.com/industry/article/3C-Theatre-Management-Launches-With-New-Team-20251205"
+        }
+      ],
+      "critic_score": 68,
+      "sentiment_score": 77,
+      "composite_score": 72.2,
+      "grade": "B",
+      "score_label": "Good",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "NY Post"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T06:57:02.573205+00:00",
+      "scores_meta": {
+        "confidence": "medium",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
       }
     },
     {
@@ -2767,7 +4536,8 @@
       ],
       "ticket_links": {
         "official": "https://www.bam.org/hamlet"
-      }
+      },
+      "marketing_firms": []
     },
     {
       "slug": "kenrex",
@@ -2781,7 +4551,7 @@
       "opening_date": "2026-04-26",
       "closing_date": "2026-06-27",
       "status": "in_previews",
-      "synopsis": "On July 10, 1981, in Skidmore, Missouri, a man was shot dead in broad daylight before 60 witnesses \u2014 all of whom later claimed to have seen nothing. Olivier Award winner Jack Holden plays over 30 characters in this one-man true-crime thriller, backed by a live Americana score performed on stage by composer John Patrick Elliott.",
+      "synopsis": "On July 10, 1981, in Skidmore, Missouri, a man was shot dead in broad daylight before 60 witnesses — all of whom later claimed to have seen nothing. Olivier Award winner Jack Holden plays over 30 characters in this one-man true-crime thriller, backed by a live Americana score performed on stage by composer John Patrick Elliott.",
       "cast": [
         {
           "name": "Jack Holden",
@@ -2819,7 +4589,8 @@
       "ticket_links": {
         "todaytix": "https://www.todaytix.com/nyc/shows/46159-kenrex-lortel",
         "official": "https://kenrextheplay.com"
-      }
+      },
+      "marketing_firms": []
     },
     {
       "slug": "the-receptionist",
@@ -2869,7 +4640,16 @@
       ],
       "ticket_links": {
         "official": "https://2st.com/shows/the-receptionist"
-      }
+      },
+      "marketing_firms": [
+        {
+          "firm": "Polk & Co.",
+          "role": "press",
+          "is_primary": false,
+          "_confidence": "high",
+          "_source": "https://www.polkandco.com/the-receptionist"
+        }
+      ]
     },
     {
       "slug": "indian-princesses",
@@ -2924,7 +4704,8 @@
       ],
       "ticket_links": {
         "official": "https://atlantictheater.org/productions/"
-      }
+      },
+      "marketing_firms": []
     },
     {
       "slug": "lights-out-nat-king-cole",
@@ -2938,10 +4719,10 @@
       "opening_date": "2026-05-19",
       "closing_date": "2026-06-29",
       "status": "coming_soon",
-      "synopsis": "Set on the final night of Nat 'King' Cole's NBC variety show \u2014 the first network TV program hosted by a Black American \u2014 Cole must decide whether to go quietly or follow Sammy Davis Jr.'s advice and go out with a bang. The play weaves Cole's hit songs into a story about art, race, and the cost of breaking through.",
+      "synopsis": "Set on the final night of Nat 'King' Cole's NBC variety show — the first network TV program hosted by a Black American — Cole must decide whether to go quietly or follow Sammy Davis Jr.'s advice and go out with a bang. The play weaves Cole's hit songs into a story about art, race, and the cost of breaking through.",
       "cast": [
         {
-          "name": "Dul\u00e9 Hill",
+          "name": "Dulé Hill",
           "role": "Nat 'King' Cole"
         },
         {
@@ -2974,7 +4755,8 @@
       ],
       "ticket_links": {
         "official": "https://www.nytw.org/show/lights-out-nat-king-cole/"
-      }
+      },
+      "marketing_firms": []
     },
     {
       "slug": "new-born",
@@ -2988,7 +4770,7 @@
       "opening_date": "2026-05-08",
       "closing_date": "2026-06-08",
       "status": "coming_soon",
-      "synopsis": "Three interlocking monologues \u2014 a tree surgeon falling in love, a young woman searching the prairie for a lost friend, and a new mother consumed by a celebrity obsession \u2014 whose smallest choices cascade across centuries and continents. Ella Hickson's play, presented at Audible's Minetta Lane in repertory.",
+      "synopsis": "Three interlocking monologues — a tree surgeon falling in love, a young woman searching the prairie for a lost friend, and a new mother consumed by a celebrity obsession — whose smallest choices cascade across centuries and continents. Ella Hickson's play, presented at Audible's Minetta Lane in repertory.",
       "cast": [
         {
           "name": "Hugh Jackman",
@@ -3029,7 +4811,8 @@
       ],
       "ticket_links": {
         "official": "https://www.broadway.com/shows/new-born/"
-      }
+      },
+      "marketing_firms": []
     }
   ]
 }

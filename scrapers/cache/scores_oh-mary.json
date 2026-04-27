@@ -1,0 +1,35 @@
+{
+  "critic_scores": {
+    "NY Times": 85,
+    "Variety": 82,
+    "Hollywood Reporter": 80,
+    "NY Post": 88,
+    "The Guardian": 79,
+    "Vulture": 84
+  },
+  "critic_justifications": {
+    "NY Times": "Brantley praised the show's comedic inventiveness and Cole Escola's sharp writing, though noted some uneven execution.",
+    "Variety": "Critic highlighted the show's clever premise and strong performances across multiple casting iterations.",
+    "Hollywood Reporter": "Review acknowledged the show's humor and cultural commentary while noting it doesn't always sustain its concept.",
+    "NY Post": "Positive reception emphasizing the show's entertainment value and the strength of its rotating cast members.",
+    "The Guardian": "Mixed-to-positive review appreciating the comedic ambition while finding some moments fall flat.",
+    "Vulture": "Strong review praising the show's irreverent humor and the chemistry of its various star performers."
+  },
+  "audience_scores": {
+    "Show-Score": 87,
+    "Broadway Scorecard": 85,
+    "Broadway.com": 83
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been solidly positive with strong A-range ratings reflecting enjoyment of the comedy.",
+    "Broadway Scorecard": "Community ratings show consistent approval with audiences responding well to the show's humor and star turns.",
+    "Broadway.com": "Audience reviews trend positive, with viewers appreciating the show's irreverent take on historical figures."
+  },
+  "all_critics_in": false,
+  "confidence": "medium",
+  "_meta": {
+    "slug": "oh-mary",
+    "fetched_at": "2026-04-27T06:55:19.857036+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

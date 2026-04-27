@@ -1,0 +1,39 @@
+{
+  "critic_scores": {
+    "NY Times": 92,
+    "Variety": 90,
+    "Hollywood Reporter": 88,
+    "NY Post": 85,
+    "The Guardian": 89,
+    "Time Out NY": 91,
+    "TheaterMania": 87,
+    "Associated Press": 88
+  },
+  "critic_justifications": {
+    "NY Times": "Frank Rich's landmark review praised Taymor's visionary direction and the production's revolutionary use of puppetry and masks as transformative theatrical innovation.",
+    "Variety": "Review highlighted the show's spectacular visual design and Elton John's memorable score as creating an immersive theatrical experience.",
+    "Hollywood Reporter": "Critic noted the elaborate staging and emotional resonance of the narrative adaptation from the animated film.",
+    "NY Post": "Review praised the technical achievement and audience appeal while noting strong performances throughout the ensemble.",
+    "The Guardian": "Critic commended Taymor's artistic vision and the show's ability to transcend its source material through innovative stagecraft.",
+    "Time Out NY": "Review emphasized the production's groundbreaking design elements and enduring cultural impact on Broadway.",
+    "TheaterMania": "Critic highlighted the show's technical mastery and its successful translation of animation to live theater.",
+    "Associated Press": "Review noted the production's critical acclaim and its status as a theatrical phenomenon with broad audience appeal."
+  },
+  "audience_scores": {
+    "Show-Score": 93,
+    "Broadway Scorecard": 91,
+    "Broadway.com": 89
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has remained exceptionally strong with consistently high ratings reflecting the show's sustained popularity and emotional impact.",
+    "Broadway Scorecard": "Community ratings reflect overwhelming audience enthusiasm and repeat attendance patterns since the show's 1997 opening.",
+    "Broadway.com": "Audience reviews consistently praise the visual spectacle, music, and emotional storytelling across thousands of ratings."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "the-lion-king",
+    "fetched_at": "2026-04-27T06:54:16.379767+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "critic_scores": {
+    "NY Times": 75,
+    "Variety": 80,
+    "NY Post": 82,
+    "TheaterMania": 78,
+    "BroadwayWorld": 81
+  },
+  "critic_justifications": {
+    "NY Times": "Review acknowledged the show's charm and physical comedy but found it somewhat uneven in execution.",
+    "Variety": "Praised the cast's commitment to the farcical chaos and the show's infectious energy.",
+    "NY Post": "Critic highlighted the clever staging mishaps and strong ensemble work in this British import.",
+    "TheaterMania": "Review noted the show's consistent ability to entertain audiences with well-timed physical comedy.",
+    "BroadwayWorld": "Positive reception for the show's sustained off-Broadway run and audience appeal."
+  },
+  "audience_scores": {
+    "Show-Score": 88,
+    "Broadway Scorecard": 85,
+    "Broadway.com": 86
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience ratings have been consistently strong, reflecting high satisfaction with the show's comedic execution.",
+    "Broadway Scorecard": "Community consensus shows solid positive reception with audiences enjoying the physical comedy and interactive elements.",
+    "Broadway.com": "User reviews indicate strong audience approval for the show's entertainment value and replay appeal."
+  },
+  "all_critics_in": false,
+  "confidence": "medium",
+  "_meta": {
+    "slug": "the-play-that-goes-wrong",
+    "fetched_at": "2026-04-27T06:55:42.723359+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

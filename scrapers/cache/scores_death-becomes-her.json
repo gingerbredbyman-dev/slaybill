@@ -1,0 +1,33 @@
+{
+  "critic_scores": {
+    "NY Times": 75,
+    "Variety": 78,
+    "Hollywood Reporter": 76,
+    "NY Post": 82,
+    "TheaterMania": 80,
+    "Vulture": 74
+  },
+  "critic_justifications": {
+    "NY Times": "Reviewer acknowledged the show's visual spectacle and practical effects while noting uneven pacing and book issues.",
+    "Variety": "Praised the performances of Hilty and Simard and the ambitious staging, though found the narrative occasionally clunky.",
+    "Hollywood Reporter": "Highlighted the impressive technical execution and star chemistry while noting the script could be sharper.",
+    "NY Post": "Gave a favorable review emphasizing the fun, campy energy and strong lead performances.",
+    "TheaterMania": "Appreciated the audacious practical effects and comedic commitment from the cast despite some structural weaknesses.",
+    "Vulture": "Noted the show's entertaining spectacle and star power but found the adaptation didn't fully capture the film's satirical edge."
+  },
+  "audience_scores": {
+    "Show-Score": 85,
+    "Broadway Scorecard": 83
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience ratings have been solidly positive, with viewers praising the visual effects and performances.",
+    "Broadway Scorecard": "Audience consensus has been favorable, with strong marks for entertainment value and technical execution."
+  },
+  "all_critics_in": false,
+  "confidence": "medium",
+  "_meta": {
+    "slug": "death-becomes-her",
+    "fetched_at": "2026-04-27T06:55:10.175568+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

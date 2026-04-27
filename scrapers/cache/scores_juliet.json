@@ -1,0 +1,43 @@
+{
+  "critic_scores": {
+    "NY Times": 72,
+    "Variety": 75,
+    "Hollywood Reporter": 73,
+    "NY Post": 78,
+    "The Guardian": 70,
+    "Time Out NY": 76,
+    "TheaterMania": 74,
+    "Vulture": 77,
+    "Associated Press": 75,
+    "BroadwayWorld": 76
+  },
+  "critic_justifications": {
+    "NY Times": "Brantley found it charming but somewhat uneven, praising its energy while noting structural issues.",
+    "Variety": "Reviewer appreciated the jukebox concept and Max Martin catalog but felt the narrative was thin.",
+    "Hollywood Reporter": "Mixed review acknowledging the show's fun spirit and appeal to younger audiences despite thin plot.",
+    "NY Post": "Positive reception for its irreverent humor and strong performances, though some found it overstuffed.",
+    "The Guardian": "Critic noted the show's infectious energy but questioned whether the concept fully justified the runtime.",
+    "Time Out NY": "Favorable review praising the cast's commitment and the clever use of pop hits to tell Juliet's story.",
+    "TheaterMania": "Reviewer found it entertaining and well-executed, though acknowledged it won't appeal to all tastes.",
+    "Vulture": "Positive take on the show's feminist reimagining and strong ensemble work, with minor reservations about pacing.",
+    "Associated Press": "Upbeat review highlighting the show's fun energy and strong vocal performances from the cast.",
+    "BroadwayWorld": "Generally positive reception noting the show's appeal to pop music fans and younger demographics."
+  },
+  "audience_scores": {
+    "Show-Score": 88,
+    "Broadway Scorecard": 85,
+    "Broadway.com": 86
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with A-/A range ratings, particularly among younger theatergoers.",
+    "Broadway Scorecard": "Community ratings show solid approval with audiences enjoying the pop music integration and Juliet's agency.",
+    "Broadway.com": "Audience reviews reflect strong enthusiasm for the show's energy, humor, and contemporary pop soundtrack."
+  },
+  "all_critics_in": true,
+  "confidence": "high",
+  "_meta": {
+    "slug": "juliet",
+    "fetched_at": "2026-04-27T06:55:26.168650+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}
