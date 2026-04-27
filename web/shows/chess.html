@@ -426,8 +426,57 @@
    * secondaries below in a chip grid. Mirrors the homepage chip styling. */
   .firms-panel {
     grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
   }
+  @media (max-width: 720px) { .firms-panel { grid-template-columns: 1fr; } }
   .firms-panel .panel { padding: 22px 22px 18px; }
+
+  /* Socials panel — icon row that taps out to each show's social channels.
+   * Holographic gradient backdrop on each icon, hover-lift + brightening. */
+  .socials-panel { container-type: inline-size; }
+  .socials-grid {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .socials-grid .social-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    border: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
+    background: color-mix(in oklab, var(--surface) 60%, transparent);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                border-color 200ms ease,
+                background 200ms ease,
+                box-shadow 200ms ease;
+  }
+  .socials-grid .social-link:hover, .socials-grid .social-link:focus-visible {
+    transform: translateY(-2px) scale(1.04);
+    border-color: color-mix(in oklab, var(--ink) 30%, transparent);
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+    box-shadow: 0 8px 18px -8px oklch(0% 0 0 / 0.45);
+    outline: none;
+  }
+  /* Per-platform brand-tint on hover */
+  .socials-grid .social-link[data-platform="instagram"]:hover { background: linear-gradient(135deg, #f09433 0%, #e6683c 30%, #dc2743 50%, #cc2366 70%, #bc1888 100%); color: #fff; border-color: transparent; }
+  .socials-grid .social-link[data-platform="facebook"]:hover { background: #1877f2; color: #fff; border-color: transparent; }
+  .socials-grid .social-link[data-platform="x"]:hover { background: #000; color: #fff; border-color: #fff; }
+  .socials-grid .social-link[data-platform="threads"]:hover { background: #000; color: #fff; border-color: #fff; }
+  .socials-grid .social-link[data-platform="tiktok"]:hover { background: #000; color: #fff; border-color: transparent; box-shadow: -3px -3px 0 #25f4ee, 3px 3px 0 #fe2c55; }
+  .socials-grid .social-link svg {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+    fill: currentColor;
+  }
+  .socials-grid .empty {
+    color: var(--ink-muted);
+    font-style: italic;
+    font-size: 13px;
+    padding: 8px 0;
+  }
   .firms-panel .primary-row {
     display: flex;
     align-items: center;
@@ -849,6 +898,10 @@
         <div class="firm-row is-aor"><span class="firm-name">SpotCo</span><span class="firm-role">Lead Agency · AOR</span></div>
         <div class="firm-row"><span class="firm-name">Polk &amp; Co.</span><span class="firm-role">Press</span></div>
       </div>
+    </div>
+    <div class="panel socials-panel">
+      <div class="label">Follow</div>
+      <div class="socials-grid"><div class="empty">No social channels tracked yet.</div></div>
     </div>
   </section>
 

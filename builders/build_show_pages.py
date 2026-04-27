@@ -289,6 +289,43 @@ def _firms_markup(raw_firms):
     return "\n      ".join(blocks)
 
 
+SOCIAL_PLATFORMS = [
+    ("instagram", "Instagram"),
+    ("tiktok",    "TikTok"),
+    ("x",         "X (Twitter)"),
+    ("threads",   "Threads"),
+    ("facebook",  "Facebook"),
+]
+SOCIAL_ICONS = {
+    "instagram": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>',
+    "tiktok":    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.6 20.1a6.34 6.34 0 0 0 10.86-4.43V8.62a8.16 8.16 0 0 0 4.77 1.52V6.69h-1.64z"/></svg>',
+    "x":         '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+    "threads":   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.74-1.757-.503-.585-1.281-.882-2.312-.89h-.024c-.806 0-1.901.218-2.6 1.247L7.4 7.156c.939-1.382 2.466-2.143 4.302-2.143h.034c3.06.022 4.881 1.882 5.063 5.122.103.043.205.087.305.132 1.4.654 2.426 1.65 2.967 2.879.755 1.706.825 4.486-1.435 6.69-1.726 1.687-3.82 2.47-6.79 2.494v-.01z"/></svg>',
+    "facebook":  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
+}
+
+
+def _socials_markup(socials):
+    """Render social channels grid for a show. socials is a dict like
+    {instagram: 'https://instagram.com/...', tiktok: '...', etc.}"""
+    if not socials:
+        return '<div class="socials-grid"><div class="empty">No social channels tracked yet.</div></div>'
+    out = ['<div class="socials-grid">']
+    for key, label in SOCIAL_PLATFORMS:
+        url = socials.get(key)
+        if not url:
+            continue
+        icon = SOCIAL_ICONS[key]
+        out.append(
+            f'<a class="social-link" href="{html.escape(url)}" target="_blank" rel="noopener" '
+            f'data-platform="{key}" aria-label="{html.escape(label)}" title="{html.escape(label)}">{icon}</a>'
+        )
+    out.append('</div>')
+    if len(out) == 2:  # only opening + closing div = no actual links
+        return '<div class="socials-grid"><div class="empty">No social channels tracked yet.</div></div>'
+    return "\n".join(out)
+
+
 def _build_per_outlet_table(slug: str) -> str:
     """Render the per-outlet score table from the LLM aggregator cache.
     Returns HTML for a 2-col grid: critics left, audience right.
@@ -410,6 +447,7 @@ def build_one(show, template):
         "{{CAPACITY_CLASS}}": cap_class,
         "{{TICKET_ROWS}}": _ticket_rows(show.get("ticket_links", {})),
         "{{FIRMS_MARKUP}}": _firms_markup(show.get("marketing_firms", [])),
+        "{{SOCIALS_MARKUP}}": _socials_markup(show.get("socials", {})),
         "{{CRITIC_SCORE}}": str(critic) if critic is not None else "—",
         "{{CRITIC_CLASS}}": "" if critic is not None else "pending",
         "{{CRITIC_NOTE}}": f"{crit_count} critic outlets" if critic is not None else "Aggregation not yet available",

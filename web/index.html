@@ -396,34 +396,7 @@
   /* Hide section-nav while the tier-chip is visible (top-left) — they'd compete */
   body.scrolled-past-cover .tier-chip { opacity: 0; pointer-events: none; }
 
-  /* Hover-to-preview synopsis overlay on Live show cards */
-  .show-card .preview-overlay {
-    position: absolute;
-    inset: auto 8px 8px 8px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    background: color-mix(in oklch, oklch(8% 0.01 270) 85%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid color-mix(in oklch, var(--cream) 18%, transparent);
-    color: var(--cream);
-    font-family: var(--font-ui);
-    font-size: 11px; line-height: 1.5;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 200ms ease, transform 200ms ease;
-    pointer-events: none;
-    z-index: 5;
-    max-height: 40%;
-    overflow: hidden;
-    -webkit-line-clamp: 4;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-  }
-  .show-card:hover .preview-overlay {
-    opacity: 1; transform: translateY(0);
-    transition-delay: 350ms;
-  }
+  /* (Hover-to-preview overlay removed — synopsis lives on Tier 2 only.) */
 
   /* AKA NYC trademark-style mark — sits inline next to SLAYBILL like a TM
    * superscript. Black ink (CSS filter forces all-black so the logo reads as
@@ -2056,14 +2029,8 @@ function makeCard(show) {
   scores.appendChild(cSpan);
   scores.appendChild(aSpan);
 
-  // Hover-preview overlay (synopsis snippet). Renders only if synopsis exists.
-  if (show.synopsis) {
-    const preview = document.createElement('div');
-    preview.className = 'preview-overlay';
-    preview.setAttribute('aria-hidden', 'true');
-    preview.textContent = show.synopsis;
-    a.appendChild(preview);
-  }
+  // (Hover-preview overlay removed per feedback — Tier 2 show pages already
+   // surface the synopsis; Tier 1 thumbnails should stay clean.)
 
   // Flag icon — weekly gross < $499K OR sentiment < 60%. Tooltip explains both.
   const flags = show.flags || {};

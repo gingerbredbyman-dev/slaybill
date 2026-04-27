@@ -426,8 +426,57 @@
    * secondaries below in a chip grid. Mirrors the homepage chip styling. */
   .firms-panel {
     grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
   }
+  @media (max-width: 720px) { .firms-panel { grid-template-columns: 1fr; } }
   .firms-panel .panel { padding: 22px 22px 18px; }
+
+  /* Socials panel — icon row that taps out to each show's social channels.
+   * Holographic gradient backdrop on each icon, hover-lift + brightening. */
+  .socials-panel { container-type: inline-size; }
+  .socials-grid {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .socials-grid .social-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    border: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
+    background: color-mix(in oklab, var(--surface) 60%, transparent);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                border-color 200ms ease,
+                background 200ms ease,
+                box-shadow 200ms ease;
+  }
+  .socials-grid .social-link:hover, .socials-grid .social-link:focus-visible {
+    transform: translateY(-2px) scale(1.04);
+    border-color: color-mix(in oklab, var(--ink) 30%, transparent);
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+    box-shadow: 0 8px 18px -8px oklch(0% 0 0 / 0.45);
+    outline: none;
+  }
+  /* Per-platform brand-tint on hover */
+  .socials-grid .social-link[data-platform="instagram"]:hover { background: linear-gradient(135deg, #f09433 0%, #e6683c 30%, #dc2743 50%, #cc2366 70%, #bc1888 100%); color: #fff; border-color: transparent; }
+  .socials-grid .social-link[data-platform="facebook"]:hover { background: #1877f2; color: #fff; border-color: transparent; }
+  .socials-grid .social-link[data-platform="x"]:hover { background: #000; color: #fff; border-color: #fff; }
+  .socials-grid .social-link[data-platform="threads"]:hover { background: #000; color: #fff; border-color: #fff; }
+  .socials-grid .social-link[data-platform="tiktok"]:hover { background: #000; color: #fff; border-color: transparent; box-shadow: -3px -3px 0 #25f4ee, 3px 3px 0 #fe2c55; }
+  .socials-grid .social-link svg {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+    fill: currentColor;
+  }
+  .socials-grid .empty {
+    color: var(--ink-muted);
+    font-style: italic;
+    font-size: 13px;
+    padding: 8px 0;
+  }
   .firms-panel .primary-row {
     display: flex;
     align-items: center;
@@ -864,6 +913,13 @@
     <div class="panel">
       <div class="label">Marketing</div>
       <div class="empty">No marketing firms tracked yet for this show.</div>
+    </div>
+    <div class="panel socials-panel">
+      <div class="label">Follow</div>
+      <div class="socials-grid">
+<a class="social-link" href="https://www.instagram.com/littleshopnyc" target="_blank" rel="noopener" data-platform="instagram" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+<a class="social-link" href="https://www.tiktok.com/@littleshopnyc" target="_blank" rel="noopener" data-platform="tiktok" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.6 20.1a6.34 6.34 0 0 0 10.86-4.43V8.62a8.16 8.16 0 0 0 4.77 1.52V6.69h-1.64z"/></svg></a>
+</div>
     </div>
   </section>
 
