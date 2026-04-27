@@ -200,11 +200,12 @@
     margin-top: -30vmin;
     margin-left: -30vmin;
     border-radius: 50%;
-    filter: blur(14px);
+    filter: blur(8px);
     mix-blend-mode: overlay;
     opacity: 0;
-    will-change: top, left, opacity;
-    transition: top 380ms cubic-bezier(0.25, 0.1, 0.25, 1), left 380ms cubic-bezier(0.25, 0.1, 0.25, 1), opacity 600ms ease-out;
+    /* No will-change — was forcing a permanent compositor layer for static
+     * elements after intro completed. Only used during the keyframe sweep. */
+    transition: opacity 600ms ease-out;
   }
   /* KEY light — larger, warmer, positioned upper-left. Rakes across to land
    * on the SLAYBILL letterforms (Y ~28% of cover). */
@@ -245,13 +246,11 @@
   .cover.intro-running .stage-spot.spot-1 { animation: spot-key-rake  3.0s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s 1 forwards; }
   .cover.intro-running .stage-spot.spot-2 { animation: spot-fill-rake 3.0s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s 1 forwards; }
 
-  /* RESTING: lights hold at the title position, breathe slightly. */
-  .cover.intro-finished .stage-spot.spot-1 { opacity: 1; --sx: 42%; --sy: 28%; animation: light-breathe 9s ease-in-out infinite; }
-  .cover.intro-finished .stage-spot.spot-2 { opacity: 0.85; --sx: 62%; --sy: 30%; animation: light-breathe 11s ease-in-out infinite reverse; animation-delay: 2s; }
-  @keyframes light-breathe {
-    0%, 100% { transform: scale(1);    filter: blur(14px); }
-    50%      { transform: scale(1.05); filter: blur(11px); }
-  }
+  /* RESTING: lights hold at the title position. No continuous animation —
+   * the prior 'breathe' loop animated `filter: blur()` on every frame which
+   * was a paint+layout hit. Static now. */
+  .cover.intro-finished .stage-spot.spot-1 { opacity: 1; --sx: 42%; --sy: 28%; }
+  .cover.intro-finished .stage-spot.spot-2 { opacity: 0.85; --sx: 62%; --sy: 30%; }
   @media (prefers-reduced-motion: reduce) {
     .stage-scrim { opacity: 1 !important; transition: none !important; }
     .stage-spot.spot-1 { opacity: 1 !important; --sx: 42% !important; --sy: 28% !important; animation: none !important; }
@@ -360,8 +359,8 @@
     padding: 6px;
     border-radius: 999px;
     background: color-mix(in oklch, oklch(8% 0.005 270) 70%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid color-mix(in oklch, var(--cream) 12%, transparent);
     opacity: 0;
     pointer-events: none;
@@ -1241,20 +1240,20 @@
   .bucket[data-theme="live"] .grid {
     padding: 38px 4px;
   }
-  .bucket[data-theme="live"] > .marquee-bulbs-top    { top: 64px; }
-  .bucket[data-theme="live"] > .marquee-bulbs-bottom { bottom: 18px; }
+  /* Bulb strips sit OUTSIDE the bucket frame so they never cover the
+   * gradient header. Top strip floats above the bucket, bottom strip below. */
+  .bucket[data-theme="live"] > .marquee-bulbs-top    { top: -11px; }
+  .bucket[data-theme="live"] > .marquee-bulbs-bottom { bottom: -11px; }
+  /* Allow bulbs to render outside the bucket overflow */
+  .bucket[data-theme="live"] { overflow: visible; }
 
   .ob-row { position: relative; padding-bottom: 22px; }
   .ob-row > .marquee-bulbs-top    { top: 56px; }
   .ob-row > .marquee-bulbs-bottom { bottom: 6px; }
 
-  /* Each bulb: outer glass orb + inner filament glow. Animatable via custom
-   * properties so we can stagger per-bulb. Size scales with --bulb-size,
-   * which is set per-section: Live Broadway gets LARGE bulbs (focus surface),
-   * Marquee/Off-Broadway get smaller. */
-  @property --bulb-glow {
-    syntax: '<number>'; inherits: false; initial-value: 1;
-  }
+  /* Bulb: glass orb + static glow. Animation drives OPACITY only (cheap on
+   * GPU) instead of @property + box-shadow (triggers paint every frame and
+   * was the dominant frame-cost on the page). Same visual rhythm, ~10x cheaper. */
   .bulb {
     position: relative;
     width: var(--bulb-size, 12px); height: var(--bulb-size, 12px);
@@ -1265,13 +1264,12 @@
       oklch(80% 0.20 80) 60%,
       oklch(55% 0.16 70) 100%);
     box-shadow:
-      0 0 calc(8px * var(--bulb-glow, 1)) oklch(85% 0.20 80 / 0.85),
-      0 0 calc(20px * var(--bulb-glow, 1)) oklch(75% 0.22 75 / 0.55),
+      0 0 8px oklch(85% 0.20 80 / 0.85),
+      0 0 20px oklch(75% 0.22 75 / 0.5),
       inset -2px -2px 3px oklch(40% 0.10 60 / 0.45),
       inset 1px 1px 2px oklch(98% 0.05 95 / 0.85);
-    animation: bulb-flicker var(--bulb-period, 3.2s) ease-in-out infinite;
+    animation: bulb-flicker var(--bulb-period, 4.6s) ease-in-out infinite;
     animation-delay: var(--bulb-delay, 0s);
-    will-change: --bulb-glow;
   }
   /* Filament — small glowing core inside the bulb */
   .bulb::after {
@@ -1283,19 +1281,12 @@
       oklch(99% 0.03 90) 0%,
       oklch(95% 0.14 85) 50%,
       transparent 75%);
-    filter: blur(0.6px);
-    opacity: var(--bulb-glow, 1);
   }
   @keyframes bulb-flicker {
-    0%   { --bulb-glow: 1; }
-    18%  { --bulb-glow: 1.05; }
-    19%  { --bulb-glow: 0.55; }
-    20%  { --bulb-glow: 1; }
-    47%  { --bulb-glow: 0.88; }
-    62%  { --bulb-glow: 1.1; }
-    75%  { --bulb-glow: 0.7; }
-    76%  { --bulb-glow: 1; }
-    100% { --bulb-glow: 1; }
+    0%, 100% { opacity: 1; }
+    47%      { opacity: 0.95; }
+    50%      { opacity: 0.7; }
+    53%      { opacity: 0.98; }
   }
   /* Occasional dim-bulb (one in five) — slightly weaker, more amber */
   .bulb.dim {
@@ -2346,10 +2337,16 @@ function renderMarquee(data) {
   for (const s of coming)   slot.appendChild(makeMarqueeRow(s, 'Coming Soon', 'coming'));
 
   // Light up bulbs across all show sections once they're rendered + sized.
+  // Belt-and-suspenders: rAF for first frame + setTimeout fallback in case the
+  // rAF resolves before strips have laid out their width.
   requestAnimationFrame(() => {
     ensureBulbStrips();
     populateBulbStrips();
   });
+  setTimeout(() => {
+    ensureBulbStrips();
+    populateBulbStrips();
+  }, 200);
 }
 
 // Ensure top + bottom bulb strips exist on Live Broadway + Off-Broadway sections.
@@ -2377,19 +2374,23 @@ function ensureBulbStrips() {
 function populateBulbStrips() {
   const strips = document.querySelectorAll('.marquee-bulbs');
   if (!strips.length) return;
+  // Hard cap on bulbs per strip — was unbounded before, on wide desktop with
+  // 6 strips this could approach 200 animated elements all repainting box-shadow
+  // every frame. 14 max per strip = ~84 total across the page = comfortable.
+  const MAX_BULBS = 14;
   for (const strip of strips) {
     strip.innerHTML = '';
     const w = strip.offsetWidth;
     if (!w) continue;
-    // Density scales with bulb size — small bulbs cluster denser, big ones space wider.
     const bulbSize = parseFloat(getComputedStyle(strip).getPropertyValue('--bulb-size')) || 12;
-    const spacing = bulbSize * 1.8 + 4; // ~22px for 12px bulbs, ~33px for 16px bulbs, ~18px for 8px bulbs
-    const count = Math.max(8, Math.floor(w / spacing));
+    const spacing = bulbSize * 2.2 + 6;
+    const count = Math.min(MAX_BULBS, Math.max(6, Math.floor(w / spacing)));
     for (let i = 0; i < count; i++) {
       const bulb = document.createElement('span');
       bulb.className = 'bulb' + (Math.random() < 0.18 ? ' dim' : '');
-      const delay = (Math.random() * 4).toFixed(2) + 's';
-      const period = (2.4 + Math.random() * 2.6).toFixed(2) + 's';
+      // Stagger flicker but with longer periods so animation cost is amortized.
+      const delay = (Math.random() * 6).toFixed(2) + 's';
+      const period = (4 + Math.random() * 3).toFixed(2) + 's';
       bulb.style.setProperty('--bulb-delay', delay);
       bulb.style.setProperty('--bulb-period', period);
       strip.appendChild(bulb);

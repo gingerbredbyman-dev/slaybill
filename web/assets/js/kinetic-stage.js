@@ -106,16 +106,30 @@ function setupPointerLight() {
 function setupTiltCards() {
   if (!canMove()) return;
 
+  // Coalesce per-frame to avoid setting custom properties dozens of times
+  // per scroll-tick. pointermove fires per-pixel; layout reads + writes on
+  // every fire was a frame killer on long pages.
+  let pending = null;
+  let raf = 0;
+  const flush = () => {
+    raf = 0;
+    if (!pending) return;
+    const { card, x, y } = pending;
+    card.style.setProperty('--tilt-x', ((0.5 - y) * 7).toFixed(2) + 'deg');
+    card.style.setProperty('--tilt-y', ((x - 0.5) * 7).toFixed(2) + 'deg');
+    card.style.setProperty('--glint-x', (x * 100).toFixed(1) + '%');
+    card.style.setProperty('--glint-y', (y * 100).toFixed(1) + '%');
+    pending = null;
+  };
+
   document.addEventListener('pointermove', (event) => {
     const card = event.target.closest?.('.show-card, .cover, .poster');
     if (!card) return;
     const rect = card.getBoundingClientRect();
     const x = (event.clientX - rect.left) / Math.max(1, rect.width);
     const y = (event.clientY - rect.top) / Math.max(1, rect.height);
-    card.style.setProperty('--tilt-x', ((0.5 - y) * 7).toFixed(2) + 'deg');
-    card.style.setProperty('--tilt-y', ((x - 0.5) * 7).toFixed(2) + 'deg');
-    card.style.setProperty('--glint-x', (x * 100).toFixed(1) + '%');
-    card.style.setProperty('--glint-y', (y * 100).toFixed(1) + '%');
+    pending = { card, x, y };
+    if (!raf) raf = requestAnimationFrame(flush);
   }, { passive: true });
 
   document.addEventListener('pointerout', (event) => {
