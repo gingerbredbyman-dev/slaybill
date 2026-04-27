@@ -652,7 +652,8 @@
   a.show-card:hover .poster::after,
   a.show-card:focus-visible .poster::after { opacity: 0.75; }
 
-  /* Title — container-query-sized so HADESTOWN fits without mid-word wrap. */
+  /* Title — container-query-sized so HADESTOWN fits without mid-word wrap.
+   * translateZ pulls the title slightly forward for parallax depth on tilt. */
   .show-card .title {
     font-family: var(--font-display);
     font-variation-settings: 'wght' 800, 'opsz' 24, 'WONK' 1;
@@ -668,7 +669,16 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transform: translateZ(8px);
+    transition: transform var(--dur-fast) var(--ease-spring);
   }
+  /* Pill chip floats further forward than the title — front of the stack. */
+  .show-card .pill { transform: translateZ(14px); }
+  /* Metrics + scores sit between card surface and title for layering. */
+  .show-card .metrics,
+  .show-card .scores { transform: translateZ(4px); }
+  /* Firms sit at card surface (depth 0). */
+  .show-card .venue { transform: translateZ(2px); }
   .show-card .venue {
     font-family: var(--font-ui);
     font-size: 10px;
@@ -986,34 +996,80 @@
       0 16px 60px -20px color-mix(in oklch, oklch(50% 0.15 30) 40%, transparent);
     overflow: hidden;
   }
-  /* Light-bulb rows: top + bottom. Each .marquee-bulbs is a flex strip of dots. */
+  /* Light-bulb rows: top + bottom. Each bulb is an individual element with
+   * its own flicker phase, filament glow, and glass-shaded body. JS injects
+   * the bulbs at runtime so the count auto-fits the marquee width. */
   .marquee-bulbs {
-    position: absolute; left: 16px; right: 16px;
-    height: 14px;
-    display: flex; gap: 14px; align-items: center; justify-content: space-between;
+    position: absolute; left: 18px; right: 18px;
+    height: 18px;
+    display: flex; align-items: center; justify-content: space-between;
     pointer-events: none;
   }
-  .marquee-bulbs::before, .marquee-bulbs::after {
-    content: ""; flex: 1;
-    background-image: radial-gradient(circle at center, oklch(94% 0.18 90) 0 4px, transparent 5px);
-    background-repeat: repeat-x;
-    background-size: 22px 14px;
-    background-position: center;
-    height: 14px;
-    filter: drop-shadow(0 0 4px oklch(80% 0.20 80 / 0.65));
-    animation: bulb-flicker 2.6s infinite ease-in-out;
+  .marquee-bulbs-top    { top: 10px; }
+  .marquee-bulbs-bottom { bottom: 10px; }
+
+  /* Each bulb: outer glass orb + inner filament glow. Animatable via custom
+   * properties so we can stagger per-bulb. */
+  @property --bulb-glow {
+    syntax: '<number>'; inherits: false; initial-value: 1;
   }
-  .marquee-bulbs-top    { top: 12px; }
-  .marquee-bulbs-bottom { bottom: 12px; }
-  .marquee-bulbs-bottom::before, .marquee-bulbs-bottom::after { animation-delay: 1.3s; }
+  .bulb {
+    position: relative;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+      oklch(98% 0.05 90) 0%,
+      oklch(92% 0.16 88) 28%,
+      oklch(80% 0.20 80) 60%,
+      oklch(55% 0.16 70) 100%);
+    box-shadow:
+      0 0 calc(8px * var(--bulb-glow, 1)) oklch(85% 0.20 80 / 0.85),
+      0 0 calc(20px * var(--bulb-glow, 1)) oklch(75% 0.22 75 / 0.55),
+      inset -2px -2px 3px oklch(40% 0.10 60 / 0.45),
+      inset 1px 1px 2px oklch(98% 0.05 95 / 0.85);
+    animation: bulb-flicker var(--bulb-period, 3.2s) ease-in-out infinite;
+    animation-delay: var(--bulb-delay, 0s);
+    will-change: --bulb-glow;
+  }
+  /* Filament — small glowing core inside the bulb */
+  .bulb::after {
+    content: "";
+    position: absolute;
+    inset: 28%;
+    border-radius: 50%;
+    background: radial-gradient(circle at center,
+      oklch(99% 0.03 90) 0%,
+      oklch(95% 0.14 85) 50%,
+      transparent 75%);
+    filter: blur(0.6px);
+    opacity: var(--bulb-glow, 1);
+  }
   @keyframes bulb-flicker {
-    0%, 100% { opacity: 1; }
-    47%      { opacity: 0.92; }
-    50%      { opacity: 0.65; }
-    53%      { opacity: 0.95; }
+    0%   { --bulb-glow: 1; }
+    18%  { --bulb-glow: 1.05; }
+    19%  { --bulb-glow: 0.55; }
+    20%  { --bulb-glow: 1; }
+    47%  { --bulb-glow: 0.88; }
+    62%  { --bulb-glow: 1.1; }
+    75%  { --bulb-glow: 0.7; }
+    76%  { --bulb-glow: 1; }
+    100% { --bulb-glow: 1; }
+  }
+  /* Occasional dim-bulb (one in five) — slightly weaker, more amber */
+  .bulb.dim {
+    background: radial-gradient(circle at 35% 30%,
+      oklch(92% 0.07 80) 0%,
+      oklch(78% 0.16 75) 35%,
+      oklch(60% 0.16 65) 70%,
+      oklch(40% 0.10 55) 100%);
+    box-shadow:
+      0 0 calc(5px * var(--bulb-glow, 1)) oklch(70% 0.18 70 / 0.7),
+      0 0 calc(14px * var(--bulb-glow, 1)) oklch(60% 0.18 65 / 0.45),
+      inset -2px -2px 3px oklch(35% 0.08 55 / 0.5),
+      inset 1px 1px 2px oklch(92% 0.06 90 / 0.75);
   }
   @media (prefers-reduced-motion: reduce) {
-    .marquee-bulbs::before, .marquee-bulbs::after { animation: none; }
+    .bulb { animation: none !important; --bulb-glow: 1; }
   }
 
   .marquee-list {
@@ -1995,7 +2051,45 @@ function renderMarquee(data) {
   // In Previews up top (tonight, hot), then Coming Soon (anticipated).
   for (const s of previews) slot.appendChild(makeMarqueeRow(s, 'In Previews', 'previews'));
   for (const s of coming)   slot.appendChild(makeMarqueeRow(s, 'Coming Soon', 'coming'));
+
+  // Light up the bulbs once the marquee is rendered + sized.
+  requestAnimationFrame(() => populateBulbStrips());
 }
+
+// Populate the marquee bulb strips with individual bulb elements. Auto-fits
+// to current marquee width. Each bulb gets a randomized flicker delay +
+// period so they feel alive instead of metronome-synced. ~1 in 5 is dim.
+function populateBulbStrips() {
+  const strips = document.querySelectorAll('.marquee-bulbs');
+  if (!strips.length) return;
+  const SPACING = 22; // px between bulb centers
+  for (const strip of strips) {
+    strip.innerHTML = '';
+    const w = strip.offsetWidth;
+    if (!w) continue;
+    const count = Math.max(8, Math.floor(w / SPACING));
+    for (let i = 0; i < count; i++) {
+      const bulb = document.createElement('span');
+      bulb.className = 'bulb' + (Math.random() < 0.18 ? ' dim' : '');
+      // Unique flicker phase + period per bulb so they don't pulse in lockstep.
+      const delay = (Math.random() * 4).toFixed(2) + 's';
+      const period = (2.4 + Math.random() * 2.6).toFixed(2) + 's';
+      bulb.style.setProperty('--bulb-delay', delay);
+      bulb.style.setProperty('--bulb-period', period);
+      strip.appendChild(bulb);
+    }
+  }
+}
+
+// Re-fit bulbs on resize so the strip stays full whether mobile or desktop.
+let _bulbResizeRaf = 0;
+window.addEventListener('resize', () => {
+  if (_bulbResizeRaf) return;
+  _bulbResizeRaf = requestAnimationFrame(() => {
+    _bulbResizeRaf = 0;
+    populateBulbStrips();
+  });
+}, { passive: true });
 
 async function hydrate() {
   // Render skeletons in every visible bucket grid before fetch (Live only now).
