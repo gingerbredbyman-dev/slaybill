@@ -1,0 +1,13 @@
+{
+  "critic_scores": {},
+  "critic_justifications": {},
+  "audience_scores": {},
+  "audience_justifications": {},
+  "all_critics_in": false,
+  "confidence": "low",
+  "_meta": {
+    "slug": "appropriate-revival",
+    "fetched_at": "2026-04-27T15:05:33.413704+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}

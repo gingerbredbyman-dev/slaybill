@@ -42,11 +42,15 @@ PROJECT_ROOT = HERE.parent
 OUT_PATH = PROJECT_ROOT / "web" / "data" / "news_feed.json"
 
 NEWS_SOURCES = [
-    {"name": "Playbill",          "rss": "https://www.playbill.com/rss/news",          "weight": 1.0, "tier": "official"},
-    {"name": "Broadway News",     "rss": "https://broadwaynews.com/feed/",             "weight": 1.0, "tier": "independent"},
+    # Confirmed live as of 2026-04-27 — Vulture (404) + THR theater feed (empty)
+    # were dropped and replaced with Variety + OnStage Blog + WhatsOnStage.
+    {"name": "Playbill",          "rss": "https://www.playbill.com/rss/news",          "weight": 1.0,  "tier": "official"},
+    {"name": "Broadway News",     "rss": "https://broadwaynews.com/feed/",             "weight": 1.0,  "tier": "independent"},
     {"name": "Broadway.com",      "rss": "https://www.broadway.com/feeds/buzz/latest", "weight": 0.85, "tier": "official"},
-    {"name": "Vulture",           "rss": "https://www.vulture.com/theater/rss.xml",    "weight": 0.95, "tier": "criticism"},
-    {"name": "Hollywood Reporter","rss": "https://www.hollywoodreporter.com/c/theater/feed/", "weight": 0.85, "tier": "trade"},
+    {"name": "Variety",           "rss": "https://variety.com/v/legit/feed/",          "weight": 0.95, "tier": "trade"},
+    {"name": "Theatermania",      "rss": "https://www.theatermania.com/news/rss",      "weight": 0.85, "tier": "criticism"},
+    {"name": "OnStage Blog",      "rss": "https://www.onstageblog.com/onstage-blog-news?format=rss", "weight": 0.7,  "tier": "independent"},
+    {"name": "WhatsOnStage",      "rss": "https://www.whatsonstage.com/news/rss/",     "weight": 0.7,  "tier": "international"},
 ]
 
 USER_AGENT = "SlaybillNewsBot/1.0 (+https://slaybill.local)"

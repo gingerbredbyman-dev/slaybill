@@ -132,10 +132,11 @@
   .news-tier {
     display: inline-block; width: 7px; height: 7px; border-radius: 999px;
   }
-  .news-tier.official     { background: oklch(78% 0.16 95); }
-  .news-tier.independent  { background: oklch(72% 0.18 200); }
-  .news-tier.criticism    { background: oklch(72% 0.18 320); }
-  .news-tier.trade        { background: oklch(72% 0.18 30); }
+  .news-tier.official       { background: oklch(78% 0.16 95); }
+  .news-tier.independent    { background: oklch(72% 0.18 200); }
+  .news-tier.criticism      { background: oklch(72% 0.18 320); }
+  .news-tier.trade          { background: oklch(72% 0.18 30); }
+  .news-tier.international  { background: oklch(72% 0.18 140); }
   .empty {
     grid-column: 1 / -1;
     padding: 24px; text-align: center;
@@ -167,6 +168,7 @@
     <button class="filter-chip" data-tier="independent">Independent</button>
     <button class="filter-chip" data-tier="criticism">Criticism</button>
     <button class="filter-chip" data-tier="trade">Trade</button>
+    <button class="filter-chip" data-tier="international">International</button>
   </div>
 
   <div class="feed" id="feed" aria-live="polite">

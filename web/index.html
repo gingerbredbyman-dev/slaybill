@@ -388,6 +388,23 @@
     line-height: 0.95;
     text-wrap: balance;
   }
+  /* Live Broadway is the focus surface — bump headline scale + add a thin
+   * accent rule so the section visually announces itself. */
+  .bucket[data-theme="live"] h2 {
+    font-size: clamp(40px, 5vw + 14px, 72px);
+    background: linear-gradient(180deg,
+      oklch(96% 0.04 90) 0%,
+      oklch(82% 0.18 80) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px color-mix(in oklch, oklch(80% 0.18 75) 28%, transparent);
+  }
+  .bucket[data-theme="live"] header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid color-mix(in oklch, oklch(80% 0.18 80) 22%, transparent);
+    margin-bottom: 28px;
+  }
   .bucket .bucket-note {
     font-family: var(--font-ui);
     font-size: 11px;
@@ -432,8 +449,22 @@
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
 
-  /* ── Live Stage Slider ─────────────────────────────────────────── */
-  .bucket[data-theme="live"] .grid { display: block; }
+  /* ── Live Broadway: vertical single-column hero layout ─────────────
+   * Slider was cut. Live is the focus of the site — give it room. Each
+   * card stretches the full bucket width on all viewports, stacks vertically.
+   * Constrains max-width on wide screens so cards don't feel comical. */
+  .bucket[data-theme="live"] .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .bucket[data-theme="live"] .show-card {
+    width: 100%;
+  }
+
+  /* Legacy slider class names kept for any residual references. */
 
   .live-stage { position: relative; }
 
@@ -1004,18 +1035,41 @@
     height: 18px;
     display: flex; align-items: center; justify-content: space-between;
     pointer-events: none;
+    --bulb-size: 12px;  /* default — overridden by per-section rules below */
   }
   .marquee-bulbs-top    { top: 10px; }
   .marquee-bulbs-bottom { bottom: 10px; }
 
+  /* Section-specific bulb sizing. Live Broadway is the focus surface — biggest.
+   * Marquee is the secondary highlight — medium. Off-Broadway is supporting — smallest. */
+  .bucket[data-theme="live"] .marquee-bulbs { --bulb-size: 16px; height: 22px; left: 24px; right: 24px; }
+  .marquee-frame .marquee-bulbs              { --bulb-size: 12px; }
+  .ob-row .marquee-bulbs                     { --bulb-size: 6px; height: 10px; left: 12px; right: 12px; opacity: 0.55; }
+
+  /* Frame variants for Live + OB so the bulbs have a backdrop to glow against. */
+  .bucket[data-theme="live"] {
+    position: relative;
+  }
+  .bucket[data-theme="live"] .grid {
+    padding: 38px 4px;
+  }
+  .bucket[data-theme="live"] > .marquee-bulbs-top    { top: 64px; }
+  .bucket[data-theme="live"] > .marquee-bulbs-bottom { bottom: 18px; }
+
+  .ob-row { position: relative; padding-bottom: 22px; }
+  .ob-row > .marquee-bulbs-top    { top: 56px; }
+  .ob-row > .marquee-bulbs-bottom { bottom: 6px; }
+
   /* Each bulb: outer glass orb + inner filament glow. Animatable via custom
-   * properties so we can stagger per-bulb. */
+   * properties so we can stagger per-bulb. Size scales with --bulb-size,
+   * which is set per-section: Live Broadway gets LARGE bulbs (focus surface),
+   * Marquee/Off-Broadway get smaller. */
   @property --bulb-glow {
     syntax: '<number>'; inherits: false; initial-value: 1;
   }
   .bulb {
     position: relative;
-    width: 12px; height: 12px;
+    width: var(--bulb-size, 12px); height: var(--bulb-size, 12px);
     border-radius: 50%;
     background: radial-gradient(circle at 35% 30%,
       oklch(98% 0.05 90) 0%,
@@ -1267,10 +1321,11 @@
     display: inline-block; width: 6px; height: 6px; border-radius: 999px;
     background: color-mix(in oklch, var(--cream) 60%, transparent);
   }
-  .feed-item .news-tier.official     { background: oklch(78% 0.16 95); }
-  .feed-item .news-tier.independent  { background: oklch(72% 0.18 200); }
-  .feed-item .news-tier.criticism    { background: oklch(72% 0.18 320); }
-  .feed-item .news-tier.trade        { background: oklch(72% 0.18 30); }
+  .feed-item .news-tier.official       { background: oklch(78% 0.16 95); }
+  .feed-item .news-tier.independent    { background: oklch(72% 0.18 200); }
+  .feed-item .news-tier.criticism      { background: oklch(72% 0.18 320); }
+  .feed-item .news-tier.trade          { background: oklch(72% 0.18 30); }
+  .feed-item .news-tier.international  { background: oklch(72% 0.18 140); }
 
   /* Skeleton loaders. */
   @property --shimmer-x {
@@ -2048,12 +2103,42 @@ function renderMarquee(data) {
     slot.appendChild(empty);
     return;
   }
-  // In Previews up top (tonight, hot), then Coming Soon (anticipated).
+  // Sort each set by soonest-first (first_preview_date asc, nulls last) so the
+  // most-imminent show leads. In Previews always render before Coming Soon.
+  const byDate = (a, b) => {
+    const ad = a.first_preview_date || '9999';
+    const bd = b.first_preview_date || '9999';
+    return ad.localeCompare(bd);
+  };
+  previews.sort(byDate);
+  coming.sort(byDate);
   for (const s of previews) slot.appendChild(makeMarqueeRow(s, 'In Previews', 'previews'));
   for (const s of coming)   slot.appendChild(makeMarqueeRow(s, 'Coming Soon', 'coming'));
 
-  // Light up the bulbs once the marquee is rendered + sized.
-  requestAnimationFrame(() => populateBulbStrips());
+  // Light up bulbs across all show sections once they're rendered + sized.
+  requestAnimationFrame(() => {
+    ensureBulbStrips();
+    populateBulbStrips();
+  });
+}
+
+// Ensure top + bottom bulb strips exist on Live Broadway + Off-Broadway sections.
+// Marquee already has them in the HTML; this idempotently adds them elsewhere.
+function ensureBulbStrips() {
+  const targets = [
+    document.querySelector('.bucket[data-theme="live"]'),
+    document.querySelector('.ob-row'),
+  ].filter(Boolean);
+  for (const host of targets) {
+    if (host.querySelector(':scope > .marquee-bulbs-top')) continue;
+    const top = document.createElement('div');
+    top.className = 'marquee-bulbs marquee-bulbs-top';
+    top.setAttribute('aria-hidden', 'true');
+    const bot = document.createElement('div');
+    bot.className = 'marquee-bulbs marquee-bulbs-bottom';
+    bot.setAttribute('aria-hidden', 'true');
+    host.appendChild(top); host.appendChild(bot);
+  }
 }
 
 // Populate the marquee bulb strips with individual bulb elements. Auto-fits
@@ -2062,16 +2147,17 @@ function renderMarquee(data) {
 function populateBulbStrips() {
   const strips = document.querySelectorAll('.marquee-bulbs');
   if (!strips.length) return;
-  const SPACING = 22; // px between bulb centers
   for (const strip of strips) {
     strip.innerHTML = '';
     const w = strip.offsetWidth;
     if (!w) continue;
-    const count = Math.max(8, Math.floor(w / SPACING));
+    // Density scales with bulb size — small bulbs cluster denser, big ones space wider.
+    const bulbSize = parseFloat(getComputedStyle(strip).getPropertyValue('--bulb-size')) || 12;
+    const spacing = bulbSize * 1.8 + 4; // ~22px for 12px bulbs, ~33px for 16px bulbs, ~18px for 8px bulbs
+    const count = Math.max(8, Math.floor(w / spacing));
     for (let i = 0; i < count; i++) {
       const bulb = document.createElement('span');
       bulb.className = 'bulb' + (Math.random() < 0.18 ? ' dim' : '');
-      // Unique flicker phase + period per bulb so they don't pulse in lockstep.
       const delay = (Math.random() * 4).toFixed(2) + 's';
       const period = (2.4 + Math.random() * 2.6).toFixed(2) + 's';
       bulb.style.setProperty('--bulb-delay', delay);
@@ -2131,11 +2217,9 @@ async function hydrate() {
       grid.appendChild(empty);
       continue;
     }
-    if (bucket === 'live') {
-      initLiveStage(grid, shows);
-    } else {
-      for (const show of shows) grid.appendChild(makeCard(show));
-    }
+    // Vertical single-column layout for ALL show buckets including Live.
+    // Slider was cut per design direction — Live is the focus, give it room.
+    for (const show of shows) grid.appendChild(makeCard(show));
   }
 
   const track = document.querySelector('[data-slot="ob-track"]');

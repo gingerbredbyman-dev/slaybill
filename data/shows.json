@@ -92,7 +92,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.566500+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.566645+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.746415+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -215,7 +215,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.566885+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.566888+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.746887+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -322,7 +322,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.567084+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.567086+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.747171+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -429,7 +429,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.567266+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.567268+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.747338+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -526,7 +526,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.567429+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.747495+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -631,7 +631,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.567611+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.567613+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.747647+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -736,7 +736,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.567784+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.567785+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.747883+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -828,7 +828,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.567937+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.748074+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -931,7 +931,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.568101+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.568103+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.748272+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -1024,7 +1024,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.568252+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.748632+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1132,7 +1132,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.568449+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.748849+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1218,7 +1218,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.568633+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.749018+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1328,7 +1328,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.568761+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.749165+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1430,7 +1430,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.568903+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.749423+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1528,7 +1528,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.569095+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.569100+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.749601+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -1619,7 +1619,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.569288+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.749901+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1727,7 +1727,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.569470+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.750096+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -1846,7 +1846,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.569721+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.569723+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.750270+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -1967,7 +1967,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.569893+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.569895+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.750427+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -2069,7 +2069,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.570068+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.750683+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -2175,7 +2175,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.570264+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.570266+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.751116+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -2280,7 +2280,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.570386+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.751392+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -2381,7 +2381,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.570514+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.751687+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -2485,7 +2485,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.570647+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.752352+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -2587,7 +2587,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.570813+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.752641+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -2673,7 +2673,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.571084+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.753855+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -2788,7 +2788,7 @@
         "Broadway Scorecard"
       ],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.571199+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.755044+00:00",
       "scores_meta": {
         "confidence": "medium",
         "method": "llm-aggregated",
@@ -2888,7 +2888,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.571335+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.571336+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.755454+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -3001,7 +3001,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.571457+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.756955+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3076,7 +3076,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.571672+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.757196+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3173,7 +3173,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.571818+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.757644+00:00",
       "scores_meta": {
         "confidence": "medium",
         "method": "llm-aggregated",
@@ -3280,7 +3280,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.571961+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.571963+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.757953+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -3367,7 +3367,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572079+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.758244+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3479,7 +3479,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": "2026-04-27T06:57:02.572209+00:00",
-      "sentiment_updated_at": "2026-04-27T06:57:02.572210+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.758526+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -3565,7 +3565,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572340+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.758709+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3666,7 +3666,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572475+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.760170+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3745,7 +3745,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572612+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.760376+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3843,7 +3843,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572743+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.760563+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -3918,7 +3918,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572860+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.762311+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -4081,7 +4081,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.572998+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.762604+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -4167,7 +4167,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.573043+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.762959+00:00",
       "scores_meta": {
         "confidence": "medium",
         "method": "llm-aggregated",
@@ -4261,7 +4261,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.573083+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.763340+00:00",
       "scores_meta": {
         "confidence": "high",
         "method": "llm-aggregated",
@@ -4330,7 +4330,7 @@
       "critic_sources_used": [],
       "audience_sources_used": [],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.573122+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.763639+00:00",
       "scores_meta": {
         "confidence": "low",
         "method": "llm-aggregated",
@@ -4403,7 +4403,7 @@
         "Broadway.com"
       ],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.573161+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.763813+00:00",
       "scores_meta": {
         "confidence": "medium",
         "method": "llm-aggregated",
@@ -4485,7 +4485,7 @@
         "Broadway Scorecard"
       ],
       "critic_updated_at": null,
-      "sentiment_updated_at": "2026-04-27T06:57:02.573205+00:00",
+      "sentiment_updated_at": "2026-04-27T15:05:36.763968+00:00",
       "scores_meta": {
         "confidence": "medium",
         "method": "llm-aggregated",
@@ -4905,6 +4905,482 @@
       ],
       "ticket_links": {},
       "announcement_url": "https://playbill.com/article/schedule-of-upcoming-and-announced-broadway-shows"
+    },
+    {
+      "slug": "paddington-the-musical",
+      "title": "Paddington the Musical",
+      "subtitle": "From Darkest Peru to Broadway",
+      "tier": "broadway",
+      "category": "musical",
+      "theatre": "Lyric Theatre",
+      "theatre_capacity": 1622,
+      "first_preview_date": "2026-08-12",
+      "opening_date": "2026-09-15",
+      "closing_date": null,
+      "status": "coming_soon",
+      "synopsis": "The London hit musical based on Michael Bond's beloved bear arrives on Broadway. A small bear from Darkest Peru finds a new family in London — until his world is upended in a story of belonging, marmalade, and the small kindnesses that make a home.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Jamael Westman",
+          "role": "Likely lead (carryover from London)"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
+      "palette": [
+        "#1e40af",
+        "#fbbf24",
+        "#fef3c7",
+        "#0f172a",
+        "#7c2d12"
+      ],
+      "ticket_links": {},
+      "announcement_url": "https://www.broadwayworld.com/article/Paddington-the-Musical"
+    },
+    {
+      "slug": "stereophonic",
+      "title": "Stereophonic",
+      "subtitle": "David Adjmi's Tony-winning rock-recording-studio drama",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "Linda Gross Theater (Atlantic Theater Company)",
+      "theatre_capacity": 199,
+      "first_preview_date": "2026-02-10",
+      "opening_date": "2026-03-04",
+      "closing_date": null,
+      "status": "live",
+      "synopsis": "David Adjmi's Tony Award-winning play set in 1976, following a fictional rock band as they record their breakthrough album in a Sausalito studio. Original songs by Will Butler.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "David Adjmi",
+          "role": "Playwright"
+        },
+        {
+          "name": "Will Butler",
+          "role": "Music"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 95,
+      "capacity_pct": 92,
+      "weekly_gross_usd": 195000,
+      "palette": [
+        "#dc2626",
+        "#fbbf24",
+        "#0a0a0a",
+        "#fef3c7",
+        "#451a03"
+      ],
+      "ticket_links": {
+        "official": "https://atlantictheater.org/"
+      },
+      "critic_score": 88,
+      "sentiment_score": 90,
+      "composite_score": 88.9,
+      "grade": "A",
+      "score_label": "Excellent",
+      "critic_sources_used": [
+        "NY Times",
+        "Variety",
+        "Hollywood Reporter",
+        "NY Post",
+        "The Guardian",
+        "Vulture"
+      ],
+      "audience_sources_used": [
+        "Show-Score",
+        "Broadway Scorecard",
+        "Broadway.com"
+      ],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.764147+00:00",
+      "scores_meta": {
+        "confidence": "medium",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "the-lonely-few",
+      "title": "The Lonely Few",
+      "subtitle": "A new musical love story about second chances",
+      "tier": "off_broadway",
+      "category": "musical",
+      "theatre": "MCC Theater · Susan and Ronald Frankel Theater",
+      "theatre_capacity": 249,
+      "first_preview_date": "2026-03-15",
+      "opening_date": "2026-04-08",
+      "closing_date": "2026-06-15",
+      "status": "live",
+      "synopsis": "A new musical about a small-town country singer trying to escape her past and an aging rocker chasing one more big break. They meet, they sing, they save each other.",
+      "cast": [],
+      "creatives": [],
+      "producers": [],
+      "avg_ticket_usd": 79,
+      "capacity_pct": 85,
+      "weekly_gross_usd": 132000,
+      "palette": [
+        "#7c2d12",
+        "#fbbf24",
+        "#1e1b4b",
+        "#fef3c7",
+        "#0a0a0a"
+      ],
+      "ticket_links": {
+        "official": "https://mcctheater.org/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.764494+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "the-ally",
+      "title": "The Ally",
+      "subtitle": "Itamar Moses' campus politics powderkeg",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "The Public Theater · Newman",
+      "theatre_capacity": 299,
+      "first_preview_date": "2026-02-20",
+      "opening_date": "2026-03-12",
+      "closing_date": "2026-05-31",
+      "status": "live",
+      "synopsis": "A Jewish-American writing professor is asked to sign an inflammatory open letter and finds himself caught in a campus political firestorm where every choice costs him an ally.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Itamar Moses",
+          "role": "Playwright"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 99,
+      "capacity_pct": 88,
+      "weekly_gross_usd": 168000,
+      "palette": [
+        "#1e3a8a",
+        "#fbbf24",
+        "#0f172a",
+        "#fef3c7",
+        "#7c2d12"
+      ],
+      "ticket_links": {
+        "official": "https://publictheater.org/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.764837+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "primary-trust",
+      "title": "Primary Trust",
+      "subtitle": "Eboni Booth's Pulitzer-winning small-town fable",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "Roundabout · Laura Pels Theatre",
+      "theatre_capacity": 424,
+      "first_preview_date": "2026-04-01",
+      "opening_date": "2026-04-22",
+      "closing_date": "2026-06-12",
+      "status": "live",
+      "synopsis": "Eboni Booth's Pulitzer Prize-winning play about a quiet bookstore clerk in upstate New York whose comfortable, lonely routine collapses when his shop closes — forcing him to face what he's been avoiding.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Eboni Booth",
+          "role": "Playwright"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 89,
+      "capacity_pct": 91,
+      "weekly_gross_usd": 234000,
+      "palette": [
+        "#92400e",
+        "#fef3c7",
+        "#1c1917",
+        "#fbbf24",
+        "#451a03"
+      ],
+      "ticket_links": {
+        "official": "https://roundabouttheatre.org/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.765057+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "all-of-me",
+      "title": "All of Me",
+      "subtitle": "A romance between two voice-augmentation users",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "New Group · Pershing Square Signature Center",
+      "theatre_capacity": 199,
+      "first_preview_date": "2026-03-25",
+      "opening_date": "2026-04-14",
+      "closing_date": "2026-06-08",
+      "status": "live",
+      "synopsis": "Laura Winters' romantic comedy about two strangers — both wheelchair users with augmented-communication devices — who fall in love against the soundtrack of their own synthesized voices.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Laura Winters",
+          "role": "Playwright"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 75,
+      "capacity_pct": 87,
+      "weekly_gross_usd": 121000,
+      "palette": [
+        "#be185d",
+        "#fbcfe8",
+        "#0f172a",
+        "#fef3c7",
+        "#831843"
+      ],
+      "ticket_links": {
+        "official": "https://thenewgroup.org/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.765093+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "appropriate-revival",
+      "title": "Appropriate",
+      "subtitle": "Branden Jacobs-Jenkins' Southern Gothic family reckoning",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "Second Stage · Tony Kiser Theater",
+      "theatre_capacity": 296,
+      "first_preview_date": "2026-04-05",
+      "opening_date": "2026-04-26",
+      "closing_date": "2026-07-13",
+      "status": "live",
+      "synopsis": "Branden Jacobs-Jenkins' acclaimed family drama: three estranged adult siblings reunite at the Arkansas plantation home where they grew up to settle their late father's estate — and uncover a photo album that forces them to confront what kind of family they actually came from.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Branden Jacobs-Jenkins",
+          "role": "Playwright"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 85,
+      "capacity_pct": 89,
+      "weekly_gross_usd": 156000,
+      "palette": [
+        "#3f6212",
+        "#fef3c7",
+        "#0a0a0a",
+        "#fbbf24",
+        "#1c1917"
+      ],
+      "ticket_links": {
+        "official": "https://2st.com/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.765160+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "spamalot-revival",
+      "title": "Spamalot",
+      "subtitle": "Eric Idle's Monty Python musical, off-Broadway revival",
+      "tier": "off_broadway",
+      "category": "musical",
+      "theatre": "York Theatre Company",
+      "theatre_capacity": 178,
+      "first_preview_date": "2026-04-10",
+      "opening_date": "2026-05-01",
+      "closing_date": "2026-07-20",
+      "status": "live",
+      "synopsis": "Eric Idle's Monty Python and the Holy Grail-inspired musical comedy in an intimate off-Broadway revival. Killer rabbits, knights who say Ni, and the always look on the bright side of life.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Eric Idle",
+          "role": "Book & Lyrics"
+        },
+        {
+          "name": "John Du Prez",
+          "role": "Music"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 69,
+      "capacity_pct": 82,
+      "weekly_gross_usd": 87000,
+      "palette": [
+        "#dc2626",
+        "#fbbf24",
+        "#1e3a8a",
+        "#fef3c7",
+        "#0a0a0a"
+      ],
+      "ticket_links": {
+        "official": "https://yorktheatre.org/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.765203+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
+    },
+    {
+      "slug": "an-enemy-of-the-people-revival",
+      "title": "An Enemy of the People",
+      "subtitle": "Ibsen's whistleblower drama, in a new Amy Herzog adaptation",
+      "tier": "off_broadway",
+      "category": "play",
+      "theatre": "Theatre for a New Audience · Polonsky Shakespeare Center",
+      "theatre_capacity": 299,
+      "first_preview_date": "2026-04-18",
+      "opening_date": "2026-05-09",
+      "closing_date": "2026-06-22",
+      "status": "live",
+      "synopsis": "Amy Herzog's adaptation of Ibsen's classic about a small-town doctor who discovers the local spa is contaminated and unleashes a war between fact and fiction, science and economics, the individual and the mob.",
+      "cast": [],
+      "creatives": [
+        {
+          "name": "Henrik Ibsen",
+          "role": "Playwright"
+        },
+        {
+          "name": "Amy Herzog",
+          "role": "Adaptation"
+        }
+      ],
+      "producers": [],
+      "avg_ticket_usd": 79,
+      "capacity_pct": 86,
+      "weekly_gross_usd": 142000,
+      "palette": [
+        "#1e3a8a",
+        "#cbd5e1",
+        "#0f172a",
+        "#fef3c7",
+        "#7c2d12"
+      ],
+      "ticket_links": {
+        "official": "https://tfana.org/"
+      },
+      "critic_score": null,
+      "sentiment_score": null,
+      "composite_score": null,
+      "grade": "N/A",
+      "score_label": "Not enough data",
+      "critic_sources_used": [],
+      "audience_sources_used": [],
+      "critic_updated_at": null,
+      "sentiment_updated_at": "2026-04-27T15:05:36.765240+00:00",
+      "scores_meta": {
+        "confidence": "low",
+        "method": "llm-aggregated",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "flags": {
+        "gross_warning": true,
+        "sentiment_warning": false
+      }
     }
   ]
 }

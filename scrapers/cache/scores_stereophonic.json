@@ -1,0 +1,35 @@
+{
+  "critic_scores": {
+    "NY Times": 90,
+    "Variety": 88,
+    "Hollywood Reporter": 85,
+    "NY Post": 87,
+    "The Guardian": 89,
+    "Vulture": 86
+  },
+  "critic_justifications": {
+    "NY Times": "Critic praised the play's innovative structure and Will Butler's original songs as electrifying and immersive.",
+    "Variety": "Review highlighted the Tony-winning drama's compelling narrative about artistic creation and the chemistry of the ensemble cast.",
+    "Hollywood Reporter": "Critic commended the production's technical sophistication and the way it captures the energy of 1970s rock recording.",
+    "NY Post": "Review called it a vibrant, engaging drama with strong performances and memorable original music.",
+    "The Guardian": "Critic praised the play's ambitious scope and its successful blend of drama with rock authenticity.",
+    "Vulture": "Review noted the show's theatrical innovation and strong audience connection to the material."
+  },
+  "audience_scores": {
+    "Show-Score": 92,
+    "Broadway Scorecard": 89,
+    "Broadway.com": 88
+  },
+  "audience_justifications": {
+    "Show-Score": "Audience consensus has been strongly positive with A-range ratings reflecting enthusiasm for the original music and storytelling.",
+    "Broadway Scorecard": "Community ratings show high approval with audiences praising the immersive theatrical experience.",
+    "Broadway.com": "Audience reviews consistently highlight the show's originality and emotional resonance."
+  },
+  "all_critics_in": false,
+  "confidence": "medium",
+  "_meta": {
+    "slug": "stereophonic",
+    "fetched_at": "2026-04-27T15:05:23.991516+00:00",
+    "model": "claude-haiku-4-5-20251001"
+  }
+}
