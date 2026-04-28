@@ -185,8 +185,8 @@ def _list_items(rows, roleless=False):
 def _ticket_rows(links: dict):
     if not links:
         return (
-            '<tr><td colspan="3" class="pending">Ticket links pending — '
-            'check your favorite vendor directly.</td></tr>'
+            '<tr><td colspan="3" class="pending">Box office is quiet on this one. '
+            'Check your favorite vendor for now.</td></tr>'
         )
     rows = []
     # Preferred display order.
@@ -237,7 +237,7 @@ def _firms_markup(raw_firms):
     'others' chip. Empty array -> 'No firms tracked'.
     """
     if not raw_firms:
-        return '<div class="empty">No marketing firms tracked yet for this show.</div>'
+        return '<div class="empty">Marketing team coming soon.</div>'
 
     aka_aor = None  # the single AKA-AOR row, if it exists
     others: list[dict] = []
@@ -285,7 +285,7 @@ def _firms_markup(raw_firms):
         )
         blocks.append(f'<div class="others">\n        {rows}\n      </div>')
     if not blocks:
-        return '<div class="empty">No marketing firms tracked yet for this show.</div>'
+        return '<div class="empty">Marketing team coming soon.</div>'
     return "\n      ".join(blocks)
 
 
@@ -309,7 +309,7 @@ def _socials_markup(socials):
     """Render social channels grid for a show. socials is a dict like
     {instagram: 'https://instagram.com/...', tiktok: '...', etc.}"""
     if not socials:
-        return '<div class="socials-grid"><div class="empty">No social channels tracked yet.</div></div>'
+        return '<div class="socials-grid"><div class="empty">Socials coming soon.</div></div>'
     out = ['<div class="socials-grid">']
     for key, label in SOCIAL_PLATFORMS:
         url = socials.get(key)
@@ -322,7 +322,7 @@ def _socials_markup(socials):
         )
     out.append('</div>')
     if len(out) == 2:  # only opening + closing div = no actual links
-        return '<div class="socials-grid"><div class="empty">No social channels tracked yet.</div></div>'
+        return '<div class="socials-grid"><div class="empty">Socials coming soon.</div></div>'
     return "\n".join(out)
 
 

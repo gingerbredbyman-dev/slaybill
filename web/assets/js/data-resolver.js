@@ -139,7 +139,7 @@ export function formatTierBadge(source, ageDays) {
   }
   if (source === 'fan_scrape') {
     const age = formatAge(ageDays);
-    return `Fan scrape · ${age}`;
+    return `Updated ${age}`;
   }
   if (source === 'local') {
     const age = formatAge(ageDays);

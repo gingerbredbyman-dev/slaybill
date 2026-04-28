@@ -678,14 +678,14 @@
   }
   .source-details summary::-webkit-details-marker { display: none; }
   .source-details summary::after {
-    content: "▾ Click for per-outlet scores";
+    content: "▾ See each outlet's score";
     display: block;
     margin-top: 8px;
     font-size: 9px; opacity: 0.6;
     letter-spacing: 0.18em;
     transition: transform 180ms ease;
   }
-  .source-details[open] summary::after { content: "▴ Hide per-outlet scores"; }
+  .source-details[open] summary::after { content: "▴ Hide breakdown"; }
   .source-details summary:hover { background: color-mix(in oklab, var(--surface) 75%, transparent); }
   .per-outlet {
     margin-top: 8px;
@@ -897,7 +897,7 @@
     </div>
     <div class="panel socials-panel">
       <div class="label">Follow</div>
-      <div class="socials-grid"><div class="empty">No social channels tracked yet.</div></div>
+      <div class="socials-grid"><div class="empty">Socials coming soon.</div></div>
     </div>
   </section>
 

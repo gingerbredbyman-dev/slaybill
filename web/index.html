@@ -1959,7 +1959,7 @@
 <section class="news-row" aria-labelledby="bk-news">
   <header>
     <h2 id="bk-news">Legit News</h2>
-    <a class="view-all" href="news.html">All the legit news <span aria-hidden="true">&rarr;</span></a>
+    <a class="view-all" href="news.html">Read the wire <span aria-hidden="true">&rarr;</span></a>
   </header>
   <div class="feed-list teaser" data-slot="news-feed" aria-busy="true">
     <div class="feed-loading">Loading the wire&hellip;</div>
@@ -2415,7 +2415,7 @@ function renderMarquee(data) {
   if (!coming.length && !previews.length) {
     const empty = document.createElement('div');
     empty.className = 'marquee-empty';
-    empty.textContent = 'No new shows on the marquee right now.';
+    empty.textContent = 'Marquee’s between acts. Check back soon.';
     slot.appendChild(empty);
     return;
   }
@@ -2539,7 +2539,7 @@ async function hydrate() {
     if (!shows.length) {
       const empty = document.createElement('div');
       empty.className = 'empty-bucket';
-      empty.textContent = 'Nothing in this bucket right now.';
+      empty.textContent = 'House lights on. Nothing here yet.';
       grid.appendChild(empty);
       continue;
     }
@@ -2554,7 +2554,7 @@ async function hydrate() {
   if (!ob.length) {
     const empty = document.createElement('div');
     empty.className = 'empty-bucket';
-    empty.textContent = 'No Off-Broadway shows tracked yet.';
+    empty.textContent = 'The downtown stage is dark tonight.';
     track.appendChild(empty);
   } else {
     for (const show of ob) {

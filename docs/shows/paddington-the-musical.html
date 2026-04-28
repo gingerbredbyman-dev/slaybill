@@ -678,14 +678,14 @@
   }
   .source-details summary::-webkit-details-marker { display: none; }
   .source-details summary::after {
-    content: "▾ Click for per-outlet scores";
+    content: "▾ See each outlet's score";
     display: block;
     margin-top: 8px;
     font-size: 9px; opacity: 0.6;
     letter-spacing: 0.18em;
     transition: transform 180ms ease;
   }
-  .source-details[open] summary::after { content: "▴ Hide per-outlet scores"; }
+  .source-details[open] summary::after { content: "▴ Hide breakdown"; }
   .source-details summary:hover { background: color-mix(in oklab, var(--surface) 75%, transparent); }
   .per-outlet {
     margin-top: 8px;
@@ -894,7 +894,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td colspan="3" class="pending">Ticket links pending — check your favorite vendor directly.</td></tr>
+          <tr><td colspan="3" class="pending">Box office is quiet on this one. Check your favorite vendor for now.</td></tr>
         </tbody>
       </table>
       <div class="note">Live prices open on the vendor's page in a new tab. Daily &amp; week-over-week price history wires in once our price-sample pipeline is live.</div>
@@ -904,7 +904,7 @@
   <section class="firms-panel" aria-label="Marketing firms">
     <div class="panel">
       <div class="label">Marketing</div>
-      <div class="empty">No marketing firms tracked yet for this show.</div>
+      <div class="empty">Marketing team coming soon.</div>
     </div>
     <div class="panel socials-panel">
       <div class="label">Follow</div>
