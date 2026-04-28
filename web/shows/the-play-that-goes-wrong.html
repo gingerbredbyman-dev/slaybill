@@ -67,8 +67,8 @@
     position: sticky; top: 0; z-index: 100;
     margin: 0 -20px 24px;
     padding: 14px 20px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     background: color-mix(in oklab, var(--stage) 70%, transparent);
     border-bottom: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
     display: flex; justify-content: space-between; align-items: center; gap: 12px;
@@ -270,11 +270,11 @@
     transform: translateY(-3px);
     border-color: color-mix(in oklab, var(--c1) 34%, transparent);
   }
-  @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  @supports ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
     .panel {
       background: color-mix(in oklab, var(--surface) 55%, transparent);
-      -webkit-backdrop-filter: blur(14px) saturate(140%);
-      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
+      backdrop-filter: blur(8px) saturate(120%);
     }
   }
   .panel .label {
@@ -353,11 +353,11 @@
     transform: translateY(-4px);
     border-color: color-mix(in oklab, var(--c1) 32%, transparent);
   }
-  @supports ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  @supports ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))) {
     .money .cell {
       background: color-mix(in oklab, var(--surface) 50%, transparent);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
     }
   }
   .money .metric {
@@ -928,7 +928,7 @@
       <div class="big ">82.1</div>
       <div class="grade-pill " aria-label="Letter grade A-">A-</div>
       <div class="grade-label">Great</div>
-      <div class="methodology">55% weighted critic + 45% weighted audience, Metacritic-style. Updated 2026-04-27.</div>
+      <div class="methodology">55% weighted critic + 45% weighted audience, Metacritic-style. Updated 2026-04-28.</div>
     </div>
     <div class="score-card">
       <div class="label" style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">Critic Score</div>
@@ -965,7 +965,7 @@
   </section>
 
   <section class="sources">
-    Sources &middot; Playbill grosses &middot; Off-Broadway League &middot; BroadwayWorld &middot; editorial curation &middot; last updated 2026-04-27
+    Sources &middot; Playbill grosses &middot; Off-Broadway League &middot; BroadwayWorld &middot; editorial curation &middot; last updated 2026-04-28
   </section>
 </main>
 

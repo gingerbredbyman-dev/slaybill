@@ -1302,7 +1302,7 @@
       inset 1px 1px 2px oklch(92% 0.06 90 / 0.75);
   }
   @media (prefers-reduced-motion: reduce) {
-    .bulb { animation: none !important; --bulb-glow: 1; }
+    .bulb { animation: none !important; }
   }
 
   .marquee-list {
@@ -1962,11 +1962,17 @@ function makeCard(show) {
   const stamp = frag.querySelector('.poster .stamp');
   stamp.textContent = show.title;
   if (show.poster_path) {
-    const img = new Image();
+    // Use a real <img> element with loading="lazy" so the browser defers
+    // off-screen poster fetches. JS-instantiated `new Image()` doesn't get
+    // the viewport-aware lazy treatment — was the dominant first-paint cost.
+    const img = document.createElement('img');
     img.alt = '';
-    img.onload = () => { poster.appendChild(img); stamp.style.display = 'none'; };
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onload = () => { stamp.style.display = 'none'; };
     img.onerror = () => img.remove();
     img.src = show.poster_path;
+    poster.appendChild(img);
   }
 
   frag.querySelector('.title').textContent = show.title;
