@@ -1,0 +1,2734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SLAYBILL — Broadway, Off-Broadway, what they're worth</title>
+<meta name="description" content="SLAYBILL — the Broadway guide that tracks what's opening, what's running, and what it's all grossing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Inter:wght@300..800&family=Instrument+Serif&display=swap">
+<style>
+  /* SLAYBILL design system — post-glass-liquid 2026.
+   * Fraunces (display, variable opsz/wght/WONK) + Inter (UI) replace
+   * Times New Roman + Courier. OKLCH tokens, edge-lit borders, no
+   * backdrop-filter on cards. Three buckets get distinct themes via
+   * data-theme on each <section.bucket>. */
+  :root {
+    color-scheme: dark light;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-ui:      'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-stamp:   'Instrument Serif', 'Times New Roman', serif;
+    --font-mono:    'Courier New', monospace;
+
+    /* Core OKLCH palette */
+    --yellow:   oklch(86% 0.22 95);
+    --ink:      oklch(12% 0.01 270);
+    --cream:    oklch(96% 0.01 95);
+    --red:      oklch(48% 0.22 27);
+    --gold:     oklch(80% 0.19 85);
+    --violet:   oklch(72% 0.18 290);
+    --cyan:     oklch(78% 0.13 220);
+
+    /* Surfaces */
+    --surface-0: oklch(8% 0.02 270);
+    --surface-1: oklch(11% 0.025 270);
+    --surface-2: oklch(15% 0.03 270);
+    --surface-border: oklch(22% 0.04 270);
+
+    /* Easing */
+    --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out-cub: cubic-bezier(0.65, 0, 0.35, 1);
+
+    --dur-fast:    200ms;
+    --dur-medium:  350ms;
+    --dur-slow:    600ms;
+
+    --pointer-x: 0.5;
+    --pointer-y: 0.35;
+    --pointer-x-pct: 50%;
+    --pointer-y-pct: 35%;
+    --pointer-shift: 0px;
+    --scroll-progress: 0;
+    --scroll-velocity: 0;
+    --scroll-lift: 0px;
+    --cover-lift: 0px;
+    --rail-lift: 0px;
+    --aurora-rotation: 0deg;
+
+    /* === DESIGN SYSTEM TOKENS — added in d10 audit ============================
+     * Components: Show Card · Marquee Row · Feed Item · Grade Pill · Tier Badge
+     *           · Bulb · AKA TM-mark · Score Card · Section Nav · Crumb Bar
+     *           · Socials Link
+     * Focus state: all clickable cards use `:focus-visible` with the
+     *   `--focus-ring` token (gold-violet, 2px, 3px offset).
+     * Use these tokens going forward — avoid raw px/oklch() in new code. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    --radius-sm:   4px;
+    --radius-md:   8px;
+    --radius-lg:  12px;
+    --radius-xl:  18px;
+    --radius-pill: 999px;
+
+    /* Holographic brand gradient — used on Grade Pill (composite A+→F) and on
+     * Verified Exclusive tier badge. Single source of truth. */
+    --brand-gradient: linear-gradient(110deg,
+      #6b3df5 0%,
+      #d946ef 35%,
+      #ec4899 70%,
+      #f59e0b 100%);
+    --brand-gradient-warm: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    /* Reverse direction (orange→pink→purple) — used on Verified Exclusive
+     * tier badges to differentiate from grade-pill premium read */
+    --brand-gradient-reverse: linear-gradient(110deg,
+      #f59e0b 0%,
+      #ec4899 60%,
+      #6b3df5 100%);
+
+    --focus-ring: 2px solid oklch(72% 0.18 290);
+    --focus-ring-offset: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  html { overflow-x: hidden; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    background:
+      radial-gradient(circle at var(--pointer-x-pct) var(--pointer-y-pct), oklch(80% 0.18 85 / 0.18), transparent 24rem),
+      radial-gradient(circle at 82% 85%, oklch(70% 0.22 335 / 0.14), transparent 28rem),
+      linear-gradient(145deg, var(--surface-0), oklch(5% 0.025 285) 52%, oklch(10% 0.018 235));
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-feature-settings: "ss01" 1, "cv05" 1;
+    min-height: 100vh;
+    padding: 32px 20px 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 72px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    overflow-x: hidden;
+    isolation: isolate;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+  body::before {
+    z-index: -2;
+    background:
+      /* Warm gold halo where the cover lives — leans into the masthead glow */
+      radial-gradient(ellipse 60% 45% at 50% 14%,
+        oklch(86% 0.22 95 / 0.18),
+        transparent 70%),
+      /* Soft vignette darkening edges so the cover pops */
+      radial-gradient(ellipse 80% 60% at 50% 50%,
+        transparent 0%,
+        oklch(0% 0 0 / 0.35) 100%);
+    opacity: 0.95;
+    transform: translateY(var(--scroll-lift));
+  }
+  body::after {
+    z-index: -1;
+    opacity: 0.12;
+    mix-blend-mode: soft-light;
+    background-image:
+      repeating-radial-gradient(circle at 20% 10%, oklch(100% 0 0 / 0.7) 0 1px, transparent 1px 3px);
+    background-size: 120px 120px;
+  }
+  ::selection { background: color-mix(in oklch, var(--gold) 35%, transparent); color: var(--cream); }
+
+  /* Theatrical focus rings — visible on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* Scroll-jostle: black text shifts opposite scroll direction, eases back. */
+  .jostle {
+    display: inline-block;
+    will-change: transform;
+    transition: transform .45s var(--ease-out-expo);
+  }
+  body.scroll-down .jostle { transform: translateY(-3px); }
+  body.scroll-up   .jostle { transform: translateY(3px); }
+  body.scroll-down .cover .jostle:nth-of-type(2n) { transform: translateY(-4px); }
+  body.scroll-up   .cover .jostle:nth-of-type(2n) { transform: translateY(4px); }
+
+  /* SLAYBILL yellow cover. */
+  .cover {
+    width: 100%; max-width: 480px;
+    background: var(--yellow);
+    color: var(--ink);
+    box-shadow:
+      0 30px 80px oklch(0% 0 0 / 0.6),
+      0 0 0 1px oklch(0% 0 0 / 0.1);
+    padding: 28px 32px 24px;
+    display: grid;
+    gap: 16px;
+    position: relative;
+    font-family: var(--font-display);
+    isolation: isolate;
+    transform:
+      perspective(1200px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(var(--cover-lift));
+    transition: transform var(--dur-medium) var(--ease-out-expo);
+  }
+  /* Subtle diagonal shimmer on the yellow ground (kept from original). */
+  .cover::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    background:
+      linear-gradient(120deg, transparent 0 35%, oklch(100% 0 0 / 0.28) 46%, transparent 58%),
+      var(--yellow);
+    opacity: 0.55;
+    transform: translateX(var(--pointer-shift));
+    pointer-events: none;
+  }
+
+  /* COVER LIGHTING — refined 2-light architectural setup. Cover starts dark,
+   * a key light sweeps in from upper-left, a fill from the right, both rake
+   * across the masthead, then settle on the SLAYBILL letterforms ABOVE the
+   * body text (so the copy underneath stays readable). Replaces the earlier
+   * 4-spot convergence that pooled light over the body text. */
+  .cover { overflow: hidden; }
+  /* Subtle vignette that frames the cover; never fully hides the masthead. */
+  .stage-scrim {
+    position: absolute; inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+      radial-gradient(140% 100% at 50% 50%, transparent 40%, oklch(8% 0.01 30 / 0.55) 100%);
+    opacity: 0;
+    transition: opacity 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .cover.intro-running .stage-scrim,
+  .cover.intro-finished .stage-scrim { opacity: 1; }
+
+  /* Two architectural lights stacked above the cover. mix-blend overlay so
+   * they tint the yellow Playbill warmly without washing it out. */
+  .stage-spots {
+    position: absolute; inset: 0;
+    z-index: 6;
+    pointer-events: none;
+  }
+  .stage-spot {
+    position: absolute;
+    top: var(--sy, 30%);
+    left: var(--sx, 50%);
+    width: 60vmin; height: 60vmin;
+    margin-top: -30vmin;
+    margin-left: -30vmin;
+    border-radius: 50%;
+    filter: blur(8px);
+    mix-blend-mode: overlay;
+    opacity: 0;
+    /* No will-change — was forcing a permanent compositor layer for static
+     * elements after intro completed. Only used during the keyframe sweep. */
+    transition: opacity 600ms ease-out;
+  }
+  /* KEY light — larger, warmer, positioned upper-left. Rakes across to land
+   * on the SLAYBILL letterforms (Y ~28% of cover). */
+  .stage-spot.spot-1 {
+    background: radial-gradient(circle at center,
+      oklch(96% 0.05 80 / 0.55) 0%,
+      oklch(82% 0.14 70 / 0.30) 25%,
+      oklch(60% 0.10 50 / 0.10) 55%,
+      transparent 78%);
+  }
+  /* FILL light — smaller, cooler, positioned upper-right. Softens the shadow
+   * side without competing with the key. */
+  .stage-spot.spot-2 {
+    width: 42vmin; height: 42vmin; margin-top: -21vmin; margin-left: -21vmin;
+    background: radial-gradient(circle at center,
+      oklch(94% 0.04 240 / 0.40) 0%,
+      oklch(75% 0.08 220 / 0.20) 30%,
+      transparent 70%);
+  }
+  /* Hide the legacy spot-3 + spot-4 (still in DOM from JS injection but no
+   * styling = invisible). Cleaner two-light setup is the upgrade. */
+  .stage-spot.spot-3, .stage-spot.spot-4 { display: none; }
+
+  /* INTRO: lights sweep in. Key starts off-canvas upper-left, fill from
+   * upper-right, both ease toward the title. */
+  @keyframes spot-key-rake {
+    0%   { opacity: 0; --sx: -10%; --sy: 10%; }
+    20%  { opacity: 0.9; }
+    55%  { --sx: 35%; --sy: 22%; opacity: 1; }
+    100% { --sx: 42%; --sy: 28%; opacity: 1; }
+  }
+  @keyframes spot-fill-rake {
+    0%   { opacity: 0; --sx: 110%; --sy: 18%; }
+    30%  { opacity: 0.7; }
+    65%  { --sx: 70%; --sy: 26%; opacity: 0.85; }
+    100% { --sx: 62%; --sy: 30%; opacity: 0.85; }
+  }
+  .cover.intro-running .stage-spot.spot-1 { animation: spot-key-rake  3.0s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s 1 forwards; }
+  .cover.intro-running .stage-spot.spot-2 { animation: spot-fill-rake 3.0s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s 1 forwards; }
+
+  /* RESTING: lights hold at the title position. No continuous animation —
+   * the prior 'breathe' loop animated `filter: blur()` on every frame which
+   * was a paint+layout hit. Static now. */
+  .cover.intro-finished .stage-spot.spot-1 { opacity: 1; --sx: 42%; --sy: 28%; }
+  .cover.intro-finished .stage-spot.spot-2 { opacity: 0.85; --sx: 62%; --sy: 30%; }
+  @media (prefers-reduced-motion: reduce) {
+    .stage-scrim { opacity: 1 !important; transition: none !important; }
+    .stage-spot.spot-1 { opacity: 1 !important; --sx: 42% !important; --sy: 28% !important; animation: none !important; }
+    .stage-spot.spot-2 { opacity: 0.85 !important; --sx: 62% !important; --sy: 30% !important; animation: none !important; }
+  }
+  .masthead {
+    border-top: 4px solid var(--ink);
+    border-bottom: 4px solid var(--ink);
+    padding: 12px 0 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Spotlight follow-sweep — a soft warm halo crosses the masthead every
+   * ~7s, like a follow-spot finding center stage. mix-blend-mode keeps
+   * the title legible; pointer-events off; opacity ramps at edges. */
+  .masthead::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0;
+    width: 28%;
+    background: radial-gradient(ellipse at center,
+      oklch(99% 0.12 92 / 0.85) 0%,
+      oklch(96% 0.14 84 / 0.45) 30%,
+      transparent 65%);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    filter: blur(10px);
+    transform: translateX(-30%);
+    opacity: 0;
+    animation: spotlight-cross 7.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+  @keyframes spotlight-cross {
+    0%   { transform: translateX(-30%); opacity: 0; }
+    8%   { opacity: 0.95; }
+    50%  { transform: translateX(150%); opacity: 0.95; }
+    58%  { opacity: 0; }
+    /* hold off-stage right, then snap back invisibly */
+    100% { transform: translateX(380%); opacity: 0; }
+  }
+  .masthead .word {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8.8vw + 4px, 70px);
+    font-variation-settings: 'wght' 900, 'opsz' 72, 'WONK' 1;
+    letter-spacing: -0.04em;
+    line-height: 0.86;
+    text-rendering: optimizeLegibility;
+  }
+  .masthead { position: relative; }
+  .masthead .sub {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.36em;
+    margin-top: 8px;
+    text-transform: uppercase;
+    opacity: 0.78;
+  }
+  .tagline {
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: 'wght' 320, 'opsz' 14, 'WONK' 0;
+    font-size: clamp(14px, 1.5vw + 8px, 17px);
+    line-height: 1.45;
+    letter-spacing: 0.005em;
+    margin: 0;
+  }
+  footer.cover-foot {
+    border-top: 2px solid var(--ink);
+    padding-top: 12px;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono);
+  }
+  .dog-ear {
+    position: absolute; top: 0; right: 0;
+    width: 38px; height: 38px;
+    background: linear-gradient(225deg, oklch(0% 0 0 / 0.08) 0%, oklch(0% 0 0 / 0.08) 50%, transparent 50%);
+  }
+
+  /* Scroll-progress gold line at top of viewport — fills as you scroll. */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: oklch(15% 0.02 30 / 0.4);
+    z-index: 200;
+    pointer-events: none;
+  }
+  .scroll-progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, oklch(80% 0.18 75), oklch(94% 0.14 90), oklch(80% 0.18 75));
+    box-shadow: 0 0 12px color-mix(in oklch, oklch(80% 0.18 75) 60%, transparent);
+    transition: width 100ms linear;
+  }
+
+  /* Sticky section nav — fades in once user scrolls past the cover. */
+  .section-nav {
+    position: fixed; top: 12px; right: 12px;
+    z-index: 150;
+    display: flex; gap: 4px; align-items: center;
+    padding: 6px;
+    border-radius: 999px;
+    background: color-mix(in oklch, oklch(8% 0.005 270) 70%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid color-mix(in oklch, var(--cream) 12%, transparent);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 280ms ease, transform 280ms ease;
+  }
+  body.scrolled-past-cover .section-nav {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .section-nav a {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 75%, transparent);
+    text-decoration: none;
+    transition: background 180ms ease, color 180ms ease;
+    white-space: nowrap;
+  }
+  .section-nav a:hover, .section-nav a:focus-visible {
+    background: color-mix(in oklch, var(--cream) 14%, transparent);
+    color: var(--cream);
+    outline: none;
+  }
+  @media (max-width: 640px) {
+    .section-nav { top: 8px; right: 8px; padding: 4px; }
+    .section-nav a { padding: 5px 8px; font-size: 9px; letter-spacing: 0.14em; }
+  }
+  /* Hide section-nav while the tier-chip is visible (top-left) — they'd compete */
+  body.scrolled-past-cover .tier-chip { opacity: 0; pointer-events: none; }
+
+  /* (Hover-to-preview overlay removed — synopsis lives on Tier 2 only.) */
+
+  /* AKA NYC trademark-style mark — sits inline next to SLAYBILL like a TM
+   * superscript. Black ink (CSS filter forces all-black so the logo reads as
+   * a true ink stamp on the yellow paper). Animates in once on page load. */
+  /* Positioned absolutely at the top-right of the SLAYBILL word so it
+   * never overflows the masthead. Lifts above the cap height as a true
+   * TM-superscript would. */
+  /* AKA TM-mark — text-based black ink stamp, anchored to upper-right of
+   * the masthead frame. Set in the same display serif as SLAYBILL but
+   * tiny + tightly-tracked. Animates in on load. */
+  .aka-tm {
+    position: absolute;
+    top: 12px; right: 16px;
+    z-index: 4;
+    font-family: var(--font-display);
+    font-variation-settings: 'wght' 900, 'opsz' 32, 'WONK' 1;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: oklch(8% 0.005 30);
+    text-decoration: none;
+    padding: 4px 7px 3px;
+    border: 1.5px solid oklch(8% 0.005 30);
+    border-radius: 3px;
+    background: oklch(0% 0 0 / 0.04);
+    transform: scale(0);
+    transform-origin: right top;
+    opacity: 0;
+    will-change: opacity, transform;
+    transition: background 200ms ease, transform 200ms var(--ease-spring);
+  }
+  .aka-tm:hover {
+    background: oklch(0% 0 0 / 0.10);
+  }
+  .aka-tm:focus-visible {
+    outline: 2px solid oklch(40% 0.20 280);
+    outline-offset: 3px;
+  }
+  /* Hover tooltip */
+  .aka-tm::after {
+    content: "Marketing partner";
+    position: absolute;
+    top: calc(100% + 6px); right: 0;
+    padding: 5px 9px;
+    border-radius: 4px;
+    background: oklch(15% 0.01 30);
+    color: oklch(96% 0.04 90);
+    font-family: var(--font-ui);
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transform: translateY(-3px);
+    transition: opacity 200ms ease, transform 200ms ease;
+    line-height: 1.2;
+  }
+  .aka-tm:hover::after, .aka-tm:focus-visible::after {
+    opacity: 1; transform: translateY(0);
+  }
+  @media (max-width: 480px) {
+    .aka-tm { top: 9px; right: 12px; font-size: 11px; padding: 3px 6px 2px; }
+  }
+  /* Stamp-press animation — fires once when cover lights settle (~3.4s). */
+  @keyframes aka-tm-press {
+    0%   { opacity: 0; transform: scale(3.5) rotate(-18deg); }
+    40%  { opacity: 1; }
+    62%  { transform: scale(0.92) rotate(4deg); opacity: 1; }
+    82%  { transform: scale(1.04) rotate(-2deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  .aka-tm.is-stamping {
+    animation: aka-tm-press 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) 0s 1 forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aka-tm { opacity: 1 !important; transform: scale(1) !important; animation: none !important; }
+  }
+
+  /* Buckets — three lifecycle modules with distinct themes. */
+  .bucket {
+    width: 100%; max-width: 1200px;
+    padding: 30px 26px 34px;
+    border-radius: 18px;
+    background: var(--bucket-bg, var(--surface-1));
+    color: var(--bucket-ink, var(--cream));
+    transition: background var(--dur-medium) var(--ease-in-out-cub);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklch, var(--bucket-ink) 10%, transparent),
+      0 26px 90px oklch(0% 0 0 / 0.28);
+  }
+  .bucket::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at var(--pointer-x-pct) 0%, color-mix(in oklch, var(--bucket-accent, var(--gold)) 20%, transparent), transparent 38%),
+      linear-gradient(100deg, transparent 0 64%, color-mix(in oklch, var(--bucket-accent, var(--gold)) 8%, transparent) 100%);
+    opacity: 0.9;
+    mix-blend-mode: plus-lighter;
+  }
+  .bucket > * { position: relative; }
+  .bucket header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .bucket h2 {
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    font-size: clamp(30px, 3.5vw + 12px, 48px);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+  /* Live Broadway is the focus surface — bump headline scale + add a thin
+   * accent rule so the section visually announces itself. */
+  .bucket[data-theme="live"] h2 {
+    font-size: clamp(40px, 5vw + 14px, 72px);
+    background: linear-gradient(180deg,
+      oklch(96% 0.04 90) 0%,
+      oklch(82% 0.18 80) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px color-mix(in oklch, oklch(80% 0.18 75) 28%, transparent);
+  }
+  .bucket[data-theme="live"] header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid color-mix(in oklch, oklch(80% 0.18 80) 22%, transparent);
+    margin-bottom: 28px;
+  }
+  .bucket .bucket-note {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    text-align: right;
+  }
+  /* Live's subtitle is louder — companion to the gradient h2 */
+  .bucket[data-theme="live"] .bucket-note {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.92;
+    color: color-mix(in oklch, oklch(80% 0.18 80) 70%, var(--cream) 30%);
+  }
+
+  /* Theme: Coming Soon — paper, monochrome.
+   * In OS dark mode, drop to a pale grey instead of pure white. */
+  .bucket[data-theme="coming"] {
+    --bucket-bg: oklch(96% 0.005 95);
+    --bucket-ink: oklch(15% 0.01 270);
+    --bucket-accent: oklch(15% 0.01 270);
+    --poster-filter: grayscale(1) contrast(1.05);
+  }
+
+  /* Theme: In Previews — yellow on black, duotone posters. */
+  .bucket[data-theme="previews"] {
+    --bucket-bg: oklch(10% 0.01 270);
+    --bucket-ink: oklch(86% 0.22 95);
+    --bucket-accent: oklch(86% 0.22 95);
+    --poster-filter: sepia(0.7) saturate(3) hue-rotate(-10deg) brightness(0.95);
+  }
+
+  /* Theme: Live — full color, current scheme. */
+  .bucket[data-theme="live"] {
+    --bucket-bg: oklch(11% 0.025 270);
+    --bucket-ink: var(--cream);
+    --bucket-accent: oklch(70% 0.22 350);
+    --poster-filter: none;
+  }
+
+  /* Card grid. */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ── Live Broadway: horizontal scroll row, OB pattern, 25% smaller cards.
+   * Live is the FOCUS surface. Same scroll-snap pattern as Off-Broadway, but
+   * cards are larger than OB (260px vs 168px), full saturation (no desat
+   * filter), iridescent gradient borders, glass treatment. 2026-trendy:
+   * scroll-snap-stop: always so each card pauses cleanly, edge mask, hover
+   * lift, container queries on poster sizing. */
+  .bucket[data-theme="live"] .grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 6px 4px 22px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, oklch(80% 0.18 75) 45%, transparent) transparent;
+    mask-image: linear-gradient(90deg, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+  }
+  .bucket[data-theme="live"] .grid::-webkit-scrollbar { height: 8px; }
+  .bucket[data-theme="live"] .grid::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, oklch(80% 0.18 75) 45%, transparent);
+    border-radius: 4px;
+  }
+  .bucket[data-theme="live"] .show-card {
+    flex: 0 0 260px;        /* ~25% smaller than the prior wide single-column */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    container-type: inline-size;
+    container-name: livecard;
+    /* 2026-trendy: gradient border via background trick + glass layer */
+    background-image:
+      linear-gradient(color-mix(in oklch, var(--bucket-bg) 92%, var(--bucket-ink) 5%),
+                      color-mix(in oklch, var(--bucket-bg) 92%, var(--bucket-ink) 5%)),
+      linear-gradient(135deg,
+        oklch(80% 0.20 75) 0%,
+        oklch(70% 0.20 350) 35%,
+        oklch(70% 0.18 220) 65%,
+        oklch(78% 0.16 75) 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border: 1px solid transparent;
+    box-shadow:
+      0 1px 0 color-mix(in oklch, var(--bucket-ink) 8%, transparent) inset,
+      0 14px 30px -18px oklch(0% 0 0 / 0.55),
+      0 2px 6px -2px oklch(0% 0 0 / 0.18);
+  }
+  /* Inner ink-hairline guarantees a card frame even when the iridescent
+   * gradient border washes out against warm-palette posters (Hamilton gold,
+   * Lion King amber, etc). */
+  .bucket[data-theme="live"] .show-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid color-mix(in oklch, oklch(15% 0.02 270) 60%, transparent);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  .bucket[data-theme="live"] .show-card:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+  .bucket[data-theme="live"] .show-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 1px 0 color-mix(in oklch, var(--bucket-ink) 14%, transparent) inset,
+      0 22px 40px -16px oklch(0% 0 0 / 0.65),
+      0 4px 10px -4px oklch(0% 0 0 / 0.22),
+      0 0 0 1px color-mix(in oklch, oklch(80% 0.18 75) 30%, transparent);
+  }
+  .bucket[data-theme="live"] .show-card .poster {
+    aspect-ratio: 3 / 4;
+    transform: translateZ(18px);
+  }
+  .bucket[data-theme="live"] .show-card .title {
+    font-size: clamp(13px, 7.2cqw, 18px);
+  }
+  /* Tablet+ widens cards slightly for breathing room */
+  @media (min-width: 880px) {
+    .bucket[data-theme="live"] .show-card { flex-basis: 280px; }
+  }
+  /* Mobile: trim card width so the snap reveals the next card edge as a tease */
+  @media (max-width: 720px) {
+    .bucket[data-theme="live"] .show-card { flex-basis: 220px; }
+    .bucket[data-theme="live"] .grid { padding-bottom: 28px; }
+    /* Override the earlier mobile rule that disabled slider — we now WANT the scroll */
+    .bucket[data-theme="live"] .stage-viewport { display: none; }
+  }
+  /* Legacy slider class names kept for any residual references. */
+
+  .live-stage { position: relative; }
+
+  .stage-viewport {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .stage-track {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.52s cubic-bezier(0.45, 0.05, 0.15, 1);
+    will-change: transform;
+  }
+
+  .stage-page {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-bottom: 16px;
+    flex-shrink: 0;
+  }
+  /* Live now uses horizontal scroll-row (OB pattern) — legacy slider rules
+   * removed. The .stage-page / .stage-track / .stage-nav classes are no
+   * longer rendered into the DOM; their CSS above is dead-code-tolerant. */
+
+  /* Nav */
+  .stage-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .stage-btn {
+    all: unset;
+    cursor: pointer;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in oklch, var(--bucket-ink) 28%, transparent);
+    color: var(--bucket-ink);
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  }
+  .stage-btn:hover:not(:disabled) {
+    background: color-mix(in oklch, var(--bucket-ink) 10%, transparent);
+    border-color: color-mix(in oklch, var(--bucket-ink) 55%, transparent);
+    transform: scale(1.1);
+  }
+  .stage-btn:disabled { opacity: 0.25; cursor: default; }
+  .stage-counter {
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: color-mix(in oklch, var(--bucket-ink) 50%, transparent);
+    font-variant-numeric: tabular-nums;
+    min-width: 48px;
+    text-align: center;
+  }
+
+  /* Spotlight overlay that flares on first entry */
+  .stage-spotlight {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(ellipse 55% 38% at 50% 28%,
+      oklch(100% 0.04 90 / 0.22) 0%,
+      oklch(100% 0.02 90 / 0.07) 45%,
+      transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Roll-in entry animation for stage cards */
+  @keyframes stage-roll-in {
+    from {
+      opacity: 0;
+      transform: perspective(700px) translateY(56px) rotateX(-7deg);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(700px) translateY(0) rotateX(0deg);
+    }
+  }
+  .stage-page.is-entering .show-card {
+    animation: stage-roll-in 0.58s var(--ease-spring) both;
+  }
+  .stage-page.is-entering .show-card:nth-child(2) { animation-delay: 0.08s; }
+  .stage-page.is-entering .show-card:nth-child(3) { animation-delay: 0.16s; }
+  .stage-page.is-entering .show-card:nth-child(4) { animation-delay: 0.24s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage-page.is-entering .show-card { animation: none; }
+    .stage-spotlight { display: none; }
+    .stage-track { transition: none; }
+  }
+
+  /* Card — container query host so titles fit without mid-word wraps. */
+  a.show-card {
+    container-type: inline-size;
+    container-name: card;
+    display: flex; flex-direction: column; gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 14px;
+    padding: 14px;
+    min-width: 0;
+    overflow: hidden;
+    /* Edge-lit border via two-layer background — no rgba border. */
+    border: 1px solid transparent;
+    background-image:
+      linear-gradient(color-mix(in oklch, var(--bucket-bg) 88%, var(--bucket-ink) 5%),
+                      color-mix(in oklch, var(--bucket-bg) 88%, var(--bucket-ink) 5%)),
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--bucket-accent) 50%, transparent) 0%,
+        transparent 50%,
+        color-mix(in oklch, var(--bucket-accent) 18%, transparent) 100%
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition:
+      box-shadow var(--dur-fast) var(--ease-spring),
+      transform var(--dur-fast) var(--ease-spring);
+    transform:
+      perspective(900px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(0);
+    transform-style: preserve-3d;
+  }
+  a.show-card:hover, a.show-card:focus-visible {
+    transform:
+      perspective(900px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(-5px);
+    box-shadow:
+      0 20px 48px oklch(0% 0 0 / 0.35),
+      0 0 0 1px color-mix(in oklch, var(--bucket-accent) 35%, transparent);
+  }
+
+  /* Poster: palette-gradient fallback + optional real image. */
+  .poster {
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    filter: var(--poster-filter);
+    background: oklch(15% 0.01 270);
+    transform: translateZ(18px);
+  }
+  .poster .palette-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--p1, oklch(45% 0.05 270)), var(--p2, oklch(30% 0.04 270)) 55%, var(--p3, oklch(20% 0.03 270)));
+  }
+  .poster .palette-accent {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 28% 18%, var(--p4, oklch(60% 0.10 270)) 0%, transparent 55%);
+    opacity: 0.55;
+  }
+  .poster img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .poster .stamp {
+    position: absolute; inset: auto 0 14px 0;
+    text-align: center;
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    color: var(--p5, white);
+    letter-spacing: -0.01em;
+    padding: 0 14px;
+    text-transform: uppercase;
+    font-size: clamp(14px, 6cqw, 32px);
+    line-height: 0.95;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+    mix-blend-mode: overlay;
+  }
+  a.show-card .poster::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at var(--glint-x, 35%) var(--glint-y, 20%), oklch(100% 0 0 / 0.38), transparent 18%),
+      linear-gradient(135deg, oklch(100% 0 0 / 0.20), transparent 34% 64%, oklch(0% 0 0 / 0.22));
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease-out-expo);
+    mix-blend-mode: screen;
+  }
+  a.show-card:hover .poster::after,
+  a.show-card:focus-visible .poster::after { opacity: 0.75; }
+
+  /* Title — container-query-sized so HADESTOWN fits without mid-word wrap.
+   * translateZ pulls the title slightly forward for parallax depth on tilt. */
+  .show-card .title {
+    font-family: var(--font-display);
+    font-variation-settings: 'wght' 800, 'opsz' 24, 'WONK' 1;
+    font-size: clamp(15px, 8.5cqw, 22px);
+    line-height: 1;
+    letter-spacing: -0.018em;
+    text-transform: uppercase;
+    word-break: keep-all;
+    hyphens: none;
+    text-wrap: balance;
+    min-height: calc(2 * 1em);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transform: translateZ(8px);
+    transition: transform var(--dur-fast) var(--ease-spring);
+  }
+  /* Pill chip floats further forward than the title — front of the stack. */
+  .show-card .pill { transform: translateZ(14px); }
+  /* Metrics + scores sit between card surface and title for layering. */
+  .show-card .metrics,
+  .show-card .scores { transform: translateZ(4px); }
+  /* Firms sit at card surface (depth 0). */
+  .show-card .venue { transform: translateZ(2px); }
+  .show-card .venue {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .metrics {
+    display: flex; flex-wrap: wrap; gap: 4px 10px;
+    font-family: var(--font-ui);
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+  .metrics .m { white-space: nowrap; }
+  .metrics .m.pending { opacity: 0.45; font-style: italic; font-weight: 400; }
+
+  .scores {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    font-family: var(--font-ui);
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    opacity: 1;
+  }
+  .scores .s { color: color-mix(in oklch, var(--bucket-accent) 92%, white); }
+  .scores .s.pending { opacity: 0.55; font-weight: 500; }
+  .scores .grade {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 30px; height: 18px; padding: 0 7px;
+    border-radius: 999px;
+    font-family: "Courier New", monospace; font-weight: 700;
+    font-size: 10px; letter-spacing: 0.12em;
+    background: var(--brand-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    box-shadow: 0 4px 12px -4px color-mix(in oklch, #d946ef 60%, transparent);
+  }
+  .scores .grade.na {
+    background: color-mix(in oklch, var(--bucket-accent) 18%, transparent);
+    color: color-mix(in oklch, var(--bucket-accent) 75%, white);
+    box-shadow: none;
+    text-shadow: none;
+    opacity: 0.5;
+  }
+  /* Flag icon — fires when weekly gross < $499K OR audience sentiment < 60%. */
+  .flag-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 999px;
+    background: var(--brand-gradient-warm);
+    color: #fff;
+    font-size: 11px; font-weight: 700; line-height: 1;
+    box-shadow: 0 4px 12px -4px color-mix(in oklch, #ef4444 65%, transparent);
+    cursor: help;
+  }
+  .flag-icon::before { content: "▼"; font-size: 9px; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: color-mix(in oklch, var(--bucket-accent) 12%, transparent);
+    border: 1px solid color-mix(in oklch, var(--bucket-accent) 32%, transparent);
+    color: var(--bucket-accent);
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  /* Marketing firm chips — render under poster, primary firm gets gold treatment. */
+  .firms {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  .firm-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: color-mix(in oklch, var(--bucket-bg) 80%, var(--bucket-ink) 8%);
+    border: 1px solid color-mix(in oklch, var(--bucket-ink) 12%, transparent);
+    color: color-mix(in oklch, var(--bucket-ink) 78%, transparent);
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .firm-chip .firm-name { font-weight: 600; }
+  .firm-chip .firm-role {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .firm-chip .firm-icon { opacity: 0.6; }
+  .firm-chip[data-stub="true"]::after {
+    content: "?";
+    margin-left: 4px;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: color-mix(in oklch, var(--bucket-ink) 40%, transparent);
+  }
+
+  /* Primary firm — gold gradient text, halo, and 6 emanating sparkles. */
+  .firm-chip.is-aka-aor {
+    position: relative;
+    background:
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--gold) 18%, var(--bucket-bg) 70%),
+        color-mix(in oklch, var(--gold) 8%, var(--bucket-bg) 80%));
+    border-color: color-mix(in oklch, var(--gold) 55%, transparent);
+    color: oklch(96% 0.15 90);
+    box-shadow:
+      0 0 12px color-mix(in oklch, var(--gold) 30%, transparent),
+      inset 0 0 0 1px color-mix(in oklch, var(--gold) 25%, transparent);
+    overflow: visible;  /* let sparkles escape */
+  }
+  .firm-chip.is-aka-aor .firm-name {
+    background: linear-gradient(135deg, var(--gold), oklch(92% 0.12 75) 50%, var(--gold));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: firm-shimmer 3.4s linear infinite;
+  }
+  .firm-chip.is-aka-aor .firm-role {
+    color: oklch(82% 0.18 88);
+    opacity: 1;
+  }
+  .firm-chip.is-aka-aor .firm-icon { color: var(--gold); opacity: 1; }
+  .firm-chip.is-aka-aor::before,
+  .firm-chip.is-aka-aor::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow:
+      0 0 6px var(--gold),
+      0 0 12px color-mix(in oklch, var(--gold) 60%, transparent);
+    opacity: 0;
+  }
+  .firm-chip.is-aka-aor::before {
+    top: -2px; left: 12%;
+    animation: sparkle-drift-a 2.6s ease-out infinite;
+  }
+  .firm-chip.is-aka-aor::after {
+    content: "";  /* override the [data-stub] ::after on primary chips */
+    top: 30%; right: -2px;
+    animation: sparkle-drift-b 2.9s ease-out infinite 0.5s;
+  }
+  @keyframes firm-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes sparkle-drift-a {
+    0%   { transform: translate(0, 0)    scale(0.4); opacity: 0; }
+    20%  { opacity: 0.95; }
+    100% { transform: translate(-14px, -16px) scale(1); opacity: 0; }
+  }
+  @keyframes sparkle-drift-b {
+    0%   { transform: translate(0, 0) scale(0.4); opacity: 0; }
+    25%  { opacity: 0.9; }
+    100% { transform: translate(18px, -10px) scale(1); opacity: 0; }
+  }
+
+  /* Multi-particle sparkle layer — 6 particles via stacked box-shadows on
+   * a single pseudo-element on the parent show-card .poster. */
+  a.show-card.is-aka-show .poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 12% 20%, var(--gold) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 88% 14%, var(--gold) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 18% 78%, var(--gold) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 82% 84%, var(--gold) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 50% 8%,  var(--gold) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 50% 92%, var(--gold) 0 1.5px, transparent 2px);
+    filter: drop-shadow(0 0 4px color-mix(in oklch, var(--gold) 70%, transparent));
+    animation: poster-sparkle 3.2s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+  @keyframes poster-sparkle {
+    0%, 100% { opacity: 0.0; transform: scale(0.96); }
+    20%      { opacity: 0.85; transform: scale(1.02); }
+    40%      { opacity: 0.4; transform: scale(1.0); }
+    60%      { opacity: 0.95; transform: scale(1.04); }
+    80%      { opacity: 0.5; transform: scale(1.0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .firm-chip.is-aka-aor .firm-name,
+    .firm-chip.is-aka-aor::before,
+    .firm-chip.is-aka-aor::after,
+    a.show-card.is-aka-show .poster::before {
+      animation: none !important;
+    }
+    /* Static gold gradient on primary firm name when motion is reduced. */
+    .firm-chip.is-aka-aor .firm-name { background-position: 0 0; }
+  }
+
+  /* Off-Broadway horizontal scroll row. */
+  .ob-row {
+    width: 100%; max-width: 1200px;
+  }
+  .ob-row header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 0 4px 12px;
+  }
+  .ob-row h2 {
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    font-size: clamp(24px, 2.4vw + 10px, 32px);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--cream);
+    opacity: 0.9;
+  }
+  .ob-row .note {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+  .ob-track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 4px 4px 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: oklch(35% 0.04 270) transparent;
+    mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  }
+  .ob-track::-webkit-scrollbar { height: 8px; }
+  .ob-track::-webkit-scrollbar-thumb { background: oklch(35% 0.04 270); border-radius: 4px; }
+  .ob-card {
+    flex: 0 0 168px;
+    scroll-snap-align: start;
+    filter: saturate(0.78);
+    container-type: inline-size;
+    container-name: obcard;
+    --bucket-bg: var(--surface-1);
+    --bucket-ink: var(--cream);
+    --bucket-accent: oklch(60% 0.06 270);
+  }
+  .ob-card .title { font-size: clamp(13px, 9cqw, 18px); }
+
+  /* Marquee board — Coming Soon + In Previews replaced with a theater-marquee strip. */
+  .marquee-board {
+    width: 100%; max-width: 1200px;
+    margin: 0;
+  }
+  .marquee-board header {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    margin: 0 4px 14px; flex-wrap: wrap;
+  }
+  .marquee-board h2 {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-size: clamp(28px, 3vw + 12px, 44px);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin: 0;
+    color: var(--cream);
+    font-style: italic;
+  }
+  .marquee-board .bucket-note {
+    font-family: var(--font-ui);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 70%, transparent);
+  }
+  .marquee-frame {
+    position: relative;
+    padding: 38px 28px;
+    border-radius: 18px;
+    background:
+      radial-gradient(120% 80% at 50% -10%, oklch(60% 0.18 75 / 0.18), transparent 60%),
+      linear-gradient(180deg,
+        oklch(20% 0.04 30) 0%,
+        oklch(15% 0.03 30) 50%,
+        oklch(10% 0.02 30) 100%);
+    border: 1px solid color-mix(in oklch, oklch(80% 0.16 75) 32%, transparent);
+    box-shadow:
+      inset 0 0 50px color-mix(in oklch, oklch(40% 0.10 30) 35%, transparent),
+      inset 0 0 0 1px color-mix(in oklch, oklch(80% 0.18 80) 22%, transparent),
+      0 16px 60px -20px color-mix(in oklch, oklch(50% 0.15 30) 40%, transparent);
+    overflow: hidden;
+  }
+  /* Light-bulb rows: top + bottom. Each bulb is an individual element with
+   * its own flicker phase, filament glow, and glass-shaded body. JS injects
+   * the bulbs at runtime so the count auto-fits the marquee width. */
+  .marquee-bulbs {
+    position: absolute; left: 18px; right: 18px;
+    height: 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    pointer-events: none;
+    --bulb-size: 12px;  /* default — overridden by per-section rules below */
+  }
+  .marquee-bulbs-top    { top: 10px; }
+  .marquee-bulbs-bottom { bottom: 10px; }
+
+  /* Section-specific bulb sizing. Live Broadway is the focus surface — biggest.
+   * Marquee is the secondary highlight — medium. Off-Broadway is supporting — smallest. */
+  .bucket[data-theme="live"] .marquee-bulbs { --bulb-size: 16px; height: 22px; left: 24px; right: 24px; }
+  .marquee-frame .marquee-bulbs              { --bulb-size: 12px; }
+  .ob-row .marquee-bulbs                     { --bulb-size: 6px; height: 10px; left: 12px; right: 12px; opacity: 0.55; }
+
+  /* Frame variants for Live + OB so the bulbs have a backdrop to glow against. */
+  .bucket[data-theme="live"] {
+    position: relative;
+  }
+  .bucket[data-theme="live"] .grid {
+    padding: 38px 4px;
+  }
+  /* Bulb strips sit OUTSIDE the bucket frame so they never cover the
+   * gradient header. Top strip floats above the bucket, bottom strip below. */
+  .bucket[data-theme="live"] > .marquee-bulbs-top    { top: -11px; }
+  .bucket[data-theme="live"] > .marquee-bulbs-bottom { bottom: -11px; }
+  /* Allow bulbs to render outside the bucket overflow */
+  .bucket[data-theme="live"] { overflow: visible; }
+
+  .ob-row { position: relative; padding-bottom: 22px; }
+  .ob-row > .marquee-bulbs-top    { top: 56px; }
+  .ob-row > .marquee-bulbs-bottom { bottom: 6px; }
+
+  /* Bulb: glass orb + static glow. Animation drives OPACITY only (cheap on
+   * GPU) instead of @property + box-shadow (triggers paint every frame and
+   * was the dominant frame-cost on the page). Same visual rhythm, ~10x cheaper. */
+  .bulb {
+    position: relative;
+    width: var(--bulb-size, 12px); height: var(--bulb-size, 12px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+      oklch(98% 0.05 90) 0%,
+      oklch(92% 0.16 88) 28%,
+      oklch(80% 0.20 80) 60%,
+      oklch(55% 0.16 70) 100%);
+    box-shadow:
+      0 0 8px oklch(85% 0.20 80 / 0.85),
+      0 0 20px oklch(75% 0.22 75 / 0.5),
+      inset -2px -2px 3px oklch(40% 0.10 60 / 0.45),
+      inset 1px 1px 2px oklch(98% 0.05 95 / 0.85);
+    animation: bulb-flicker var(--bulb-period, 4.6s) ease-in-out infinite;
+    animation-delay: var(--bulb-delay, 0s);
+  }
+  /* Filament — small glowing core inside the bulb */
+  .bulb::after {
+    content: "";
+    position: absolute;
+    inset: 28%;
+    border-radius: 50%;
+    background: radial-gradient(circle at center,
+      oklch(99% 0.03 90) 0%,
+      oklch(95% 0.14 85) 50%,
+      transparent 75%);
+  }
+  @keyframes bulb-flicker {
+    0%, 100% { opacity: 1; }
+    47%      { opacity: 0.95; }
+    50%      { opacity: 0.7; }
+    53%      { opacity: 0.98; }
+  }
+  /* Occasional dim-bulb (one in five) — slightly weaker, more amber */
+  .bulb.dim {
+    background: radial-gradient(circle at 35% 30%,
+      oklch(92% 0.07 80) 0%,
+      oklch(78% 0.16 75) 35%,
+      oklch(60% 0.16 65) 70%,
+      oklch(40% 0.10 55) 100%);
+    box-shadow:
+      0 0 calc(5px * var(--bulb-glow, 1)) oklch(70% 0.18 70 / 0.7),
+      0 0 calc(14px * var(--bulb-glow, 1)) oklch(60% 0.18 65 / 0.45),
+      inset -2px -2px 3px oklch(35% 0.08 55 / 0.5),
+      inset 1px 1px 2px oklch(92% 0.06 90 / 0.75);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bulb { animation: none !important; }
+  }
+
+  .marquee-list {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    margin: 14px 0;
+    gap: 0;
+  }
+  .marquee-empty {
+    padding: 18px;
+    color: color-mix(in oklch, var(--cream) 70%, transparent);
+    font-family: var(--font-ui); font-size: 13px;
+    text-align: center;
+  }
+  .marquee-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: baseline;
+    gap: 18px;
+    padding: 14px 8px;
+    border-bottom: 1px solid color-mix(in oklch, oklch(80% 0.16 80) 14%, transparent);
+    color: var(--cream);
+    text-decoration: none;
+    transition: background 200ms;
+  }
+  .marquee-row:last-child { border-bottom: none; }
+  .marquee-row:hover {
+    background: color-mix(in oklch, oklch(80% 0.16 80) 5%, transparent);
+  }
+  .marquee-row:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: -2px;
+    background: color-mix(in oklch, oklch(80% 0.16 80) 8%, transparent);
+  }
+  .marquee-status {
+    font-family: var(--font-ui);
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .marquee-status.coming   { color: oklch(85% 0.12 95); }
+  .marquee-status.previews { color: oklch(82% 0.16 350); }
+  .marquee-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(22px, 2.6vw + 6px, 36px);
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: oklch(96% 0.06 90);
+    text-shadow: 0 0 18px color-mix(in oklch, oklch(80% 0.18 75) 30%, transparent);
+    text-transform: uppercase;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-wrap: balance;
+  }
+  .marquee-date {
+    font-family: var(--font-ui);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 80%, transparent);
+    white-space: nowrap;
+  }
+  .marquee-arrow {
+    font-family: var(--font-ui);
+    font-size: 18px;
+    color: color-mix(in oklch, oklch(80% 0.18 75) 80%, transparent);
+    transition: transform 200ms;
+  }
+  .marquee-row:hover .marquee-arrow { transform: translateX(4px); color: var(--cream); }
+  @media (max-width: 720px) {
+    /* Stack pill above title so long titles get full width */
+    .marquee-row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "pill arrow" "title title";
+      gap: 8px 12px;
+      padding: 14px 6px;
+    }
+    .marquee-row .marquee-status { grid-area: pill; justify-self: start; }
+    .marquee-row .marquee-arrow  { grid-area: arrow; }
+    .marquee-row .marquee-title  { grid-area: title; font-size: clamp(20px, 5.5vw, 30px); }
+    .marquee-date { display: none; }
+  }
+
+  /* News + Gossip feed sections. */
+  .news-row, .gossip-row {
+    width: 100%; max-width: 1200px;
+    margin-top: 12px;
+  }
+  .news-row header, .gossip-row header {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    margin: 0 4px 14px; flex-wrap: wrap;
+  }
+  .view-all {
+    font-family: var(--font-ui);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 80%, transparent);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklch, var(--cream) 22%, transparent);
+    transition: background 180ms, color 180ms, border-color 180ms;
+  }
+  .view-all:hover {
+    background: color-mix(in oklch, var(--cream) 12%, transparent);
+    color: var(--cream);
+    border-color: color-mix(in oklch, var(--cream) 40%, transparent);
+  }
+  .view-all span { margin-left: 4px; }
+  .news-row h2, .gossip-row h2 {
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    font-size: clamp(24px, 2.4vw + 10px, 32px);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--cream);
+  }
+  .news-row h2 .h2-sub, .gossip-row h2 .h2-sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.55em;
+    color: color-mix(in oklch, var(--cream) 65%, transparent);
+    margin-left: 6px;
+    vertical-align: 4px;
+  }
+  .news-row .note, .gossip-row .note {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 75%, transparent);
+  }
+  .feed-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  /* Teaser: first item spans both columns as a lead story, items 2-4 sit in
+   * the standard 2-col grid below. Editorial magazine pattern. */
+  .feed-list.teaser .feed-item:first-child {
+    grid-column: 1 / -1;
+    padding: 18px 22px;
+  }
+  .feed-list.teaser .feed-item:first-child .feed-title {
+    font-family: var(--font-stamp);
+    font-size: clamp(20px, 2.5vw + 6px, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  @media (max-width: 760px) { .feed-list { grid-template-columns: 1fr; } }
+  .feed-loading {
+    padding: 18px 16px;
+    color: color-mix(in oklch, var(--cream) 65%, transparent);
+    font-family: var(--font-ui); font-size: 12px;
+    grid-column: 1 / -1;
+  }
+  .feed-item {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: color-mix(in oklch, var(--surface-1) 88%, transparent);
+    border: 1px solid var(--surface-border);
+    color: var(--cream);
+    text-decoration: none;
+    transition: background 200ms, transform 200ms;
+  }
+  .feed-item:hover {
+    background: color-mix(in oklch, var(--surface-1) 100%, white 4%);
+    transform: translateY(-1px);
+  }
+  .feed-item:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    background: color-mix(in oklch, var(--surface-1) 100%, white 6%);
+  }
+  .feed-item .feed-meta {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-family: var(--font-ui);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--cream) 80%, transparent);
+  }
+  .feed-item .feed-source { color: var(--cream); }
+  .feed-item .feed-date { color: color-mix(in oklch, var(--cream) 60%, transparent); font-weight: 500; letter-spacing: 0.06em; }
+  .feed-item .feed-title {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 17px; line-height: 1.35;
+    color: var(--cream);
+  }
+  .feed-item .feed-summary {
+    font-family: var(--font-ui);
+    font-size: 13px; line-height: 1.55;
+    color: color-mix(in oklch, var(--cream) 78%, transparent);
+    margin-top: 2px;
+  }
+  /* Confidence tier badges (gossip only). */
+  .feed-item .tier-badge {
+    display: inline-flex; align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    font-size: 9px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .tier-badge.verified_exclusive {
+    background: var(--brand-gradient-reverse);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  .tier-badge.confirmed_adjacent {
+    background: color-mix(in oklch, #d946ef 20%, transparent);
+    color: #f5d0fe;
+    border: 1px solid color-mix(in oklch, #d946ef 40%, transparent);
+  }
+  .tier-badge.unverified {
+    background: color-mix(in oklch, var(--cream) 8%, transparent);
+    color: color-mix(in oklch, var(--cream) 80%, transparent);
+    border: 1px solid color-mix(in oklch, var(--cream) 18%, transparent);
+  }
+  /* News tier subtle dot indicator (no full badge). */
+  .feed-item .news-tier {
+    display: inline-block; width: 6px; height: 6px; border-radius: 999px;
+    background: color-mix(in oklch, var(--cream) 60%, transparent);
+  }
+  .feed-item .news-tier.official       { background: oklch(78% 0.16 95); }
+  .feed-item .news-tier.independent    { background: oklch(72% 0.18 200); }
+  .feed-item .news-tier.criticism      { background: oklch(72% 0.18 320); }
+  .feed-item .news-tier.trade          { background: oklch(72% 0.18 30); }
+  .feed-item .news-tier.international  { background: oklch(72% 0.18 140); }
+
+  /* Skeleton loaders. */
+  @property --shimmer-x {
+    syntax: '<percentage>'; inherits: false; initial-value: -100%;
+  }
+  .skeleton-card {
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-border);
+    overflow: hidden;
+    position: relative;
+  }
+  .skeleton-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      color-mix(in oklch, var(--bucket-ink, var(--cream)) 8%, transparent) 50%,
+      transparent 100%
+    );
+    transform: translateX(var(--shimmer-x));
+    animation: shimmer 1.6s linear infinite;
+  }
+  @keyframes shimmer {
+    from { --shimmer-x: -100%; }
+    to   { --shimmer-x:  200%; }
+  }
+
+  /* Visible fetch error (CRIT a11y fix). */
+  .fetch-error {
+    width: 100%;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: color-mix(in oklch, var(--red) 12%, transparent);
+    border: 1px solid color-mix(in oklch, var(--red) 40%, transparent);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* Secondary nav: Fantasy + Archive. */
+  .more {
+    width: 100%; max-width: 1200px;
+    display: flex; justify-content: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  .more a {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 14px 22px;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    color: var(--cream);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-variation-settings: 'wght' 800, 'opsz' 24, 'WONK' 0;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    transition: translate var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) var(--ease-spring);
+  }
+  .more a .badge {
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+  .more a:hover, .more a:focus-visible {
+    translate: 0 -2px;
+    border-color: color-mix(in oklch, var(--gold) 60%, transparent);
+    outline: none;
+  }
+
+  .motion-reveal {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+    transition:
+      opacity 700ms var(--ease-out-expo),
+      transform 700ms var(--ease-out-expo);
+  }
+  .motion-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .cover.motion-reveal {
+    transform:
+      perspective(1200px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(24px)
+      scale(0.985);
+  }
+  .cover.motion-reveal.is-visible {
+    transform:
+      perspective(1200px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(var(--cover-lift))
+      scale(1);
+  }
+  .show-card.motion-reveal {
+    transform:
+      perspective(900px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(24px)
+      scale(0.985);
+  }
+  .show-card.motion-reveal.is-visible {
+    transform:
+      perspective(900px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(0)
+      scale(1);
+  }
+  .show-card.motion-reveal.is-visible:hover,
+  .show-card.motion-reveal.is-visible:focus-visible {
+    transform:
+      perspective(900px)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(-5px)
+      scale(1);
+  }
+
+  footer.page-foot {
+    max-width: 1200px;
+    color: oklch(75% 0.02 270);
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: 'wght' 320, 'opsz' 14;
+    font-size: 14px;
+  }
+
+  .empty-bucket {
+    padding: 30px 10px;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    font-style: italic;
+  }
+
+  /* Tier badge — subtle floating chip top-right showing data source. */
+  .tier-chip {
+    position: fixed;
+    top: 16px; right: 16px;
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--surface-1) 85%, transparent);
+    border: 1px solid var(--surface-border);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: oklch(78% 0.02 270);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .tier-chip::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 6px var(--gold);
+  }
+  .tier-chip[data-source="pro_cache"]::before { background: var(--violet); box-shadow: 0 0 6px var(--violet); }
+  .tier-chip[data-source="fan_scrape"]::before { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+  .tier-chip[data-source="cached"]::before { background: oklch(60% 0.04 270); box-shadow: none; }
+  .tier-chip[data-source="error"]::before { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  @media (max-width: 640px) {
+    .tier-chip { top: 8px; right: 8px; font-size: 9px; padding: 4px 8px; }
+  }
+
+  /* Pro spend warning + Fan upgrade banner. */
+  .banner {
+    width: 100%; max-width: 1200px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .banner.spend {
+    background: color-mix(in oklch, var(--gold) 12%, transparent);
+    border: 1px solid color-mix(in oklch, var(--gold) 40%, transparent);
+    color: var(--cream);
+  }
+  .banner.upgrade {
+    background: color-mix(in oklch, var(--violet) 14%, transparent);
+    border: 1px solid color-mix(in oklch, var(--violet) 38%, transparent);
+    color: var(--cream);
+  }
+  .banner .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .banner button, .banner a {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: color-mix(in oklch, var(--cream) 12%, transparent);
+    border: 1px solid color-mix(in oklch, var(--cream) 25%, transparent);
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-expo);
+  }
+  .banner button:hover, .banner a:hover {
+    background: color-mix(in oklch, var(--cream) 22%, transparent);
+  }
+  .banner[hidden] { display: none; }
+
+  @media (prefers-contrast: more) {
+    a.show-card {
+      background-image: none !important;
+      background: var(--surface-1) !important;
+      border-color: var(--bucket-ink) !important;
+    }
+    .pill {
+      background: transparent;
+      border-color: currentColor;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .motion-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="tier-chip" data-slot="tier-badge" data-source="loading" role="status" aria-live="polite">Loading…</div>
+
+<div class="banner spend" data-slot="spend-banner" hidden role="status" aria-live="polite">
+  <span><strong>Editorial scrape runs Tuesday 10am ET.</strong> Estimated cost $5–8.</span>
+  <div class="actions">
+    <button type="button" data-action="skip-week">Skip this week</button>
+    <button type="button" data-action="confirm-spend">Confirm</button>
+  </div>
+</div>
+
+<div class="banner upgrade" data-slot="upgrade-banner" hidden role="status">
+  <span><strong>You're on SLAYBILL Fan.</strong> Pro adds editorial verification, daily price snapshots, and the weekly story digest.</span>
+  <div class="actions">
+    <a href="#" data-slot="upgrade-link">Upgrade to Pro</a>
+    <button type="button" data-action="dismiss-upgrade">Not now</button>
+  </div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-bar"></div></div>
+
+<nav class="section-nav" aria-label="Quick navigation">
+  <a href="#bk-marquee">Marquee</a>
+  <a href="#bk-live">Live</a>
+  <a href="#bk-ob">Off-Bway</a>
+  <a href="#bk-news">News</a>
+  <a href="#bk-gossip">Gossip</a>
+</nav>
+
+<section class="cover" aria-label="SLAYBILL masthead">
+  <div class="masthead">
+    <div class="word jostle">SLAYBILL</div>
+    <div class="sub jostle">Your show&rsquo;s favorite show guide &middot; Broadway Edition</div>
+    <a class="aka-tm" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC — visit aka.nyc">AKA</a>
+  </div>
+  <p class="tagline jostle">A look at what&rsquo;s showing<br>and how it&rsquo;s going.</p>
+  <footer class="cover-foot">
+    <span class="jostle">Vol. 1 &middot; Issue 3</span>
+    <span class="jostle">26 Apr 2026</span>
+  </footer>
+  <div class="dog-ear" aria-hidden="true"></div>
+</section>
+
+<section class="marquee-board" aria-labelledby="bk-marquee">
+  <header>
+    <h2 id="bk-marquee">The Marquee</h2>
+    <div class="bucket-note">Coming Soon &middot; In Previews &middot; click any title for the announcement</div>
+  </header>
+  <div class="marquee-frame">
+    <div class="marquee-bulbs marquee-bulbs-top" aria-hidden="true"></div>
+    <div class="marquee-list" data-slot="marquee" aria-busy="true">
+      <div class="marquee-empty">Lighting the bulbs&hellip;</div>
+    </div>
+    <div class="marquee-bulbs marquee-bulbs-bottom" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="bucket" data-theme="live" data-bucket="live" aria-labelledby="bk-live">
+  <header>
+    <h2 id="bk-live">Live on Broadway</h2>
+    <div class="bucket-note">Curtain&rsquo;s up.</div>
+  </header>
+  <div class="grid" data-slot="grid"></div>
+</section>
+
+<section class="ob-row" aria-labelledby="bk-ob">
+  <header>
+    <h2 id="bk-ob">Off-Broadway</h2>
+    <div class="note">Scroll &rarr;</div>
+  </header>
+  <div class="ob-track" data-slot="ob-track"></div>
+</section>
+
+<section class="news-row" aria-labelledby="bk-news">
+  <header>
+    <h2 id="bk-news">Legit News</h2>
+    <a class="view-all" href="news.html">All the legit news <span aria-hidden="true">&rarr;</span></a>
+  </header>
+  <div class="feed-list teaser" data-slot="news-feed" aria-busy="true">
+    <div class="feed-loading">Loading the wire&hellip;</div>
+  </div>
+</section>
+
+<section class="gossip-row" aria-labelledby="bk-gossip">
+  <header>
+    <h2 id="bk-gossip">Hot Mic</h2>
+    <a class="view-all" href="gossip.html">All the tea <span aria-hidden="true">&rarr;</span></a>
+  </header>
+  <div class="feed-list teaser" data-slot="gossip-feed" aria-busy="true">
+    <div class="feed-loading">Pulling the tea&hellip;</div>
+  </div>
+</section>
+
+<nav class="more" aria-label="More">
+  <a href="fantasy.html"><span>Fantasy Broadway</span><span class="badge">Four slots &middot; Tonys</span></a>
+  <a href="archive.html"><span>Archive</span><span class="badge">Closed &middot; Cancelled</span></a>
+</nav>
+
+<footer class="page-foot">SLAYBILL &middot; The boards never lied.</footer>
+
+<template id="card-template">
+  <a class="show-card" href="#">
+    <span class="pill"></span>
+    <div class="poster" role="img">
+      <div class="palette-bg" aria-hidden="true"></div>
+      <div class="palette-accent" aria-hidden="true"></div>
+      <span class="stamp" aria-hidden="true"></span>
+    </div>
+    <div class="title"></div>
+    <div class="venue"></div>
+    <div class="metrics" aria-label="Box office summary"></div>
+    <div class="scores" aria-label="Critic and audience scores"></div>
+    <div class="firms" aria-label="Marketing firms"></div>
+  </a>
+</template>
+
+<script type="module">
+/* SLAYBILL hydration — uses tier-aware data resolver to choose between
+ * Pro cache (Fan tier with cache fresh) → local data (Pro tier or cache
+ * miss) → localStorage (offline fallback). Renders each bucket + OB row.
+ * Skeleton loaders while fetching; visible <div role="alert"> on failure. */
+import { resolveShowData, formatTierBadge } from './assets/js/data-resolver.js';
+import { setupSlaybillMotion } from './assets/js/kinetic-stage.js';
+
+const motion = setupSlaybillMotion();
+
+function fmtMoney(n) {
+  if (n == null) return null;
+  if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(2) + 'M/wk';
+  if (n >= 1_000)     return '$' + Math.round(n / 1_000) + 'K/wk';
+  return '$' + n + '/wk';
+}
+function fmtPct(p) { return p == null ? null : Math.round(p) + '% cap'; }
+function fmtAvg(a) { return a == null ? null : '$' + a + ' avg'; }
+
+function heroCredit(show) {
+  const c = (show.creatives || []);
+  const byRole = (needle) => c.find(x => (x.role || '').toLowerCase().includes(needle));
+  const pick = byRole('music') || byRole('book') || byRole('play') || byRole('director') || c[0];
+  return pick ? pick.name : null;
+}
+
+function makeCard(show) {
+  const tpl = document.getElementById('card-template');
+  const frag = tpl.content.cloneNode(true);
+  const a = frag.querySelector('a.show-card');
+  a.href = `shows/${show.slug}.html`;
+  a.setAttribute('aria-label', `${show.title} — ${show.theatre || 'Broadway'} — ${show.status.replace('_', ' ')}`);
+
+  const pal = show.palette || [];
+  for (let i = 0; i < 5; i++) {
+    a.style.setProperty(`--p${i+1}`, pal[i] || 'oklch(40% 0.05 270)');
+  }
+
+  const pill = frag.querySelector('.pill');
+  pill.textContent = ({
+    coming_soon: 'Coming Soon',
+    in_previews: 'In Previews',
+    live:        'Live',
+    closed:      'Closed',
+  })[show.status] || show.status;
+  pill.setAttribute('aria-hidden', 'true');
+
+  const poster = frag.querySelector('.poster');
+  poster.setAttribute('aria-label', `${show.title} poster`);
+  const stamp = frag.querySelector('.poster .stamp');
+  stamp.textContent = show.title;
+  if (show.poster_path) {
+    // Use a real <img> element with loading="lazy" so the browser defers
+    // off-screen poster fetches. JS-instantiated `new Image()` doesn't get
+    // the viewport-aware lazy treatment — was the dominant first-paint cost.
+    const img = document.createElement('img');
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onload = () => { stamp.style.display = 'none'; };
+    img.onerror = () => img.remove();
+    img.src = show.poster_path;
+    poster.appendChild(img);
+  }
+
+  frag.querySelector('.title').textContent = show.title;
+  const hero = heroCredit(show);
+  frag.querySelector('.venue').textContent =
+    hero ? `${show.theatre || ''} · ${hero}` : (show.theatre || '');
+
+  const metrics = frag.querySelector('.metrics');
+  const parts = [
+    { v: fmtMoney(show.weekly_gross_usd), label: 'Weekly gross', ok: show.weekly_gross_usd != null },
+    { v: fmtAvg(show.avg_ticket_usd),     label: 'Average ticket', ok: show.avg_ticket_usd    != null },
+    { v: fmtPct(show.capacity_pct),       label: 'Capacity', ok: show.capacity_pct      != null },
+  ];
+  for (const p of parts) {
+    if (p.v == null) continue;
+    const span = document.createElement('span');
+    span.className = 'm' + (p.ok ? '' : ' pending');
+    span.textContent = p.v;
+    span.setAttribute('aria-label', `${p.label}: ${p.v}`);
+    metrics.appendChild(span);
+  }
+  if (!metrics.children.length) {
+    const span = document.createElement('span');
+    span.className = 'm pending';
+    span.textContent = 'data pending';
+    metrics.appendChild(span);
+  }
+
+  const scores = frag.querySelector('.scores');
+  if (show.grade) {
+    const gradeEl = document.createElement('span');
+    gradeEl.className = 'grade' + (show.grade === 'N/A' ? ' na' : '');
+    gradeEl.textContent = show.grade;
+    const compTip = show.composite_score != null
+      ? `${show.score_label || ''} — Composite ${show.composite_score}/100`.trim()
+      : 'Score not yet aggregated';
+    gradeEl.title = compTip;
+    gradeEl.setAttribute('aria-label', `Grade ${show.grade}. ${compTip}`);
+    scores.appendChild(gradeEl);
+  }
+  const cSpan = document.createElement('span');
+  cSpan.className = 's ' + (show.critic_score != null ? '' : 'pending');
+  cSpan.textContent = show.critic_score != null ? `Critic ${show.critic_score}` : 'Scoring soon';
+  cSpan.title = show.critic_score != null ? '' : 'Critic score — aggregation in progress';
+  cSpan.setAttribute('aria-label', show.critic_score != null ? `Critic score: ${show.critic_score} of 100` : 'Critic score: pending');
+  const aSpan = document.createElement('span');
+  aSpan.className = 's ' + (show.sentiment_score != null ? '' : 'pending');
+  aSpan.textContent = show.sentiment_score != null ? `Audience ${show.sentiment_score}` : 'Audience pending';
+  aSpan.title = show.sentiment_score != null ? '' : 'Audience sentiment — aggregation in progress';
+  aSpan.setAttribute('aria-label', show.sentiment_score != null ? `Audience score: ${show.sentiment_score} of 100` : 'Audience score: pending');
+  scores.appendChild(cSpan);
+  scores.appendChild(aSpan);
+
+  // (Hover-preview overlay removed per feedback — Tier 2 show pages already
+   // surface the synopsis; Tier 1 thumbnails should stay clean.)
+
+  // Flag icon — weekly gross < $499K OR sentiment < 60%. Tooltip explains both.
+  const flags = show.flags || {};
+  if (flags.gross_warning || flags.sentiment_warning) {
+    const reasons = [];
+    if (flags.gross_warning) reasons.push(`Weekly gross under $499K (${fmtMoney(show.weekly_gross_usd) || 'unknown'})`);
+    if (flags.sentiment_warning) reasons.push(`Audience sentiment under 60 (currently ${show.sentiment_score})`);
+    const flagEl = document.createElement('span');
+    flagEl.className = 'flag-icon';
+    flagEl.title = 'Trend warning: ' + reasons.join(' · ');
+    flagEl.setAttribute('aria-label', flagEl.title);
+    flagEl.setAttribute('role', 'img');
+    scores.appendChild(flagEl);
+  }
+
+  // Marketing firm chips. Only the AKA-as-AOR case gets the gold sparkles
+  // treatment — every other firm (AOR or not) renders as a flat chip. This
+  // keeps the visual reserved for shows AKA holds, by design.
+  const firmsEl = frag.querySelector('.firms');
+  const firms = show.marketing_firms || [];
+  const isAka = (firm) => /\bAKA\b/i.test(firm);
+  const isAkaAOR = firms.some(f => f.is_primary && isAka(f.firm));
+  if (firms.length) {
+    if (isAkaAOR) a.classList.add('is-aka-show');
+    for (const f of firms) {
+      const chip = document.createElement('span');
+      const akaAor = f.is_primary && isAka(f.firm);
+      chip.className = 'firm-chip' + (akaAor ? ' is-aka-aor' : '');
+      const icon = document.createElement('span');
+      icon.className = 'firm-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = akaAor ? '✦' : '◆';
+      const name = document.createElement('span');
+      name.className = 'firm-name';
+      name.textContent = f.firm;
+      const role = document.createElement('span');
+      role.className = 'firm-role';
+      role.textContent = '· ' + (f.role_display || f.role);
+      chip.appendChild(icon);
+      chip.appendChild(name);
+      chip.appendChild(role);
+      const ariaSuffix = akaAor ? ' (AKA — agency of record)' : (f.is_primary ? ' (agency of record)' : '');
+      chip.setAttribute('aria-label', `${f.firm} — ${f.role_display || f.role}${ariaSuffix}`);
+      firmsEl.appendChild(chip);
+    }
+  }
+
+  return frag;
+}
+
+function initLiveStage(grid, shows) {
+  const CARDS_PER_PAGE = 4;
+  let currentPage = 0;
+
+  // Chunk shows into pages of 4
+  const pages = [];
+  for (let i = 0; i < shows.length; i += CARDS_PER_PAGE) {
+    pages.push(shows.slice(i, i + CARDS_PER_PAGE));
+  }
+  const totalPages = pages.length;
+  if (!totalPages) return;
+
+  // Build stage DOM
+  const stage = document.createElement('div');
+  stage.className = 'live-stage';
+
+  const spotlight = document.createElement('div');
+  spotlight.className = 'stage-spotlight';
+  spotlight.setAttribute('aria-hidden', 'true');
+  stage.appendChild(spotlight);
+
+  const viewport = document.createElement('div');
+  viewport.className = 'stage-viewport';
+  stage.appendChild(viewport);
+
+  const track = document.createElement('div');
+  track.className = 'stage-track';
+  viewport.appendChild(track);
+
+  // Render all page divs (cards already built via makeCard)
+  const pageDivs = pages.map((pageShows) => {
+    const page = document.createElement('div');
+    page.className = 'stage-page';
+    for (const show of pageShows) page.appendChild(makeCard(show));
+    return page;
+  });
+  pageDivs.forEach(p => track.appendChild(p));
+
+  // Nav controls
+  const nav = document.createElement('div');
+  nav.className = 'stage-nav';
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'stage-btn prev';
+  prevBtn.innerHTML = '&#8249;';
+  prevBtn.setAttribute('aria-label', 'Previous shows');
+  const counter = document.createElement('span');
+  counter.className = 'stage-counter';
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'stage-btn next';
+  nextBtn.innerHTML = '&#8250;';
+  nextBtn.setAttribute('aria-label', 'Next shows');
+  if (totalPages > 1) {
+    nav.appendChild(prevBtn);
+    nav.appendChild(counter);
+    nav.appendChild(nextBtn);
+  }
+  stage.appendChild(nav);
+  grid.appendChild(stage);
+
+  function goToPage(n, animate) {
+    n = Math.max(0, Math.min(totalPages - 1, n));
+    currentPage = n;
+
+    // Compute vertical offset: sum of all previous page heights + padding-bottom gaps
+    let offset = 0;
+    for (let i = 0; i < n; i++) offset += pageDivs[i].offsetHeight + 16;
+
+    track.style.transition = animate !== false
+      ? 'transform 0.52s cubic-bezier(0.45, 0.05, 0.15, 1)'
+      : 'none';
+    track.style.transform = `translateY(-${offset}px)`;
+    viewport.style.height = pageDivs[n].offsetHeight + 'px';
+
+    counter.textContent = `${n + 1} / ${totalPages}`;
+    prevBtn.disabled = n === 0;
+    nextBtn.disabled = n === totalPages - 1;
+  }
+
+  prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+  nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+
+  // Recompute slider transform on resize. On mobile the CSS disables the
+  // slider entirely — we still re-fire so when user rotates back to desktop
+  // the math is fresh.
+  let resizeRaf = 0;
+  window.addEventListener('resize', () => {
+    if (resizeRaf) return;
+    resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = 0;
+      // Only run slider math when slider is actually active (>720px viewport).
+      if (window.matchMedia('(min-width: 721px)').matches) {
+        goToPage(currentPage, false);
+      } else {
+        // Mobile: clear inline style so CSS !important rules clean state.
+        viewport.style.height = '';
+      }
+    });
+  }, { passive: true });
+
+  // First-time roll-in animation + spotlight on section entry
+  let animated = false;
+  const io = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting || animated) continue;
+      animated = true;
+      io.disconnect();
+
+      // Spotlight flare in, then fade
+      spotlight.style.opacity = '1';
+      setTimeout(() => { spotlight.style.opacity = '0'; }, 1200);
+
+      // Staggered card roll-in on the first page
+      const firstPage = pageDivs[0];
+      firstPage.classList.add('is-entering');
+      const cards = firstPage.querySelectorAll('.show-card');
+      let done = 0;
+      cards.forEach(c => c.addEventListener('animationend', () => {
+        if (++done >= cards.length) firstPage.classList.remove('is-entering');
+      }, { once: true }));
+    }
+  }, { threshold: 0.15 });
+  io.observe(grid.closest('.bucket') || grid);
+
+  // Set initial viewport height after first paint. Skip the slider math on
+  // mobile — CSS handles layout and the inline styles would just be dead weight.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (!window.matchMedia('(min-width: 721px)').matches) return;
+    viewport.style.height = pageDivs[0].offsetHeight + 'px';
+    goToPage(0, false);
+  }));
+}
+
+function renderSkeletons(grid, count) {
+  grid.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'skeleton-card';
+    s.setAttribute('aria-hidden', 'true');
+    grid.appendChild(s);
+  }
+}
+
+function showFetchError(grid, msg) {
+  grid.innerHTML = '';
+  const div = document.createElement('div');
+  div.className = 'fetch-error';
+  div.setAttribute('role', 'alert');
+  div.textContent = msg;
+  grid.appendChild(div);
+}
+
+function updateTierBadge(source, ageDays, tierLabel) {
+  const badge = document.querySelector('[data-slot="tier-badge"]');
+  if (!badge) return;
+  badge.dataset.source = source;
+  const sourceText = formatTierBadge(source, ageDays);
+  badge.textContent = `${tierLabel || 'SLAYBILL'} · ${sourceText}`;
+}
+
+function setupTierUI(config) {
+  // Pro tier: show spend banner Mondays (or always-on for now until Pro
+  // schedule reads server-side state). Fan tier: show upgrade banner once
+  // per week, dismissible.
+  const isPro = config.tier === 'pro' && config.show_spend_warning;
+  const isFan = config.tier === 'fan' && config.show_upgrade_nudges;
+
+  if (isPro) {
+    const banner = document.querySelector('[data-slot="spend-banner"]');
+    const dayOfWeek = new Date().getDay(); // 0 Sun, 1 Mon
+    if (dayOfWeek === 1) banner.hidden = false; // Mondays only
+    banner.querySelector('[data-action="skip-week"]')?.addEventListener('click', () => {
+      localStorage.setItem('slaybill.pro.skip_until', String(Date.now() + 7 * 86_400_000));
+      banner.hidden = true;
+    });
+    banner.querySelector('[data-action="confirm-spend"]')?.addEventListener('click', () => {
+      banner.hidden = true;
+    });
+  }
+
+  if (isFan) {
+    const dismissedAt = parseInt(localStorage.getItem('slaybill.fan.upgrade_dismissed_at') || '0', 10);
+    const showAgainAfter = dismissedAt + 7 * 86_400_000;
+    if (Date.now() > showAgainAfter) {
+      const banner = document.querySelector('[data-slot="upgrade-banner"]');
+      banner.hidden = false;
+      const link = banner.querySelector('[data-slot="upgrade-link"]');
+      if (link && config.pro_upgrade_url) link.href = config.pro_upgrade_url;
+      banner.querySelector('[data-action="dismiss-upgrade"]')?.addEventListener('click', () => {
+        localStorage.setItem('slaybill.fan.upgrade_dismissed_at', String(Date.now()));
+        banner.hidden = true;
+      });
+    }
+  }
+}
+
+function fmtMarqueeDate(iso) {
+  if (!iso) return 'TBA';
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function makeMarqueeRow(show, statusLabel, statusClass) {
+  const a = document.createElement('a');
+  a.className = 'marquee-row';
+  a.href = show.source_url || ('shows/' + show.slug + '.html');
+  if (show.source_url) {
+    a.target = '_blank';
+    a.rel = 'noopener';
+  }
+  a.setAttribute('aria-label',
+    `${show.title} — ${statusLabel} — opening ${show.opening_date || 'TBA'}`);
+
+  const status = document.createElement('span');
+  status.className = 'marquee-status ' + statusClass;
+  status.textContent = statusLabel;
+
+  const title = document.createElement('span');
+  title.className = 'marquee-title';
+  title.textContent = show.title;
+
+  const date = document.createElement('span');
+  date.className = 'marquee-date';
+  // Coming Soon → first-preview date (more relevant than opening). In Previews → opening night.
+  const useDate = (statusClass === 'coming')
+    ? (show.first_preview_date || show.opening_date)
+    : (show.opening_date || show.first_preview_date);
+  date.textContent = (statusClass === 'coming' ? 'Previews ' : 'Opens ') + fmtMarqueeDate(useDate);
+
+  const arrow = document.createElement('span');
+  arrow.className = 'marquee-arrow';
+  arrow.setAttribute('aria-hidden', 'true');
+  arrow.textContent = '→';
+
+  a.appendChild(status); a.appendChild(title); a.appendChild(date); a.appendChild(arrow);
+  return a;
+}
+
+function renderMarquee(data) {
+  const slot = document.querySelector('[data-slot="marquee"]');
+  if (!slot) return;
+  slot.innerHTML = '';
+  slot.removeAttribute('aria-busy');
+  const coming = (data.buckets && data.buckets.coming_soon) || [];
+  const previews = (data.buckets && data.buckets.in_previews) || [];
+  if (!coming.length && !previews.length) {
+    const empty = document.createElement('div');
+    empty.className = 'marquee-empty';
+    empty.textContent = 'No new shows on the marquee right now.';
+    slot.appendChild(empty);
+    return;
+  }
+  // Sort each set by soonest-first (first_preview_date asc, nulls last) so the
+  // most-imminent show leads. In Previews always render before Coming Soon.
+  const byDate = (a, b) => {
+    const ad = a.first_preview_date || '9999';
+    const bd = b.first_preview_date || '9999';
+    return ad.localeCompare(bd);
+  };
+  previews.sort(byDate);
+  coming.sort(byDate);
+  for (const s of previews) slot.appendChild(makeMarqueeRow(s, 'In Previews', 'previews'));
+  for (const s of coming)   slot.appendChild(makeMarqueeRow(s, 'Coming Soon', 'coming'));
+
+  // Light up bulbs across all show sections once they're rendered + sized.
+  // Belt-and-suspenders: rAF for first frame + setTimeout fallback in case the
+  // rAF resolves before strips have laid out their width.
+  requestAnimationFrame(() => {
+    ensureBulbStrips();
+    populateBulbStrips();
+  });
+  setTimeout(() => {
+    ensureBulbStrips();
+    populateBulbStrips();
+  }, 200);
+}
+
+// Ensure top + bottom bulb strips exist on Live Broadway + Off-Broadway sections.
+// Marquee already has them in the HTML; this idempotently adds them elsewhere.
+function ensureBulbStrips() {
+  const targets = [
+    document.querySelector('.bucket[data-theme="live"]'),
+    document.querySelector('.ob-row'),
+  ].filter(Boolean);
+  for (const host of targets) {
+    if (host.querySelector(':scope > .marquee-bulbs-top')) continue;
+    const top = document.createElement('div');
+    top.className = 'marquee-bulbs marquee-bulbs-top';
+    top.setAttribute('aria-hidden', 'true');
+    const bot = document.createElement('div');
+    bot.className = 'marquee-bulbs marquee-bulbs-bottom';
+    bot.setAttribute('aria-hidden', 'true');
+    host.appendChild(top); host.appendChild(bot);
+  }
+}
+
+// Populate the marquee bulb strips with individual bulb elements. Auto-fits
+// to current marquee width. Each bulb gets a randomized flicker delay +
+// period so they feel alive instead of metronome-synced. ~1 in 5 is dim.
+function populateBulbStrips() {
+  const strips = document.querySelectorAll('.marquee-bulbs');
+  if (!strips.length) return;
+  // Hard cap on bulbs per strip — was unbounded before, on wide desktop with
+  // 6 strips this could approach 200 animated elements all repainting box-shadow
+  // every frame. 14 max per strip = ~84 total across the page = comfortable.
+  const MAX_BULBS = 14;
+  for (const strip of strips) {
+    strip.innerHTML = '';
+    const w = strip.offsetWidth;
+    if (!w) continue;
+    const bulbSize = parseFloat(getComputedStyle(strip).getPropertyValue('--bulb-size')) || 12;
+    const spacing = bulbSize * 2.2 + 6;
+    const count = Math.min(MAX_BULBS, Math.max(6, Math.floor(w / spacing)));
+    for (let i = 0; i < count; i++) {
+      const bulb = document.createElement('span');
+      bulb.className = 'bulb' + (Math.random() < 0.18 ? ' dim' : '');
+      // Stagger flicker but with longer periods so animation cost is amortized.
+      const delay = (Math.random() * 6).toFixed(2) + 's';
+      const period = (4 + Math.random() * 3).toFixed(2) + 's';
+      bulb.style.setProperty('--bulb-delay', delay);
+      bulb.style.setProperty('--bulb-period', period);
+      strip.appendChild(bulb);
+    }
+  }
+}
+
+// Re-fit bulbs on resize so the strip stays full whether mobile or desktop.
+let _bulbResizeRaf = 0;
+window.addEventListener('resize', () => {
+  if (_bulbResizeRaf) return;
+  _bulbResizeRaf = requestAnimationFrame(() => {
+    _bulbResizeRaf = 0;
+    populateBulbStrips();
+  });
+}, { passive: true });
+
+async function hydrate() {
+  // Render skeletons in every visible bucket grid before fetch (Live only now).
+  for (const section of document.querySelectorAll('.bucket')) {
+    renderSkeletons(section.querySelector('[data-slot="grid"]'), 4);
+  }
+  renderSkeletons(document.querySelector('[data-slot="ob-track"]'), 4);
+
+  const { data, source, age_days, config } = await resolveShowData();
+  updateTierBadge(source, age_days, config.tier_label);
+  setupTierUI(config);
+
+  if (!data) {
+    for (const section of document.querySelectorAll('.bucket')) {
+      showFetchError(
+        section.querySelector('[data-slot="grid"]'),
+        'Show data did not load. The server may be down — refresh in a moment.'
+      );
+    }
+    showFetchError(
+      document.querySelector('[data-slot="ob-track"]'),
+      'Off-Broadway data did not load.'
+    );
+    return;
+  }
+
+  // Marquee replaces the old coming_soon + in_previews bucket grids.
+  renderMarquee(data);
+
+  for (const section of document.querySelectorAll('.bucket')) {
+    const bucket = section.dataset.bucket;
+    const shows = (data.buckets && data.buckets[bucket]) || [];
+    const grid = section.querySelector('[data-slot="grid"]');
+    grid.innerHTML = '';
+    if (!shows.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-bucket';
+      empty.textContent = 'Nothing in this bucket right now.';
+      grid.appendChild(empty);
+      continue;
+    }
+    // Vertical single-column layout for ALL show buckets including Live.
+    // Slider was cut per design direction — Live is the focus, give it room.
+    for (const show of shows) grid.appendChild(makeCard(show));
+  }
+
+  const track = document.querySelector('[data-slot="ob-track"]');
+  track.innerHTML = '';
+  const ob = data.off_broadway || [];
+  if (!ob.length) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-bucket';
+    empty.textContent = 'No Off-Broadway shows tracked yet.';
+    track.appendChild(empty);
+  } else {
+    for (const show of ob) {
+      const card = makeCard(show);
+      const a = card.querySelector('a.show-card');
+      a.classList.add('ob-card');
+      track.appendChild(card);
+    }
+  }
+
+  // News + Gossip teasers — top 4 each on home; "View all" links to Tier 2 pages.
+  hydrateFeed('data/news_feed.json',   '[data-slot="news-feed"]',   'news',   4, true);
+  hydrateFeed('data/gossip_feed.json', '[data-slot="gossip-feed"]', 'gossip', 4, true);
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  const now = new Date();
+  const hrs = (now - d) / 36e5;
+  if (hrs < 1)  return Math.max(1, Math.round(hrs * 60)) + 'm ago';
+  if (hrs < 24) return Math.round(hrs) + 'h ago';
+  const days = Math.round(hrs / 24);
+  if (days < 30) return days + 'd ago';
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+const TIER_LABEL = {
+  verified_exclusive: 'Verified Exclusive',
+  confirmed_adjacent: 'Confirmed-Adjacent',
+  unverified:         'Unverified Rumor',
+};
+
+function makeFeedItem(item, kind, teaser = false) {
+  const a = document.createElement('a');
+  a.className = 'feed-item';
+  a.href = item.link;
+  a.target = '_blank';
+  a.rel = 'noopener';
+
+  const meta = document.createElement('div');
+  meta.className = 'feed-meta';
+  if (kind === 'gossip') {
+    const badge = document.createElement('span');
+    badge.className = 'tier-badge ' + (item.tier || 'unverified');
+    badge.textContent = TIER_LABEL[item.tier] || 'Rumor';
+    meta.appendChild(badge);
+  } else {
+    const dot = document.createElement('span');
+    dot.className = 'news-tier ' + (item.tier || 'official');
+    dot.setAttribute('aria-hidden', 'true');
+    meta.appendChild(dot);
+  }
+  const src = document.createElement('span');
+  src.className = 'feed-source';
+  src.textContent = item.source;
+  meta.appendChild(src);
+  if (item.published) {
+    const dot = document.createElement('span');
+    dot.textContent = '·';
+    dot.className = 'feed-date';
+    const date = document.createElement('span');
+    date.className = 'feed-date';
+    date.textContent = fmtDate(item.published);
+    meta.appendChild(dot);
+    meta.appendChild(date);
+  }
+  a.appendChild(meta);
+
+  const title = document.createElement('div');
+  title.className = 'feed-title';
+  title.textContent = item.title;
+  a.appendChild(title);
+
+  if (item.summary && !teaser) {
+    const summary = document.createElement('div');
+    summary.className = 'feed-summary';
+    summary.textContent = item.summary;
+    a.appendChild(summary);
+  }
+  return a;
+}
+
+async function hydrateFeed(url, selector, kind, limit, teaser = false) {
+  const container = document.querySelector(selector);
+  if (!container) return;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('fetch failed: ' + res.status);
+    const payload = await res.json();
+    const items = (payload.items || []).slice(0, limit);
+    container.innerHTML = '';
+    container.removeAttribute('aria-busy');
+    if (!items.length) {
+      const empty = document.createElement('div');
+      empty.className = 'feed-loading';
+      empty.textContent = (kind === 'news' ? 'No news items right now.' : 'No gossip in the air. Yet.');
+      container.appendChild(empty);
+      return;
+    }
+    for (const item of items) container.appendChild(makeFeedItem(item, kind, teaser));
+  } catch (err) {
+    container.innerHTML = '';
+    container.removeAttribute('aria-busy');
+    const note = document.createElement('div');
+    note.className = 'feed-loading';
+    note.textContent = (kind === 'news' ? 'News feed offline — refresh in a moment.' : 'Gossip feed offline — refresh in a moment.');
+    container.appendChild(note);
+  }
+}
+
+// Scroll-progress bar + section-nav reveal. Single rAF-coalesced scroll listener.
+(() => {
+  const bar = document.querySelector('.scroll-progress-bar');
+  const cover = document.querySelector('.cover');
+  if (!bar || !cover) return;
+  let raf = 0;
+  const update = () => {
+    raf = 0;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = pct.toFixed(1) + '%';
+    const past = (window.scrollY > cover.offsetHeight - 80);
+    document.body.classList.toggle('scrolled-past-cover', past);
+  };
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+})();
+
+// Spotlight intro — cover starts in darkness; four follow-spots light up
+// one at a time, sweep around as if searching the stage, then converge on
+// the SLAYBILL masthead. Replaces the prior red-curtain animation entirely.
+// JS-injected so no-JS users see the cover already lit (graceful degradation).
+(() => {
+  const cover = document.querySelector('.cover');
+  if (!cover) return;
+
+  const scrim = document.createElement('div');
+  scrim.className = 'stage-scrim';
+  scrim.setAttribute('aria-hidden', 'true');
+
+  const spots = document.createElement('div');
+  spots.className = 'stage-spots';
+  spots.setAttribute('aria-hidden', 'true');
+  for (let i = 1; i <= 4; i++) {
+    const s = document.createElement('div');
+    s.className = `stage-spot spot-${i}`;
+    spots.appendChild(s);
+  }
+  // scrim first (sits below the spots), then spots
+  cover.prepend(spots);
+  cover.prepend(scrim);
+
+  // Trigger intro. CSS @media (prefers-reduced-motion: reduce) snaps to
+  // the resting state, no JS branching needed.
+  void cover.offsetWidth; // flush layout
+  cover.classList.add('intro-running');
+  // Lights settle at ~3.5s. Fire the AKA TM-mark press a hair later.
+  setTimeout(() => {
+    const stamp = cover.querySelector('.aka-tm');
+    if (stamp) stamp.classList.add('is-stamping');
+  }, 3400);
+  // Lighting intro completes at 5s.
+  setTimeout(() => {
+    cover.classList.remove('intro-running');
+    cover.classList.add('intro-finished');
+  }, 5000);
+})();
+
+// Scroll-jostle — only enable when reduced-motion is not requested.
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let lastY = window.scrollY, clearTimer, raf = 0;
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const y = window.scrollY, delta = y - lastY;
+      if (Math.abs(delta) < 2) return;
+      const dir = delta > 0 ? 'down' : 'up';
+      lastY = y;
+      document.body.classList.remove('scroll-up', 'scroll-down');
+      document.body.classList.add('scroll-' + dir);
+      clearTimeout(clearTimer);
+      clearTimer = setTimeout(() => {
+        document.body.classList.remove('scroll-up', 'scroll-down');
+      }, 240);
+    });
+  }, { passive: true });
+}
+
+hydrate()
+  .then(() => motion.refresh())
+  .catch((error) => {
+    console.error('[slaybill] hydration failed', error);
+    updateTierBadge('error', Infinity, 'SLAYBILL');
+    for (const section of document.querySelectorAll('.bucket')) {
+      showFetchError(
+        section.querySelector('[data-slot="grid"]'),
+        'Show data did not load. The page caught the error and stayed usable.'
+      );
+    }
+    showFetchError(
+      document.querySelector('[data-slot="ob-track"]'),
+      'Off-Broadway data did not load.'
+    );
+  });
+</script>
+</body>
+</html>

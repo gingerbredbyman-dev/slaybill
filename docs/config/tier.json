@@ -1,0 +1,10 @@
+{
+  "_doc": "SLAYBILL tier config. The front-end reads this at load time and adjusts what shows: data sources, badges, upgrade nudges. To switch a deploy from Fan to Pro, change `tier` and provide pro_cache_url.",
+  "tier": "fan",
+  "tier_label": "SLAYBILL Fan",
+  "pro_cache_url": null,
+  "pro_cache_max_age_days": 7,
+  "show_upgrade_nudges": true,
+  "pro_upgrade_url": "https://slaybill.app/pro",
+  "support_email": "hello@slaybill.app"
+}
