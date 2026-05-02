@@ -42,11 +42,24 @@ def connect() -> sqlite3.Connection:
 
 
 def _to_int(s: str) -> int | None:
-    s = re.sub(r"[^\d\-]", "", s or "")
-    try:
-        return int(s) if s else None
-    except ValueError:
+    """Parse the FIRST currency figure in s. Stops at the first non-digit/comma
+    after the '$' so adjacent cells (e.g. attendance, capacity) don't bleed in."""
+    if not s:
         return None
+    m = re.search(r"\$([\d,]+)", s)
+    if m:
+        try:
+            return int(m.group(1).replace(",", ""))
+        except ValueError:
+            return None
+    # Fallback: first number in the string
+    m = re.search(r"([\d,]{4,})", s)
+    if m:
+        try:
+            return int(m.group(1).replace(",", ""))
+        except ValueError:
+            return None
+    return None
 
 
 def _parse_week_ending(week_text: str | None) -> str | None:
@@ -139,7 +152,7 @@ def upsert_show(conn: sqlite3.Connection, title: str) -> int:
     row = conn.execute("SELECT show_id FROM shows WHERE title = ?", (title,)).fetchone()
     if row:
         return row[0]
-    cur = conn.execute("INSERT INTO shows (title, status) VALUES (?, 'open')", (title,))
+    cur = conn.execute("INSERT INTO shows (title, status) VALUES (?, 'live')", (title,))
     conn.commit()
     return cur.lastrowid
 
