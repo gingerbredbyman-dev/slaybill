@@ -4189,9 +4189,9 @@
         "Bill Kenwright Ltd.",
         "Paul Taylor-Mills"
       ],
-      "avg_ticket_usd": 210,
-      "capacity_pct": 95.0,
-      "weekly_gross_usd": 520000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#3b84dc",
         "#d2872c",
@@ -4236,7 +4236,8 @@
       "flags": {
         "gross_warning": false,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "the-play-that-goes-wrong",
@@ -4280,9 +4281,9 @@
         "J.J. Abrams",
         "Kenny Wax"
       ],
-      "avg_ticket_usd": 194,
-      "capacity_pct": 85.0,
-      "weekly_gross_usd": 340000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#a1c552",
         "#363d28",
@@ -4327,7 +4328,8 @@
         "instagram": "https://www.instagram.com/broadwaygoeswrong",
         "tiktok": "https://www.tiktok.com/@broadwaygoeswrong",
         "x": "https://x.com/MischiefComedy"
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "little-shop-of-horrors",
@@ -4379,9 +4381,9 @@
         "Robert Ahrens",
         "Hunter Arnold"
       ],
-      "avg_ticket_usd": 181,
-      "capacity_pct": 92.0,
-      "weekly_gross_usd": 280000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#3bc9dc",
         "#d23f2c",
@@ -4425,7 +4427,8 @@
       "socials": {
         "instagram": "https://www.instagram.com/littleshopnyc",
         "tiktok": "https://www.tiktok.com/@littleshopnyc"
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "mexodus",
@@ -4463,9 +4466,9 @@
       "producers": [
         "ShowTown Theatricals"
       ],
-      "avg_ticket_usd": 85,
-      "capacity_pct": 86.0,
-      "weekly_gross_usd": 210000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#dc3b9e",
         "#2cd26c",
@@ -4494,7 +4497,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "drunk-shakespeare",
@@ -4528,9 +4532,9 @@
       "producers": [
         "Scott Griffin / Meme Juice Productions"
       ],
-      "avg_ticket_usd": 80,
-      "capacity_pct": 88.0,
-      "weekly_gross_usd": 120000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#6d0a0f",
         "#e3b34a",
@@ -4567,7 +4571,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "perfect-crime",
@@ -4603,9 +4608,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 89,
-      "capacity_pct": 75.0,
-      "weekly_gross_usd": 80000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#6d0a0f",
         "#f4e1c1",
@@ -4649,7 +4654,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "hamlet",
@@ -4679,7 +4685,7 @@
         "National Theatre of Great Britain",
         "Brooklyn Academy of Music"
       ],
-      "avg_ticket_usd": 35,
+      "avg_ticket_usd": null,
       "capacity_pct": null,
       "weekly_gross_usd": null,
       "palette": [
@@ -4692,7 +4698,8 @@
       "ticket_links": {
         "official": "https://www.bam.org/hamlet"
       },
-      "marketing_firms": []
+      "marketing_firms": [],
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "kenrex",
@@ -4731,7 +4738,7 @@
         "Aria Entertainment",
         "Seaview"
       ],
-      "avg_ticket_usd": 97,
+      "avg_ticket_usd": null,
       "capacity_pct": null,
       "weekly_gross_usd": null,
       "palette": [
@@ -4745,7 +4752,8 @@
         "todaytix": "https://www.todaytix.com/nyc/shows/46159-kenrex-lortel",
         "official": "https://kenrextheplay.com"
       },
-      "marketing_firms": []
+      "marketing_firms": [],
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "the-receptionist",
@@ -4954,7 +4962,7 @@
         "Audible Theater",
         "TOGETHER (Hugh Jackman & Sonia Friedman)"
       ],
-      "avg_ticket_usd": 208,
+      "avg_ticket_usd": null,
       "capacity_pct": null,
       "weekly_gross_usd": null,
       "palette": [
@@ -4967,7 +4975,8 @@
       "ticket_links": {
         "official": "https://www.broadway.com/shows/new-born/"
       },
-      "marketing_firms": []
+      "marketing_firms": [],
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League)."
     },
     {
       "slug": "school-girls-african-mean-girls-play",
@@ -5110,8 +5119,8 @@
       "theatre_capacity": 199,
       "first_preview_date": "2026-02-10",
       "opening_date": "2026-03-04",
-      "closing_date": null,
-      "status": "live",
+      "closing_date": "2025-01-12",
+      "status": "closed",
       "synopsis": "David Adjmi's Tony Award-winning play set in 1976, following a fictional rock band as they record their breakthrough album in a Sausalito studio. Original songs by Will Butler.",
       "cast": [],
       "creatives": [
@@ -5125,9 +5134,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 95,
-      "capacity_pct": 92,
-      "weekly_gross_usd": 195000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#dc2626",
         "#fbbf24",
@@ -5171,7 +5180,8 @@
         "instagram": "https://www.instagram.com/stereophonicbway",
         "tiktok": "https://www.tiktok.com/@stereophonicbway",
         "x": "https://x.com/StereophonicBwy"
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "the-lonely-few",
@@ -5183,15 +5193,15 @@
       "theatre_capacity": 249,
       "first_preview_date": "2026-03-15",
       "opening_date": "2026-04-08",
-      "closing_date": "2026-06-15",
-      "status": "live",
+      "closing_date": "2024-04-21",
+      "status": "closed",
       "synopsis": "A new musical about a small-town country singer trying to escape her past and an aging rocker chasing one more big break. They meet, they sing, they save each other.",
       "cast": [],
       "creatives": [],
       "producers": [],
-      "avg_ticket_usd": 79,
-      "capacity_pct": 85,
-      "weekly_gross_usd": 132000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#7c2d12",
         "#fbbf24",
@@ -5219,7 +5229,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "the-ally",
@@ -5231,8 +5242,8 @@
       "theatre_capacity": 299,
       "first_preview_date": "2026-02-20",
       "opening_date": "2026-03-12",
-      "closing_date": "2026-05-31",
-      "status": "live",
+      "closing_date": "2024-05-12",
+      "status": "closed",
       "synopsis": "A Jewish-American writing professor is asked to sign an inflammatory open letter and finds himself caught in a campus political firestorm where every choice costs him an ally.",
       "cast": [],
       "creatives": [
@@ -5242,9 +5253,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 99,
-      "capacity_pct": 88,
-      "weekly_gross_usd": 168000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#1e3a8a",
         "#fbbf24",
@@ -5272,7 +5283,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "primary-trust",
@@ -5284,8 +5296,8 @@
       "theatre_capacity": 424,
       "first_preview_date": "2026-04-01",
       "opening_date": "2026-04-22",
-      "closing_date": "2026-06-12",
-      "status": "live",
+      "closing_date": "2023-07-02",
+      "status": "closed",
       "synopsis": "Eboni Booth's Pulitzer Prize-winning play about a quiet bookstore clerk in upstate New York whose comfortable, lonely routine collapses when his shop closes — forcing him to face what he's been avoiding.",
       "cast": [],
       "creatives": [
@@ -5295,9 +5307,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 89,
-      "capacity_pct": 91,
-      "weekly_gross_usd": 234000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#92400e",
         "#fef3c7",
@@ -5325,7 +5337,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "all-of-me",
@@ -5337,8 +5350,8 @@
       "theatre_capacity": 199,
       "first_preview_date": "2026-03-25",
       "opening_date": "2026-04-14",
-      "closing_date": "2026-06-08",
-      "status": "live",
+      "closing_date": "2024-06-02",
+      "status": "closed",
       "synopsis": "Laura Winters' romantic comedy about two strangers — both wheelchair users with augmented-communication devices — who fall in love against the soundtrack of their own synthesized voices.",
       "cast": [],
       "creatives": [
@@ -5348,9 +5361,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 75,
-      "capacity_pct": 87,
-      "weekly_gross_usd": 121000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#be185d",
         "#fbcfe8",
@@ -5378,7 +5391,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "appropriate-revival",
@@ -5390,8 +5404,8 @@
       "theatre_capacity": 296,
       "first_preview_date": "2026-04-05",
       "opening_date": "2026-04-26",
-      "closing_date": "2026-07-13",
-      "status": "live",
+      "closing_date": "2024-03-03",
+      "status": "closed",
       "synopsis": "Branden Jacobs-Jenkins' acclaimed family drama: three estranged adult siblings reunite at the Arkansas plantation home where they grew up to settle their late father's estate — and uncover a photo album that forces them to confront what kind of family they actually came from.",
       "cast": [],
       "creatives": [
@@ -5401,9 +5415,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 85,
-      "capacity_pct": 89,
-      "weekly_gross_usd": 156000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#3f6212",
         "#fef3c7",
@@ -5431,7 +5445,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "spamalot-revival",
@@ -5443,8 +5458,8 @@
       "theatre_capacity": 178,
       "first_preview_date": "2026-04-10",
       "opening_date": "2026-05-01",
-      "closing_date": "2026-07-20",
-      "status": "live",
+      "closing_date": "2024-04-07",
+      "status": "closed",
       "synopsis": "Eric Idle's Monty Python and the Holy Grail-inspired musical comedy in an intimate off-Broadway revival. Killer rabbits, knights who say Ni, and the always look on the bright side of life.",
       "cast": [],
       "creatives": [
@@ -5458,9 +5473,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 69,
-      "capacity_pct": 82,
-      "weekly_gross_usd": 87000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#dc2626",
         "#fbbf24",
@@ -5488,7 +5503,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     },
     {
       "slug": "an-enemy-of-the-people-revival",
@@ -5500,8 +5516,8 @@
       "theatre_capacity": 299,
       "first_preview_date": "2026-04-18",
       "opening_date": "2026-05-09",
-      "closing_date": "2026-06-22",
-      "status": "live",
+      "closing_date": "2024-06-23",
+      "status": "closed",
       "synopsis": "Amy Herzog's adaptation of Ibsen's classic about a small-town doctor who discovers the local spa is contaminated and unleashes a war between fact and fiction, science and economics, the individual and the mob.",
       "cast": [],
       "creatives": [
@@ -5515,9 +5531,9 @@
         }
       ],
       "producers": [],
-      "avg_ticket_usd": 79,
-      "capacity_pct": 86,
-      "weekly_gross_usd": 142000,
+      "avg_ticket_usd": null,
+      "capacity_pct": null,
+      "weekly_gross_usd": null,
       "palette": [
         "#1e3a8a",
         "#cbd5e1",
@@ -5545,7 +5561,8 @@
       "flags": {
         "gross_warning": true,
         "sentiment_warning": false
-      }
+      },
+      "_grosses_note": "Off-Broadway productions do not publicly report weekly grosses (only Broadway shows file with the League). This production has closed."
     }
   ]
 }
