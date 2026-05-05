@@ -44,7 +44,7 @@ corpus.db  (scraper output — v1.5 onwards)
 | Cast, creatives, producers | `shows.json` | future scrapers |
 | Ticket links | `shows.json` (Telecharge / TodayTix / TKTS search URLs) | daily price snapshots into `price_points` |
 | Critic score | — (shows em-dash "coming soon") | `scrapers/critic_aggregator.py` in v2 |
-| Audience sentiment | — (shows em-dash "coming soon") | social-listening pipeline in v2 |
+| Audience sentiment | Show-Score / Broadway Scorecard / Broadway.com cache when available | social-listening pipeline in v2 |
 
 ## Layout
 
@@ -109,4 +109,4 @@ Set `"status": "closed"` and populate `closing_date` in `shows.json`, then re-ru
 
 - **v1** (shipped) — three-bucket layout, off-Broadway row, HADESTOWN card fit fix, Tier 2 detail pages, Fantasy Broadway, archive.
 - **v1.5** — real off-Broadway scrapers (offbroadway.com, Off-Broadway League member portal, BroadwayWorld OB), daily ticket price snapshots, automated cron.
-- **v2** — critic aggregation (NYT / Variety / THR / Vulture / TimeOut, normalized 0–100) and audience sentiment (Reddit / TikTok / Instagram social listening, likely via a paid aggregator).
+- **v2** — critic aggregation (NYT / Variety / THR / Vulture / TimeOut, normalized 0–100) and audience sentiment anchored by Show-Score plus Reddit / TikTok / Instagram social listening.

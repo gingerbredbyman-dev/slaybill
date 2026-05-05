@@ -30,11 +30,21 @@ HEADERS = {
 
 
 def check_stop() -> None:
+    """Check for STOP file and abort scraper if present.
+
+    Raises:
+        SystemExit: If data/STOP file exists.
+    """
     if STOP_FILE.exists():
         raise SystemExit("STOP file present — aborting.")
 
 
 def connect() -> sqlite3.Connection:
+    """Open connection to corpus.db and ensure schema is initialized.
+
+    Returns:
+        sqlite3.Connection: Database connection with schema applied.
+    """
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.executescript(SCHEMA_PATH.read_text())
@@ -95,6 +105,15 @@ def _to_float(s: str) -> float | None:
 
 
 def fetch() -> str:
+    """Fetch Playbill weekly grosses page HTML.
+
+    Returns:
+        str: Raw HTML content of the grosses page.
+
+    Raises:
+        SystemExit: If STOP file present.
+        requests.HTTPError: If HTTP request fails.
+    """
     check_stop()
     r = requests.get(URL, headers=HEADERS, timeout=30)
     r.raise_for_status()

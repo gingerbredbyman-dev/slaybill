@@ -1,5 +1,5 @@
 {
-  "_doc": "SLAYBILL curated show list as of 2026-04-25. Sources: Playbill weekly grosses, Off-Broadway League, BroadwayWorld, editorial verification. Refresh: re-run agents and re-merge weekly. Drop web/shows/posters/<slug>.{jpg,png,webp} to override the auto-generated palette poster.",
+  "_doc": "SLAYBILL curated show list as of 2026-04-25. Sources: Playbill weekly grosses, Off-Broadway League, BroadwayWorld, Show-Score audience reviews, editorial verification. Refresh: re-run agents and re-merge weekly. Drop web/shows/posters/<slug>.{jpg,png,webp} to override the auto-generated palette poster.",
   "as_of": "2026-04-25",
   "shows": [
     {

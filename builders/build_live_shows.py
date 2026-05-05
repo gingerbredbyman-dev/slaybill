@@ -43,6 +43,10 @@ OUT_PATH = PROJECT_ROOT / "web" / "data" / "shows_live.json"
 NEWS_FEED = PROJECT_ROOT / "web" / "data" / "news_feed.json"
 POSTERS_DIR = PROJECT_ROOT / "web" / "shows" / "posters"
 POSTER_EXTS = (".jpg", ".jpeg", ".png", ".webp")
+SHOW_SCORE_URLS = {
+    "broadway": "https://www.show-score.com/broadway-shows",
+    "off_broadway": "https://www.show-score.com/off-broadway-shows",
+}
 
 COMING_SOON_WINDOW_DAYS = 270  # 9 months — marquee showcases the announced season
 
@@ -219,6 +223,7 @@ def normalize(show: dict, today: date, news_items: list[dict] | None = None) -> 
         "flags": show.get("flags") or {"gross_warning": False, "sentiment_warning": False},
         "palette": show.get("palette", ["#333333", "#666666", "#999999", "#cccccc", "#ffffff"]),
         "poster_path": poster_path,
+        "show_score_url": show.get("show_score_url") or SHOW_SCORE_URLS.get(show.get("tier", "broadway")),
         "ticket_links": show.get("ticket_links", {}),
         "marketing_firms": firms,
         "primary_firm": primary_firm,

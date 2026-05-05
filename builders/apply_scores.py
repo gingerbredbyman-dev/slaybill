@@ -111,6 +111,12 @@ def apply_to_show(show: dict, cache: dict, prev_critic_updated: str | None) -> d
 
 
 def main():
+    """Apply LLM-aggregated scores from cache to shows.json.
+
+    Reads per-show cache files (scrapers/cache/scores_<slug>.json), computes
+    weighted composites, sets flags (gross_warning, sentiment_warning), and
+    atomically updates shows.json with scoring fields.
+    """
     ap = argparse.ArgumentParser()
     ap.add_argument("--live-only", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true")

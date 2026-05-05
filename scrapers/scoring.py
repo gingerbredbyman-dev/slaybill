@@ -5,7 +5,7 @@ Stands alone (no feedparser/requests/openai imports) so apply_scores.py can
 import it without dragging the whole scraper toolchain into the runtime.
 
 Source weights and methodology come straight from Austin's research doc
-(/tmp/critic-audience.txt) and broadwayscorecard.com — no edits.
+(/tmp/critic-audience.txt), show-score.com, and broadwayscorecard.com.
 
 Note: Mezzanine and Reddit are present in CRITIC/AUDIENCE_SOURCES so the
 upstream LLM aggregator can OPT-IN if data ever materializes. They simply
@@ -74,6 +74,11 @@ def compute_show_score(
         composite = None
 
     def grade(s):
+        """Convert numeric score (0-100) to letter grade and label.
+
+        Returns:
+            tuple: (grade_letter, human_readable_label)
+        """
         if s is None: return "N/A", "Not enough data"
         if s >= 91:   return "A+", "Must See"
         if s >= 85:   return "A",  "Excellent"

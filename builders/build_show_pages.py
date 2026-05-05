@@ -37,6 +37,10 @@ POSTERS_DIR = SHOWS_DIR / "posters"
 SCORE_CACHE_DIR = PROJECT_ROOT / "scrapers" / "cache"
 
 POSTER_EXTS = (".jpg", ".jpeg", ".png", ".webp")
+SHOW_SCORE_URLS = {
+    "broadway": "https://www.show-score.com/broadway-shows",
+    "off_broadway": "https://www.show-score.com/off-broadway-shows",
+}
 
 STATUS_CHIP_TEXT = {
     "coming_soon": "Coming Soon",
@@ -124,6 +128,18 @@ def extract_palette(poster: Path, k: int = 5):
 
 
 def derive_tones(palette):
+    """Derive ink and surface tones from a color palette for readable contrast.
+
+    Analyzes palette luminance to choose light-on-dark or dark-on-light text
+    rendering. Returns ink (primary text), ink_muted (secondary text), stage
+    (dominant background), and surface (median background).
+
+    Args:
+        palette: List of hex color strings (e.g., ['#ff0000', ...]).
+
+    Returns:
+        dict: {"ink": hex, "ink_muted": hex, "stage": hex, "surface": hex}
+    """
     rgbs = [_parse_hex(c) for c in palette]
     lums = [_luminance(c) for c in rgbs]
     avg = sum(lums) / len(lums)
@@ -326,6 +342,13 @@ def _socials_markup(socials):
     return "\n".join(out)
 
 
+def _show_score_url(show: dict) -> str:
+    return show.get("show_score_url") or SHOW_SCORE_URLS.get(
+        show.get("tier", "broadway"),
+        "https://www.show-score.com/",
+    )
+
+
 def _build_per_outlet_table(slug: str) -> str:
     """Render the per-outlet score table from the LLM aggregator cache.
     Returns HTML for a 2-col grid: critics left, audience right.
@@ -374,6 +397,18 @@ def _build_per_outlet_table(slug: str) -> str:
 
 
 def build_one(show, template):
+    """Render a single show detail page from template and show data.
+
+    Extracts poster palette (via Pillow if available), derives ink/surface tones,
+    populates all template variables, and writes web/shows/<slug>.html.
+
+    Args:
+        show: Show dict from shows.json with all required fields.
+        template: HTML template string with {{PLACEHOLDER}} tokens.
+
+    Returns:
+        Path: The output file path for the generated page.
+    """
     slug = show["slug"]
     poster_path = _find_poster(slug)
 
@@ -415,9 +450,9 @@ def build_one(show, template):
         "Scoring soon — reviews still landing or production too new to aggregate."
     )
     audience_methodology = (
-        f"Weighted aggregate across {aud_count} audience platforms (Show-Score, Broadway Scorecard, Broadway.com). Refreshes weekly."
+        f"Weighted aggregate across {aud_count} audience platforms (Show-Score/show-score.com, Broadway Scorecard, Broadway.com). Refreshes weekly."
         if aud_count else
-        "Scoring soon — audience platforms still gathering ratings for this run."
+        "Scoring soon — Show-Score and other audience platforms are still gathering ratings for this run."
     )
     critic_sources_list = ", ".join(critic_sources) if critic_sources else "—"
     audience_sources_list = ", ".join(audience_sources) if audience_sources else "—"
@@ -448,6 +483,7 @@ def build_one(show, template):
         "{{TICKET_ROWS}}": _ticket_rows(show.get("ticket_links", {})),
         "{{FIRMS_MARKUP}}": _firms_markup(show.get("marketing_firms", [])),
         "{{SOCIALS_MARKUP}}": _socials_markup(show.get("socials", {})),
+        "{{SHOW_SCORE_URL}}": html.escape(_show_score_url(show)),
         "{{CRITIC_SCORE}}": str(critic) if critic is not None else "—",
         "{{CRITIC_CLASS}}": "" if critic is not None else "pending",
         "{{CRITIC_NOTE}}": f"{crit_count} critic outlets" if critic is not None else "Aggregation not yet available",

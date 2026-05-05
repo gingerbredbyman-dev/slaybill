@@ -207,9 +207,7 @@
       inset 0 -1px 0 color-mix(in oklab, black 25%, transparent),
       0 30px 80px color-mix(in oklab, var(--c1) 30%, transparent);
     transform:
-      perspective(1000px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg));
+      perspective(1000px);
     transition: transform .35s var(--ease-out-expo), box-shadow .35s var(--ease-out-expo);
   }
   .poster img, .poster svg {
@@ -742,6 +740,11 @@
     color: var(--ink-muted);
     text-align: center;
   }
+  .sources a {
+    color: var(--ink);
+    text-decoration-color: color-mix(in oklab, var(--c1) 55%, transparent);
+    text-underline-offset: 3px;
+  }
 
   footer {
     max-width: 1100px; margin: 48px auto 0;
@@ -765,18 +768,62 @@
   .poster.motion-reveal {
     transform:
       perspective(1000px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(24px)
       scale(0.985);
   }
   .poster.motion-reveal.is-visible {
     transform:
       perspective(1000px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(0)
       scale(1);
+  }
+
+  /* Detail poster reveal, no pointer tilt and no scroll drift. It lands like
+   * a freshly printed theatre one-sheet with a quick ink-press scan. */
+  .poster {
+    transform: none !important;
+  }
+  .poster.motion-reveal {
+    opacity: 0;
+    filter: contrast(1.25) saturate(0.7);
+    transform: translate3d(0, 18px, 0) scale(0.985) !important;
+    transform-origin: 50% 50%;
+  }
+  .poster.motion-reveal.is-visible {
+    opacity: 1;
+    filter: contrast(1) saturate(1);
+    transform: translate3d(0, 0, 0) scale(1) !important;
+  }
+  .poster img,
+  .poster svg {
+    transform: none !important;
+    transition: filter 280ms var(--ease-out-expo);
+    will-change: auto;
+  }
+  .poster.motion-reveal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg,
+        transparent 0 10%,
+        color-mix(in oklab, var(--c1) 45%, transparent) 42%,
+        color-mix(in oklab, white 38%, transparent) 50%,
+        transparent 62% 100%);
+    mix-blend-mode: screen;
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  .poster.motion-reveal.is-visible::before {
+    animation: ink-press-scan 780ms var(--ease-out-expo) both;
+  }
+  @keyframes ink-press-scan {
+    0% { opacity: 0; transform: translateX(-120%); }
+    18% { opacity: 0.9; }
+    68% { opacity: 0.55; }
+    100% { opacity: 0; transform: translateX(120%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -926,7 +973,9 @@
   </section>
 
   <section class="sources">
-    Sources &middot; Playbill grosses &middot; Off-Broadway League &middot; BroadwayWorld &middot; editorial curation &middot; last updated {{LAST_UPDATED}}
+    Sources &middot; Playbill grosses &middot; Off-Broadway League &middot; BroadwayWorld &middot;
+    <a href="{{SHOW_SCORE_URL}}" target="_blank" rel="noopener">Show-Score audience reviews</a>
+    &middot; editorial curation &middot; last updated {{LAST_UPDATED}}
   </section>
 </main>
 

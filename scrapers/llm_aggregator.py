@@ -18,7 +18,8 @@ Per Austin's research doc (/tmp/critic-audience.txt):
   Critic weights:    NYT 20, Variety 14, HR 10, NY Post 10, Guardian 10,
                      Time Out NY 8, TheaterMania 8, BroadwayWorld 6,
                      Vulture 7, AP 7
-  Audience weights:  Show-Score 35, Broadway Scorecard 25, Broadway.com 20
+  Audience weights:  Show-Score/show-score.com 35,
+                     Broadway Scorecard 25, Broadway.com 20
                      (Mezzanine 12% dropped — iOS-only, no public data)
                      (Reddit 8% dropped — no PRAW creds yet)
   Composite:         0.55 * critic + 0.45 * audience

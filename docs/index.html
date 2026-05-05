@@ -190,8 +190,6 @@
     isolation: isolate;
     transform:
       perspective(1200px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(var(--cover-lift));
     transition: transform var(--dur-medium) var(--ease-out-expo);
   }
@@ -877,16 +875,12 @@
       transform var(--dur-fast) var(--ease-spring);
     transform:
       perspective(900px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(0);
     transform-style: preserve-3d;
   }
   a.show-card:hover, a.show-card:focus-visible {
     transform:
       perspective(900px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(-5px);
     box-shadow:
       0 20px 48px oklch(0% 0 0 / 0.35),
@@ -1714,32 +1708,24 @@
   .cover.motion-reveal {
     transform:
       perspective(1200px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(24px)
       scale(0.985);
   }
   .cover.motion-reveal.is-visible {
     transform:
       perspective(1200px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(var(--cover-lift))
       scale(1);
   }
   .show-card.motion-reveal {
     transform:
       perspective(900px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(24px)
       scale(0.985);
   }
   .show-card.motion-reveal.is-visible {
     transform:
       perspective(900px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(0)
       scale(1);
   }
@@ -1747,10 +1733,100 @@
   .show-card.motion-reveal.is-visible:focus-visible {
     transform:
       perspective(900px)
-      rotateX(var(--tilt-x, 0deg))
-      rotateY(var(--tilt-y, 0deg))
       translateY(-5px)
       scale(1);
+  }
+
+  /* Gallery-wall reveal. Pointer tilt and loose scroll motion are intentionally
+   * gone: cards land as a disciplined theatre contact sheet with an ink-press
+   * flash instead of hanging in the wind. */
+  a.show-card,
+  .bucket[data-theme="live"] .show-card {
+    transform: translate3d(0, 0, 0) !important;
+    transform-origin: 50% 50%;
+    transition:
+      transform 260ms var(--ease-out-expo),
+      box-shadow var(--dur-fast) var(--ease-spring),
+      filter 360ms var(--ease-out-expo),
+      opacity 360ms var(--ease-out-expo);
+  }
+  a.show-card:hover,
+  a.show-card:focus-visible,
+  .bucket[data-theme="live"] .show-card:hover,
+  .bucket[data-theme="live"] .show-card:focus-visible {
+    transform: translate3d(0, -4px, 0) !important;
+  }
+  a.show-card:active,
+  .bucket[data-theme="live"] a.show-card:active {
+    transform: translate3d(0, -1px, 0) scale(0.985) !important;
+  }
+  .show-card.motion-reveal {
+    opacity: 0;
+    filter: contrast(1.25) saturate(0.7);
+    transform: translate3d(0, 18px, 0) scale(0.985) !important;
+  }
+  .show-card.motion-reveal.is-visible {
+    opacity: 1;
+    filter: contrast(1) saturate(1);
+    transform: translate3d(0, 0, 0) scale(1) !important;
+  }
+  .show-card.motion-reveal.is-visible:hover,
+  .show-card.motion-reveal.is-visible:focus-visible {
+    transform: translate3d(0, -4px, 0) scale(1) !important;
+  }
+  .cover,
+  .cover.motion-reveal,
+  .cover.motion-reveal.is-visible {
+    transform: translateY(var(--cover-lift)) !important;
+  }
+  .poster,
+  .bucket[data-theme="live"] .show-card .poster {
+    transform: none !important;
+    isolation: isolate;
+  }
+  .poster .palette-bg,
+  .poster img,
+  .poster svg {
+    transform: none !important;
+    transition: filter 280ms var(--ease-out-expo);
+    will-change: auto;
+  }
+  .poster .palette-accent {
+    transform: none !important;
+    transition: opacity 280ms var(--ease-out-expo);
+    will-change: auto;
+  }
+  .show-card.motion-reveal .poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg,
+        transparent 0 10%,
+        color-mix(in oklch, var(--bucket-accent, var(--gold)) 42%, transparent) 42%,
+        color-mix(in oklch, white 36%, transparent) 50%,
+        transparent 62% 100%);
+    mix-blend-mode: screen;
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  .show-card.motion-reveal.is-visible .poster::before {
+    animation: ink-press-scan 780ms var(--ease-out-expo) both;
+  }
+  @keyframes ink-press-scan {
+    0% { opacity: 0; transform: translateX(-120%); }
+    18% { opacity: 0.9; }
+    68% { opacity: 0.55; }
+    100% { opacity: 0; transform: translateX(120%); }
+  }
+  .show-card .title,
+  .show-card .pill,
+  .show-card .metrics,
+  .show-card .scores,
+  .show-card .venue {
+    transform: none !important;
   }
 
   footer.page-foot {

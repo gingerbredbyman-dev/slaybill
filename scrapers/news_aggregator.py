@@ -69,6 +69,15 @@ def _strip_html(s: str) -> str:
 
 
 def fetch_rss(source: dict, limit: int = 25) -> list[dict]:
+    """Fetch and parse RSS feed from a news source.
+
+    Args:
+        source: Dict with 'name', 'rss', 'weight', 'tier' keys.
+        limit: Max items to fetch (default 25).
+
+    Returns:
+        List of normalized news item dicts with title, link, published, etc.
+    """
     import feedparser
     parsed = feedparser.parse(source["rss"], request_headers=HEADERS)
     items = []

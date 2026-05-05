@@ -63,6 +63,14 @@ URL_TEMPLATES = [
 
 
 def existing_poster(slug: str) -> Path | None:
+    """Check if a poster already exists for the given show slug.
+
+    Args:
+        slug: Show slug identifier.
+
+    Returns:
+        Path to existing poster file, or None if not found.
+    """
     for ext in POSTER_EXTS:
         p = POSTERS_DIR / f"{slug}{ext}"
         if p.exists():
@@ -71,6 +79,15 @@ def existing_poster(slug: str) -> Path | None:
 
 
 def fetch(url: str, timeout: int = 20) -> requests.Response:
+    """Fetch URL with SLAYBILL user-agent headers.
+
+    Args:
+        url: Target URL to fetch.
+        timeout: Request timeout in seconds (default 20).
+
+    Returns:
+        requests.Response object.
+    """
     return requests.get(url, headers=HEADERS, timeout=timeout, allow_redirects=True)
 
 
