@@ -137,7 +137,7 @@ def aggregate_show(show: dict, client, *, force: bool = False) -> dict:
     cached = None
     if cache.exists():
         try:
-            cached = json.loads(cache.read_text())
+            cached = json.loads(cache.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             cached = None
 
@@ -211,7 +211,7 @@ def main():
 
     client = Anthropic(api_key=api_key)
 
-    data = json.loads(SHOWS_JSON.read_text())
+    data = json.loads(SHOWS_JSON.read_text(encoding="utf-8"))
     shows = data["shows"]
 
     if args.show:

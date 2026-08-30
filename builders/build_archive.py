@@ -134,7 +134,7 @@ def build() -> None:
     closing_date descending, and renders a simple table view with links to
     each show's Tier 2 detail page.
     """
-    data = json.loads(SHOWS_JSON.read_text())
+    data = json.loads(SHOWS_JSON.read_text(encoding="utf-8"))
     closed = [
         s for s in data["shows"]
         if s.get("status") in ("closed", "closed_early", "cancelled")

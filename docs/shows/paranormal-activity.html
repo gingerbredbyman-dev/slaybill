@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Galileo — SLAYBILL</title>
-<meta name="description" content="A musical centered on the historical scientist Galileo Galilei, who defied the Inquisition with what his telescope revealed about the heavens. Premiered at Berkeley Rep in 2024.">
+<title>Paranormal Activity — SLAYBILL</title>
+<meta name="description" content="—">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Inter:wght@300..800&family=Instrument+Serif&display=swap">
 <style>
   :root {
-    --c1: #06060b; --c2: #daa230; --c3: #efc95a; --c4: #e4b54b; --c5: #695325;
+    --c1: #0b0d12; --c2: #1e2633; --c3: #3d4c63; --c4: #7f8ea6; --c5: #d9e2f1;
     --ink: #fbfaf3;
     --ink-muted: #d4d4d4;
-    --stage: #06060b;
-    --surface: #daa230;
-    --accent: #06060b;
+    --stage: #0b0d12;
+    --surface: #3d4c63;
+    --accent: #0b0d12;
     --font-display: 'Fraunces', Georgia, serif;
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --font-stamp: 'Instrument Serif', 'Times New Roman', serif;
@@ -130,7 +130,7 @@
     transform: translateY(var(--cover-lift));
   }
   .marquee::after {
-    content: "SLAYBILL / Coming Soon / Shubert Theatre";
+    content: "SLAYBILL / In Previews / August Wilson Theatre";
     position: absolute;
     left: 50%;
     bottom: -16px;
@@ -843,7 +843,7 @@
 <body>
 <div class="topbar">
   <a href="../index.html">&larr; SLAYBILL</a>
-  <span class="chip">Coming Soon &middot; Shubert Theatre</span>
+  <span class="chip">In Previews &middot; August Wilson Theatre</span>
   <a class="topbar-aka" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC">
     <img src="../assets/img/aka-logo-dark.png" alt="AKA NYC">
   </a>
@@ -854,26 +854,44 @@
     <div class="bulbs top" aria-hidden="true"></div>
     <div class="bulbs bottom" aria-hidden="true"></div>
     <div class="eyebrow">SLAYBILL</div>
-    <h1>Galileo</h1>
-    <p class="subtitle">A new musical about the man who saw the stars</p>
+    <h1>Paranormal Activity</h1>
+    <p class="subtitle"></p>
   </section>
 
   <section class="poster">
-    <img src="posters/galileo-musical.jpg" alt="Galileo poster" loading="lazy">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Paranormal Activity placeholder poster">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0d12"/>
+      <stop offset="55%" stop-color="#1e2633"/>
+      <stop offset="100%" stop-color="#3d4c63"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="30%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#7f8ea6" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#7f8ea6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="400" fill="url(#bg)"/>
+  <rect width="300" height="400" fill="url(#spot)"/>
+  <rect x="20" y="20" width="260" height="360" fill="none" stroke="#d9e2f1" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="150" y="190" text-anchor="middle" font-family="Times New Roman, Georgia, serif" font-weight="900" font-size="32" fill="#d9e2f1" letter-spacing="-1">PARANORMAL ACTIVITY</text>
+  <text x="150" y="215" text-anchor="middle" font-family="Times New Roman, Georgia, serif" font-style="italic" font-size="11" fill="#d9e2f1" fill-opacity="0.8"></text>
+  <text x="150" y="370" text-anchor="middle" font-family="Courier New, monospace" font-size="8" letter-spacing="3" fill="#d9e2f1" fill-opacity="0.5">POSTER PLACEHOLDER</text>
+</svg>
   </section>
 
   <section class="vitals">
     <div class="panel">
       <div class="label">Synopsis</div>
-      <div class="synopsis">A musical centered on the historical scientist Galileo Galilei, who defied the Inquisition with what his telescope revealed about the heavens. Premiered at Berkeley Rep in 2024.</div>
+      <div class="synopsis">—</div>
     </div>
     <div class="panel">
       <div class="label">Vitals</div>
-      <div class="row"><span class="k">Theatre</span><span class="v">Shubert Theatre</span></div>
-      <div class="row"><span class="k">Capacity</span><span class="v">1,502</span></div>
-      <div class="row"><span class="k">First Preview</span><span class="v">2026-11-10</span></div>
-      <div class="row"><span class="k">Opened</span><span class="v">2026-12-06</span></div>
-      <div class="row"><span class="k">Status</span><span class="v">Coming Soon</span></div>
+      <div class="row"><span class="k">Theatre</span><span class="v">August Wilson Theatre</span></div>
+      <div class="row"><span class="k">Capacity</span><span class="v">—</span></div>
+      <div class="row"><span class="k">First Preview</span><span class="v">—</span></div>
+      <div class="row"><span class="k">Opened</span><span class="v">—</span></div>
+      <div class="row"><span class="k">Status</span><span class="v">In Previews</span></div>
     </div>
   </section>
 
@@ -984,7 +1002,7 @@
   import { setupUpgradeNudge } from '../assets/js/upgrade-nudge.js';
   import { setupSlaybillMotion } from '../assets/js/kinetic-stage.js';
   const motion = setupSlaybillMotion();
-  setupUpgradeNudge('galileo-musical').then(() => motion.refresh());
+  setupUpgradeNudge('paranormal-activity').then(() => motion.refresh());
 </script>
 </body>
 </html>

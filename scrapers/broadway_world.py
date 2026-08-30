@@ -38,7 +38,7 @@ def connect() -> sqlite3.Connection:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.execute("PRAGMA foreign_keys = ON")
-    conn.executescript(SCHEMA_PATH.read_text())
+    conn.executescript(SCHEMA_PATH.read_text(encoding="utf-8"))
     return conn
 
 

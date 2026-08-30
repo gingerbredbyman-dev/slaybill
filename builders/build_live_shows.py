@@ -5,8 +5,15 @@ v1 strategy: shows.json is authoritative. This builder normalizes it into the
 format the front-end expects (split by tier + status bucket, computed rank
 fields, safe defaults for missing metrics).
 
-v1.5 will layer DB grosses + news-event overlays on top (date refresh + live
-capacity_pct from the latest grosses row).
+v1.5 (live): two overlays on top of the curated file —
+  1. Date-truth statuses: when a show carries preview/opening/closing dates,
+     its bucket is re-derived against today instead of trusting a curated
+     status that may have gone stale. Terminal curated states (cancelled,
+     closed_early) still win. Every override is printed.
+  2. Grosses overlay: the latest corpus.db week (Playbill scrape) replaces
+     curated weekly_gross/capacity/avg-ticket for matched Broadway shows and
+     adds week-over-week diffs. A top-level "week" block carries the
+     Standing O's / Oh No's movers for the front page.
 
 Run:
     python builders/build_live_shows.py
@@ -31,12 +38,15 @@ once here than to filter client-side.
 
 import json
 import re
+import sqlite3
+import unicodedata
 from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
 SHOWS_JSON = PROJECT_ROOT / "data" / "shows.json"
+CORPUS_DB = PROJECT_ROOT / "data" / "corpus.db"
 # Write the generated JSON into web/data/ so the static server can reach it
 # via a sibling path (fetch('data/shows_live.json') from web/index.html).
 OUT_PATH = PROJECT_ROOT / "web" / "data" / "shows_live.json"
@@ -96,7 +106,8 @@ _TITLE_NOISE = re.compile(r"[^a-z0-9 ]+")
 
 
 def _norm_title(t: str) -> str:
-    return _TITLE_NOISE.sub(" ", (t or "").lower()).strip()
+    t = unicodedata.normalize("NFKD", t or "").encode("ascii", "ignore").decode("ascii")
+    return _TITLE_NOISE.sub(" ", t.lower()).strip()
 
 
 def _load_news_index() -> list[dict]:
@@ -104,7 +115,7 @@ def _load_news_index() -> list[dict]:
     if not NEWS_FEED.exists():
         return []
     try:
-        payload = json.loads(NEWS_FEED.read_text())
+        payload = json.loads(NEWS_FEED.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return []
     return payload.get("items") or []
@@ -157,12 +168,20 @@ def _parse_date(value):
 
 
 def derive_status(show: dict, today: date) -> str:
-    """If shows.json already has a status, trust it. Otherwise derive from dates."""
-    if show.get("status"):
-        return show["status"]
+    """Date-truth first: derive the bucket from the show's own dates against
+    today, so a curation pause can't strand a show in a stale bucket. The
+    curated status is honored when it's terminal (cancelled / closed_early)
+    or when the show carries no dates to reason from."""
+    curated = show.get("status")
+    if curated in ("cancelled", "closed_early"):
+        return curated
+
     closing = _parse_date(show.get("closing_date"))
     opening = _parse_date(show.get("opening_date"))
     first_preview = _parse_date(show.get("first_preview_date"))
+
+    if not (closing or opening or first_preview):
+        return curated or "announced"
 
     if closing and closing < today:
         return "closed"
@@ -174,10 +193,67 @@ def derive_status(show: dict, today: date) -> str:
             return "in_previews"
     if first_preview and today < first_preview <= today + timedelta(days=COMING_SOON_WINDOW_DAYS):
         return "coming_soon"
-    return "announced"
+    return curated or "announced"
 
 
-def normalize(show: dict, today: date, news_items: list[dict] | None = None) -> dict:
+def _load_latest_grosses() -> tuple[str | None, list[dict]]:
+    """Latest scraped week from corpus.db as (week_ending, rows). Rows carry a
+    normalized 'title + theatre' match key. Empty when the DB is absent so a
+    fresh clone still builds."""
+    if not CORPUS_DB.exists():
+        return None, []
+    try:
+        db = sqlite3.connect(CORPUS_DB)
+        week = db.execute("SELECT MAX(week_ending) FROM grosses").fetchone()[0]
+        if not week:
+            return None, []
+        cols = {r[1] for r in db.execute("PRAGMA table_info(grosses)")}
+        extra = ""
+        if "gross_diff_usd" in cols:
+            extra = ", g.gross_diff_usd, g.capacity_diff_pct, g.performances"
+        rows = []
+        for r in db.execute(
+            f"""SELECT s.title, g.gross_usd, g.attendance, g.capacity_pct,
+                       g.average_ticket_usd{extra}
+                FROM grosses g JOIN shows s USING(show_id)
+                WHERE g.week_ending = ?""", (week,)):
+            rows.append({
+                "match_key": _norm_title(r[0]),
+                "raw_title": r[0],
+                "gross_usd": r[1],
+                "attendance": r[2],
+                "capacity_pct": r[3],
+                "average_ticket_usd": r[4],
+                "gross_diff_usd": r[5] if extra else None,
+                "capacity_diff_pct": r[6] if extra else None,
+                "performances": r[7] if extra else None,
+                "matched": False,
+            })
+        db.close()
+        return week, rows
+    except sqlite3.Error:
+        return None, []
+
+
+def _match_grosses(show: dict, grosses_rows: list[dict]) -> dict | None:
+    """Corpus titles read 'Show Title Theatre Name'. A show claims the first
+    unclaimed row its title prefixes on a word boundary; the caller matches
+    longest titles first so 'Six' can't steal 'Six Degrees...'."""
+    key = _norm_title(show.get("title", ""))
+    if not key:
+        return None
+    for row in grosses_rows:
+        if row["matched"]:
+            continue
+        ck = row["match_key"]
+        if ck == key or ck.startswith(key + " "):
+            row["matched"] = True
+            return row
+    return None
+
+
+def normalize(show: dict, today: date, news_items: list[dict] | None = None,
+              grosses_row: dict | None = None, week_ending: str | None = None) -> dict:
     """Flatten into the exact contract the front-end expects. Keeping the
     in-memory JS simple means all fields have the SAME name across every
     show, and always present (null when unknown)."""
@@ -192,6 +268,9 @@ def normalize(show: dict, today: date, news_items: list[dict] | None = None) -> 
     )
 
     firms, primary_firm = _normalize_firms(show.get("marketing_firms"))
+
+    g = grosses_row or {}
+    live_gross = g.get("gross_usd")
 
     return {
         "slug": slug,
@@ -209,9 +288,15 @@ def normalize(show: dict, today: date, news_items: list[dict] | None = None) -> 
         "cast": show.get("cast", []),
         "creatives": show.get("creatives", []),
         "producers": show.get("producers", []),
-        "avg_ticket_usd": show.get("avg_ticket_usd"),
-        "capacity_pct": show.get("capacity_pct"),
-        "weekly_gross_usd": show.get("weekly_gross_usd"),
+        "avg_ticket_usd": g.get("average_ticket_usd") or show.get("avg_ticket_usd"),
+        "capacity_pct": g.get("capacity_pct") if g.get("capacity_pct") is not None else show.get("capacity_pct"),
+        "weekly_gross_usd": live_gross if live_gross is not None else show.get("weekly_gross_usd"),
+        "gross_diff_usd": g.get("gross_diff_usd"),
+        "capacity_diff_pct": g.get("capacity_diff_pct"),
+        "attendance": g.get("attendance"),
+        "performances": g.get("performances"),
+        "grosses_week_ending": week_ending if live_gross is not None else None,
+        "has_live_grosses": live_gross is not None,
         "critic_score": show.get("critic_score"),
         "sentiment_score": show.get("sentiment_score"),
         "composite_score": show.get("composite_score"),
@@ -241,9 +326,19 @@ def build() -> dict:
     Returns:
         dict: The complete output structure with buckets + off_broadway list.
     """
-    data = json.loads(SHOWS_JSON.read_text())
+    data = json.loads(SHOWS_JSON.read_text(encoding="utf-8"))
     today = date.today()
     news_items = _load_news_index()
+
+    # Grosses overlay pre-pass: longest titles claim their corpus row first.
+    week_ending, grosses_rows = _load_latest_grosses()
+    match_map: dict[str, dict] = {}
+    for show in sorted(data["shows"], key=lambda s: -len(s.get("title", ""))):
+        if show.get("tier", "broadway") != "broadway":
+            continue
+        row = _match_grosses(show, grosses_rows)
+        if row:
+            match_map[show["slug"]] = row
 
     buckets: dict[str, list[dict]] = {
         "coming_soon": [],
@@ -252,9 +347,26 @@ def build() -> dict:
         "closed": [],
     }
     off_broadway: list[dict] = []
+    status_overrides: list[str] = []
 
     for show in data["shows"]:
-        normalized = normalize(show, today, news_items)
+        grosses_row = match_map.get(show["slug"])
+        normalized = normalize(show, today, news_items,
+                               grosses_row=grosses_row,
+                               week_ending=week_ending)
+        curated = show.get("status")
+        if curated and normalized["status"] != curated:
+            status_overrides.append(
+                f"{show['title']}: {curated} -> {normalized['status']} (date-truth)")
+        # Grosses-truth outranks date-truth: a show performing this reporting
+        # week is running, whatever a stale curated closing_date says
+        # (extensions happen). Zero-performance grossing weeks stay untouched.
+        if (grosses_row and (grosses_row.get("performances") or 0) > 0
+                and normalized["status"] in ("closed", "coming_soon", "announced")):
+            status_overrides.append(
+                f"{show['title']}: {normalized['status']} -> live (grosses-truth: "
+                f"{grosses_row['performances']} perfs week of {week_ending})")
+            normalized["status"] = "live"
         if normalized["tier"] == "off_broadway":
             off_broadway.append(normalized)
             continue
@@ -265,6 +377,33 @@ def build() -> dict:
             buckets[bucket].append(normalized)
         # announced shows are omitted from main page; they'd live on an
         # upcoming-season view later.
+
+    # Standing O's / Oh No's — this week's movers among matched, listed shows.
+    all_listed = [s for b in buckets.values() for s in b] + off_broadway
+    movers = [s for s in all_listed if s.get("gross_diff_usd") is not None]
+    ups = sorted((s for s in movers if s["gross_diff_usd"] > 0),
+                 key=lambda s: -s["gross_diff_usd"])[:3]
+    downs = sorted((s for s in movers if s["gross_diff_usd"] < 0),
+                   key=lambda s: s["gross_diff_usd"])[:3]
+
+    def _mover(s):
+        return {
+            "slug": s["slug"], "title": s["title"],
+            "gross_usd": s["weekly_gross_usd"],
+            "gross_diff_usd": s["gross_diff_usd"],
+            "capacity_pct": s["capacity_pct"],
+            "capacity_diff_pct": s["capacity_diff_pct"],
+        }
+
+    week_block = {
+        "week_ending": week_ending,
+        "matched_shows": len(match_map),
+        "reported_shows": len(grosses_rows),
+        "total_gross_usd": sum(r["gross_usd"] or 0 for r in grosses_rows) or None,
+        "standing_os": [_mover(s) for s in ups],
+        "oh_nos": [_mover(s) for s in downs],
+        "unlisted_titles": sorted(r["raw_title"] for r in grosses_rows if not r["matched"]),
+    }
 
     # Sort each Broadway bucket by weekly gross desc (nulls last).
     def sort_key(s):
@@ -278,15 +417,26 @@ def build() -> dict:
         "_doc": (
             "Auto-generated by build_live_shows.py from shows.json. "
             "buckets[*] lists Broadway shows grouped by status; off_broadway "
-            "is flat regardless of bucket. Do NOT edit by hand — edit "
-            "shows.json and re-run the builder."
+            "is flat regardless of bucket. week carries this week's grosses "
+            "movers. Do NOT edit by hand — edit shows.json and re-run the "
+            "builder."
         ),
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "week": week_block,
         "buckets": buckets,
         "off_broadway": off_broadway,
     }
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUT_PATH.write_text(json.dumps(out, indent=2))
+    OUT_PATH.write_text(json.dumps(out, indent=2), encoding="utf-8")
+
+    if status_overrides:
+        print(f"date-truth status overrides ({len(status_overrides)}):")
+        for line in status_overrides:
+            print(f"  {line}")
+    if week_block["unlisted_titles"]:
+        print(f"reporting grosses but not in shows.json ({len(week_block['unlisted_titles'])}):")
+        for t in week_block["unlisted_titles"]:
+            print(f"  {t}")
     return out
 
 
@@ -297,3 +447,7 @@ if __name__ == "__main__":
     print(f"Wrote {OUT_PATH.name}")
     for k, v in counts.items():
         print(f"  {k:14} {v}")
+    wk = data.get("week") or {}
+    if wk.get("week_ending"):
+        print(f"  grosses week  {wk['week_ending']} "
+              f"({wk['matched_shows']}/{wk['reported_shows']} matched)")

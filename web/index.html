@@ -993,6 +993,91 @@
   }
   .metrics .m { white-space: nowrap; }
   .metrics .m.pending { opacity: 0.45; font-style: italic; font-weight: 400; }
+  /* Week-over-week movement on the gross — fed by the v1.5 grosses overlay. */
+  .metrics .m.diff { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .metrics .m.diff.up   { color: var(--gold); }
+  .metrics .m.diff.down { color: color-mix(in oklch, var(--red) 70%, var(--cream)); }
+
+  /* === The Week's Receipts — Standing O's / Oh No's (v1.5) =================
+   * Two-column ledger of this week's biggest box-office moves, straight from
+   * the Playbill grosses scrape. Hidden until the week block hydrates. */
+  .week-board {
+    width: 100%; max-width: 1200px;
+    padding: 30px 26px 34px;
+    border-radius: 18px;
+    background: var(--surface-1);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklch, var(--cream) 10%, transparent),
+      0 26px 90px oklch(0% 0 0 / 0.28);
+  }
+  .week-board header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; margin-bottom: 22px; flex-wrap: wrap;
+  }
+  .week-board h2 {
+    font-family: var(--font-stamp);
+    font-weight: 400;
+    font-size: clamp(30px, 3.5vw + 12px, 48px);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .receipts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+  @media (max-width: 720px) { .receipts { grid-template-columns: 1fr; } }
+  .receipt-col h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid currentColor;
+  }
+  .receipt-col.os  h3 { color: var(--gold); }
+  .receipt-col.nos h3 { color: color-mix(in oklch, var(--red) 62%, var(--cream)); }
+  .receipt-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+  .receipt-col li a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    border: 1px solid var(--surface-border);
+    color: var(--cream);
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+  .receipt-col li a:hover { background: color-mix(in oklch, var(--surface-2) 86%, var(--gold)); transform: translateX(3px); }
+  .receipt-col li a:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-ring-offset); }
+  .receipt-col .rt {
+    font-family: var(--font-display);
+    font-size: 17px;
+    min-width: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .receipt-col .rd {
+    font-variant-numeric: tabular-nums;
+    font-size: 13px; font-weight: 650;
+    white-space: nowrap;
+  }
+  .receipt-col.os  .rd { color: var(--gold); }
+  .receipt-col.nos .rd { color: color-mix(in oklch, var(--red) 70%, var(--cream)); }
+  .week-total {
+    margin-top: var(--space-5);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: color-mix(in oklch, var(--cream) 72%, transparent);
+    font-variant-numeric: tabular-nums;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .receipt-col li a:hover { transform: none; }
+  }
 
   .scores {
     display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
@@ -1982,6 +2067,7 @@
 
 <nav class="section-nav" aria-label="Quick navigation">
   <a href="#bk-marquee">Marquee</a>
+  <a href="#bk-week">Receipts</a>
   <a href="#bk-live">Live</a>
   <a href="#bk-ob">Off-Bway</a>
   <a href="#bk-news">News</a>
@@ -1991,13 +2077,13 @@
 <section class="cover" aria-label="SLAYBILL masthead">
   <div class="masthead">
     <div class="word jostle">SLAYBILL</div>
-    <div class="sub jostle">Your show&rsquo;s favorite show guide &middot; Broadway Edition</div>
+    <div class="sub jostle">Your show&rsquo;s favorite show guide &middot; AKA Edition</div>
     <a class="aka-tm" href="https://aka.nyc" target="_blank" rel="noopener" aria-label="Marketing by AKA NYC — visit aka.nyc">AKA</a>
   </div>
   <p class="tagline jostle">A look at what&rsquo;s showing<br>and how it&rsquo;s going.</p>
   <footer class="cover-foot">
-    <span class="jostle">Vol. 1 &middot; Issue 3</span>
-    <span class="jostle">26 Apr 2026</span>
+    <span class="jostle">Vol. 1 &middot; Issue 4</span>
+    <span class="jostle" data-slot="cover-date">30 Aug 2026</span>
   </footer>
   <div class="dog-ear" aria-hidden="true"></div>
 </section>
@@ -2014,6 +2100,24 @@
     </div>
     <div class="marquee-bulbs marquee-bulbs-bottom" aria-hidden="true"></div>
   </div>
+</section>
+
+<section class="week-board" aria-labelledby="bk-week" hidden>
+  <header>
+    <h2 id="bk-week">The Week&rsquo;s Receipts</h2>
+    <div class="bucket-note" data-slot="week-note">Standing O&rsquo;s &middot; Oh No&rsquo;s</div>
+  </header>
+  <div class="receipts">
+    <div class="receipt-col os">
+      <h3>Standing O&rsquo;s</h3>
+      <ul data-slot="week-os"></ul>
+    </div>
+    <div class="receipt-col nos">
+      <h3>Oh No&rsquo;s</h3>
+      <ul data-slot="week-nos"></ul>
+    </div>
+  </div>
+  <div class="week-total" data-slot="week-total"></div>
 </section>
 
 <section class="bucket" data-theme="live" data-bucket="live" aria-labelledby="bk-live">
@@ -2053,7 +2157,7 @@
 </section>
 
 <nav class="more" aria-label="More">
-  <a href="fantasy.html"><span>Fantasy Broadway</span><span class="badge">Four slots &middot; Tonys</span></a>
+  <a href="fantasy.html"><span>Tony Tics</span><span class="badge">The office league &middot; Tonys</span></a>
   <a href="archive.html"><span>Archive</span><span class="badge">Closed &middot; Cancelled</span></a>
 </nav>
 
@@ -2093,6 +2197,17 @@ function fmtMoney(n) {
 }
 function fmtPct(p) { return p == null ? null : Math.round(p) + '% cap'; }
 function fmtAvg(a) { return a == null ? null : '$' + a + ' avg'; }
+function fmtDiff(n) {
+  const abs = Math.abs(n);
+  if (abs >= 1_000_000) return '$' + (abs / 1_000_000).toFixed(2) + 'M';
+  if (abs >= 1_000)     return '$' + Math.round(abs / 1_000) + 'K';
+  return '$' + abs;
+}
+function fmtDateShort(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
 
 function heroCredit(show) {
   const c = (show.creatives || []);
@@ -2157,6 +2272,16 @@ function makeCard(show) {
     span.className = 'm' + (p.ok ? '' : ' pending');
     span.textContent = p.v;
     span.setAttribute('aria-label', `${p.label}: ${p.v}`);
+    metrics.appendChild(span);
+  }
+  // Week-over-week arrow from the grosses overlay (skip flat/absent weeks).
+  if (show.gross_diff_usd != null && show.gross_diff_usd !== 0) {
+    const up = show.gross_diff_usd > 0;
+    const span = document.createElement('span');
+    span.className = 'm diff ' + (up ? 'up' : 'down');
+    span.textContent = (up ? '▲ ' : '▼ ') + fmtDiff(show.gross_diff_usd);
+    span.setAttribute('aria-label',
+      `Week over week: ${up ? 'up' : 'down'} ${fmtDiff(show.gross_diff_usd)}`);
     metrics.appendChild(span);
   }
   if (!metrics.children.length) {
@@ -2579,6 +2704,62 @@ window.addEventListener('resize', () => {
   });
 }, { passive: true });
 
+/* The Week's Receipts — Standing O's / Oh No's from the grosses overlay.
+ * The section ships hidden and only reveals when a real week block exists,
+ * so a data gap degrades to absence instead of an empty frame. */
+function renderWeek(data) {
+  const wk = data.week;
+  const board = document.querySelector('.week-board');
+  if (!board || !wk || !wk.week_ending) return;
+  if (!(wk.standing_os || []).length && !(wk.oh_nos || []).length) return;
+
+  const fill = (slot, movers, up) => {
+    const ul = document.querySelector(`[data-slot="${slot}"]`);
+    ul.innerHTML = '';
+    if (!movers.length) {
+      const li = document.createElement('li');
+      li.className = 'week-empty';
+      li.textContent = up ? 'No standing ovations this week.' : 'Nobody stumbled. A quiet week.';
+      ul.appendChild(li);
+      return;
+    }
+    for (const m of movers) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `shows/${m.slug}.html`;
+      const t = document.createElement('span');
+      t.className = 'rt';
+      t.textContent = m.title;
+      const d = document.createElement('span');
+      d.className = 'rd';
+      const capBit = m.capacity_diff_pct != null && m.capacity_diff_pct !== 0
+        ? ` · ${m.capacity_diff_pct > 0 ? '+' : '−'}${Math.abs(m.capacity_diff_pct).toFixed(1)} cap pts`
+        : '';
+      d.textContent = (up ? '▲ ' : '▼ ') + fmtDiff(m.gross_diff_usd) + capBit;
+      a.setAttribute('aria-label',
+        `${m.title}: gross ${up ? 'up' : 'down'} ${fmtDiff(m.gross_diff_usd)} week over week${capBit ? `, capacity ${m.capacity_diff_pct > 0 ? 'up' : 'down'} ${Math.abs(m.capacity_diff_pct).toFixed(1)} points` : ''}`);
+      a.appendChild(t);
+      a.appendChild(d);
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
+  };
+  fill('week-os', wk.standing_os || [], true);
+  fill('week-nos', wk.oh_nos || [], false);
+
+  const note = document.querySelector('[data-slot="week-note"]');
+  const weekDate = fmtDateShort(wk.week_ending);
+  if (note && weekDate) {
+    note.textContent = `Week ending ${weekDate} · vs the week prior · straight from the grosses`;
+  }
+  const total = document.querySelector('[data-slot="week-total"]');
+  if (total && wk.total_gross_usd) {
+    total.textContent =
+      `The Street took ${fmtDiff(wk.total_gross_usd)} across ${wk.reported_shows} billed productions.`;
+  }
+  board.hidden = false;
+}
+
 async function hydrate() {
   // Render skeletons in every visible bucket grid before fetch (Live only now).
   for (const section of document.querySelectorAll('.bucket')) {
@@ -2606,6 +2787,17 @@ async function hydrate() {
 
   // Marquee replaces the old coming_soon + in_previews bucket grids.
   renderMarquee(data);
+  renderWeek(data);
+
+  // Cover date follows the build, so the bill always reads like this week's.
+  if (data.generated_at) {
+    const d = new Date(data.generated_at);
+    if (!Number.isNaN(d.getTime())) {
+      const el = document.querySelector('[data-slot="cover-date"]');
+      if (el) el.textContent = d.toLocaleDateString('en-GB',
+        { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+  }
 
   for (const section of document.querySelectorAll('.bucket')) {
     const bucket = section.dataset.bucket;

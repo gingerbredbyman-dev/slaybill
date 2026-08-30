@@ -191,7 +191,7 @@ def main():
     }
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = OUT_PATH.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+    tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
     tmp.replace(OUT_PATH)
     print(f"\nwrote {OUT_PATH.relative_to(PROJECT_ROOT)} — {len(items)} items")
 

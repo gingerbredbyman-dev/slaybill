@@ -357,7 +357,7 @@ def _build_per_outlet_table(slug: str) -> str:
     if not cache_path.exists():
         return '<div class="outlet-empty">Per-outlet scores will appear once aggregation lands.</div>'
     try:
-        data = json.loads(cache_path.read_text())
+        data = json.loads(cache_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return '<div class="outlet-empty">Score data unreadable.</div>'
     crit = data.get("critic_scores") or {}
@@ -517,7 +517,7 @@ def build_one(show, template):
         page = page.replace(k, v)
 
     out = SHOWS_DIR / f"{slug}.html"
-    out.write_text(page)
+    out.write_text(page, encoding="utf-8")
     return out
 
 
@@ -529,8 +529,8 @@ def main():
     metrics, cast/crew, ticket links, and marketing firms.
     """
     POSTERS_DIR.mkdir(parents=True, exist_ok=True)
-    data = json.loads(SHOWS_JSON.read_text())
-    template = TEMPLATE.read_text()
+    data = json.loads(SHOWS_JSON.read_text(encoding="utf-8"))
+    template = TEMPLATE.read_text(encoding="utf-8")
     count = 0
     for show in data["shows"]:
         out = build_one(show, template)

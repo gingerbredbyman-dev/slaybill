@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fantasy Broadway — SLAYBILL</title>
-<meta name="description" content="Fantasy Broadway: draft a roster of one Broadway musical, one Broadway play, and the same for off-Broadway. Score on audience sentiment, critic reviews, and weekly revenue. Season ends at the Tonys.">
+<title>Tony Tics — SLAYBILL</title>
+<meta name="description" content="Tony Tics: the office fantasy league for theatre nerds. Draft one Broadway musical, one Broadway play, and the same for off-Broadway; score on the weekly grosses; settle it at the Tonys.">
 <style>
   :root {
     --playbill-yellow: #f4d71e;
@@ -31,6 +31,15 @@
     font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     min-height: 100vh;
     padding: 32px 20px 64px;
+  }
+
+  /* Hero — the ticket-ribbon TONY TICS artwork (alpha WebP on the dark stage). */
+  .tt-hero {
+    display: block;
+    width: min(560px, 92%);
+    height: auto;
+    margin: 0 auto 30px;
+    filter: drop-shadow(0 26px 60px rgba(0,0,0,0.55));
   }
 
   /* Same jostle pattern as the main Playbill page for continuity. */
@@ -349,19 +358,23 @@
   <a href="index.html">← SLAYBILL · All Shows</a>
 </div>
 
+<img class="tt-hero jostle" src="assets/tony-tics-hero.webp"
+     alt="TONY TICS spelled out in curling ribbons of theatre ticket stubs, each stub branded A.K.A.NYC"
+     width="760" height="1140" decoding="async">
+
 <section class="cover">
   <div class="masthead">
-    <div class="word jostle">FANTASY BROADWAY</div>
-    <div class="sub jostle">Draft · Score · Tonys</div>
+    <div class="word jostle">TONY TICS</div>
+    <div class="sub jostle">The AKA office league &middot; Draft &middot; Score &middot; Tonys</div>
   </div>
   <p class="owner jostle">Manager · <input id="ownerName" type="text" maxlength="28" placeholder="Your name here" autocomplete="off" spellcheck="false"></p>
-  <p class="tagline jostle">Like Fantasy Football — without the risk of CTEs.<br><span style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--playbill-red)">Draft 4 shows · score weekly · crown the Tonys</span></p>
+  <p class="tagline jostle">Like fantasy football, for an office of theatre nerds — without the risk of CTEs.<br><span style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--playbill-red)">Draft 4 shows · score weekly · settle it at the Tonys</span></p>
   <div class="dog-ear"></div>
 </section>
 
 <section class="tonys">
   <div>
-    <div class="s">78th Tony Awards</div>
+    <div class="s" id="tonysLabel">The Tonys</div>
     <div class="t" id="tonysCountdown">calculating…</div>
   </div>
   <div>
@@ -403,7 +416,7 @@
   </div>
 </section>
 
-<footer>SLAYBILL &middot; Fantasy Broadway &middot; Data from Playbill weekly grosses</footer>
+<footer>SLAYBILL &middot; TONY TICS &middot; The AKA office league &middot; Data from Playbill weekly grosses</footer>
 
 <script>
 /* Fantasy Broadway page logic.
@@ -581,20 +594,23 @@ function wireOwnerName() {
 }
 
 function wireTonysCountdown() {
-  // 78th Tony Awards — airing June 7 2026 per current calendar.
-  // Placeholder; update to CBS/League-confirmed air date when announced.
-  const target = new Date('2026-06-07T20:00:00-04:00');
+  // The ceremony lands in early-to-mid June and the exact date is announced
+  // late in the season — so the season always targets the NEXT June and the
+  // countdown says the date is approximate until the League confirms it.
+  const now = new Date();
+  const seasonYear = now.getMonth() >= 5 ? now.getFullYear() + 1 : now.getFullYear();
+  const target = new Date(`${seasonYear}-06-01T20:00:00-04:00`);
+  const label = document.getElementById('tonysLabel');
+  if (label) label.textContent = `The ${seasonYear} Tonys`;
   const el = document.getElementById('tonysCountdown');
   function tick() {
-    const now = new Date();
-    const ms = target - now;
-    if (ms <= 0) { el.textContent = 'TONIGHT'; return; }
+    const ms = target - new Date();
+    if (ms <= 0) { el.textContent = 'Tonys season — check the wire'; return; }
     const d = Math.floor(ms / 86_400_000);
-    const h = Math.floor((ms % 86_400_000) / 3_600_000);
-    el.textContent = `${d} days · ${h}h · to ceremony`;
+    el.textContent = `≈ ${d} days · exact date TBA`;
   }
   tick();
-  setInterval(tick, 60_000);
+  setInterval(tick, 3_600_000);
 }
 
 function escapeHTML(s) {
